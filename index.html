@@ -36,13 +36,13 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Mes vendeurs vont-ils réellement l'utiliser ?","acceptedAnswer":{"@type":"Answer","text":"L'application est pensée pour être ouverte entre deux clientes, sur mobile, avec les priorités déjà triées et quatre actions sous le pouce. L'adoption est elle-même mesurée : le manager voit qui a envoyé un message cette semaine et qui n'en a envoyé aucun depuis neuf jours."}},
-    {"@type":"Question","name":"Comment le CA influencé est-il calculé ?","acceptedAnswer":{"@type":"Answer","text":"Une vente réalisée dans la fenêtre d'attribution après une action tracée est rattachée au vendeur émetteur. Le rapprochement tourne chaque nuit sur l'identifiant client de votre POS, avec le téléphone au format E.164 en clé secondaire. Aucun vendeur ne peut déclarer une vente comme influencée."}},
-    {"@type":"Question","name":"Que se passe-t-il si deux vendeurs ont contacté le même client ?","acceptedAnswer":{"@type":"Answer","text":"C'est une règle que vous tranchez au cadrage : dernière action avant l'achat, première action, ou partage à parts égales. Elle est visible et modifiable dans la console, pas enfouie dans le code."}},
-    {"@type":"Question","name":"Selekt fonctionne-t-il avec mon POS ?","acceptedAnswer":{"@type":"Answer","text":"Les connecteurs POS et e-commerce sont entrants : votre système reste maître de la donnée. Si votre POS n'est pas encore couvert, l'intégration fait partie du cadrage, c'est le métier d'origine de l'équipe."}},
+    {"@type":"Question","name":"Mes vendeurs vont-ils réellement l'utiliser ?","acceptedAnswer":{"@type":"Answer","text":"L'application est pensée pour être ouverte entre deux visites clients, sur mobile, avec les priorités déjà triées et quatre actions sous le pouce. L'adoption est elle-même mesurée : le manager voit qui a envoyé un message cette semaine et qui n'en a envoyé aucun depuis neuf jours."}},
+    {"@type":"Question","name":"Comment le CA influencé est-il calculé ?","acceptedAnswer":{"@type":"Answer","text":"Chaque action du vendeur (message, rendez-vous, lookbook) est horodatée. Si une vente a lieu dans la fenêtre d'attribution qui suit, elle est automatiquement rattachée à cette action, donc au vendeur. Ce rapprochement tourne chaque nuit en croisant les ventes de votre POS avec l'historique des actions, à partir de l'identifiant client et du téléphone (format E.164) en clé secondaire. Le vendeur ne déclare rien : l'attribution est calculée, jamais saisie manuellement."}},
+    {"@type":"Question","name":"Que se passe-t-il si deux vendeurs ont contacté le même client ?","acceptedAnswer":{"@type":"Answer","text":"C'est une règle que vous tranchez au cadrage : dernière action avant l'achat, première action, ou partage à parts égales. Elle est visible et modifiable dans la console."}},
+    {"@type":"Question","name":"Selekt fonctionne-t-il avec mon POS ?","acceptedAnswer":{"@type":"Answer","text":"Les connecteurs POS et e-commerce sont entrants : votre système reste maître de la donnée. Si votre POS n'est pas encore couvert, l'intégration fait partie du cadrage, c'est notre métier."}},
     {"@type":"Question","name":"Selekt est-il un produit fermé ?","acceptedAnswer":{"@type":"Answer","text":"Non. Selekt est un socle SaaS auquel s'ajoutent des briques sur mesure, e-commerce, PIM, CRM 360, marketing automation, BI, pilotage des stocks, construites par l'équipe qui a livré plus de quatre-vingt-dix projets retail. Un audit de l'existant peut précéder le cadrage pour prioriser la feuille de route."}},
-    {"@type":"Question","name":"Ma base client est en mauvais état. Est-ce bloquant ?","acceptedAnswer":{"@type":"Answer","text":"Non, c'est le cas le plus fréquent. L'import est outillé : mapping des colonnes, simulation avant écriture, rapport d'anomalies, lot réversible. Le référentiel client unique et la détection de doublons font partie du produit."}},
-    {"@type":"Question","name":"Où sont hébergées les données ?","acceptedAnswer":{"@type":"Answer","text":"En France, sur une infrastructure certifiée. Les traitements d'IA ont lieu en Union européenne, sur des données pseudonymisées."}},
+    {"@type":"Question","name":"Ma base client est en mauvais état. Est-ce bloquant ?","acceptedAnswer":{"@type":"Answer","text":"Non, c'est un cas fréquent. Le référentiel client unique et la détection de doublons font partie du produit."}},
+    {"@type":"Question","name":"Où sont hébergées les données ?","acceptedAnswer":{"@type":"Answer","text":"En France, sur une infrastructure certifiée. Les traitements d'IA ont lieu en Union européenne, sur des données anonymisées et cryptées."}},
     {"@type":"Question","name":"Puis-je limiter ce que voit chaque profil ?","acceptedAnswer":{"@type":"Answer","text":"Oui, écran par écran, action par action, champ par champ. Le mode « Voir en tant que » vous permet de vérifier le résultat avant d'ouvrir les accès."}},
     {"@type":"Question","name":"Combien coûte Selekt Retail OS ?","acceptedAnswer":{"@type":"Answer","text":"La tarification dépend du nombre de boutiques, du nombre d'utilisateurs et du périmètre d'intégration. Trente minutes en visioconférence suffisent à qualifier le besoin ; un chiffrage complet suit dans les jours qui suivent."}}
   ]
@@ -589,7 +589,8 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
    suivent la souris, filet animé. Tout est coupé par
    prefers-reduced-motion. ------------------------------------- */
 .progress-hair{position:fixed;top:0;left:0;height:2px;background:var(--sand);z-index:200;width:0;pointer-events:none}
-.grain{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:.05;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>')}
+/* Grain teinté bordeaux (retour cliente 10/08 : « grains bordeaux 3 à 5 % ») */
+.grain{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:.05;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .43 0 0 0 0 .15 0 0 0 0 .2 0 0 0 .55 0"/></filter><rect width="140" height="140" filter="url(%23n)"/></svg>')}
 .dots-bg{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(188,177,160,.22) 1px,transparent 1.6px);background-size:30px 30px;-webkit-mask-image:radial-gradient(1050px 640px at 58% 30%,#000 20%,transparent 74%);mask-image:radial-gradient(1050px 640px at 58% 30%,#000 20%,transparent 74%)}
 .spotlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease;background:radial-gradient(620px circle at var(--mx,60%) var(--my,40%),rgba(188,177,160,.09),transparent 65%)}
 .hero:hover .spotlight{opacity:1}
@@ -830,18 +831,18 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
     <div class="edit-list">
       <div class="edit-row rv">
         <span class="edit-num" aria-hidden="true">01</span>
-        <h3>La donnée est éclatée</h3>
+        <h3>La donnée est dispersée</h3>
         <p>POS, e-commerce, CRM, carnet du vendeur : personne ne voit le client en entier.</p>
       </div>
       <div class="edit-row rv">
         <span class="edit-num" aria-hidden="true">02</span>
-        <h3>Les canaux personnels échappent à tout</h3>
+        <h3>Les échanges personnels échappent à votre visibilité</h3>
         <p>Messages depuis un téléphone privé : sans consentement, sans trace, sans continuité.</p>
       </div>
       <div class="edit-row rv">
         <span class="edit-num" aria-hidden="true">03</span>
-        <h3>La contribution ne se prouve pas</h3>
-        <p>Sans mesure, le clienteling reste une ligne de coût discutée chaque année.</p>
+        <h3>La contribution reste invisible</h3>
+        <p>Sans mesure, le clienteling passe pour une dépense, jamais pour un résultat.</p>
       </div>
     </div>
   </div>
@@ -859,14 +860,14 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
         <span class="sc-top"><span>01 · Espace</span><span>mobile · /app</span></span>
         <span class="sc-glyph" aria-hidden="true"><svg viewBox="0 0 34 34"><circle cx="17" cy="11.5" r="5"/><path d="M6.5 28.5c1.9-6.4 6.3-8.6 10.5-8.6s8.6 2.2 10.5 8.6"/><path d="M23.5 6.5l2.2 2.2 3.8-4"/></svg></span>
         <span class="sc-title">Vendeur</span>
-        <span class="sc-desc">Sa journée, son portefeuille, ses actions, entre deux clientes.</span>
+        <span class="sc-desc">Sa journée, son portefeuille, ses actions, entre deux visites clients.</span>
         <span class="sc-open"><span>Ouvrir l'espace</span><span aria-hidden="true">→</span></span>
       </button>
       <button class="space-card" role="tab" id="tab-manager" aria-selected="false" aria-controls="panel-manager" tabindex="-1">
         <span class="sc-top"><span>02 · Espace</span><span>tablette · /manage</span></span>
         <span class="sc-glyph" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M7 13.5L8.8 6h16.4L27 13.5"/><path d="M7 13.5c0 1.8 1.5 3.2 3.3 3.2s3.4-1.4 3.4-3.2c0 1.8 1.5 3.2 3.3 3.2s3.3-1.4 3.3-3.2c0 1.8 1.6 3.2 3.4 3.2s3.3-1.4 3.3-3.2"/><path d="M8.5 16.5v11.5h17V16.5"/><path d="M14 28v-6.5h6V28"/></svg></span>
         <span class="sc-title">Manager</span>
-        <span class="sc-desc">Le CA de sa boutique, la charge de son équipe, l'adoption réelle.</span>
+        <span class="sc-desc">Le CA de sa boutique, l'investissement de son équipe et l'adoption réelle.</span>
         <span class="sc-open"><span>Ouvrir l'espace</span><span aria-hidden="true">→</span></span>
       </button>
       <button class="space-card" role="tab" id="tab-siege" aria-selected="false" aria-controls="panel-siege" tabindex="-1">
@@ -880,7 +881,7 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
 
     <div class="tab-panel active" role="tabpanel" id="panel-vendeur" aria-labelledby="tab-vendeur">
       <div>
-        <h3>Le carnet client, dans la poche, entre deux clientes.</h3>
+        <h3>Le carnet client, dans la poche, entre deux visites clients.</h3>
         <p class="intro">Le vendeur ouvre l'application et trouve sa journée déjà triée : trois priorités, chacune accompagnée de son motif. Il n'y a rien à chercher.</p>
         <ul class="feat">
           <li><strong>Ma journée</strong>, priorités triées, motif toujours affiché</li>
@@ -937,9 +938,9 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
         <h3>Piloter une équipe sur des faits, pas sur des impressions.</h3>
         <p class="intro">Le manager voit le CA de sa boutique, la part qui vient du clienteling, et qui, dans son équipe, a réellement pris l'outil en main.</p>
         <ul class="feat">
-          <li><strong>Tableau de bord</strong>, CA, part influencée, adoption</li>
+          <li><strong>Tableau de bord</strong>, CA, part de revenu influencée, adoption</li>
           <li><strong>Comparatif nominatif</strong>, réservé au manager</li>
-          <li><strong>Portefeuilles</strong>, réaffectation à effet immédiat</li>
+          <li><strong>Portefeuille client</strong>, réaffectation des clients à effet immédiat</li>
           <li><strong>Alertes d'adoption</strong>, un vendeur inactif remonte à 9 jours</li>
         </ul>
       </div>
@@ -1032,7 +1033,7 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
   <div class="wrap">
     <span class="eyebrow rv">La métrique</span>
     <h2 class="rv">Le CA influencé, ou comment une relation devient une ligne dans vos chiffres.</h2>
-    <p class="lede rv">Toute vente réalisée dans la fenêtre d'attribution après une action tracée est rattachée au vendeur émetteur. Rapprochement nocturne, réconciliable ligne à ligne avec votre POS.</p>
+    <p class="lede rv">Une vente réalisée après une action tracée, dans la fenêtre d'attribution, est attribuée au vendeur. Rapprochement automatique chaque nuit, traçable ligne à ligne avec votre POS.</p>
 
     <div class="sig-frame rv deep">
       <svg class="beam" aria-hidden="true"><rect x="1" y="1" width="99.8%" height="99.6%" rx="6" pathLength="100"></rect></svg>
@@ -1100,7 +1101,7 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
         <span class="day-lbl">La nuit</span>
         <span class="day-time num">02:00</span>
         <h3>Le rapprochement tourne</h3>
-        <p>Les ventes rejoignent les actions. Au matin, tous lisent le même chiffre.</p>
+        <p>Pendant la nuit, chaque vente rejoint l'action qui l'a déclenchée. Au matin, la boutique et le siège lisent le même chiffre.</p>
       </div>
     </div>
   </div>
@@ -1154,12 +1155,12 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
 
     <div class="spec-grid c3">
       <div class="spec rv"><span class="n">Brique 01</span><h3>E-commerce</h3><p>Site premium connecté au stock : Click &amp; Collect, Ship from Store, comptes clients, paiements.</p></div>
-      <div class="spec rv"><span class="n">Brique 02</span><h3>PIM &amp; catalogue</h3><p>Enrichissement produit, rédaction assistée, attributs, SEO, lookbooks.</p></div>
+      <div class="spec rv"><span class="n">Brique 02</span><h3>Catalogue produit</h3><p>Enrichissement produit, rédaction assistée, attributs, SEO, lookbooks.</p></div>
       <div class="spec rv"><span class="n">Brique 03</span><h3>CRM &amp; Client 360</h3><p>Dédoublonnage, segmentation VIP et locale, historique d'achat, consentements RGPD.</p></div>
-      <div class="spec rv"><span class="n">Brique 04</span><h3>Marketing automation</h3><p>Parcours anniversaire et bienvenue, ventes privées, relance panier, win-back.</p></div>
-      <div class="spec rv"><span class="n">Brique 05</span><h3>Business intelligence</h3><p>CA, marge, sell-through, best-sellers, KPI hebdomadaires par boutique et par vendeur.</p></div>
-      <div class="spec rv"><span class="n">Brique 06</span><h3>Pilotage des stocks</h3><p>Alertes, suggestions de réassort, stock dormant, transferts inter-boutiques.</p></div>
-      <div class="spec rv"><span class="n">Brique 07</span><h3>Omnicanal</h3><p>Stock unifié, réservation en ligne, vente inter-boutiques, gestion des retours.</p></div>
+      <div class="spec rv"><span class="n">Brique 04</span><h3>Marketing automatisé</h3><p>Parcours anniversaire et bienvenue, ventes privées, relance panier, win-back.</p></div>
+      <div class="spec rv"><span class="n">Brique 05</span><h3>Pilotage de la performance</h3><p>CA, marge, sell-through, best-sellers, KPI hebdomadaires par boutique et par vendeur.</p></div>
+      <div class="spec rv"><span class="n">Brique 06</span><h3>Gestion des stocks</h3><p>Alertes, suggestions de réassort, stock dormant, mouvements entre boutiques.</p></div>
+      <div class="spec rv"><span class="n">Brique 07</span><h3>Omnicanal</h3><p>Réservation en ligne, vente entre boutiques, gestion des retours, disponibilité en temps réel.</p></div>
       <div class="spec rv"><span class="n">Brique 08</span><h3>IA étendue</h3><p>Prévisions de stock, recommandations d'achat, segmentation assistée, toujours sous validation.</p></div>
       <div class="spec rv"><span class="n">Brique 09</span><h3>Formation &amp; adoption</h3><p>Managers et vendeurs, documentation, bonnes pratiques, suivi de l'adoption.</p></div>
     </div>
@@ -1172,19 +1173,19 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
 <section class="light alt" id="ia">
   <div class="wrap">
     <span class="eyebrow rv">Intelligence artificielle</span>
-    <h2 class="rv">Elle propose. Vous validez. Toujours.</h2>
+    <h2 class="rv">Elle propose. Vous validez avant tout envoi.</h2>
     <p class="lede rv">Une plateforme de clienteling écrit au nom de votre marque. Selekt traite l'IA comme un rédacteur junior : elle prépare, elle ne publie jamais.</p>
     <!-- Le brouillon annoté : une proposition de l'IA posée comme une
          épreuve de manuscrit, les quatre garde-fous en notes de marge. -->
     <div class="ai-stage">
       <div class="ai-notes side-l">
         <div class="ai-note rv">
-          <span class="n">Garde-fou 01</span>
+          <span class="n">Contrôle 01</span>
           <h3>Le ton, c'est vous</h3>
-          <p>Vous décrivez la voix de la maison une seule fois. Chaque proposition s'y tient, vouvoiement, sobriété, pas d'urgence artificielle.</p>
+          <p>Définissez le ton de votre maison une seule fois. Chaque proposition s'y tient, vouvoiement, sobriété, pas d'urgence artificielle.</p>
         </div>
         <div class="ai-note rv">
-          <span class="n">Garde-fou 02</span>
+          <span class="n">Contrôle 02</span>
           <h3>Vocabulaire interdit</h3>
           <p>Dix-huit termes bannis, blocage appliqué jusque dans les reformulations.</p>
         </div>
@@ -1196,7 +1197,7 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
           <span class="state">brouillon IA</span>
         </div>
         <blockquote class="ai-msg"><span id="aiTyped">Chère Isabelle, toute la maison vous souhaite un très bel anniversaire. Le Trench Régence que vous aviez regardé est de nouveau disponible dans votre taille, souhaitez-vous que je vous le réserve pour un essayage cette semaine ?</span><span class="caret" id="aiCaret" aria-hidden="true"></span></blockquote>
-        <div class="ai-blocked" aria-label="Termes refusés par les garde-fous">
+        <div class="ai-blocked" aria-label="Termes refusés par les règles de la maison">
           <span class="lbl">Refusés</span>
           <s>offre exceptionnelle</s><s>dernière chance</s><s>promo</s><s>craquer</s><s>😍</s>
         </div>
@@ -1209,19 +1210,19 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
 
       <div class="ai-notes side-r">
         <div class="ai-note rv">
-          <span class="n">Garde-fou 03</span>
+          <span class="n">Contrôle 03</span>
           <h3>Validation humaine</h3>
-          <p>Rien ne part, rien ne s'enregistre sans relecture. Ce comportement n'est pas désactivable.</p>
+          <p>Rien ne part, rien ne s'enregistre sans relecture. Cette option n'est pas désactivable.</p>
         </div>
         <div class="ai-note rv">
-          <span class="n">Garde-fou 04</span>
-          <h3>Traitement européen</h3>
-          <p>Données pseudonymisées, traitées en Union européenne.</p>
+          <span class="n">Contrôle 04</span>
+          <h3>Données protégées</h3>
+          <p>Vos données clients restent anonymes aux yeux de l'IA, et ne quittent jamais l'Union européenne, conforme au RGPD.</p>
         </div>
       </div>
     </div>
 
-    <p class="ai-strip rv"><span><b class="num">18 402</b> générations ce mois</span><span><b class="num">2,4 s</b> de réponse moyenne</span><span><b class="num">312</b> messages bloqués par les garde-fous</span><span><b class="num">100 %</b> relus avant envoi</span></p>
+    <p class="ai-strip rv"><span><b class="num">18 402</b> générations ce mois</span><span><b class="num">2,4 s</b> de réponse moyenne</span><span><b class="num">312</b> messages bloqués par ces règles</span><span><b class="num">100 %</b> relus avant envoi</span></p>
   </div>
 </section>
 
@@ -1280,10 +1281,14 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
          court et daté. Ne rien publier ici tant qu'un témoignage authentique et
          autorisé n'est pas disponible. Même règle pour un éventuel bandeau de
          logos clients : uniquement des marques ayant donné leur accord écrit. -->
+    <!-- Bloc masqué à la demande de la cliente (10/08) : rien d'affiché tant
+         qu'aucun témoignage client réel n'est disponible. Rétablir le div
+         ci-dessous le moment venu.
     <div class="placeholder rv">
       <span class="t">Emplacement réservé · témoignages clients</span>
       <p>Cette section accueillera les témoignages des premières enseignes en production. Aucun témoignage fictif n'est publié.</p>
     </div>
+    -->
   </div>
 </section>
 
@@ -1309,7 +1314,7 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
         <span class="n">Étape 03</span>
         <h3>Reprise de données</h3>
         <p>Simulation, anomalies, lot réversible.</p>
-        <span class="d">90 % réconciliées</span>
+        <span class="d">Vérifiée ligne à ligne</span>
       </div>
       <div class="spec rv">
         <span class="n">Étape 04</span>
@@ -1334,19 +1339,19 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
     <div class="faq rv">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="true" aria-controls="faq-a1" id="faq-q1">Mes vendeurs vont-ils réellement l'utiliser ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><p>L'application est pensée pour être ouverte entre deux clientes, sur mobile, avec les priorités déjà triées et quatre actions sous le pouce. L'adoption est elle-même mesurée : le manager voit qui a envoyé un message cette semaine et qui n'en a envoyé aucun depuis neuf jours.</p></div>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><p>L'application est pensée pour être ouverte entre deux visites clients, sur mobile, avec les priorités déjà triées et quatre actions sous le pouce. L'adoption est elle-même mesurée : le manager voit qui a envoyé un message cette semaine et qui n'en a envoyé aucun depuis neuf jours.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">Comment le CA influencé est-il calculé ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><p>Une vente réalisée dans la fenêtre d'attribution après une action tracée est rattachée au vendeur émetteur. Le rapprochement tourne chaque nuit sur l'identifiant client de votre POS, avec le téléphone au format E.164 en clé secondaire. Aucun vendeur ne peut déclarer une vente comme influencée.</p></div>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><p>Chaque action du vendeur (message, rendez-vous, lookbook) est horodatée. Si une vente a lieu dans la fenêtre d'attribution qui suit, elle est automatiquement rattachée à cette action, donc au vendeur. Ce rapprochement tourne chaque nuit en croisant les ventes de votre POS avec l'historique des actions, à partir de l'identifiant client et du téléphone (format E.164) en clé secondaire. Le vendeur ne déclare rien : l'attribution est calculée, jamais saisie manuellement.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">Que se passe-t-il si deux vendeurs ont contacté le même client ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><p>C'est une règle que vous tranchez au cadrage : dernière action avant l'achat, première action, ou partage à parts égales. Elle est visible et modifiable dans la console, pas enfouie dans le code.</p></div>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><p>C'est une règle que vous tranchez au cadrage : dernière action avant l'achat, première action, ou partage à parts égales. Elle est visible et modifiable dans la console.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">Selekt fonctionne-t-il avec mon POS ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><p>Les connecteurs POS et e-commerce sont entrants : votre système reste maître de la donnée. Si votre POS n'est pas encore couvert, l'intégration fait partie du cadrage, c'est le métier d'origine de l'équipe.</p></div>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><p>Les connecteurs POS et e-commerce sont entrants : votre système reste maître de la donnée. Si votre POS n'est pas encore couvert, l'intégration fait partie du cadrage, c'est notre métier.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a9" id="faq-q9">Selekt est-il un produit fermé ?<span class="chev" aria-hidden="true">▾</span></button>
@@ -1354,11 +1359,11 @@ footer{background:var(--void);color:var(--on-void-2);border-top:1px solid var(--
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">Ma base client est en mauvais état. Est-ce bloquant ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><p>Non, c'est le cas le plus fréquent. L'import est outillé : mapping des colonnes, simulation avant écriture, rapport d'anomalies, lot réversible. Le référentiel client unique et la détection de doublons font partie du produit.</p></div>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><p>Non, c'est un cas fréquent. Le référentiel client unique et la détection de doublons font partie du produit.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">Où sont hébergées les données ?<span class="chev" aria-hidden="true">▾</span></button>
-        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6"><p>En France, sur une infrastructure certifiée. Les traitements d'IA ont lieu en Union européenne, sur des données pseudonymisées.</p></div>
+        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6"><p>En France, sur une infrastructure certifiée. Les traitements d'IA ont lieu en Union européenne, sur des données anonymisées et cryptées.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">Puis-je limiter ce que voit chaque profil ?<span class="chev" aria-hidden="true">▾</span></button>
