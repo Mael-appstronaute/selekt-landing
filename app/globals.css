@@ -1,0 +1,344 @@
+@import "tailwindcss";
+
+/* ————————————————————————————————————————————————————————
+   Selekt Retail OS — design tokens (source : Selekt_Brief_Landing.md §5)
+   Jamais de blanc pur. L'or est rare. Profondeur par filets, pas d'ombres.
+   ———————————————————————————————————————————————————————— */
+
+:root {
+  /* Sombres chauds (chrome, en-têtes) */
+  --void: #100F0D;
+  --void-warm: #2A2620;
+  --void-2: #171512;
+
+  /* Clairs chauds (canvas, cartes) — PAS de blanc pur */
+  --cream: #EDE8DD;
+  --cream-2: #F2EEE6;
+  --card: #FAF7F0;
+  --paper: #FBFAF8;
+
+  /* Textes */
+  --ink: #2A2216;
+  --on-void: #F2EEE6;
+  --sand: #C9B99E;
+  --sand-muted: #A8977A;
+
+  /* Accents */
+  --gold: #C9A96A;
+  --brass: #8C7648;
+  --green: #3D5238;
+  --wine: #6E2634;
+
+  /* Dérivés (contraste AA sur les deux familles de fonds) */
+  --green-on-void: #9FBCAA;
+  --wine-deep: #5E1F2B;
+  --ink-soft: rgba(42, 34, 22, 0.72);
+  --on-void-soft: rgba(242, 238, 230, 0.68);
+  --line-dark: rgba(201, 185, 158, 0.16);
+  --line-light: rgba(42, 34, 22, 0.14);
+
+  /* Mouvement — une seule courbe, trois durées */
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 150ms;
+  --dur-2: 300ms;
+  --dur-3: 600ms;
+
+  --radius: 6px;
+  --radius-sm: 3px;
+  /* Famille bspk : le panneau flottant arrondi comme unité de composition */
+  --radius-panel: 28px;
+  --radius-card: 20px;
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-void-warm: var(--void-warm);
+  --color-void-2: var(--void-2);
+  --color-cream: var(--cream);
+  --color-cream-2: var(--cream-2);
+  --color-card: var(--card);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-on-void: var(--on-void);
+  --color-sand: var(--sand);
+  --color-sand-muted: var(--sand-muted);
+  --color-gold: var(--gold);
+  --color-brass: var(--brass);
+  --color-green: var(--green);
+  --color-green-on-void: var(--green-on-void);
+  --color-wine: var(--wine);
+  --color-wine-deep: var(--wine-deep);
+
+  --font-serif: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* ————— Base ————— */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--sand);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ————— Échelle typographique ————— */
+
+/* Gabarit resserré, famille bspk : poids optique par le serrage, pas la taille */
+.display-1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.8vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.display-2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 3.4vw, 2.95rem);
+  line-height: 1.06;
+  letter-spacing: -0.008em;
+  text-wrap: balance;
+}
+
+.title-1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.lede {
+  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+  line-height: 1.7;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ————— Filets & couleurs de texte utilitaires ————— */
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.on-dark {
+  color: var(--on-void);
+}
+
+.muted-dark {
+  color: var(--on-void-soft);
+}
+
+/* ————— Grain papier global (très discret) ————— */
+
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ————— Halo héros — effet signature n°1.
+   Dégradés chauds quasi imperceptibles, dérive très lente. ————— */
+
+.hero-halo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-halo::before,
+.hero-halo::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.hero-halo::before {
+  width: 60vw;
+  height: 60vw;
+  left: -12vw;
+  top: -28vw;
+  background: radial-gradient(closest-side, rgba(140, 118, 72, 0.28), transparent 70%);
+  animation: halo-drift-a 26s var(--ease-lux) infinite alternate;
+}
+
+.hero-halo::after {
+  width: 48vw;
+  height: 48vw;
+  right: -16vw;
+  bottom: -24vw;
+  background: radial-gradient(closest-side, rgba(110, 38, 52, 0.16), transparent 70%);
+  animation: halo-drift-b 34s var(--ease-lux) infinite alternate;
+}
+
+@keyframes halo-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6vw, 4vw, 0) scale(1.08); }
+}
+
+@keyframes halo-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-5vw, -3vw, 0) scale(1.06); }
+}
+
+/* Vignettage doux des sections sombres */
+.dark-vignette {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(42, 38, 32, 0.55), transparent 60%),
+    var(--void);
+}
+
+/* ————— Marquee lent ————— */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ————— Liens éditoriaux ————— */
+
+.link-quiet {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--dur-2) var(--ease-lux);
+}
+
+.link-quiet::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  opacity: 0.35;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-lux), opacity var(--dur-2) var(--ease-lux);
+}
+
+.link-quiet:hover::after {
+  transform: scaleX(1);
+  opacity: 0.7;
+}
+
+/* ————— Panneaux flottants & photographie (famille bspk) ————— */
+
+.panel {
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+/* Étalonnage chaud unifié de toutes les photos */
+.photo-warm {
+  filter: sepia(0.14) saturate(0.85) contrast(1.03) brightness(0.97);
+}
+
+/* Voile sombre chaud posé sur les panneaux photo à texte */
+.photo-veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(16, 15, 13, 0.78) 0%, rgba(16, 15, 13, 0.32) 45%, rgba(42, 38, 32, 0.18) 100%);
+}
+
+/* ————— Motif signature : les ondes d'attribution ————— */
+
+@keyframes ripple {
+  0% { transform: scale(0.55); opacity: 0.55; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+.ripple-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+  animation: ripple 3.6s var(--ease-lux) infinite;
+}
+
+.ripple-ring:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+/* ————— Mockups UI maison ————— */
+
+.mock-chrome {
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.mock-chrome.dark {
+  border-color: var(--line-dark);
+  background: var(--void-2);
+}
+
+/* ————— Réduction de mouvement — respect strict ————— */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ripple-ring {
+    display: none;
+  }
+}
