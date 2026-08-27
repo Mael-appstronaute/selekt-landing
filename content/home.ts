@@ -63,11 +63,11 @@ export type HomeContent = {
   pricing: {
     kicker: string;
     title: string;
-    lede: string;
     unit: string;
-    tiers: { name: string; range: string; price: string; note?: string }[];
-    setup: { title: string; body: string };
-    engagement: { title: string; items: { label: string; value: string }[] };
+    tiers: { name: string; range: string; price: string; setup: string }[];
+    /** rangée Grand magasin, affichée en une ligne sous les cartes */
+    corner: { name: string; range: string; price: string };
+    chips: string[];
     micro: string;
     cta: string;
   };
@@ -237,32 +237,19 @@ export const HOME: Record<Locale, HomeContent> = {
     pricing: {
       kicker: "Tarifs",
       title: "Une facturation à la *boutique*. Utilisateurs illimités.",
-      lede: "Le prix ne dépend que du nombre de points de vente : aucun minimum, aucun plafond, aucune facturation au siège.",
-      unit: "Abonnement / boutique / mois",
+      unit: "/ boutique / mois",
       tiers: [
-        { name: "Boutique", range: "1 à 3 boutiques", price: "90 €" },
-        { name: "Entreprise", range: "4 à 12 boutiques", price: "200 €" },
-        { name: "Elite", range: "13 boutiques et plus", price: "200 €" },
-        {
-          name: "Grand magasin",
-          range: "Dizaines de corners, par utilisateur actif",
-          price: "de 20 € à 12 €",
-          note: "Barème par tranches · minimum mensuel 1 000 €",
-        },
+        { name: "Boutique", range: "1 à 3 boutiques", price: "90 €", setup: "Setup dès 5 000 €" },
+        { name: "Entreprise", range: "4 à 12 boutiques", price: "200 €", setup: "Setup dès 10 000 €" },
+        { name: "Elite", range: "13 boutiques et plus", price: "200 €", setup: "Setup dès 15 000 €" },
       ],
-      setup: {
-        title: "Frais de setup",
-        body: "Dès 5 000 €, 10 000 € ou 15 000 € selon le palier : configuration, reprise du fichier client, intégrations et formation. Montants planchers.",
+      corner: {
+        name: "Grand magasin",
+        range: "corners, par utilisateur actif",
+        price: "de 20 € à 12 €",
       },
-      engagement: {
-        title: "Engagement et dégressivité",
-        items: [
-          { label: "Sans engagement", value: "tarif plein" },
-          { label: "12 mois", value: "− 10 %" },
-          { label: "36 mois", value: "− 20 %, prix bloqué" },
-        ],
-      },
-      micro: "Montants hors taxes. La remise porte sur l'abonnement, jamais sur le setup. Grille non contractuelle.",
+      chips: ["Sans engagement · tarif plein", "12 mois · − 10 %", "36 mois · − 20 %, prix bloqué"],
+      micro: "Montants hors taxes · Grille non contractuelle",
       cta: "Demander une démo",
     },
     proof: {
@@ -441,32 +428,19 @@ export const HOME: Record<Locale, HomeContent> = {
     pricing: {
       kicker: "Pricing",
       title: "Billed per *boutique*. Unlimited users.",
-      lede: "The price depends only on the number of points of sale: no minimum, no ceiling, no charge for headquarters.",
-      unit: "Subscription / boutique / month",
+      unit: "/ boutique / month",
       tiers: [
-        { name: "Boutique", range: "1 to 3 boutiques", price: "€90" },
-        { name: "Enterprise", range: "4 to 12 boutiques", price: "€200" },
-        { name: "Elite", range: "13 boutiques and more", price: "€200" },
-        {
-          name: "Department store",
-          range: "Dozens of corners, per active user",
-          price: "€20 to €12",
-          note: "Tiered scale · €1,000 monthly minimum",
-        },
+        { name: "Boutique", range: "1 to 3 boutiques", price: "€90", setup: "Setup from €5,000" },
+        { name: "Enterprise", range: "4 to 12 boutiques", price: "€200", setup: "Setup from €10,000" },
+        { name: "Elite", range: "13 boutiques and more", price: "€200", setup: "Setup from €15,000" },
       ],
-      setup: {
-        title: "Setup fee",
-        body: "From €5,000, €10,000 or €15,000 depending on the tier: configuration, client-file migration, integrations and training. Floor amounts.",
+      corner: {
+        name: "Department store",
+        range: "corners, per active user",
+        price: "€20 to €12",
       },
-      engagement: {
-        title: "Commitment & discounts",
-        items: [
-          { label: "No commitment", value: "full price" },
-          { label: "12 months", value: "− 10%" },
-          { label: "36 months", value: "− 20%, price locked" },
-        ],
-      },
-      micro: "Amounts excl. VAT. Discounts apply to the subscription, never to the setup. Non-contractual grid.",
+      chips: ["No commitment · full price", "12 months · − 10%", "36 months · − 20%, price locked"],
+      micro: "Amounts excl. VAT · Non-contractual grid",
       cta: "Request a demo",
     },
     proof: {

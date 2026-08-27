@@ -323,91 +323,56 @@ export function HomePage({ locale }: { locale: Locale }) {
           </section>
         </Reveal>
 
-        {/* ——— Tarifs — panneau sombre vignette, trois grandes cartes de palier
-             (grammaire des tuiles Configurabilité), prix géants en serif ——— */}
+        {/* ——— Tarifs — pricing one-page centré : trois cartes épurées,
+             une ligne grand magasin, trois mentions, un bouton ——— */}
         <Reveal>
           <section className="panel dark-vignette">
-            <div className="on-dark p-7 md:p-12">
-              <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-                <div>
-                  <Kicker tone="dark" className="text-cream-2/90">
-                    {c.pricing.kicker}
-                  </Kicker>
-                  <h2 className="display-2 mt-4 max-w-[18ch]">
-                    <EmText text={c.pricing.title} tone="dark" />
-                  </h2>
-                </div>
-                <p className="muted-dark max-w-[44ch] text-[0.98rem] leading-relaxed">
-                  {c.pricing.lede}
-                </p>
-              </div>
+            <div className="on-dark flex flex-col items-center p-7 py-14 text-center md:p-12 md:py-20">
+              <Kicker tone="dark" rule={false} className="text-cream-2/90">
+                {c.pricing.kicker}
+              </Kicker>
+              <h2 className="display-2 mt-5 max-w-[24ch]">
+                <EmText text={c.pricing.title} tone="dark" />
+              </h2>
 
-              <div className="mt-12 grid gap-4 md:grid-cols-3">
-                {c.pricing.tiers.slice(0, 3).map((tier) => (
+              <div className="mt-12 grid w-full max-w-[920px] gap-4 md:grid-cols-3">
+                {c.pricing.tiers.map((tier) => (
                   <div
                     key={tier.name}
-                    className="rounded-2xl border border-sand/14 bg-void/45 p-6 transition-[border-color] duration-300 ease-(--ease-lux) hover:border-gold/40 md:p-8"
+                    className="flex flex-col items-center rounded-2xl border border-sand/14 bg-void/45 p-8 transition-[border-color] duration-300 ease-(--ease-lux) hover:border-gold/40"
                   >
                     <p className="kicker text-gold">{tier.name}</p>
-                    <p className="mt-7 font-serif text-[2.8rem] leading-none text-cream-2 md:text-[3.2rem]">
+                    <p className="muted-dark mt-2 text-[0.88rem]">{tier.range}</p>
+                    <p className="mt-8 font-serif text-[3.1rem] leading-none text-cream-2">
                       {tier.price}
                     </p>
-                    <p className="kicker mt-3 text-[0.56rem] text-sand-muted">{c.pricing.unit}</p>
-                    <p className="muted-dark mt-7 border-t border-sand/14 pt-5 text-[0.94rem]">
-                      {tier.range}
+                    <p className="kicker mt-2.5 text-[0.56rem] text-sand-muted">{c.pricing.unit}</p>
+                    <p className="muted-dark mt-8 w-full border-t border-sand/14 pt-5 text-[0.85rem]">
+                      {tier.setup}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {c.pricing.tiers[3] && (
-                <div className="mt-4 flex flex-col gap-4 rounded-2xl border border-sand/14 bg-void/45 p-6 md:flex-row md:items-center md:justify-between md:gap-10 md:p-8">
-                  <div>
-                    <p className="kicker text-gold">{c.pricing.tiers[3].name}</p>
-                    <p className="muted-dark mt-2.5 text-[0.94rem]">
-                      {c.pricing.tiers[3].range}
-                      {c.pricing.tiers[3].note && (
-                        <span className="text-sand-muted"> · {c.pricing.tiers[3].note}</span>
-                      )}
-                    </p>
-                  </div>
-                  <p className="whitespace-nowrap font-serif text-[1.9rem] leading-none text-cream-2 md:text-[2.2rem]">
-                    {c.pricing.tiers[3].price}
-                  </p>
-                </div>
-              )}
+              <p className="muted-dark mt-7 text-[0.92rem]">
+                {c.pricing.corner.name}, {c.pricing.corner.range} :{" "}
+                <span className="font-serif italic text-cream-2">{c.pricing.corner.price}</span>
+              </p>
 
-              <div className="mt-11 grid gap-8 border-t border-sand/16 pt-8 md:grid-cols-2 md:gap-12">
-                <div>
-                  <p className="kicker text-sand-muted">{c.pricing.setup.title}</p>
-                  <p className="muted-dark mt-4 max-w-[52ch] text-[0.92rem] leading-relaxed">
-                    {c.pricing.setup.body}
-                  </p>
-                </div>
-                <div>
-                  <p className="kicker text-sand-muted">{c.pricing.engagement.title}</p>
-                  <ul className="mt-4">
-                    {c.pricing.engagement.items.map((item) => (
-                      <li
-                        key={item.label}
-                        className="flex items-baseline justify-between gap-4 border-t border-sand/10 py-2.5 first:border-t-0 first:pt-0 last:pb-0"
-                      >
-                        <span className="text-[0.92rem] text-cream-2">{item.label}</span>
-                        <span className="muted-dark text-[0.92rem]">{item.value}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <ul className="mt-10 flex flex-wrap justify-center gap-x-9 gap-y-3">
+                {c.pricing.chips.map((chip) => (
+                  <li key={chip} className="kicker text-[0.62rem] text-sand">
+                    {chip}
+                  </li>
+                ))}
+              </ul>
 
-              <div className="mt-10 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 border-t border-sand/16 pt-7">
-                <p className="kicker max-w-[52ch] text-[0.58rem] leading-relaxed text-sand-muted">
-                  {c.pricing.micro}
-                </p>
-                <Button href={pagePath("demo", locale)} variant="primary-inverse">
+              <div className="mt-10">
+                <Button href={pagePath("demo", locale)} variant="primary-inverse" size="lg">
                   {c.pricing.cta}
                 </Button>
               </div>
+              <p className="kicker mt-6 text-[0.55rem] text-sand-muted">{c.pricing.micro}</p>
             </div>
           </section>
         </Reveal>
