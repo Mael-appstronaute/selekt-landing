@@ -99,7 +99,7 @@ export const HOME: Record<Locale, HomeContent> = {
       cta: "Voir la plateforme",
     },
     intro: {
-      title: "Le travail de relation existe. Sa *preuve*, enfin, aussi.",
+      title: "La relation client se travaille. Désormais, elle se *prouve*.",
       body: "Selekt trace les gestes de clienteling, attribue les ventes selon vos règles, et fait remonter un CA influencé réconciliable à chaque niveau, du comptoir au comité de direction.",
     },
     trace: {
