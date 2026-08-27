@@ -311,75 +311,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           </section>
         </Reveal>
 
-        {/* ——— Tarifs — table éditoriale à filets sur panneau clair,
-             grille du deck de présentation (paliers à la boutique) ——— */}
-        <Reveal>
-          <section className="panel bg-card p-7 md:p-12">
-            <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
-              <div>
-                <Kicker>{c.pricing.kicker}</Kicker>
-                <h2 className="display-2 mt-4 max-w-[18ch]">
-                  <EmText text={c.pricing.title} />
-                </h2>
-              </div>
-              <p className="muted max-w-[44ch] text-[0.98rem] leading-relaxed">
-                {c.pricing.lede}
-              </p>
-            </div>
-
-            <p className="kicker mt-12 text-right text-[0.6rem] text-sand-muted">
-              {c.pricing.unit}
-            </p>
-            <ul className="mt-3 border-t border-ink/12">
-              {c.pricing.tiers.map((tier) => (
-                <li
-                  key={tier.name}
-                  className="grid items-baseline gap-x-8 gap-y-1.5 border-b border-ink/12 py-5 sm:grid-cols-[150px_1fr_auto] md:grid-cols-[190px_1fr_auto] md:py-6"
-                >
-                  <h3 className="font-serif text-[1.4rem] leading-tight">{tier.name}</h3>
-                  <div>
-                    <p className="text-[0.92rem] muted">{tier.range}</p>
-                    {tier.note && (
-                      <p className="kicker mt-1.5 text-[0.56rem] text-sand-muted">{tier.note}</p>
-                    )}
-                  </div>
-                  <p className="font-serif text-[1.8rem] leading-none sm:justify-self-end md:text-[2.1rem]">
-                    {tier.price}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2 md:gap-5">
-              <div className="rounded-2xl bg-cream-2 p-6 md:p-7">
-                <p className="kicker text-sand-muted">{c.pricing.setup.title}</p>
-                <p className="muted mt-4 text-[0.92rem] leading-relaxed">{c.pricing.setup.body}</p>
-              </div>
-              <div className="rounded-2xl bg-cream-2 p-6 md:p-7">
-                <p className="kicker text-sand-muted">{c.pricing.engagement.title}</p>
-                <ul className="mt-4">
-                  {c.pricing.engagement.items.map((item) => (
-                    <li
-                      key={item.label}
-                      className="flex items-baseline justify-between gap-4 border-t border-ink/10 py-2.5 first:border-t-0 first:pt-0 last:pb-0"
-                    >
-                      <span className="text-[0.92rem] text-ink">{item.label}</span>
-                      <span className="text-[0.92rem] muted">{item.value}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-9 flex flex-wrap items-center justify-between gap-x-10 gap-y-5 border-t border-ink/12 pt-7">
-              <p className="kicker max-w-[52ch] text-[0.58rem] leading-relaxed text-sand-muted">
-                {c.pricing.micro}
-              </p>
-              <Button href={pagePath("demo", locale)}>{c.pricing.cta}</Button>
-            </div>
-          </section>
-        </Reveal>
-
         {/* ——— Preuve sociale — placeholder explicite, jamais inventé ——— */}
         <Reveal>
           <section className="rounded-[20px] bg-cream-2 px-7 py-14 text-center md:py-16">
@@ -389,6 +320,95 @@ export function HomePage({ locale }: { locale: Locale }) {
             </p>
             {/* PLACEHOLDER — à remplacer par de vraies références publiables */}
             <p className="kicker mt-4 text-[0.6rem] text-sand-muted">{c.proof.note}</p>
+          </section>
+        </Reveal>
+
+        {/* ——— Tarifs — panneau sombre vignette, trois grandes cartes de palier
+             (grammaire des tuiles Configurabilité), prix géants en serif ——— */}
+        <Reveal>
+          <section className="panel dark-vignette">
+            <div className="on-dark p-7 md:p-12">
+              <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-end">
+                <div>
+                  <Kicker tone="dark" className="text-cream-2/90">
+                    {c.pricing.kicker}
+                  </Kicker>
+                  <h2 className="display-2 mt-4 max-w-[18ch]">
+                    <EmText text={c.pricing.title} tone="dark" />
+                  </h2>
+                </div>
+                <p className="muted-dark max-w-[44ch] text-[0.98rem] leading-relaxed">
+                  {c.pricing.lede}
+                </p>
+              </div>
+
+              <div className="mt-12 grid gap-4 md:grid-cols-3">
+                {c.pricing.tiers.slice(0, 3).map((tier) => (
+                  <div
+                    key={tier.name}
+                    className="rounded-2xl border border-sand/14 bg-void/45 p-6 transition-[border-color] duration-300 ease-(--ease-lux) hover:border-gold/40 md:p-8"
+                  >
+                    <p className="kicker text-gold">{tier.name}</p>
+                    <p className="mt-7 font-serif text-[2.8rem] leading-none text-cream-2 md:text-[3.2rem]">
+                      {tier.price}
+                    </p>
+                    <p className="kicker mt-3 text-[0.56rem] text-sand-muted">{c.pricing.unit}</p>
+                    <p className="muted-dark mt-7 border-t border-sand/14 pt-5 text-[0.94rem]">
+                      {tier.range}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {c.pricing.tiers[3] && (
+                <div className="mt-4 flex flex-col gap-4 rounded-2xl border border-sand/14 bg-void/45 p-6 md:flex-row md:items-center md:justify-between md:gap-10 md:p-8">
+                  <div>
+                    <p className="kicker text-gold">{c.pricing.tiers[3].name}</p>
+                    <p className="muted-dark mt-2.5 text-[0.94rem]">
+                      {c.pricing.tiers[3].range}
+                      {c.pricing.tiers[3].note && (
+                        <span className="text-sand-muted"> · {c.pricing.tiers[3].note}</span>
+                      )}
+                    </p>
+                  </div>
+                  <p className="whitespace-nowrap font-serif text-[1.9rem] leading-none text-cream-2 md:text-[2.2rem]">
+                    {c.pricing.tiers[3].price}
+                  </p>
+                </div>
+              )}
+
+              <div className="mt-11 grid gap-8 border-t border-sand/16 pt-8 md:grid-cols-2 md:gap-12">
+                <div>
+                  <p className="kicker text-sand-muted">{c.pricing.setup.title}</p>
+                  <p className="muted-dark mt-4 max-w-[52ch] text-[0.92rem] leading-relaxed">
+                    {c.pricing.setup.body}
+                  </p>
+                </div>
+                <div>
+                  <p className="kicker text-sand-muted">{c.pricing.engagement.title}</p>
+                  <ul className="mt-4">
+                    {c.pricing.engagement.items.map((item) => (
+                      <li
+                        key={item.label}
+                        className="flex items-baseline justify-between gap-4 border-t border-sand/10 py-2.5 first:border-t-0 first:pt-0 last:pb-0"
+                      >
+                        <span className="text-[0.92rem] text-cream-2">{item.label}</span>
+                        <span className="muted-dark text-[0.92rem]">{item.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center justify-between gap-x-10 gap-y-6 border-t border-sand/16 pt-7">
+                <p className="kicker max-w-[52ch] text-[0.58rem] leading-relaxed text-sand-muted">
+                  {c.pricing.micro}
+                </p>
+                <Button href={pagePath("demo", locale)} variant="primary-inverse">
+                  {c.pricing.cta}
+                </Button>
+              </div>
+            </div>
           </section>
         </Reveal>
 
