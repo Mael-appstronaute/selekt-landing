@@ -68,26 +68,31 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* ——— Connecteurs — panneau sombre scindé : grille d'icônes d'apps
-             sur tuiles crème à gauche, propos et lien à droite ——— */}
+        {/* ——— Connecteurs — panneau scindé crème/sombre : plaque éditoriale
+             à filets (icône + nom mono par case) face au propos ——— */}
         <Reveal>
-          <section className="panel grid bg-void-2 lg:grid-cols-[1.04fr_1fr]">
-            <div className="flex items-center justify-center bg-sand/10 px-7 py-10 md:p-12 lg:p-16">
-              <ul className="grid w-full max-w-[430px] grid-cols-4 gap-4 md:gap-5">
+          <section className="panel grid bg-void-2 lg:grid-cols-[1.05fr_1fr]">
+            <div className="flex items-center bg-cream-2 p-4 md:p-8 lg:p-10">
+              <ul className="grid w-full grid-cols-4">
                 {CONNECTOR_ICONS.map((icon) => (
-                  <li key={icon.name} title={icon.name}>
-                    <div className="group flex aspect-square items-center justify-center rounded-[24%] bg-cream-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_14px_26px_-16px_rgba(10,8,6,0.7)] ring-1 ring-void/25 transition-[transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-1.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_22px_34px_-16px_rgba(10,8,6,0.75)]">
-                      {/* img simple : SVG hors optimiseur next/image */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={icon.src}
-                        alt={icon.name}
-                        width={44}
-                        height={44}
-                        loading="lazy"
-                        className="h-[46%] w-[46%] object-contain transition-transform duration-300 ease-(--ease-lux) group-hover:scale-108"
-                      />
-                    </div>
+                  <li
+                    key={icon.name}
+                    title={icon.name}
+                    className="group flex aspect-square flex-col items-center justify-center gap-2.5 border-b border-r border-ink/10 transition-colors duration-300 ease-(--ease-lux) hover:bg-ink/4 [&:nth-child(4n)]:border-r-0 [&:nth-child(n+13)]:border-b-0"
+                  >
+                    {/* img simple : SVG hors optimiseur next/image */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={icon.src}
+                      alt={icon.name}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      className="h-8 w-8 object-contain transition-transform duration-300 ease-(--ease-lux) group-hover:-translate-y-1 md:h-10 md:w-10"
+                    />
+                    <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-ink/50 transition-colors duration-300 ease-(--ease-lux) group-hover:text-ink/80 md:text-[0.58rem] md:tracking-[0.14em]">
+                      {icon.label}
+                    </span>
                   </li>
                 ))}
               </ul>

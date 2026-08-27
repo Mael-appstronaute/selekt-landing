@@ -22,24 +22,25 @@ export const CONNECTORS: Connector[] = [
  * Icônes d'applications seules (jamais de wordmark) pour la grille du
  * panneau « Connecteurs » de l'accueil — sources : svgl.app et Simple Icons
  * en couleur de marque (voir CREDITS.md).
+ * `label` : nom court affiché sous l'icône (une seule ligne en mobile).
  */
-export type ConnectorIcon = { name: string; src: string };
+export type ConnectorIcon = { name: string; label: string; src: string };
 
 export const CONNECTOR_ICONS: ConnectorIcon[] = [
-  { name: "Shopify", src: "/icons/shopify.svg" },
-  { name: "Salesforce", src: "/icons/salesforce.svg" },
-  { name: "Slack", src: "/icons/slack.svg" },
-  { name: "Notion", src: "/icons/notion.svg" },
-  { name: "PrestaShop", src: "/icons/prestashop.svg" },
-  { name: "Stripe", src: "/icons/stripe.svg" },
-  { name: "HubSpot", src: "/icons/hubspot.svg" },
-  { name: "Mailchimp", src: "/icons/mailchimp.svg" },
-  { name: "WhatsApp", src: "/icons/whatsapp.svg" },
-  { name: "Instagram", src: "/icons/instagram.svg" },
-  { name: "Gmail", src: "/icons/gmail.svg" },
-  { name: "Outlook", src: "/icons/outlook.svg" },
-  { name: "Google Agenda", src: "/icons/google-calendar.svg" },
-  { name: "Google Sheets", src: "/icons/google-sheets.svg" },
-  { name: "Google Analytics", src: "/icons/google-analytics.svg" },
-  { name: "Messenger", src: "/icons/messenger.svg" },
+  { name: "Shopify", label: "Shopify", src: "/icons/shopify.svg" },
+  { name: "Salesforce", label: "Salesforce", src: "/icons/salesforce.svg" },
+  { name: "Slack", label: "Slack", src: "/icons/slack.svg" },
+  { name: "Notion", label: "Notion", src: "/icons/notion.svg" },
+  { name: "PrestaShop", label: "PrestaShop", src: "/icons/prestashop.svg" },
+  { name: "Stripe", label: "Stripe", src: "/icons/stripe.svg" },
+  { name: "HubSpot", label: "HubSpot", src: "/icons/hubspot.svg" },
+  { name: "Mailchimp", label: "Mailchimp", src: "/icons/mailchimp.svg" },
+  { name: "WhatsApp", label: "WhatsApp", src: "/icons/whatsapp.svg" },
+  { name: "Instagram", label: "Instagram", src: "/icons/instagram.svg" },
+  { name: "Gmail", label: "Gmail", src: "/icons/gmail.svg" },
+  { name: "Outlook", label: "Outlook", src: "/icons/outlook.svg" },
+  { name: "Google Agenda", label: "Agenda", src: "/icons/google-calendar.svg" },
+  { name: "Google Sheets", label: "Sheets", src: "/icons/google-sheets.svg" },
+  { name: "Google Analytics", label: "Analytics", src: "/icons/google-analytics.svg" },
+  { name: "Messenger", label: "Messenger", src: "/icons/messenger.svg" },
 ];
