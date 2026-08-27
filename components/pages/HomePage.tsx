@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { HOME } from "@/content/home";
-import { CONNECTORS } from "@/lib/connectors";
+import { CONNECTOR_ICONS } from "@/lib/connectors";
 import { PHOTOS } from "@/lib/photos";
 import { pagePath, type Locale } from "@/lib/routes";
 import { JsonLd, organizationJsonLd, softwareJsonLd } from "@/lib/seo";
@@ -68,41 +68,42 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* ——— Connecteurs — carrousel automatique de logos officiels, en encre ——— */}
+        {/* ——— Connecteurs — panneau sombre scindé : grille d'icônes d'apps
+             sur tuiles crème à gauche, propos et lien à droite ——— */}
         <Reveal>
-          <section className="flex flex-col items-start gap-5 py-5 md:flex-row md:items-center md:gap-10">
-            <p className="kicker shrink-0 text-sand-muted">{c.connectors.label}</p>
-            <div
-              className="min-w-0 flex-1 overflow-hidden"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
-              }}
-            >
-              <div className="marquee-track" style={{ animationDuration: "36s" }}>
-                {[false, true].map((hidden) => (
-                  <ul
-                    key={String(hidden)}
-                    aria-hidden={hidden}
-                    className="flex shrink-0 items-center gap-14 pr-14"
-                  >
-                    {CONNECTORS.map((connector) => (
-                      <li key={connector.name} className="flex items-center">
-                        {/* img simple : SVG hors optimiseur next/image, PNG déjà réduits */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={connector.src}
-                          alt={hidden ? "" : connector.name}
-                          width={connector.width}
-                          height={connector.height}
-                          loading="lazy"
-                          style={{ height: connector.h }}
-                          className="w-auto max-w-none"
-                        />
-                      </li>
-                    ))}
-                  </ul>
+          <section className="panel grid bg-void-2 lg:grid-cols-2">
+            <div className="flex items-center justify-center bg-sand/8 p-7 md:p-10 lg:p-12">
+              <ul className="grid w-full max-w-[420px] grid-cols-4 gap-3.5 md:gap-4">
+                {CONNECTOR_ICONS.map((icon) => (
+                  <li key={icon.name} className="aspect-square" title={icon.name}>
+                    <div className="flex h-full w-full items-center justify-center rounded-2xl bg-cream-2 shadow-[0_2px_10px_rgba(10,8,6,0.35)] transition-transform duration-300 ease-(--ease-lux) hover:-translate-y-1">
+                      {/* img simple : SVG hors optimiseur next/image */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={icon.src}
+                        alt={icon.name}
+                        width={40}
+                        height={40}
+                        loading="lazy"
+                        className="h-[42%] w-[42%] object-contain"
+                      />
+                    </div>
+                  </li>
                 ))}
+              </ul>
+            </div>
+            <div className="on-dark flex flex-col justify-center p-7 md:p-12 lg:p-14">
+              <Kicker tone="dark">{c.connectors.kicker}</Kicker>
+              <h2 className="display-2 mt-4 max-w-[16ch]">
+                <EmText text={c.connectors.title} tone="dark" />
+              </h2>
+              <p className="muted-dark mt-4 max-w-[44ch] text-[0.98rem] leading-relaxed">
+                {c.connectors.body}
+              </p>
+              <div className="mt-8">
+                <Button href={pagePath("platform", locale)} variant="outline-dark">
+                  {c.connectors.cta} <Arrow />
+                </Button>
               </div>
             </div>
           </section>

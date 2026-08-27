@@ -54,6 +54,23 @@ pour rester dans la charte. Sources :
 Marques et logos restent la propriété de leurs détenteurs respectifs ;
 usage nominatif d'interopérabilité. À faire valider avant mise en ligne.
 
+Le carrousel encre est conservé sur la LP pilote ; l'accueil utilise
+désormais la grille d'icônes ci-dessous.
+
+## Icônes d'applications (`public/icons/`)
+
+Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
+« Connecteurs » de l'accueil. Sources :
+
+- svgl.app (SVG officiels redistribués) — Shopify, Salesforce, Slack, Notion,
+  Stripe, WhatsApp, Instagram, Gmail, Outlook, Google Agenda, Google Sheets,
+  Google Analytics, Messenger (non utilisé)
+- Simple Icons (CC0), recolorées couleur de marque — HubSpot `#FF5C35`,
+  Zapier `#FF4F00`, Mailchimp `#241C15`, PrestaShop `#DF0067`
+
+Marques et icônes restent la propriété de leurs détenteurs respectifs ;
+usage nominatif d'interopérabilité. À faire valider avant mise en ligne.
+
 ## Typographies
 
 - Instrument Serif — Google Fonts (OFL)

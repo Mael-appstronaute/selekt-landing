@@ -23,7 +23,7 @@ export type HomeContent = {
     alt: string;
     chips: string[];
   };
-  connectors: { label: string };
+  connectors: { kicker: string; title: string; body: string; cta: string };
   intro: { title: string; body: string };
   trace: { kicker: string; title: string; body: string; alt: string; chips: string[] };
   attribute: {
@@ -81,7 +81,12 @@ export const HOME: Record<Locale, HomeContent> = {
       alt: "Intérieur d'une boutique de luxe aux tons crème, escalier et comptoirs",
       chips: ["Contact tracé", "Vente attribuée", "CA influencé"],
     },
-    connectors: { label: "Elle se connecte avec :" },
+    connectors: {
+      kicker: "Connecteurs",
+      title: "Elle se *connecte* à vos outils.",
+      body: "E-commerce, caisse, CRM, messageries, bureautique : Selekt s'intègre à l'écosystème de la maison et fait circuler la donnée client dans les deux sens, sans double saisie.",
+      cta: "Voir la plateforme",
+    },
     intro: {
       title: "Le travail de relation existe. Sa *preuve*, enfin, aussi.",
       body: "Selekt trace les gestes de clienteling, attribue les ventes selon vos règles, et fait remonter un CA influencé réconciliable à chaque niveau, du comptoir au comité de direction.",
@@ -249,7 +254,12 @@ export const HOME: Record<Locale, HomeContent> = {
       alt: "Cream-toned luxury boutique interior with staircase and counters",
       chips: ["Traced contact", "Attributed sale", "Influenced revenue"],
     },
-    connectors: { label: "It connects with:" },
+    connectors: {
+      kicker: "Connectors",
+      title: "It *connects* with your tools.",
+      body: "E-commerce, POS, CRM, messaging, productivity: Selekt plugs into the house's ecosystem and keeps client data flowing both ways, with no double entry.",
+      cta: "Explore the platform",
+    },
     intro: {
       title: "Relationship work happens. Now its *proof* does too.",
       body: "Selekt traces clienteling gestures, attributes sales according to your rules, and surfaces reconcilable influenced revenue at every level, from the sales floor to the boardroom.",
