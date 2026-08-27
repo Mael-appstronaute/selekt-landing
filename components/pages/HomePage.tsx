@@ -80,16 +80,16 @@ export function HomePage({ locale }: { locale: Locale }) {
                     title={icon.name}
                     className="group flex aspect-square flex-col items-center justify-center gap-2.5 border-b border-r border-sand/12 transition-colors duration-300 ease-(--ease-lux) hover:bg-sand/8 [&:nth-child(4n)]:border-r-0 [&:nth-child(n+13)]:border-b-0"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-[24%] bg-cream-2 shadow-[0_10px_20px_-12px_rgba(10,8,6,0.7)] transition-transform duration-300 ease-(--ease-lux) group-hover:-translate-y-1 md:h-14 md:w-14">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-[24%] bg-cream-2 shadow-[0_10px_20px_-12px_rgba(10,8,6,0.7)] transition-transform duration-300 ease-(--ease-lux) group-hover:-translate-y-1 md:h-[76px] md:w-[76px]">
                       {/* img simple : SVG hors optimiseur next/image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={icon.src}
                         alt={icon.name}
-                        width={40}
-                        height={40}
+                        width={44}
+                        height={44}
                         loading="lazy"
-                        className="h-6 w-6 object-contain md:h-7 md:w-7"
+                        className="h-8 w-8 object-contain md:h-11 md:w-11"
                       />
                     </div>
                     <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-sand-muted transition-colors duration-300 ease-(--ease-lux) group-hover:text-cream-2 md:text-[0.58rem] md:tracking-[0.14em]">
