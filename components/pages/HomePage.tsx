@@ -71,36 +71,36 @@ export function HomePage({ locale }: { locale: Locale }) {
         {/* ——— Connecteurs — panneau sombre scindé : grille d'icônes d'apps
              sur tuiles crème à gauche, propos et lien à droite ——— */}
         <Reveal>
-          <section className="panel grid bg-void-2 lg:grid-cols-2">
-            <div className="flex items-center justify-center bg-sand/8 p-7 md:p-10 lg:p-12">
-              <ul className="grid w-full max-w-[420px] grid-cols-4 gap-3.5 md:gap-4">
+          <section className="panel grid bg-void-2 lg:grid-cols-[1.04fr_1fr]">
+            <div className="flex items-center justify-center bg-sand/10 px-7 py-10 md:p-12 lg:p-16">
+              <ul className="grid w-full max-w-[430px] grid-cols-4 gap-4 md:gap-5">
                 {CONNECTOR_ICONS.map((icon) => (
-                  <li key={icon.name} className="aspect-square" title={icon.name}>
-                    <div className="flex h-full w-full items-center justify-center rounded-2xl bg-cream-2 shadow-[0_2px_10px_rgba(10,8,6,0.35)] transition-transform duration-300 ease-(--ease-lux) hover:-translate-y-1">
+                  <li key={icon.name} title={icon.name}>
+                    <div className="group flex aspect-square items-center justify-center rounded-[24%] bg-cream-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_14px_26px_-16px_rgba(10,8,6,0.7)] ring-1 ring-void/25 transition-[transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-1.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_22px_34px_-16px_rgba(10,8,6,0.75)]">
                       {/* img simple : SVG hors optimiseur next/image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={icon.src}
                         alt={icon.name}
-                        width={40}
-                        height={40}
+                        width={44}
+                        height={44}
                         loading="lazy"
-                        className="h-[42%] w-[42%] object-contain"
+                        className="h-[46%] w-[46%] object-contain transition-transform duration-300 ease-(--ease-lux) group-hover:scale-108"
                       />
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="on-dark flex flex-col justify-center p-7 md:p-12 lg:p-14">
+            <div className="on-dark flex flex-col justify-center p-7 pt-9 md:p-12 lg:p-16">
               <Kicker tone="dark">{c.connectors.kicker}</Kicker>
-              <h2 className="display-2 mt-4 max-w-[16ch]">
+              <h2 className="display-2 mt-5 max-w-[15ch]">
                 <EmText text={c.connectors.title} tone="dark" />
               </h2>
-              <p className="muted-dark mt-4 max-w-[44ch] text-[0.98rem] leading-relaxed">
+              <p className="muted-dark mt-5 max-w-[42ch] text-[0.98rem] leading-relaxed">
                 {c.connectors.body}
               </p>
-              <div className="mt-8">
+              <div className="mt-9">
                 <Button href={pagePath("platform", locale)} variant="outline-dark">
                   {c.connectors.cta} <Arrow />
                 </Button>

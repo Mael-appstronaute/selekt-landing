@@ -41,5 +41,5 @@ export const CONNECTOR_ICONS: ConnectorIcon[] = [
   { name: "Google Agenda", src: "/icons/google-calendar.svg" },
   { name: "Google Sheets", src: "/icons/google-sheets.svg" },
   { name: "Google Analytics", src: "/icons/google-analytics.svg" },
-  { name: "Zapier", src: "/icons/zapier.svg" },
+  { name: "Messenger", src: "/icons/messenger.svg" },
 ];
