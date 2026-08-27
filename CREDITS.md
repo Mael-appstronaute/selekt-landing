@@ -66,8 +66,8 @@ Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
   WhatsApp, Instagram, Gmail, Outlook, Google Agenda, Google Sheets,
   Google Analytics, Messenger
 - Simple Icons (CC0), recolorées couleur de marque — HubSpot `#FF5C35`,
-  Stripe `#635BFF`, Mailchimp `#241C15`, PrestaShop `#DF0067`
-  (Zapier écarté : son icône Simple Icons est un wordmark)
+  Stripe `#635BFF`, Mailchimp `#FFE01B` (jaune : lisible sur fond sombre),
+  PrestaShop `#DF0067` (Zapier écarté : son icône Simple Icons est un wordmark)
 
 Marques et icônes restent la propriété de leurs détenteurs respectifs ;
 usage nominatif d'interopérabilité. À faire valider avant mise en ligne.

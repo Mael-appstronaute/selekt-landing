@@ -68,17 +68,17 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* ——— Connecteurs — panneau scindé crème/sombre : plaque éditoriale
-             à filets (icône + nom mono par case) face au propos ——— */}
+        {/* ——— Connecteurs — panneau sombre : plaque éditoriale à filets sable
+             (icône + nom mono par case) face au propos ——— */}
         <Reveal>
           <section className="panel grid bg-void-2 lg:grid-cols-[1.05fr_1fr]">
-            <div className="flex items-center bg-cream-2 p-4 md:p-8 lg:p-10">
+            <div className="flex items-center p-4 md:p-8 lg:p-10">
               <ul className="grid w-full grid-cols-4">
                 {CONNECTOR_ICONS.map((icon) => (
                   <li
                     key={icon.name}
                     title={icon.name}
-                    className="group flex aspect-square flex-col items-center justify-center gap-2.5 border-b border-r border-ink/10 transition-colors duration-300 ease-(--ease-lux) hover:bg-ink/4 [&:nth-child(4n)]:border-r-0 [&:nth-child(n+13)]:border-b-0"
+                    className="group flex aspect-square flex-col items-center justify-center gap-2.5 border-b border-r border-sand/12 transition-colors duration-300 ease-(--ease-lux) hover:bg-sand/8 [&:nth-child(4n)]:border-r-0 [&:nth-child(n+13)]:border-b-0"
                   >
                     {/* img simple : SVG hors optimiseur next/image */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -90,7 +90,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                       loading="lazy"
                       className="h-8 w-8 object-contain transition-transform duration-300 ease-(--ease-lux) group-hover:-translate-y-1 md:h-10 md:w-10"
                     />
-                    <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-ink/50 transition-colors duration-300 ease-(--ease-lux) group-hover:text-ink/80 md:text-[0.58rem] md:tracking-[0.14em]">
+                    <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-sand-muted transition-colors duration-300 ease-(--ease-lux) group-hover:text-cream-2 md:text-[0.58rem] md:tracking-[0.14em]">
                       {icon.label}
                     </span>
                   </li>
