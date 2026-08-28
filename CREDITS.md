@@ -68,9 +68,10 @@ Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
   Stripe `#635BFF`, Mailchimp `#FFE01B` (jaune : lisible sur fond sombre),
   PrestaShop `#DF0067` (Zapier et WooCommerce écartés : leurs icônes
   Simple Icons sont des wordmarks)
-- Favicons officiels 128×128 (Google s2) — Odeis (odeis.net), Cegid
-  (cegid.com), WooCommerce (woocommerce.com), Splio (splio.com — fond
-  bleu clair détouré pour la tuile crème)
+- Favicons officiels 128×128 (Google s2) — Odeis (odeis.net),
+  WooCommerce (woocommerce.com)
+- Cegid & Splio — wordmarks officiels fournis par le client (28/08,
+  JPEG WhatsApp), fond blanc détouré, affichés élargis (`wide`)
 - Fastmag — monogramme « fg » historique (favicon 192×192 pré-Orisha,
   fastmag.fr 2019 via Wayback Machine — l'actuel est une tuile Orisha
   blanche illisible en 44 px et identique à celle d'Openbravo)

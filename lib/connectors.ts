@@ -23,8 +23,10 @@ export const CONNECTORS: Connector[] = [
  * panneau « Connecteurs » de l'accueil — sources : svgl.app et Simple Icons
  * en couleur de marque (voir CREDITS.md).
  * `label` : nom court affiché sous l'icône (une seule ligne en mobile).
+ * `wide` : wordmark horizontal (logo fourni par le client sans version icône)
+ * — affiché plus large dans la pastille pour rester lisible.
  */
-export type ConnectorIcon = { name: string; label: string; src: string };
+export type ConnectorIcon = { name: string; label: string; src: string; wide?: boolean };
 
 export const CONNECTOR_ICONS: ConnectorIcon[] = [
   { name: "Shopify", label: "Shopify", src: "/icons/shopify.svg" },
@@ -37,10 +39,10 @@ export const CONNECTOR_ICONS: ConnectorIcon[] = [
   { name: "Mailchimp", label: "Mailchimp", src: "/icons/mailchimp.svg" },
   { name: "WhatsApp", label: "WhatsApp", src: "/icons/whatsapp.svg" },
   { name: "Odeis", label: "Odeis", src: "/icons/odeis.png" },
-  { name: "Cegid", label: "Cegid", src: "/icons/cegid.png" },
+  { name: "Cegid", label: "Cegid", src: "/icons/cegid.png", wide: true },
   { name: "Openbravo", label: "Openbravo", src: "/icons/openbravo.png" },
   { name: "Fastmag (Orisha)", label: "Fastmag", src: "/icons/fastmag.png" },
   { name: "WooCommerce", label: "WooCommerce", src: "/icons/woocommerce.png" },
   { name: "Google Analytics", label: "Analytics", src: "/icons/google-analytics.svg" },
-  { name: "Splio", label: "Splio", src: "/icons/splio.png" },
+  { name: "Splio", label: "Splio", src: "/icons/splio.png", wide: true },
 ];

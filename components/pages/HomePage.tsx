@@ -89,7 +89,11 @@ export function HomePage({ locale }: { locale: Locale }) {
                         width={44}
                         height={44}
                         loading="lazy"
-                        className="h-8 w-8 object-contain md:h-11 md:w-11"
+                        className={
+                          icon.wide
+                            ? "h-8 w-11 object-contain md:h-11 md:w-[58px]"
+                            : "h-8 w-8 object-contain md:h-11 md:w-11"
+                        }
                       />
                     </div>
                     <span className="font-mono text-[0.5rem] uppercase tracking-[0.12em] text-sand-muted transition-colors duration-300 ease-(--ease-lux) group-hover:text-cream-2 md:text-[0.58rem] md:tracking-[0.14em]">
