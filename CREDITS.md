@@ -63,11 +63,23 @@ Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
 « Connecteurs » de l'accueil. Sources :
 
 - svgl.app (SVG officiels redistribués) — Shopify, Salesforce, Slack, Notion,
-  WhatsApp, Instagram, Gmail, Outlook, Google Agenda, Google Sheets,
-  Google Analytics, Messenger
+  WhatsApp, Google Analytics
 - Simple Icons (CC0), recolorées couleur de marque — HubSpot `#FF5C35`,
   Stripe `#635BFF`, Mailchimp `#FFE01B` (jaune : lisible sur fond sombre),
-  PrestaShop `#DF0067` (Zapier écarté : son icône Simple Icons est un wordmark)
+  PrestaShop `#DF0067` (Zapier et WooCommerce écartés : leurs icônes
+  Simple Icons sont des wordmarks)
+- Favicons officiels 128×128 (Google s2) — Odeis (odeis.net), Cegid
+  (cegid.com), WooCommerce (woocommerce.com), Splio (splio.com — fond
+  bleu clair détouré pour la tuile crème)
+- Fastmag — monogramme « fg » historique (favicon 192×192 pré-Orisha,
+  fastmag.fr 2019 via Wayback Machine — l'actuel est une tuile Orisha
+  blanche illisible en 44 px et identique à celle d'Openbravo)
+- Openbravo — monogramme « b » vert extrait du logo officiel
+  (Wikipédia, `Openbravo's_Logo.png`)
+
+Retours client 28/08 : Instagram → Odeis, Gmail → Cegid, Outlook → Openbravo,
+Google Agenda → Fastmag, Google Sheets → WooCommerce, Messenger → Splio
+(SVG correspondants retirés de `public/icons/`).
 
 Marques et icônes restent la propriété de leurs détenteurs respectifs ;
 usage nominatif d'interopérabilité. À faire valider avant mise en ligne.
