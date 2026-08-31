@@ -26,6 +26,7 @@ type DemoPayload = {
   company?: string;
   email?: string;
   role?: string;
+  roleOther?: string;
   network?: string;
   message?: string;
   consent?: string;
@@ -68,6 +69,9 @@ export async function POST(request: Request) {
   if (typeof data.message === "string" && data.message.length > 5000) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
+  if (typeof data.roleOther === "string" && data.roleOther.length > 500) {
+    return NextResponse.json({ ok: false }, { status: 400 });
+  }
 
   const endpoint = process.env.DEMO_WEBHOOK_URL;
   if (!endpoint) {
@@ -85,7 +89,8 @@ export async function POST(request: Request) {
         name: data.name,
         company: data.company,
         email: data.email,
-        role: data.role,
+        // « Autre » : la précision saisie accompagne la fonction
+        role: data.roleOther?.trim() ? `${data.role} — ${data.roleOther.trim()}` : data.role,
         network: data.network,
         message: data.message ?? "",
         locale: data.locale ?? "fr",

@@ -62,12 +62,10 @@ désormais la grille d'icônes ci-dessous.
 Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
 « Connecteurs » de l'accueil. Sources :
 
-- svgl.app (SVG officiels redistribués) — Shopify, Salesforce, Slack, Notion,
-  WhatsApp, Google Analytics
-- Simple Icons (CC0), recolorées couleur de marque — HubSpot `#FF5C35`,
-  Stripe `#635BFF`, Mailchimp `#FFE01B` (jaune : lisible sur fond sombre),
-  PrestaShop `#DF0067` (Zapier et WooCommerce écartés : leurs icônes
-  Simple Icons sont des wordmarks)
+- svgl.app (SVG officiels redistribués) — Shopify, Salesforce, WhatsApp
+- Simple Icons (CC0), recolorées couleur de marque — PrestaShop `#DF0067`
+  (Zapier et WooCommerce écartés : leurs icônes Simple Icons sont des
+  wordmarks)
 - Favicons officiels 128×128 (Google s2) — Odeis (odeis.net),
   WooCommerce (woocommerce.com)
 - Cegid & Splio — wordmarks officiels fournis par le client (28/08,
@@ -81,6 +79,25 @@ Icônes seules (jamais de wordmark), en couleur, pour la grille du panneau
 Retours client 28/08 : Instagram → Odeis, Gmail → Cegid, Outlook → Openbravo,
 Google Agenda → Fastmag, Google Sheets → WooCommerce, Messenger → Splio
 (SVG correspondants retirés de `public/icons/`).
+
+Retours client 31/08 (notes Figma sur un screenshot antérieur au 28/08) :
+Slack → Retail Pro, Notion → Microsoft 365, Stripe → Oracle Xstore,
+HubSpot → NewStore, Mailchimp → Microsoft Dynamics 365 Commerce,
+Gmail → Bijou3. La tuile Gmail étant déjà devenue Cegid (retour 28/08),
+Bijou3 remplace Google Analytics, dernière tuile non retail. Sources :
+
+- Microsoft 365 — icône officielle 2022, Wikimedia Commons
+  (`Microsoft_365_(2022).svg`)
+- Microsoft Dynamics 365 Commerce — icône officielle, Wikimedia Commons
+  (`Dynamics_365_Commerce_logo.svg`)
+- Oracle Xstore — wordmark Oracle rouge `#C74634` officiel (Wikimedia,
+  `Oracle_logo.svg`), affiché élargi (`wide`), pas d'icône Xstore dédiée
+- NewStore — mark « N » officiel (newstore.com, `ns-mark.png`)
+- Retail Pro — wordmark officiel déjà présent dans `public/logos/`,
+  réutilisé, affiché élargi (`wide`)
+- Bijou3 — aucune identité propre : bijou3.com redirige vers odeis.net
+  (produit « Odeis Bijou3 ») ; icône Odeis réutilisée avec le label
+  Bijou3, à faire valider par le client
 
 Marques et icônes restent la propriété de leurs détenteurs respectifs ;
 usage nominatif d'interopérabilité. À faire valider avant mise en ligne.

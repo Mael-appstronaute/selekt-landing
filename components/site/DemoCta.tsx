@@ -7,7 +7,7 @@ const COPY: Record<Locale, { kicker: string; title: React.ReactNode; lede: strin
     kicker: "Demander une démo",
     title: (
       <>
-        Voyez Selekt sur <em className="italic text-sand">vos</em> cas d&apos;usage.
+        Découvrez Selekt directement avec <em className="italic text-sand">vos</em> cas d&apos;usage.
       </>
     ),
     lede: "Une démonstration guidée, adaptée à votre réseau de boutiques. Sans engagement.",
@@ -17,7 +17,7 @@ const COPY: Record<Locale, { kicker: string; title: React.ReactNode; lede: strin
     kicker: "Request a demo",
     title: (
       <>
-        See Selekt on <em className="italic text-sand">your</em> use cases.
+        Discover Selekt directly with <em className="italic text-sand">your</em> use cases.
       </>
     ),
     lede: "A guided demonstration, tailored to your boutique network. No commitment.",

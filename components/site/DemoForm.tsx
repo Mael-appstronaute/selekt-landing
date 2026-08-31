@@ -14,6 +14,9 @@ const inputCls =
 export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["form"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  // dernière entrée de copy.roles = « Autre » : ouvre un champ libre pour préciser le poste
+  const otherRole = copy.roles[copy.roles.length - 1];
+  const [role, setRole] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,6 +26,9 @@ export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["
     const nextErrors: Record<string, string> = {};
     for (const field of ["name", "company", "email", "role", "network"]) {
       if (!data[field]?.trim()) nextErrors[field] = copy.required;
+    }
+    if (data.role === otherRole && !data.roleOther?.trim()) {
+      nextErrors.roleOther = copy.required;
     }
     if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       nextErrors.email = copy.invalidEmail;
@@ -96,15 +102,30 @@ export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["
           <label htmlFor="demo-role" className="kicker text-sand-muted">
             {copy.role}
           </label>
-          <select id="demo-role" name="role" defaultValue="" className={`mt-2 ${inputCls}`}>
+          <select
+            id="demo-role"
+            name="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className={`mt-2 ${inputCls}`}
+          >
             <option value="" disabled hidden />
-            {copy.roles.map((role) => (
-              <option key={role} value={role}>
-                {role}
+            {copy.roles.map((r) => (
+              <option key={r} value={r}>
+                {r}
               </option>
             ))}
           </select>
           {err("role")}
+          {role === otherRole && (
+            <div className="mt-3">
+              <label htmlFor="demo-role-other" className="kicker text-sand-muted">
+                {copy.roleOther}
+              </label>
+              <input id="demo-role-other" name="roleOther" className={`mt-2 ${inputCls}`} />
+              {err("roleOther")}
+            </div>
+          )}
         </div>
         <div>
           <label htmlFor="demo-network" className="kicker text-sand-muted">

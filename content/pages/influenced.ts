@@ -10,7 +10,7 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
     },
     hero: {
       kicker: "CA influencé",
-      title: "Le CA influencé, enfin *mesurable*.",
+      title: "Le CA influencé, *visible et mesurable*.",
       lede: "Selekt attribue les ventes aux actions de clienteling selon vos règles, et distingue toujours le CA direct du CA influencé. Jamais additionnés, toujours réconciliables, du vendeur au siège.",
       demoLabel: "Demander une démo",
       bg: "waves",
@@ -47,8 +47,8 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
       },
       {
         type: "loop",
-        kicker: "La boucle de valeur",
-        title: "Quatre temps. Une *preuve*.",
+        kicker: "Le calcul du CA influencé",
+        title: "Quatre étapes. Un *résultat*.",
         steps: [
           {
             title: "Contact tracé",
@@ -92,7 +92,7 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
             points: [
               "Canaux inclus ou exclus explicitement",
               "Les actions hors application n'inventent pas de CA",
-              "La définition est partagée avec les équipes",
+              "Une seule définition, valable pour tout le monde",
             ],
           },
           {
@@ -107,25 +107,6 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
           },
         ],
       },
-      {
-        type: "list",
-        kicker: "La réconciliation",
-        title: "Du vendeur au siège, *ligne à ligne*.",
-        items: [
-          {
-            title: "Chaque euro a une histoire",
-            body: "Un montant influencé renvoie à une vente, qui renvoie à une action, qui renvoie à un auteur et une date.",
-          },
-          {
-            title: "Les mêmes sommes partout",
-            body: "Ce que le vendeur voit sur sa fiche, le manager le retrouve au cockpit, le siège dans ses analytics.",
-          },
-          {
-            title: "Zéro retraitement",
-            body: "Pas d'export à croiser, pas de tableur de vérification : la réconciliation est l'état normal du système.",
-          },
-        ],
-      },
     ],
   },
 
@@ -137,7 +118,7 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
     },
     hero: {
       kicker: "Influenced revenue",
-      title: "Influenced revenue, finally *measurable*.",
+      title: "Influenced revenue, *visible and measurable*.",
       lede: "Selekt attributes sales to clienteling actions according to your rules, and always distinguishes direct from influenced revenue. Never added together, always reconcilable, from advisor to headquarters.",
       demoLabel: "Request a demo",
       bg: "waves",
@@ -174,8 +155,8 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
       },
       {
         type: "loop",
-        kicker: "The value loop",
-        title: "Four beats. One *proof*.",
+        kicker: "The influenced revenue calculation",
+        title: "Four steps. One *result*.",
         steps: [
           {
             title: "Traced contact",
@@ -219,7 +200,7 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
             points: [
               "Channels explicitly included or excluded",
               "Actions outside the application do not invent revenue",
-              "The definition is shared with the teams",
+              "One definition, valid for everyone",
             ],
           },
           {
@@ -231,25 +212,6 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
               "The linking is consultable on every sale",
               "Edge cases follow a written rule, not an exception",
             ],
-          },
-        ],
-      },
-      {
-        type: "list",
-        kicker: "Reconciliation",
-        title: "From advisor to headquarters, *line by line*.",
-        items: [
-          {
-            title: "Every euro has a story",
-            body: "An influenced amount points to a sale, which points to an action, which points to an author and a date.",
-          },
-          {
-            title: "The same sums everywhere",
-            body: "What the advisor sees on their profile, the manager finds in the cockpit, headquarters in its analytics.",
-          },
-          {
-            title: "Zero reprocessing",
-            body: "No exports to cross-check, no verification spreadsheet: reconciliation is the system's normal state.",
           },
         ],
       },

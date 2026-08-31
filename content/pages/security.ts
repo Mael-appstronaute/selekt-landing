@@ -52,7 +52,7 @@ export const SECURITY: Record<Locale, FeaturePageContent> = {
           {
             kicker: "Audit",
             title: "Journal complet",
-            body: "Qui a fait quoi, quand, sur quelle donnée : chaque action sensible est journalisée et consultable.",
+            body: "Qui a fait quoi, quand, sur quelle donnée : chaque action importante est inscrite et consultable.",
           },
         ],
       },
@@ -71,7 +71,7 @@ export const SECURITY: Record<Locale, FeaturePageContent> = {
             body: "Quand un client demande l'effacement, ses données personnelles disparaissent ; vos statistiques, elles, restent justes.",
           },
           {
-            title: "Habilitations vivantes",
+            title: "Des comptes évolutifs",
             body: "Une arrivée, un départ, un changement de poste : les droits s'ajustent depuis la console, immédiatement.",
           },
         ],
@@ -129,7 +129,7 @@ export const SECURITY: Record<Locale, FeaturePageContent> = {
           {
             kicker: "Audit",
             title: "Full log",
-            body: "Who did what, when, on which data: every sensitive action is logged and consultable.",
+            body: "Who did what, when, on which data: every important action is recorded and consultable.",
           },
         ],
       },
@@ -148,7 +148,7 @@ export const SECURITY: Record<Locale, FeaturePageContent> = {
             body: "When a client requests erasure, their personal data disappears; your statistics remain accurate.",
           },
           {
-            title: "Living entitlements",
+            title: "Accounts that evolve",
             body: "An arrival, a departure, a role change: rights adjust from the console, immediately.",
           },
         ],

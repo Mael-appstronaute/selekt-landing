@@ -21,7 +21,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
           title: "Brouillon — relecture avant envoi",
           badge: "Validation requise",
           segments: [
-            { text: "Madame, la pièce que vous aviez admirée est arrivée en boutique. " },
+            { text: "Madame, la pièce que vous aviez essayée est arrivée en boutique. " },
             { text: "Profitez-en vite, offre limitée !", blocked: true },
             { text: " Puis-je vous la réserver pour votre prochaine visite ?" },
           ],
@@ -38,7 +38,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
         alt: "Plume écrivant une lettre sur papier ligné",
         kicker: "La relecture",
         title: "Rien ne part sans *validation*.",
-        body: "L'IA prépare, propose, résume. La décision d'envoyer reste un geste humain — toujours. C'est la condition de la confiance.",
+        body: "L'IA prépare, propose, résume. Mais la décision d'envoyer reste toujours un geste humain.",
         reverse: true,
         mockup: {
           kind: "ai",
@@ -46,7 +46,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
             title: "Brouillon — relecture avant envoi",
             badge: "Validation requise",
             segments: [
-              { text: "Madame, la pièce que vous aviez admirée est arrivée en boutique. " },
+              { text: "Madame, la pièce que vous aviez essayée est arrivée en boutique. " },
               { text: "Profitez-en vite, offre limitée !", blocked: true },
               { text: " Puis-je vous la réserver pour votre prochaine visite ?" },
             ],
@@ -60,8 +60,8 @@ export const AI: Record<Locale, FeaturePageContent> = {
         type: "rows",
         tone: "cream",
         kicker: "Les usages",
-        title: "Utile au *quotidien*. Sinon rien.",
-        lede: "Trois usages, choisis parce qu'ils font gagner du temps de vente, pas parce qu'ils font une démo.",
+        title: "Utile au *quotidien*, mais jamais comme un poids en plus.",
+        lede: "Trois usages, choisis parce qu'ils font gagner du temps de vente.",
         rows: [
           {
             title: "Messages dans le ton",
@@ -83,7 +83,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
         cols: 2,
         variant: "bento",
         kicker: "Les garde-fous",
-        title: "La confiance est une *architecture*.",
+        title: "Quatre piliers, pour un cadre final *solide*.",
         cards: [
           {
             kicker: "Vocabulaire",
@@ -129,7 +129,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
           title: "Draft — review before sending",
           badge: "Approval required",
           segments: [
-            { text: "Madam, the piece you admired has arrived in boutique. " },
+            { text: "Madam, the piece you tried on has arrived in boutique. " },
             { text: "Hurry, limited-time offer!", blocked: true },
             { text: " May I set it aside for your next visit?" },
           ],
@@ -146,7 +146,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
         alt: "Fountain pen writing a letter on lined paper",
         kicker: "The review",
         title: "Nothing leaves without *approval*.",
-        body: "The AI prepares, proposes, summarizes. The decision to send remains a human gesture — always. That is what trust is built on.",
+        body: "The AI prepares, proposes, summarizes. But the decision to send always remains a human gesture.",
         reverse: true,
         mockup: {
           kind: "ai",
@@ -154,7 +154,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
             title: "Draft — review before sending",
             badge: "Approval required",
             segments: [
-              { text: "Madam, the piece you admired has arrived in boutique. " },
+              { text: "Madam, the piece you tried on has arrived in boutique. " },
               { text: "Hurry, limited-time offer!", blocked: true },
               { text: " May I set it aside for your next visit?" },
             ],
@@ -168,8 +168,8 @@ export const AI: Record<Locale, FeaturePageContent> = {
         type: "rows",
         tone: "cream",
         kicker: "The uses",
-        title: "Useful *daily*. Or not at all.",
-        lede: "Three uses, chosen because they save selling time, not because they make a good demo.",
+        title: "Useful *daily*, never an added burden.",
+        lede: "Three uses, chosen because they save selling time.",
         rows: [
           {
             title: "Messages in the right tone",
@@ -191,7 +191,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
         cols: 2,
         variant: "bento",
         kicker: "The guardrails",
-        title: "Trust is an *architecture*.",
+        title: "Four pillars, for a *solid* final framework.",
         cards: [
           {
             kicker: "Vocabulary",

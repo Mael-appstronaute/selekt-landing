@@ -99,7 +99,7 @@ export const HOME: Record<Locale, HomeContent> = {
       cta: "Voir la plateforme",
     },
     intro: {
-      title: "La relation client se travaille. Désormais, elle se *prouve*.",
+      title: "La relation client se travaille. Désormais, elle peut se *calculer* également.",
       body: "Selekt trace les gestes de clienteling, attribue les ventes selon vos règles, et fait remonter un CA influencé réconciliable à chaque niveau, du comptoir au comité de direction.",
     },
     trace: {
@@ -107,14 +107,14 @@ export const HOME: Record<Locale, HomeContent> = {
       title: "Chaque geste laisse une *trace* utile.",
       body: "Messages, rendez-vous, wishlists : les actions de clienteling partent de l'application, dans le ton de la maison, et nourrissent la fiche client.",
       alt: "Vitrine d'écrin éclairée aux tons chauds dans une bijouterie",
-      chips: ["Message envoyé", "Rendez-vous tenu", "Wishlist mise à jour"],
+      chips: ["Message envoyé", "Rendez-vous planifié", "Wishlist mise à jour"],
     },
     attribute: {
       kicker: "02 · Attribuer",
       title: "La vente retrouve son *origine*.",
       body: "Quand le client achète, la vente est rattachée à l'action selon vos règles. Le CA influencé reste distinct du CA direct : jamais additionnés, toujours réconciliables.",
       points: [
-        "Fenêtre d'attribution réglable en jours, par maison",
+        "Fenêtre d'attribution réglable en jours, par boutique",
         "Canaux inclus ou exclus explicitement",
         "Une vente n'est jamais comptée deux fois",
       ],
@@ -259,7 +259,7 @@ export const HOME: Record<Locale, HomeContent> = {
     },
     cta: {
       kicker: "Demander une démo",
-      title: "Voyez Selekt sur *vos* cas d'usage.",
+      title: "Découvrez Selekt directement avec *vos* cas d'usage.",
       body: "Une démonstration guidée, adaptée à votre réseau de boutiques.",
       button: "Demander une démo",
       micro: "Trente minutes · Sans engagement",
@@ -290,7 +290,7 @@ export const HOME: Record<Locale, HomeContent> = {
       cta: "Explore the platform",
     },
     intro: {
-      title: "Relationship work happens. Now its *proof* does too.",
+      title: "Client relationships take work. Now they can be *calculated* too.",
       body: "Selekt traces clienteling gestures, attributes sales according to your rules, and surfaces reconcilable influenced revenue at every level, from the sales floor to the boardroom.",
     },
     trace: {
@@ -298,14 +298,14 @@ export const HOME: Record<Locale, HomeContent> = {
       title: "Every gesture leaves a useful *trace*.",
       body: "Messages, appointments, wishlists: clienteling actions leave from the application, in the house's tone, and feed the client profile.",
       alt: "Warm-lit jewelry display case in a boutique",
-      chips: ["Message sent", "Appointment held", "Wishlist updated"],
+      chips: ["Message sent", "Appointment scheduled", "Wishlist updated"],
     },
     attribute: {
       kicker: "02 · Attribute",
       title: "The sale finds its *origin*.",
       body: "When the client purchases, the sale is linked to the action according to your rules. Influenced revenue stays distinct from direct revenue: never added, always reconcilable.",
       points: [
-        "Attribution window adjustable in days, per house",
+        "Attribution window adjustable in days, per boutique",
         "Channels explicitly included or excluded",
         "A sale is never counted twice",
       ],
@@ -450,7 +450,7 @@ export const HOME: Record<Locale, HomeContent> = {
     },
     cta: {
       kicker: "Request a demo",
-      title: "See Selekt on *your* use cases.",
+      title: "Discover Selekt directly with *your* use cases.",
       body: "A guided demonstration, tailored to your boutique network.",
       button: "Request a demo",
       micro: "Thirty minutes · No commitment",

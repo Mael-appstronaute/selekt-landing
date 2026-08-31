@@ -29,7 +29,7 @@ export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
             title: "Des rôles définis par vous",
             body: "Vendeur, manager, siège ne sont que des points de départ. Vous créez vos rôles et décidez de ce que chacun voit et fait, champ par champ.",
             points: [
-              "Aucun rôle codé en dur dans l'application",
+              "Aucun rôle pré-défini en dur dans l'application",
               "Permissions au niveau de la donnée, pas de l'écran",
               "Changements appliqués sans redéploiement",
             ],
@@ -92,7 +92,7 @@ export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
         alt: "Atelier de couture, machine et tissus sombres",
         kicker: "Pourquoi ça compte",
         title: "Du *sur-mesure*, pas du prêt-à-porter.",
-        body: "Une maison ne reprend pas ses processus pour entrer dans un logiciel. La console met l'outil à vos mesures, et l'y maintient.",
+        body: "Une maison n'a pas à changer ses processus pour s'adapter à un logiciel. La console ajuste l'outil à sa mesure, et l'y maintient.",
         points: [
           "Pas de projet de développement à chaque évolution",
           "Un déploiement qui suit votre organisation",
@@ -129,7 +129,7 @@ export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
             title: "Roles defined by you",
             body: "Advisor, manager, headquarters are only starting points. You create your roles and decide what each one sees and does, field by field.",
             points: [
-              "No hard-coded roles in the application",
+              "No pre-defined roles hard-coded in the application",
               "Permissions at the data level, not the screen level",
               "Changes applied without redeployment",
             ],
@@ -192,7 +192,7 @@ export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
         alt: "Sewing atelier, machine and dark fabrics",
         kicker: "Why it matters",
         title: "*Made to measure*, not ready-to-wear.",
-        body: "A house does not rework its processes to fit into software. The console tailors the tool to your measurements, and keeps it there.",
+        body: "A house does not have to change its processes to adapt to software. The console adjusts the tool to its measure, and keeps it there.",
         points: [
           "No development project for every evolution",
           "A rollout that follows your organization",

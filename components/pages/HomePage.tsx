@@ -279,16 +279,18 @@ export function HomePage({ locale }: { locale: Locale }) {
               </div>
 
               <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {/* Tuiles volontairement inertes (pas de réaction au survol) :
+                    rien ici n'est cliquable, l'affordance serait mensongère */}
                 {c.statement.items.map((item) => (
                   <div
                     key={item.title}
-                    className="group rounded-2xl border border-sand/14 bg-void/45 p-5 backdrop-blur-sm transition-[border-color] duration-300 ease-(--ease-lux) hover:border-gold/40 md:p-6"
+                    className="rounded-2xl border border-sand/14 bg-void/45 p-5 backdrop-blur-sm md:p-6"
                   >
                     <div className="flex items-center gap-3">
                       <svg
                         aria-hidden
                         viewBox="0 0 10 10"
-                        className="h-2.5 w-2.5 text-gold transition-transform duration-300 ease-(--ease-lux) group-hover:rotate-90"
+                        className="h-2.5 w-2.5 text-gold"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="1"
@@ -315,17 +317,8 @@ export function HomePage({ locale }: { locale: Locale }) {
           </section>
         </Reveal>
 
-        {/* ——— Preuve sociale — placeholder explicite, jamais inventé ——— */}
-        <Reveal>
-          <section className="rounded-[20px] bg-cream-2 px-7 py-14 text-center md:py-16">
-            <p className="kicker text-sand-muted">{c.proof.kicker}</p>
-            <p className="mx-auto mt-5 max-w-[38ch] font-serif text-[1.5rem] italic leading-snug muted">
-              {c.proof.body}
-            </p>
-            {/* PLACEHOLDER — à remplacer par de vraies références publiables */}
-            <p className="kicker mt-4 text-[0.6rem] text-sand-muted">{c.proof.note}</p>
-          </section>
-        </Reveal>
+        {/* ——— Preuve sociale — masquée à la demande du client tant qu'aucune
+             référence publiable n'existe (contenu conservé dans home.ts) ——— */}
 
         {/* ——— Tarifs — pricing one-page centré : trois cartes épurées,
              une ligne grand magasin, trois mentions, un bouton ——— */}

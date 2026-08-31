@@ -13,6 +13,8 @@ export type DemoContent = {
     email: string;
     role: string;
     roles: string[];
+    /** libellé du champ libre affiché quand la fonction choisie est « Autre » */
+    roleOther: string;
     network: string;
     networks: string[];
     message: string;
@@ -46,7 +48,7 @@ export const DEMO: Record<Locale, DemoContent> = {
       points: [
         {
           title: "Une démonstration préparée",
-          body: "Nous partons de votre organisation : réseau, métiers, outils en place. Pas de tour générique.",
+          body: "Nous partons de votre organisation : réseau, métiers, outils en place. Pas d'un socle universel.",
         },
         {
           title: "Les sujets qui fâchent, d'abord",
@@ -70,6 +72,7 @@ export const DEMO: Record<Locale, DemoContent> = {
         "Direction générale",
         "Autre",
       ],
+      roleOther: "Précisez votre poste",
       network: "Taille du réseau",
       networks: ["1 à 5 boutiques", "6 à 20 boutiques", "21 à 50 boutiques", "Plus de 50 boutiques"],
       message: "Votre contexte (facultatif)",
@@ -103,7 +106,7 @@ export const DEMO: Record<Locale, DemoContent> = {
       points: [
         {
           title: "A prepared demonstration",
-          body: "We start from your organization: network, roles, tools in place. No generic tour.",
+          body: "We start from your organization: network, roles, tools in place. Not a universal template.",
         },
         {
           title: "The hard topics first",
@@ -127,6 +130,7 @@ export const DEMO: Record<Locale, DemoContent> = {
         "Executive management",
         "Other",
       ],
+      roleOther: "Specify your role",
       network: "Network size",
       networks: ["1 to 5 boutiques", "6 to 20 boutiques", "21 to 50 boutiques", "More than 50 boutiques"],
       message: "Your context (optional)",
