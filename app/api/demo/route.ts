@@ -4,9 +4,13 @@ import { NextResponse } from "next/server";
  * Réception des demandes de démo.
  * - Honeypot : le champ `website` rempli => on répond ok sans rien faire.
  * - Rate limit naïf par IP (en mémoire — suffisant pour un site vitrine).
- * - Transfert vers l'endpoint défini par DEMO_WEBHOOK_URL (variable
- *   d'environnement, à brancher : FormSubmit, CRM, webhook interne…).
+ * - Transfert vers DEMO_WEBHOOK_URL si définie (CRM, webhook interne…),
+ *   sinon vers FormSubmit → contact@selekt-retail.com. L'adresse ne
+ *   transite que côté serveur, jamais exposée au navigateur.
  */
+
+const DEFAULT_ENDPOINT = "https://formsubmit.co/ajax/contact@selekt-retail.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt-landing-one.vercel.app";
 
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
@@ -73,19 +77,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
 
-  const endpoint = process.env.DEMO_WEBHOOK_URL;
-  if (!endpoint) {
-    // Endpoint non branché : on accepte la demande pour ne pas perdre
-    // l'expérience utilisateur, mais on le signale dans les logs serveur.
-    console.warn("[demo] DEMO_WEBHOOK_URL non configurée — demande non transmise.");
-    return NextResponse.json({ ok: true });
-  }
+  const endpoint = process.env.DEMO_WEBHOOK_URL ?? DEFAULT_ENDPOINT;
 
   try {
     const res = await fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        // FormSubmit refuse les requêtes sans origine identifiable
+        Origin: SITE_URL,
+        Referer: `${SITE_URL}/`,
+      },
       body: JSON.stringify({
+        // Directives FormSubmit (ignorées par un webhook classique)
+        _subject: "Nouvelle demande de démo — site Selekt",
+        _template: "table",
         name: data.name,
         company: data.company,
         email: data.email,
@@ -98,6 +105,11 @@ export async function POST(request: Request) {
       }),
     });
     if (!res.ok) throw new Error(`webhook ${res.status}`);
+    // FormSubmit répond 200 même en échec — vérifier le corps.
+    const result = (await res.json().catch(() => null)) as { success?: string; message?: string } | null;
+    if (result && String(result.success) === "false") {
+      throw new Error(result.message ?? "formsubmit: success=false");
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[demo] transmission échouée :", error);

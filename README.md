@@ -25,12 +25,12 @@ npm run build && npm run start
   `components/pages` — templates de pages.
 - `lib/routes.ts` — carte des routes FR/EN (hreflang, sélecteur de langue).
 - `app/api/demo` — réception du formulaire (honeypot, rate limit, validation),
-  transfert vers `DEMO_WEBHOOK_URL` (voir `.env.example`).
+  transfert vers `DEMO_WEBHOOK_URL`, sinon FormSubmit →
+  contact@selekt-retail.com par défaut (voir `.env.example`).
 - `/design` — page interne de démonstration du design system (noindex).
 
 ## À compléter avant mise en ligne
 
-- `DEMO_WEBHOOK_URL` (endpoint du formulaire de démo).
 - Mentions légales & politique de confidentialité : champs « À COMPLÉTER »
   dans `content/legal.ts`.
 - Emplacement « Références » de la home : placeholder en attente de références
