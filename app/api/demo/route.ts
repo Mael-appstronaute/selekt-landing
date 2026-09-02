@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
  */
 
 const DEFAULT_ENDPOINT = "https://formsubmit.co/ajax/contact@selekt-retail.com";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt-landing-one.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt-retail.com";
 
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
