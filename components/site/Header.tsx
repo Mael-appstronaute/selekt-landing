@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { NAV, navHref, type NavEntry } from "@/content/nav";
 import { PHOTOS } from "@/lib/photos";
 import { pageKeyFromPath, pagePath, type Locale } from "@/lib/routes";
@@ -23,6 +24,9 @@ export function Header({ locale }: { locale: Locale }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<MenuId | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  /* Portal du drawer : document.body n'existe qu'au client */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const headerRef = useRef<HTMLElement>(null);
   const triggerRefs = useRef<Record<MenuId, HTMLButtonElement | null>>({
@@ -295,16 +299,20 @@ export function Header({ locale }: { locale: Locale }) {
         )}
       </AnimatePresence>
 
-      {/* ——— Drawer mobile plein écran ——— */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={reduced ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={reduced ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.3, ease: EASE_LUX }}
-            className="fixed inset-x-0 bottom-0 top-[58px] z-40 flex flex-col overflow-y-auto bg-cream lg:hidden"
-          >
+      {/* ——— Drawer mobile plein écran — porté dans <body> : le backdrop-blur
+          du header fait de lui le containing block des descendants fixed,
+          ce qui réduisait le drawer à une lamelle de 18 px ——— */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div
+                initial={reduced ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={reduced ? undefined : { opacity: 0 }}
+                transition={{ duration: 0.3, ease: EASE_LUX }}
+                className="fixed inset-x-0 bottom-0 top-[58px] z-40 flex flex-col overflow-y-auto bg-cream lg:hidden"
+              >
             <nav aria-label={nav.menuLabel} className="flex-1 px-6 py-8">
               <MobileGroup heading={nav.platformLabel} columns={nav.platformColumns} locale={locale} />
               <MobileGroup
@@ -338,7 +346,9 @@ export function Header({ locale }: { locale: Locale }) {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+          </AnimatePresence>,
+          document.body,
+        )}
     </header>
   );
 }
