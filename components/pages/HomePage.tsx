@@ -199,7 +199,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                 className="absolute inset-0 bg-gradient-to-t from-void/45 to-void-warm/10"
               />
               <div className="absolute inset-0 flex items-center justify-center p-6">
-                <AttributionPanel labels={c.attribute.mockup} />
+                <AttributionPanel labels={c.attribute.mockup} locale={locale} />
               </div>
             </div>
           </section>

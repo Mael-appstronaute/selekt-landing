@@ -126,10 +126,10 @@ export type FeaturePageContent = {
   sections: FeatureSection[];
 };
 
-function MockupView({ mockup }: { mockup: Mockup }) {
+function MockupView({ mockup, locale }: { mockup: Mockup; locale: Locale }) {
   switch (mockup.kind) {
     case "attribution":
-      return <AttributionPanel labels={mockup.labels} />;
+      return <AttributionPanel labels={mockup.labels} locale={locale} />;
     case "priorities":
       return <PrioritiesList title={mockup.title} items={mockup.items} />;
     case "kpi":
@@ -689,7 +689,7 @@ export function FeaturePage({
                       />
                       {section.mockup && (
                         <div className="absolute inset-0 flex items-center justify-center p-6">
-                          <MockupView mockup={section.mockup} />
+                          <MockupView mockup={section.mockup} locale={locale} />
                         </div>
                       )}
                     </div>
