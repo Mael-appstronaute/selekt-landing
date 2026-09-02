@@ -12,19 +12,23 @@ type Size = "md" | "lg";
 
 const base =
   "inline-flex items-center justify-center gap-2.5 rounded-full font-sans font-medium " +
-  "transition-[background-color,border-color,color,transform] duration-300 ease-(--ease-lux) " +
+  "transition-[background-color,border-color,color,transform,box-shadow] duration-300 ease-(--ease-lux) " +
+  // Retour tactile : la pilule se soulève au survol et s'enfonce au clic
+  "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:duration-100 " +
   "focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-3";
 
 const variants: Record<Variant, string> = {
   // Pilule sombre compacte (famille bspk), en chaud : encre, jamais de noir froid
-  primary: "bg-ink text-cream-2 hover:bg-void",
+  primary:
+    "bg-ink text-cream-2 hover:bg-void hover:shadow-[0_14px_28px_-12px_rgba(16,15,13,0.5)]",
   // Sur panneau sombre : pilule crème
-  "primary-inverse": "bg-cream-2 text-ink hover:bg-paper",
-  // Secondaire sur fond sombre — filet sable
+  "primary-inverse":
+    "bg-cream-2 text-ink hover:bg-paper hover:shadow-[0_16px_30px_-12px_rgba(10,8,6,0.65)]",
+  // Secondaire sur fond sombre — filet sable, se remplit d'un voile au survol
   "outline-dark":
-    "border border-sand/40 text-on-void hover:border-sand/80 hover:text-cream-2",
+    "border border-sand/40 text-on-void hover:border-sand/80 hover:bg-sand/10 hover:text-cream-2",
   // Secondaire sur fond clair — filet encre
-  "outline-light": "border border-ink/25 text-ink hover:border-ink/60",
+  "outline-light": "border border-ink/25 text-ink hover:border-ink/60 hover:bg-ink/5",
   "ghost-dark": "text-on-void/80 hover:text-on-void",
   "ghost-light": "text-ink/80 hover:text-ink",
 };

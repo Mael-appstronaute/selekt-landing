@@ -185,7 +185,7 @@ export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 inline-flex h-12 w-full cursor-pointer items-center justify-center rounded-full bg-ink px-8 text-[0.95rem] font-medium text-cream-2 transition-colors duration-300 ease-(--ease-lux) hover:bg-void disabled:opacity-60"
+        className="mt-6 inline-flex h-12 w-full cursor-pointer items-center justify-center rounded-full bg-ink px-8 text-[0.95rem] font-medium text-cream-2 transition-[background-color,transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-0.5 hover:bg-void hover:shadow-[0_14px_28px_-12px_rgba(16,15,13,0.5)] active:translate-y-0 active:scale-[0.98] active:duration-100 disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-none"
       >
         {status === "sending" ? copy.sending : copy.submit}
       </button>

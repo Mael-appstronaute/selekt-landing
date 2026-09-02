@@ -183,7 +183,7 @@ export function Header({ locale }: { locale: Locale }) {
           </a>
           <Link
             href={demoHref as "/"}
-            className="inline-flex h-10 items-center rounded-full bg-ink px-5 text-[0.88rem] font-medium text-cream-2 no-underline transition-colors duration-300 ease-(--ease-lux) hover:bg-void"
+            className="inline-flex h-10 items-center rounded-full bg-ink px-5 text-[0.88rem] font-medium text-cream-2 no-underline transition-[background-color,transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-0.5 hover:bg-void hover:shadow-[0_12px_24px_-10px_rgba(16,15,13,0.45)] active:translate-y-0 active:scale-[0.98] active:duration-100"
           >
             {nav.demoCta}
           </Link>
@@ -339,7 +339,7 @@ export function Header({ locale }: { locale: Locale }) {
             <div className="sticky bottom-0 border-t border-ink/10 bg-cream px-6 py-4">
               <Link
                 href={demoHref as "/"}
-                className="flex h-12 items-center justify-center rounded-full bg-ink text-[0.95rem] font-medium text-cream-2 no-underline"
+                className="flex h-12 items-center justify-center rounded-full bg-ink text-[0.95rem] font-medium text-cream-2 no-underline transition-[background-color,transform] duration-300 ease-(--ease-lux) hover:bg-void active:scale-[0.98] active:duration-100"
               >
                 {nav.demoCta}
               </Link>

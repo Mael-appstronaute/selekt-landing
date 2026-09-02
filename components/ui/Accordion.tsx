@@ -37,13 +37,15 @@ export function Accordion({
                 aria-expanded={isOpen}
                 aria-controls={`${id}-p-${i}`}
                 onClick={() => setOpen(isOpen ? -1 : i)}
-                className={`flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left font-serif text-[1.2rem] leading-snug ${text}`}
+                className={`group flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left font-serif text-[1.2rem] leading-snug ${text}`}
               >
-                {item.title}
+                <span className="transition-transform duration-300 ease-(--ease-lux) group-hover:translate-x-1">
+                  {item.title}
+                </span>
                 <svg
                   aria-hidden
                   viewBox="0 0 12 12"
-                  className={`h-3 w-3 shrink-0 transition-transform duration-300 ease-(--ease-lux) ${
+                  className={`h-3 w-3 shrink-0 transition-transform duration-300 ease-(--ease-lux) group-hover:scale-125 ${
                     isOpen ? "rotate-45" : ""
                   } ${tone === "dark" ? "text-sand" : "text-brass"}`}
                   fill="none"
