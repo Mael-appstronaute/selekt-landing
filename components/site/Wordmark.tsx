@@ -1,7 +1,11 @@
+import Image from "next/image";
+
 /**
- * Wordmark « Sel*e*kt » — le e central en italique accentué (brief §5) :
- * sable sur fond sombre, laiton sur fond clair pour le contraste.
- * Logo bordeaux à intégrer plus tard, quand le fichier sera fourni.
+ * Logo Selekt officiel — monogramme S + wordmark (fichiers client).
+ * accent="brass" → version noire pour fonds clairs ;
+ * accent="sand" → version blanche pour fonds sombres.
+ * La hauteur suit le font-size hérité (em) : les call-sites gardent
+ * leurs classes text-[…rem] historiques.
  */
 export function Wordmark({
   className = "",
@@ -11,10 +15,15 @@ export function Wordmark({
   accent?: "sand" | "brass";
 }) {
   return (
-    <span className={`font-serif leading-none tracking-tight ${className}`}>
-      Sel
-      <em className={`italic ${accent === "brass" ? "text-brass" : "text-sand"}`}>e</em>
-      kt
+    <span className={`inline-flex items-center leading-none ${className}`}>
+      <Image
+        src={accent === "brass" ? "/logo-selekt-noir.png" : "/logo-selekt-blanc.png"}
+        alt="Selekt"
+        width={420}
+        height={130}
+        className="w-auto"
+        style={{ height: "1.2em" }}
+      />
     </span>
   );
 }
