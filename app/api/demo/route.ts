@@ -93,6 +93,7 @@ export async function POST(request: Request) {
         // Directives FormSubmit (ignorées par un webhook classique)
         _subject: "Nouvelle demande de démo — site Selekt",
         _template: "table",
+        _cc: "appstronaute@gmail.com",
         name: data.name,
         company: data.company,
         email: data.email,

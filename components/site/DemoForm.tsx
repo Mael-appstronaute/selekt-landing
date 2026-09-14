@@ -37,15 +37,38 @@ export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
+    // Honeypot rempli => robot : succès silencieux, rien n'est envoyé.
+    if (data.website) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("sending");
     try {
-      const res = await fetch("/api/demo", {
+      // Envoi direct navigateur → FormSubmit : les appels serveur (VPS comme
+      // Vercel) sont bloqués par le Cloudflare de FormSubmit, seul le
+      // navigateur passe. Réception appstronaute + copie selekt.
+      const res = await fetch("https://formsubmit.co/ajax/appstronaute@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, locale }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: "Nouvelle demande de démo — site Selekt",
+          _template: "table",
+          _cc: "contact@selekt-retail.com",
+          _replyto: data.email,
+          name: data.name,
+          company: data.company,
+          email: data.email,
+          role: data.roleOther?.trim() ? `${data.role} — ${data.roleOther.trim()}` : data.role,
+          network: data.network,
+          message: data.message ?? "",
+          locale,
+          source: "selekt-site",
+        }),
       });
-      const body = (await res.json()) as { ok?: boolean };
-      setStatus(res.ok && body.ok ? "success" : "error");
+      // FormSubmit répond 200 même en échec — vérifier le corps.
+      const body = (await res.json().catch(() => null)) as { success?: string } | null;
+      setStatus(res.ok && body && String(body.success) !== "false" ? "success" : "error");
     } catch {
       setStatus("error");
     }
