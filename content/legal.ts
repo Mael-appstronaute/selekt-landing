@@ -24,7 +24,7 @@ export const LEGAL: Record<Locale, LegalContent> = {
       {
         title: "Éditeur du site",
         paragraphs: [
-          "Le site selekt.appstronaute.com est édité par Appstronaute SAS, dont Selekt Retail OS est une marque.",
+          "Le site selekt-retail.com est édité par Appstronaute SAS, dont Selekt Retail OS est une marque.",
           "Siège social, numéro d'immatriculation et coordonnées : À COMPLÉTER avant mise en ligne.",
         ],
       },
@@ -59,7 +59,7 @@ export const LEGAL: Record<Locale, LegalContent> = {
       {
         title: "Site publisher",
         paragraphs: [
-          "The site selekt.appstronaute.com is published by Appstronaute SAS, of which Selekt Retail OS is a brand.",
+          "The site selekt-retail.com is published by Appstronaute SAS, of which Selekt Retail OS is a brand.",
           "Registered office, registration number and contact details: TO BE COMPLETED before going live.",
         ],
       },

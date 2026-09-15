@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PAGES, type Locale, type PageKey } from "./routes";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt.appstronaute.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt-retail.com";
 
 export const SITE_NAME = "Selekt Retail OS";
 
@@ -54,7 +54,7 @@ export function softwareJsonLd(locale: Locale) {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: SITE_URL,
-    inLanguage: ["fr", "en", "es", "zh"],
+    inLanguage: ["fr", "en"],
     description:
       locale === "fr"
         ? "Plateforme SaaS de clienteling augmentée par l'IA pour les réseaux de boutiques de luxe. Vendeurs, managers et siège dans une seule application web."
