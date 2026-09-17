@@ -26,6 +26,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const FASHION: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "Fidélisation client prêt-à-porter",
       description:
@@ -311,6 +312,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Fashion retail client relationships",
       description:

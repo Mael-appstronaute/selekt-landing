@@ -18,6 +18,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const SHOPIFY_POS: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "CRM et clienteling pour Shopify POS",
       description:
@@ -187,6 +188,7 @@ export const SHOPIFY_POS: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Clienteling for Shopify and Shopify POS",
       description:

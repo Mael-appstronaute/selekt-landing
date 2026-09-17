@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const SECURITY: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-31",
     meta: {
       title: "Sécurité & conformité — la donnée traitée comme un actif",
       description:
@@ -80,6 +81,7 @@ export const SECURITY: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-31",
     meta: {
       title: "Security & compliance — data treated as an asset",
       description:

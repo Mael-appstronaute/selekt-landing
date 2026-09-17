@@ -24,6 +24,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const CRM_RETAIL: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "CRM retail pour réseaux de magasins",
       description:
@@ -268,6 +269,7 @@ export const CRM_RETAIL: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Retail CRM software for store networks",
       description:

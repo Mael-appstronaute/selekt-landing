@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const INFLUENCED: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-31",
     meta: {
       title: "CA influencé — la preuve du retour sur investissement",
       description:
@@ -111,6 +112,7 @@ export const INFLUENCED: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-31",
     meta: {
       title: "Influenced revenue — proof of return on investment",
       description:

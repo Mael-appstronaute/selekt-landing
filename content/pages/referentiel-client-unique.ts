@@ -50,6 +50,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const REFERENTIEL_CLIENT_UNIQUE: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       // 41 + 19 (suffixe « — Selekt Retail OS ») = 60 caractères exactement, limite de la checklist.
       // Repli possible sans l'acronyme : « Référentiel client unique en retail » (54).
@@ -328,6 +329,7 @@ export const REFERENTIEL_CLIENT_UNIQUE: Record<Locale, FeaturePageContent> = {
   // Slug EN : `/en/single-customer-view`. Cible non mesurée (cf. en-tête) : la page est écrite
   // proprement, mais aucun classement n'en est attendu tant que les volumes EN ne sont pas relevés.
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Single customer view for store networks",
       description:

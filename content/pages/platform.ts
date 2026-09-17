@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const PLATFORM: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-17",
     meta: {
       title: "La plateforme — une application, trois métiers",
       description:
@@ -126,6 +127,7 @@ export const PLATFORM: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-17",
     meta: {
       title: "The platform — one application, three roles",
       description:

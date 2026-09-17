@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const HQ: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-17",
     meta: {
       title: "Espace Siège — la vue réseau, unifiée",
       description:
@@ -97,6 +98,7 @@ export const HQ: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-17",
     meta: {
       title: "Headquarters — the unified network view",
       description:

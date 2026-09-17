@@ -17,6 +17,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const CEGID: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "CRM et clienteling connectés à Cegid",
       description:
@@ -211,6 +212,7 @@ export const CEGID: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "CRM and clienteling connected to Cegid",
       description:

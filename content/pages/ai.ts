@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const AI: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-31",
     meta: {
       title: "IA copilote — encadrée, utile, validée par l'humain",
       description:
@@ -111,6 +112,7 @@ export const AI: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-31",
     meta: {
       title: "AI copilot — guard-railed, useful, human-approved",
       description:

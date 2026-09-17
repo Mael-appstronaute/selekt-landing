@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { PHOTOS, type PhotoKey } from "@/lib/photos";
 import { pagePath, type Locale, type PageKey } from "@/lib/routes";
-import { JsonLd, faqJsonLd, organizationJsonLd, softwareJsonLd } from "@/lib/seo";
+import { JsonLd, faqJsonLd, organizationJsonLd, softwareJsonLd, webPageJsonLd } from "@/lib/seo";
 import { GoldLine } from "../fx/GoldLine";
 import { Reveal } from "../fx/Reveal";
 import { RippleChip } from "../fx/RippleChip";
@@ -115,6 +115,8 @@ export type FeatureSection =
     };
 
 export type FeaturePageContent = {
+  /** dernière mise à jour du contenu (ISO, affichée en bas de page + JSON-LD) */
+  modified?: string;
   meta: { title: string; description: string };
   hero: {
     kicker: string;
@@ -261,6 +263,9 @@ export function FeaturePage({
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={softwareJsonLd(locale)} />
       {faqRows.length > 0 && <JsonLd data={faqJsonLd(faqRows)} />}
+      {c.modified && (
+        <JsonLd data={webPageJsonLd({ title: c.meta.title, locale, modified: c.modified })} />
+      )}
 
       <div className="mx-auto flex max-w-[1272px] flex-col gap-5 px-4 pb-6 pt-[92px] md:gap-6 md:px-8 md:pb-8">
         <PageHero
@@ -738,6 +743,16 @@ export function FeaturePage({
         })}
 
         <DemoCta locale={locale} />
+
+        {c.modified && (
+          <p className="px-1 text-right text-[0.72rem] tracking-wide text-ink/45">
+            {locale === "fr" ? "Page mise à jour le " : "Page updated "}
+            {new Date(`${c.modified}T12:00:00Z`).toLocaleDateString(
+              locale === "fr" ? "fr-FR" : "en-US",
+              { year: "numeric", month: "long", day: "numeric" },
+            )}
+          </p>
+        )}
       </div>
     </>
   );

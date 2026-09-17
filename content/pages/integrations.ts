@@ -17,6 +17,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const INTEGRATIONS: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "Intégrations : caisse, e-commerce, CRM",
       description:
@@ -134,6 +135,7 @@ export const INTEGRATIONS: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Integrations: POS, e-commerce, CRM",
       description:

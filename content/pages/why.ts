@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const WHY: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-24",
     meta: {
       title: "Pourquoi Selekt — configurable et traçable, les deux vraiment",
       description:
@@ -78,6 +79,7 @@ export const WHY: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-24",
     meta: {
       title: "Why Selekt — configurable and traceable, truly both",
       description:

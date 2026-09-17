@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const MANAGER: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-24",
     meta: {
       title: "Espace Manager — le cockpit de la boutique",
       description:
@@ -106,6 +107,7 @@ export const MANAGER: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-24",
     meta: {
       title: "Manager workspace — the boutique cockpit",
       description:

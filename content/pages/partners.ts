@@ -17,6 +17,8 @@ export type Partner = {
 };
 
 export type PartnersPageContent = {
+  /** dernière mise à jour du contenu (ISO) */
+  modified?: string;
   meta: { title: string; description: string };
   hero: {
     kicker: string;
@@ -36,6 +38,7 @@ export type PartnersPageContent = {
 
 export const PARTNERS: Record<Locale, PartnersPageContent> = {
   fr: {
+    modified: "2026-08-24",
     meta: {
       title: "Partenaires — l'écosystème Selekt",
       description:
@@ -119,6 +122,7 @@ export const PARTNERS: Record<Locale, PartnersPageContent> = {
   },
 
   en: {
+    modified: "2026-08-24",
     meta: {
       title: "Partners — the Selekt ecosystem",
       description:

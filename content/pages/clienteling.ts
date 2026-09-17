@@ -16,6 +16,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const CLIENTELING: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "Clienteling : définition et exemples",
       description:
@@ -282,6 +283,7 @@ export const CLIENTELING: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Clienteling: meaning, examples and tools",
       description:

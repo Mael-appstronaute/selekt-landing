@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const ADVISOR: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-24",
     meta: {
       title: "Espace Vendeur — le client sur le bout des doigts",
       description:
@@ -94,6 +95,7 @@ export const ADVISOR: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-24",
     meta: {
       title: "Advisor workspace — every client at your fingertips",
       description:

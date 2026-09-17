@@ -19,6 +19,7 @@ import type { Locale } from "@/lib/routes";
  */
 export const KLAVIYO: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-09-16",
     meta: {
       title: "Clienteling en boutique avec Klaviyo",
       description:
@@ -188,6 +189,7 @@ export const KLAVIYO: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-09-16",
     meta: {
       title: "Klaviyo clienteling for store teams",
       description:

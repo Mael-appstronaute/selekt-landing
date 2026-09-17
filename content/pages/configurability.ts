@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/routes";
 
 export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
   fr: {
+    modified: "2026-08-31",
     meta: {
       title: "Configurabilité — ne rien figer",
       description:
@@ -103,6 +104,7 @@ export const CONFIGURABILITY: Record<Locale, FeaturePageContent> = {
   },
 
   en: {
+    modified: "2026-08-31",
     meta: {
       title: "Configurability — nothing set in stone",
       description:

@@ -32,7 +32,16 @@ export function pageMetadata(
       siteName: SITE_NAME,
       locale: locale === "fr" ? "fr_FR" : "en_US",
       type: "website",
+      // Image générée par page (gabarit charte) — voir app/og/route.tsx
+      images: [
+        {
+          url: `/og?title=${encodeURIComponent(meta.title)}&locale=${locale}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -59,6 +68,17 @@ export function softwareJsonLd(locale: Locale) {
       locale === "fr"
         ? "Plateforme SaaS de clienteling augmentée par l'IA pour les réseaux de boutiques de luxe. Vendeurs, managers et siège dans une seule application web."
         : "AI-augmented clienteling SaaS platform for luxury retail networks. Advisors, managers and headquarters in a single web application.",
+  };
+}
+
+/** WebPage : porte la date de mise à jour (fraîcheur pour Google et les IA). */
+export function webPageJsonLd(opts: { title: string; locale: Locale; modified: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.title,
+    inLanguage: opts.locale,
+    dateModified: opts.modified,
   };
 }
 
