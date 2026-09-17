@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SELEKT — Retail Systems Engineered for Scale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#FAFAF8; --bg2:#F3EDE3; --bg3:#EDE3D6;
+      --gold:#C4A35A; --gold-l:#E5CFA0; --gold-p:#F5EDD8;
+      --text:#0F0E0D; --t2:#5A5048; --t3:#9B9088;
+      --bdr:#DDD0C0; --bdrl:#EDE4D7;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',-apple-system,sans-serif;
+      --mw:1240px; --py:120px;
+    }
+    html{font-size:16px;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden}
+    a,button{cursor:none}
+    a{text-decoration:none;color:inherit}
+    h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1}
+    h2 em{font-style:italic;color:var(--gold)}
+    .container{max-width:var(--mw);margin:0 auto;padding:0 48px}
+    .label{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+    .stag{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px}
+    .stag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+    .sdesc{font-size:15px;color:var(--t2);line-height:1.8;max-width:420px;margin-top:12px}
+
+    /* ── CURSOR ── */
+    .cur-dot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;top:0;left:0;transition:width .2s,height .2s;mix-blend-mode:multiply;transform-origin:center}
+    .cur-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(196,163,90,.45);border-radius:50%;pointer-events:none;z-index:9998;top:-20px;left:-20px;transition:width .25s,height .25s,border-color .25s}
+    .cur-dot.big{width:14px;height:14px}
+    .cur-ring.big{width:64px;height:64px;border-color:var(--gold)}
+
+    /* ── AURORA ── */
+    .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .abl{position:absolute;border-radius:50%;filter:blur(72px);opacity:0;animation:afade 1.2s ease forwards}
+    .a1{width:700px;height:700px;top:-20%;left:-10%;background:radial-gradient(circle,rgba(255,224,130,.32) 0%,transparent 65%);animation:afade 1.2s .1s ease forwards,af1 14s ease-in-out 1.2s infinite}
+    .a2{width:550px;height:550px;top:5%;right:-8%;background:radial-gradient(circle,rgba(255,190,150,.22) 0%,transparent 65%);animation:afade 1.2s .3s ease forwards,af2 18s ease-in-out 1.2s infinite}
+    .a3{width:450px;height:450px;bottom:-10%;left:25%;background:radial-gradient(circle,rgba(196,163,90,.18) 0%,transparent 65%);animation:afade 1.2s .5s ease forwards,af3 12s ease-in-out 1.2s infinite}
+    .a4{width:380px;height:380px;bottom:15%;right:15%;background:radial-gradient(circle,rgba(180,210,255,.18) 0%,transparent 65%);animation:afade 1.2s .7s ease forwards,af1 16s ease-in-out 2s infinite reverse}
+    @keyframes afade{to{opacity:1}}
+    @keyframes af1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.06)}66%{transform:translate(-30px,30px) scale(.96)}}
+    @keyframes af2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,50px) scale(1.1)}}
+    @keyframes af3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-50px) scale(1.12)}}
+
+    /* ── NOISE ── */
+    .noise{position:absolute;inset:-200%;pointer-events:none;z-index:1;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+
+    /* ── BLUR TEXT ── */
+    .bt-char{display:inline-block;opacity:0;filter:blur(12px);transform:translateY(8px);transition:opacity .5s ease,filter .5s ease,transform .5s ease;white-space:pre}
+    .bt-char.in{opacity:1;filter:blur(0);transform:none}
+
+    /* ── FADE-IN ── */
+    .fi{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi.in{opacity:1;transform:none}
+    .fi-l{opacity:0;transform:translateX(-24px);transition:opacity .8s,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi-l.in{opacity:1;transform:none}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:none;border:none;text-decoration:none;transition:background .3s,color .3s,transform .3s}
+    .btn-dark{background:var(--text);color:var(--bg);transition:background .3s,color .3s}
+    .btn-dark:hover{background:var(--gold);color:var(--text)}
+    .btn-dark.lg{padding:18px 44px;font-size:12px}
+    .btn-out{background:transparent;color:var(--text);border:1px solid var(--bdr);transition:border-color .3s,color .3s}
+    .btn-out:hover{border-color:var(--gold);color:var(--gold)}
+    .ghost{background:none;border:none;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--t2);cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;position:relative;padding:0;transition:color .3s}
+    .ghost::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s ease}
+    .ghost:hover{color:var(--gold)}
+    .ghost:hover::after{width:100%}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);backdrop-filter:none;border-bottom:1px solid var(--bdrl);transition:border-color .3s}
+    .nav-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t3);letter-spacing:.05em;min-width:180px}
+    .nav-meta-sep{opacity:.4}
+    .nav-logo-img{height:22px;width:auto;display:block;transition:opacity .3s}
+    .nav-logo-img:hover{opacity:.7}
+    .nav-links{display:flex;gap:40px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-links a:hover::after{width:100%}
+    .nav-right{display:flex;align-items:center;gap:24px;min-width:180px;justify-content:flex-end}
+    .nav-lang{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+    /* ── LANG SELECTOR ── */
+    .lang-sel{position:relative}
+    .lang-btn{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:none;border:none;padding:4px 0;cursor:none;transition:color .2s}
+    .lang-btn:hover{color:var(--text)}
+    .lang-chevron{font-size:8px;opacity:.5;transition:transform .25s}
+    .lang-sel.open .lang-chevron{transform:rotate(180deg)}
+    .lang-drop{position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);border:1px solid var(--bdrl);min-width:140px;box-shadow:0 8px 32px rgba(15,14,13,.1);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s,transform .22s cubic-bezier(.16,1,.3,1)}
+    .lang-sel.open .lang-drop{opacity:1;transform:translateY(0);pointer-events:all}
+    .lang-opt{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--t2);cursor:none;transition:background .18s,color .18s;gap:12px}
+    .lang-opt:hover{background:var(--bg2);color:var(--text)}
+    .lang-opt.active{color:var(--gold)}
+    .lang-opt-native{font-size:10px;color:var(--t3);letter-spacing:.02em}
+    .lang-opt.active .lang-opt-native{color:rgba(196,163,90,.6)}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;padding-top:72px;display:flex;flex-direction:column;background:#0B0A09;overflow:hidden;position:relative}
+    /* Aurora blobs on dark */
+    .hero-glow{position:absolute;inset:0;pointer-events:none;z-index:0}
+    .hg1{position:absolute;width:70%;height:70%;top:-20%;left:-15%;background:radial-gradient(ellipse,rgba(196,163,90,.15) 0%,transparent 60%);filter:blur(90px);animation:af1 20s ease-in-out infinite}
+    .hg2{position:absolute;width:60%;height:60%;bottom:-20%;right:-10%;background:radial-gradient(ellipse,rgba(180,130,60,.1) 0%,transparent 60%);filter:blur(100px);animation:af2 25s ease-in-out 3s infinite}
+    .hg3{position:absolute;width:40%;height:40%;top:30%;left:35%;background:radial-gradient(ellipse,rgba(220,160,80,.07) 0%,transparent 55%);filter:blur(80px);animation:af3 18s ease-in-out 1s infinite}
+    /* Noise */
+    .hero-noise{position:absolute;inset:-200%;pointer-events:none;z-index:1;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    /* Content */
+    .hero-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(40px,6vh,72px) 48px clamp(32px,4vh,52px);position:relative;z-index:2;gap:clamp(28px,4vh,44px);background:var(--bg)}
+    /* Eyebrow pill */
+    .hero-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid rgba(196,163,90,.35);border-radius:100px;opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
+    .hero-pill.in{opacity:1;transform:none}
+    .hero-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+    .hero-pill-txt{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--t3)}
+    /* Headline */
+    .hero-hl{margin:0;display:flex;flex-direction:column;align-items:center}
+    .hero-hl-sans{font-family:var(--sans);font-weight:800;font-size:clamp(52px,8vw,130px);line-height:.92;letter-spacing:-.045em;color:var(--text);display:block;overflow:hidden}
+    .hero-hl-inner{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+    .hero-hl-inner.in{transform:translateY(0)}
+    .hero-hl-serif{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(54px,8.4vw,136px);line-height:.92;letter-spacing:.005em;color:var(--gold);display:block;overflow:hidden}
+    /* Description */
+    .hero-sub{font-size:14px;line-height:1.9;color:var(--t2);max-width:480px;opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s}
+    .hero-sub.in{opacity:1;transform:none}
+    /* CTA row */
+    .hero-ctarow{display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(14px);transition:opacity .8s,transform .8s}
+    .hero-ctarow.in{opacity:1;transform:none}
+    .btn-cream{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:var(--text);color:var(--bg);border:none;cursor:none;transition:background .3s}
+    .btn-cream:hover{background:var(--gold);color:var(--text)}
+    .btn-ghost-cream{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--t2);border:1px solid var(--bdr);cursor:none;transition:border-color .3s,color .3s}
+    .btn-ghost-cream:hover{border-color:var(--gold);color:var(--gold)}
+    /* Bottom stats bar */
+    .hero-bar{border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2;opacity:0;transform:translateY(10px);transition:opacity .9s,transform .9s}
+    .hero-bar.in{opacity:1;transform:none}
+    .hero-bar-item{padding:clamp(18px,2.5vh,26px) 0;text-align:center;border-right:1px solid rgba(255,255,255,.07);transition:background .25s}
+    .hero-bar-item:last-child{border-right:none}
+    .hero-bar-item:hover{background:rgba(255,255,255,.03)}
+    .hero-bar-n{font-size:clamp(20px,2.2vw,30px);font-weight:800;font-family:var(--sans);letter-spacing:-.04em;line-height:1;color:#F4EDE3}
+    .hero-bar-l{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.28);margin-top:5px}
+
+    /* ── HERO FRAME ── */
+    .hframe-wrap{width:100%;padding:0 48px;background:#0B0A09;opacity:0;transform:translateY(20px);transition:opacity .9s .9s ease,transform .9s .9s cubic-bezier(.16,1,.3,1)}
+    .hframe-wrap.in{opacity:1;transform:none}
+    .hframe{width:100%;aspect-ratio:21/9;background:#0D0C0B;border:1px solid rgba(255,255,255,.06);border-bottom:none;border-radius:16px 16px 0 0;position:relative;overflow:hidden;cursor:none}
+    .hfaurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .hfa1{position:absolute;width:75%;height:250%;top:-80%;left:-15%;background:radial-gradient(ellipse,rgba(196,163,90,.28) 0%,transparent 55%);border-radius:50%;filter:blur(64px);animation:af1 18s ease-in-out infinite}
+    .hfa2{position:absolute;width:65%;height:200%;top:-40%;right:-10%;background:radial-gradient(ellipse,rgba(220,140,80,.18) 0%,transparent 55%);border-radius:50%;filter:blur(80px);animation:af2 22s ease-in-out 2s infinite}
+    .hfa3{position:absolute;width:55%;height:160%;bottom:-50%;left:28%;background:radial-gradient(ellipse,rgba(140,100,50,.14) 0%,transparent 55%);border-radius:50%;filter:blur(72px);animation:af3 15s ease-in-out 1s infinite}
+    .hf-topright{position:absolute;top:24px;right:28px;z-index:10;display:flex;align-items:center}
+    .hf-code{font-size:11px;font-weight:500;letter-spacing:.08em;color:rgba(244,237,227,.3)}
+    .hf-sep{color:rgba(244,237,227,.14);margin:0 10px;font-size:11px}
+    .hf-play-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:10}
+    .hf-play{width:80px;height:80px;border-radius:50%;border:1.5px solid rgba(196,163,90,.45);display:flex;align-items:center;justify-content:center;color:rgba(196,163,90,.7);transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+    .hf-play:hover{background:var(--gold);border-color:var(--gold);color:#0D0C0B;transform:scale(1.1)}
+    .hf-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;padding:32px 36px;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,transparent 100%)}
+    .hf-bl-text{font-size:13px;color:rgba(244,237,227,.55);line-height:1.65;max-width:300px;margin-bottom:12px}
+    .hf-since{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,237,227,.28)}
+    .hf-since em{font-style:normal;color:rgba(196,163,90,.6)}
+    .hf-br{display:flex;align-items:center;gap:14px}
+    .hf-avs{display:flex;align-items:center}
+    .hf-av{width:34px;height:34px;border-radius:50%;border:2px solid rgba(13,12,11,.8);margin-left:-10px;flex-shrink:0}
+    .hf-av:first-child{margin-left:0}
+    .hf-av1{background:linear-gradient(135deg,#C4A35A,#A8835A)}
+    .hf-av2{background:linear-gradient(135deg,#A8835A,#8A6E50)}
+    .hf-av3{background:linear-gradient(135deg,#8A6E50,#6E5A40)}
+    .hf-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:2px}
+    .hf-trust-lbl{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,237,227,.35)}
+
+    /* ── TICKER ── */
+    .ticker{background:var(--text);overflow:hidden;height:44px;display:flex;align-items:center;position:relative;z-index:10}
+    .ticker-track{display:flex;animation:tick 24s linear infinite;will-change:transform}
+    .tick-item{display:inline-flex;align-items:center;gap:14px;padding:0 32px;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,237,227,.45);white-space:nowrap}
+    .tick-gem{font-size:6px;color:var(--gold)}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* ── STATS DARK ── */
+    .sbar{background:#0F0E0D;padding:88px 0}
+    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06)}
+    .sitem{padding:52px 48px;text-align:center;position:relative}
+    .snum{font-size:clamp(56px,6vw,88px);font-weight:800;color:#fff;line-height:1;margin-bottom:10px;letter-spacing:-.03em;font-family:var(--sans)}
+    .snum-gold{color:var(--gold)}
+    .slbl{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+
+    /* ── BUILT FOR ── */
+    .blt{padding:var(--py) 0;background:var(--bg)}
+    .blt-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(60px,8vw,120px);align-items:start}
+    /* Left col */
+    .blt-eyebrow{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+    .blt-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+    .blt-intro-h{font-size:clamp(44px,5vw,68px);font-weight:800;font-family:var(--sans);letter-spacing:-.04em;line-height:.94;color:var(--text);margin-bottom:28px}
+    .blt-intro-h em{display:block;font-style:italic;font-weight:300;font-family:var(--serif);color:var(--t2);font-size:.7em;letter-spacing:.01em;line-height:1.2}
+    .blt-intro-p{font-size:14px;color:var(--t2);line-height:1.8;max-width:340px;margin-bottom:48px}
+    .blt-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .blt-stat{padding:22px 24px;border:1px solid var(--bdrl);border-radius:14px;background:var(--bg2);transition:border-color .3s,transform .3s cubic-bezier(.16,1,.3,1)}
+    .blt-stat:hover{border-color:var(--gold-l);transform:translateY(-2px)}
+    .blt-stat-n{font-size:34px;font-weight:800;font-family:var(--sans);color:var(--text);letter-spacing:-.03em;line-height:1;margin-bottom:5px}
+    .blt-stat-l{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+    .blt-stat.wide{grid-column:span 2}
+    /* Right col: feature list */
+    .blt-feats{display:flex;flex-direction:column}
+    .blt-feat{display:grid;grid-template-columns:52px 1fr;gap:24px;padding:36px 0 36px 16px;border-bottom:1px solid var(--bdrl);position:relative;transition:padding-left .35s cubic-bezier(.16,1,.3,1);cursor:none}
+    .blt-feat:first-child{border-top:1px solid var(--bdrl)}
+    .blt-feat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);border-radius:2px;transform:scaleY(0);transition:transform .4s cubic-bezier(.16,1,.3,1);transform-origin:top}
+    .blt-feat:hover{padding-left:28px}
+    .blt-feat:hover::before{transform:scaleY(1)}
+    .blt-feat-n{font-size:40px;font-weight:800;font-family:var(--sans);color:var(--bdrl);letter-spacing:-.04em;line-height:1;transition:color .3s;padding-top:2px}
+    .blt-feat:hover .blt-feat-n{color:var(--gold)}
+    .blt-feat-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .blt-feat-ico{width:34px;height:34px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:background .3s}
+    .blt-feat:hover .blt-feat-ico{background:var(--gold-l)}
+    .blt-feat-name{font-size:clamp(15px,1.4vw,17px);font-weight:700;font-family:var(--sans);color:var(--text);letter-spacing:-.01em}
+    .blt-feat-desc{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:14px}
+    .blt-feat-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .blt-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-p);border:1px solid var(--gold-l);padding:3px 10px;border-radius:40px}
+
+    /* ── PRODUCTS ── */
+    .prod-sec{padding:var(--py) 0;background:var(--bg)}
+    .prod-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px}
+    .prod-head h2{font-size:clamp(36px,4vw,52px);font-weight:800;font-family:var(--sans);letter-spacing:-.03em}
+    /* Expanding panels */
+    .pcards{display:flex;gap:10px;height:520px}
+    .pcrd{border-radius:20px;overflow:hidden;position:relative;cursor:none;flex:1;transition:flex .7s cubic-bezier(.16,1,.3,1);min-width:68px}
+    .pcrd.on{flex:2.8}
+    .pcrd:nth-child(1){background:#0F0E0D}
+    .pcrd:nth-child(2){background:#16140F}
+    .pcrd:nth-child(3){background:#0B0A08}
+    /* Glow blob per card */
+    .pcrd-glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+    .pcrd:nth-child(1) .pcrd-glow{width:320px;height:320px;top:-60px;right:-60px;background:radial-gradient(circle,rgba(196,163,90,.3) 0%,transparent 65%)}
+    .pcrd:nth-child(2) .pcrd-glow{width:280px;height:280px;top:-40px;left:-40px;background:radial-gradient(circle,rgba(180,130,70,.22) 0%,transparent 65%)}
+    .pcrd:nth-child(3) .pcrd-glow{width:300px;height:300px;top:-50px;right:-30px;background:radial-gradient(circle,rgba(140,100,50,.22) 0%,transparent 65%)}
+    /* Subtle grid pattern */
+    .pcrd-grid{position:absolute;inset:0;z-index:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 40px)}
+    /* Giant background number */
+    .pcrd-nbg{position:absolute;bottom:-20px;right:8px;font-size:200px;font-weight:900;font-family:var(--sans);line-height:1;letter-spacing:-.06em;color:rgba(255,255,255,.025);pointer-events:none;user-select:none;z-index:0;transition:color .5s}
+    .pcrd.on .pcrd-nbg{color:rgba(196,163,90,.06)}
+    /* Top decorative area */
+    .pcrd-deco{position:absolute;top:32px;left:32px;z-index:1;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(-6px);transition:opacity .4s,transform .4s}
+    .pcrd.on .pcrd-deco{opacity:1;transform:none}
+    .pcrd-dot{width:8px;height:8px;border-radius:50%}
+    .pcrd-dot.g{background:var(--gold)}
+    .pcrd-dot.d{background:rgba(255,255,255,.18)}
+    /* Vertical label (collapsed) */
+    .pcrd-vtag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.18);white-space:nowrap;z-index:2;transition:opacity .3s}
+    .pcrd.on .pcrd-vtag{opacity:0}
+    /* Image */
+    .pcrd-img{position:absolute;inset:0;z-index:0}
+    .pcrd-img img{width:100%;height:100%;object-fit:cover;opacity:.28;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .5s}
+    .pcrd.on .pcrd-img img{transform:scale(1.07);opacity:.42}
+    /* Bottom content */
+    .pcrd-body{position:absolute;bottom:0;left:0;right:0;padding:36px;z-index:2;background:linear-gradient(to top,rgba(8,7,6,.98) 0%,rgba(8,7,6,.7) 45%,transparent 100%)}
+    .pcrd-cat{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(196,163,90,.7);margin-bottom:10px;opacity:0;transform:translateY(8px);transition:opacity .35s .05s,transform .35s .05s}
+    .pcrd.on .pcrd-cat{opacity:1;transform:none}
+    .pcrd-name{font-size:clamp(17px,1.7vw,22px);font-weight:700;font-family:var(--sans);color:#fff;letter-spacing:-.02em;line-height:1.2;margin-bottom:0}
+    .pcrd-desc{font-size:13px;color:rgba(255,255,255,.42);line-height:1.72;overflow:hidden;max-height:0;opacity:0;margin-top:0;transition:max-height .55s cubic-bezier(.16,1,.3,1),opacity .4s .08s,margin-top .4s}
+    .pcrd.on .pcrd-desc{max-height:100px;opacity:1;margin-top:12px}
+    .pcrd-cta{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:0;opacity:0;transform:translateY(6px);transition:opacity .35s .15s,transform .35s .15s,margin-top .35s}
+    .pcrd.on .pcrd-cta{opacity:1;transform:none;margin-top:20px}
+
+    /* ── MARQUEE NUMBERS ── */
+    .mq-nums{background:var(--gold-p);overflow:hidden;height:80px;display:flex;align-items:center;border-top:1px solid var(--gold-l);border-bottom:1px solid var(--gold-l)}
+    .mq-track{display:flex;animation:tick 18s linear infinite;will-change:transform;align-items:center}
+    .mq-item{display:inline-flex;align-items:center;gap:32px;padding:0 48px;white-space:nowrap}
+    .mq-num{font-size:32px;font-weight:800;font-family:var(--sans);color:var(--text);letter-spacing:-.02em}
+    .mq-lbl{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t3)}
+    .mq-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+    /* ── METHOD (Scroll Stack) ── */
+    .ss-outer{background:#0C0B09;position:relative}
+    .ss-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:0 48px;gap:0}
+    .ss-hd{text-align:center;margin-bottom:48px}
+    .ss-hd-tag{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(196,163,90,.55);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:14px}
+    .ss-hd-tag::before,.ss-hd-tag::after{content:'';width:28px;height:1px;background:rgba(196,163,90,.3);display:block}
+    .ss-hd h2{font-size:clamp(28px,3vw,42px);font-weight:800;font-family:var(--sans);letter-spacing:-.03em;color:#fff}
+    .ss-hd h2 span{color:var(--gold)}
+    /* Stack */
+    .ss-stack{position:relative;width:min(1100px,96vw);height:450px}
+    .ss-card{position:absolute;inset:0;border-radius:28px;padding:52px 68px;background:#201D17;border:1px solid rgba(255,255,255,.09);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;backface-visibility:hidden}
+    .ss-card::after{content:'';position:absolute;inset:0;border-radius:24px;pointer-events:none}
+    .ss-card:nth-child(1)::after{background:radial-gradient(ellipse at 10% 0%,rgba(196,163,90,.12) 0%,transparent 55%)}
+    .ss-card:nth-child(2)::after{background:radial-gradient(ellipse at 90% 10%,rgba(160,120,60,.1) 0%,transparent 55%)}
+    .ss-card:nth-child(3)::after{background:radial-gradient(ellipse at 10% 90%,rgba(196,163,90,.1) 0%,transparent 55%)}
+    .ss-card:nth-child(4)::after{background:radial-gradient(ellipse at 90% 90%,rgba(130,95,45,.1) 0%,transparent 55%)}
+    /* Watermark number */
+    .ss-nbg{position:absolute;right:-8px;bottom:-24px;font-size:240px;font-weight:900;font-family:var(--sans);line-height:1;letter-spacing:-.06em;color:rgba(255,255,255,.024);pointer-events:none;user-select:none}
+    /* Card top row */
+    .ss-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .ss-step-lbl{font-size:9px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(196,163,90,.6)}
+    .ss-top-right{display:flex;align-items:center;gap:12px}
+    .ss-dur-pill{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:5px 14px;border-radius:40px}
+    .ss-counter{font-size:11px;font-weight:600;color:rgba(255,255,255,.18);letter-spacing:.04em}
+    /* Card body */
+    .ss-title{font-size:clamp(36px,4vw,56px);font-weight:800;font-family:var(--sans);color:#fff;letter-spacing:-.04em;line-height:1.0;margin-bottom:18px}
+    .ss-desc{font-size:14px;color:rgba(255,255,255,.42);line-height:1.75;max-width:640px}
+    /* Card bottom */
+    .ss-bot{display:flex;align-items:center;gap:20px;margin-top:auto;padding-top:32px;border-top:1px solid rgba(255,255,255,.06)}
+    .ss-bar{flex:1;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+    .ss-fill{height:100%;background:linear-gradient(90deg,var(--gold),rgba(196,163,90,.6));border-radius:2px;transition:width .5s ease}
+    .ss-pct{font-size:10px;font-weight:700;color:rgba(255,255,255,.2);letter-spacing:.06em;white-space:nowrap}
+    /* Dot indicators */
+    .ss-dots{display:flex;gap:8px;margin-top:36px}
+    .ss-dot{height:6px;border-radius:3px;background:rgba(255,255,255,.15);transition:background .4s,width .4s cubic-bezier(.16,1,.3,1);width:6px}
+    .ss-dot.on{background:var(--gold);width:24px}
+
+    /* ── WORK ── */
+    .work-sec{padding:var(--py) 0;background:var(--bg)}
+    .work-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px}
+    .work-h{font-size:clamp(44px,5vw,68px);font-weight:800;font-family:var(--sans);letter-spacing:-.04em;line-height:.94}
+    .work-h em{display:block;font-style:italic;font-weight:300;font-family:var(--serif);color:var(--t3);font-size:.7em;letter-spacing:.01em}
+    /* Numbered rows */
+    .work-rows{border-top:1px solid var(--bdr)}
+    .work-row{display:grid;grid-template-columns:68px 1fr 128px;gap:40px;align-items:center;padding:32px 20px;border-bottom:1px solid var(--bdr);cursor:none;transition:padding-left .35s cubic-bezier(.16,1,.3,1);position:relative}
+    .work-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .4s cubic-bezier(.16,1,.3,1);transform-origin:top;border-radius:2px}
+    .work-row:hover{padding-left:28px}
+    .work-row:hover::before{transform:scaleY(1)}
+    .work-rn{font-size:34px;font-weight:800;font-family:var(--sans);color:var(--bdrl);letter-spacing:-.04em;line-height:1;transition:color .3s}
+    .work-row:hover .work-rn{color:var(--gold)}
+    .work-rtag{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+    .work-rtitle{font-size:clamp(18px,1.8vw,24px);font-weight:700;font-family:var(--sans);letter-spacing:-.02em;color:var(--text);margin-bottom:10px}
+    .work-rmeta{display:flex;gap:0;flex-wrap:wrap}
+    .work-rmeta span{font-size:11px;color:var(--t3);display:flex;align-items:center;gap:0}
+    .work-rmeta span+span::before{content:'·';margin:0 8px;color:var(--bdrl)}
+    .work-rimg{width:128px;height:88px;border-radius:10px;overflow:hidden;flex-shrink:0;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+    .work-row:hover .work-rimg{transform:scale(1.03)}
+    .work-rimg img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+    .work-row:hover .work-rimg img{transform:scale(1.1)}
+    /* Featured card */
+    .work-feat{margin-top:20px;border-radius:24px;overflow:hidden;position:relative;height:500px;cursor:none}
+    .work-feat-img{position:absolute;inset:0}
+    .work-feat-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1)}
+    .work-feat:hover .work-feat-img img{transform:scale(1.05)}
+    .work-feat-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,7,6,.94) 0%,rgba(8,7,6,.55) 55%,rgba(8,7,6,.08) 100%)}
+    .work-feat-body{position:absolute;inset:0;padding:56px 60px;display:flex;flex-direction:column;justify-content:space-between}
+    .work-feat-top{}
+    .work-feat-tag{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(196,163,90,.65);margin-bottom:16px}
+    .work-feat-title{font-size:clamp(28px,3.2vw,46px);font-weight:800;font-family:var(--sans);color:#fff;letter-spacing:-.03em;line-height:1.06;max-width:500px}
+    .work-feat-bot{display:flex;align-items:flex-end;justify-content:space-between}
+    .work-feat-stats{display:flex;gap:44px}
+    .work-feat-sn{font-size:40px;font-weight:800;font-family:var(--sans);color:var(--gold);letter-spacing:-.03em;line-height:1}
+    .work-feat-sl{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px}
+    .work-feat-cta{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);padding:12px 24px;border-radius:40px;transition:all .3s;white-space:nowrap}
+    .work-feat:hover .work-feat-cta{color:var(--gold);border-color:rgba(196,163,90,.4)}
+
+    /* ── TESTIMONIAL ── */
+    .testi-sec{padding:var(--py) 0;background:#0F0E0D}
+    .testi-inner{max-width:860px;margin:0 auto;text-align:center}
+    .testi-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:40px}
+    .testi-tag::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+    .testi-tag::after{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+    .ttext{font-family:var(--serif);font-size:clamp(22px,2.5vw,34px);font-style:italic;line-height:1.5;color:rgba(255,255,255,.9);margin-bottom:52px}
+    .ttext strong{font-style:normal;color:var(--gold);font-weight:400}
+    .tauth{display:flex;align-items:center;justify-content:center;gap:16px}
+    .tauth-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8A6E50);flex-shrink:0}
+    .tauth-name{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:2px}
+    .tauth-role{font-size:11px;color:rgba(255,255,255,.4)}
+    .tauth-divider{width:1px;height:32px;background:rgba(255,255,255,.1)}
+    .tauth-stat-n{font-size:28px;font-weight:800;font-family:var(--sans);color:var(--gold);letter-spacing:-.02em;line-height:1}
+    .tauth-stat-l{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:2px}
+
+    /* ── FAQ ── */
+    .faq-sec{padding:var(--py) 0;background:#fff}
+    .faq-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(60px,8vw,120px);align-items:start}
+    /* Left col */
+    .faq-eyebrow{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+    .faq-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);display:block}
+    .faq-lh{font-size:clamp(38px,4.2vw,58px);font-weight:800;font-family:var(--sans);letter-spacing:-.04em;line-height:.94;color:var(--text);margin-bottom:24px}
+    .faq-lh em{display:block;font-style:italic;font-weight:300;font-family:var(--serif);color:var(--gold);font-size:.72em;letter-spacing:.01em;line-height:1.2}
+    .faq-lp{font-size:14px;color:var(--t2);line-height:1.85;margin-bottom:44px;max-width:300px}
+    .faq-llink{display:inline-flex;align-items:center;gap:12px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t2);text-decoration:none;transition:color .3s}
+    .faq-llink:hover{color:var(--gold)}
+    .faq-llink span{display:inline-block;transition:transform .3s}
+    .faq-llink:hover span{transform:translateX(4px)}
+    /* Right: accordion */
+    .faq-list{list-style:none}
+    .faq-item{border-bottom:1px solid var(--bdrl);position:relative}
+    .faq-item:first-child{border-top:1px solid var(--bdrl)}
+    .faq-bar{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .45s cubic-bezier(.16,1,.3,1);transform-origin:top;border-radius:2px}
+    .faq-item.open .faq-bar{transform:scaleY(1)}
+    .faq-btn{width:100%;background:none;border:none;padding:26px 0 26px 20px;display:grid;grid-template-columns:48px 1fr 34px;gap:20px;align-items:center;cursor:none;text-align:left;transition:padding-left .35s cubic-bezier(.16,1,.3,1)}
+    .faq-item.open .faq-btn{padding-left:30px}
+    .faq-n{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--bdr);font-family:var(--sans);transition:color .3s}
+    .faq-item.open .faq-n{color:var(--gold)}
+    .faq-qt{font-size:clamp(14px,1.35vw,16px);font-weight:600;color:var(--t2);font-family:var(--sans);letter-spacing:-.01em;line-height:1.45;transition:color .3s}
+    .faq-item.open .faq-qt{color:var(--text)}
+    .faq-ico{width:32px;height:32px;border-radius:50%;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--t3);flex-shrink:0;transition:all .35s}
+    .faq-item.open .faq-ico{background:var(--gold);border-color:var(--gold);color:#fff;transform:rotate(45deg)}
+    /* Smooth slide-down answer */
+    .faq-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}
+    .faq-item.open .faq-body{max-height:220px}
+    .faq-ans{padding:0 0 26px 88px;font-size:14px;line-height:1.85;color:var(--t2)}
+
+    /* ── CTA ── */
+    .cta-sec{background:var(--bg2);position:relative;overflow:hidden;padding:clamp(80px,9vw,120px) 0}
+    .cta-inner{position:relative;z-index:2}
+    .cta-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(60px,8vw,120px);align-items:center}
+    .cta-h{font-size:clamp(44px,5vw,72px);font-weight:800;font-family:var(--sans);letter-spacing:-.04em;line-height:.94;color:var(--text)}
+    .cta-h em{display:block;font-style:italic;font-weight:300;font-family:var(--serif);color:var(--gold);font-size:.78em;letter-spacing:.01em;line-height:1.2}
+    .cta-btn-p{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:18px 36px;background:var(--text);color:var(--bg);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-radius:4px;text-decoration:none;transition:background .3s,transform .3s cubic-bezier(.16,1,.3,1);cursor:none;margin-bottom:16px}
+    .cta-btn-p:hover{background:var(--gold);transform:translateY(-2px)}
+    .cta-email{font-size:13px;color:var(--t3);letter-spacing:-.01em;font-family:var(--sans)}
+
+    /* ── FOOTER ── */
+    footer{background:#0C0B09;overflow:hidden}
+    .fbar{display:grid;grid-template-columns:1fr auto auto auto;gap:clamp(32px,5vw,80px);align-items:start;padding:clamp(48px,6vw,72px) 0 clamp(40px,5vw,60px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .fbar-col{display:flex;flex-direction:column;gap:6px}
+    .fbar-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px}
+    .fbar-links{display:flex;flex-direction:column;gap:6px}
+    .fbar-links a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+    .fbar-links a:hover{color:var(--gold)}
+    .fbar-copy{font-size:12px;color:rgba(255,255,255,.25);line-height:1.8}
+    .fwordmark{display:block;width:100%;padding:clamp(32px,4vw,52px) 0 0}
+    .fwordmark img{width:clamp(400px,68vw,980px);height:auto;display:block;opacity:.22;filter:brightness(0) invert(1);margin-left:var(--pad)}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, createContext, useContext } = React;
+
+/* ────────────────────────────────────────────────
+   HOOKS
+──────────────────────────────────────────────── */
+function useInView(opts = {}) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setInView(true); io.unobserve(e.target); }
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px', ...opts });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return [ref, inView];
+}
+
+function useCountUp(end, dur = 2400, active = false) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let t0 = null;
+    const raf = requestAnimationFrame(function step(ts) {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 4);
+      setV(Math.round(e * end));
+      if (p < 1) requestAnimationFrame(step);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [active, end, dur]);
+  return v;
+}
+
+/* ────────────────────────────────────────────────
+   TRANSLATIONS
+──────────────────────────────────────────────── */
+const T = {
+  EN: {
+    nav: { home:'Home', products:'Products', method:'Method', cases:'Case Studies', cta:'Request a Briefing' },
+    hero: {
+      l1:'Built for', l2:'enterprise retail.', l3:'Engineered to scale.',
+      cta:'→ Request a Briefing', link:'Our Products',
+      frame:'Enterprise solutions built for the world\'s most ambitious retail operations.',
+      since:'Enterprise Platform', sinceYear:'/SINCE 2018', trust:'Trusted by 180+ locations',
+    },
+    ticker: ['Confidential at Impact','SELEKT Backbone','99.97% Uptime SLA','Enterprise Grade','Global Deployments','180+ Locations'],
+    stats: { items: ['Retail locations deployed','Countries operating in commerce','Platform uptime SLA'] },
+    built: {
+      eyebrow:'Core Platform', h:'Built for', em:'modern retail.',
+      p:'From flagship stores to pop-ups, our platform adapts to your operations without compromise.',
+      sLocs:'Locations deployed', sCtry:'Countries active', sUp:'Platform uptime SLA',
+      feats: [
+        { name:'Offline-first architecture', desc:'Continue selling when connectivity drops. Zero compromise on data integrity across every location.', tags:['Always-on POS','Conflict-free sync'] },
+        { name:'Real-time sync across stores', desc:'Store-level data refreshes every 30 seconds. Every location, every transaction — always current.', tags:['30s refresh','Multi-location'] },
+        { name:'Any device, anywhere', desc:'Field-deployable on iOS and Android. Your team operates from wherever the business demands.', tags:['iOS & Android','Zero training'] },
+      ],
+    },
+    products: {
+      eyebrow:'Our Suite', h:'Products', link:'View All →', discover:'Discover →',
+      items: [
+        { cat:'Clienteling', name:'Clienteling Suite', desc:'A unified client profile and personalized selling workflows for retail teams. Every customer, every interaction — at your fingertips.' },
+        { cat:'Point of Sale', name:'POS Companion', desc:'A premium layer atop your existing POS. Faster flows, clean UX, better service. Designed for the demanding retail floor.' },
+        { cat:'Fulfillment', name:'OMS & Fulfillment', desc:'Orchestrate cross-channel orders for store routing and omnichannel returns. Complete visibility across your entire network.' },
+      ],
+    },
+    marquee: [
+      { num:'180+', lbl:'Locations deployed' },{ num:'12M+', lbl:'Transactions processed' },
+      { num:'12', lbl:'Countries served' },{ num:'99.97%', lbl:'Platform uptime' },{ num:'24/7', lbl:'Enterprise support' },
+    ],
+    method: {
+      tag:'Our Approach', h:'The SELEKT ', span:'Method', step:'Step',
+      steps: [
+        { title:'Discovery', desc:'Deep-dive into your existing infrastructure, workflows, and team structure to map the full scope of your retail operations.', dur:'1 week' },
+        { title:'Architecture', desc:'Technical architecture design, phased rollout planning, and performance benchmarking across your entire retail network.', dur:'1–4 weeks' },
+        { title:'Deployment', desc:'Staged rollout across locations with live monitoring, dedicated on-site engineers, and zero-downtime store transitions.', dur:'4–12 weeks' },
+        { title:'Optimisation', desc:'Continuous performance tuning, feature activation, and business intelligence integration to maximise platform ROI.', dur:'Ongoing' },
+      ],
+    },
+    work: {
+      eyebrow:'Case Studies', h:'Selected', em:'work.',
+      link:'View All Case Studies →',
+      cases: [
+        { tag:'Global Rollout', title:'180-Location Enterprise Deployment', meta:['Fashion Group','12 Countries','6 Months'] },
+        { tag:'Omnichannel', title:'EMEA Omnichannel Transformation', meta:['Luxury Goods','2.4M+ Transactions','EMEA Wide'] },
+      ],
+      featTag:'Confidential · Enterprise Platform',
+      featTitle:'Retail infrastructure deployed at global scale',
+      featLocs:'Locations live', featTx:'Transactions', featUp:'Uptime SLA',
+      featCta:'View Case Study →',
+    },
+    testi: {
+      tag:'Client Voices',
+      quote:'We needed a system that could scale from 12 pilot stores to 400+ locations without compromising performance. SELEKT\'s Command Center gives us real-time visibility across every touchpoint. It\'s the operational clarity we\'ve been missing.',
+      name:'Daniel Dove', role:'Chief Revenue Officer',
+      statN:'400+', statL:'Locations deployed',
+    },
+    faq: {
+      eyebrow:'Questions', h:'Everything', em:'you need to know.',
+      p:'Have more questions? Our team is available to discuss your specific enterprise requirements in a private briefing.',
+      link:'Request a briefing →',
+      items: [
+        { q:'Do you require an NDA before engagement?', a:'Yes. All discovery conversations, demo calls, and documents are covered under mutual NDA. We treat your context as confidential by default.' },
+        { q:'What are your security and compliance standards?', a:'Our platform is SOC 2 Type II certified. All data is encrypted at rest and in transit. We comply with GDPR, PCI-DSS, and regional data residency requirements.' },
+        { q:'How do rollouts typically work?', a:'We begin with a pilot at 1–3 locations, refine the configuration, then execute a staged rollout by region or concept. Each wave is supported by on-site SELEKT engineers.' },
+        { q:'What are typical project timelines?', a:'A typical enterprise deployment runs 8–16 weeks from signed agreement to first store go-live. Multi-region rollouts are completed within 6–12 months.' },
+      ],
+    },
+    cta: { h:'Ready to scale', span:'your retail', em:'operations.', btn:'Request a Briefing →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nEnterprise Retail Platform.',
+      products: { label:'Products', links:['POS Companion →','Clienteling Suite →','OMS & Fulfillment →'] },
+      company:  { label:'Company',  links:['Home →','Method →','Case Studies →','Support →'] },
+      legal:    { label:'Legal',    links:['Privacy Policy →','Terms of Service →','Cookie Policy →'] },
+    },
+  },
+  FR: {
+    nav: { home:'Accueil', products:'Produits', method:'Méthode', cases:'Études de cas', cta:'Demander un Briefing' },
+    hero: {
+      l1:'Conçu pour', l2:'le retail entreprise.', l3:'Pensé pour performer.',
+      cta:'→ Demander un Briefing', link:'Nos Produits',
+      frame:'Des solutions entreprise pour les opérations retail les plus ambitieuses au monde.',
+      since:'Plateforme Entreprise', sinceYear:'/DEPUIS 2018', trust:'Approuvé par 180+ sites',
+    },
+    ticker: ['Confidentiel à l\'Impact','Backbone SELEKT','SLA 99,97% de disponibilité','Niveau Entreprise','Déploiements Mondiaux','180+ Sites'],
+    stats: { items: ['Sites retail déployés','Pays en opération commerciale','SLA de disponibilité plateforme'] },
+    built: {
+      eyebrow:'Plateforme Centrale', h:'Conçu pour', em:'le retail moderne.',
+      p:'Des flagships aux pop-ups, notre plateforme s\'adapte à vos opérations sans compromis.',
+      sLocs:'Sites déployés', sCtry:'Pays actifs', sUp:'SLA de disponibilité',
+      feats: [
+        { name:'Architecture hors-ligne d\'abord', desc:'Continuez à vendre même sans connexion. Aucun compromis sur l\'intégrité des données dans chaque site.', tags:['POS Toujours actif','Sync sans conflit'] },
+        { name:'Synchronisation temps réel entre boutiques', desc:'Les données sont actualisées toutes les 30 secondes. Chaque site, chaque transaction — toujours à jour.', tags:['Actualisation 30s','Multi-site'] },
+        { name:'Tout appareil, partout', desc:'Déployable sur iOS et Android. Votre équipe opère où l\'activité l\'exige.', tags:['iOS & Android','Formation nulle'] },
+      ],
+    },
+    products: {
+      eyebrow:'Notre Suite', h:'Produits', link:'Voir tout →', discover:'Découvrir →',
+      items: [
+        { cat:'Clienteling', name:'Suite Clienteling', desc:'Un profil client unifié et des workflows de vente personnalisés pour les équipes retail. Chaque client, chaque interaction — à portée de main.' },
+        { cat:'Point de Vente', name:'POS Companion', desc:'Une couche premium sur votre POS existant. Flux plus rapides, UX épurée, meilleur service. Conçu pour le terrain retail exigeant.' },
+        { cat:'Fulfillment', name:'OMS & Fulfillment', desc:'Orchestrez les commandes cross-canal pour le routage en boutique et les retours omnicanal. Visibilité complète sur votre réseau.' },
+      ],
+    },
+    marquee: [
+      { num:'180+', lbl:'Sites déployés' },{ num:'12M+', lbl:'Transactions traitées' },
+      { num:'12', lbl:'Pays servis' },{ num:'99,97%', lbl:'Disponibilité plateforme' },{ num:'24/7', lbl:'Support entreprise' },
+    ],
+    method: {
+      tag:'Notre Approche', h:'La ', span:'Méthode SELEKT', step:'Étape',
+      steps: [
+        { title:'Découverte', desc:'Analyse approfondie de votre infrastructure, workflows et structure d\'équipe pour cartographier vos opérations retail.', dur:'1 semaine' },
+        { title:'Architecture', desc:'Conception de l\'architecture technique, planification du déploiement par phases et benchmarking sur tout votre réseau.', dur:'1–4 semaines' },
+        { title:'Déploiement', desc:'Déploiement progressif avec surveillance en direct, ingénieurs dédiés sur site et transitions sans interruption.', dur:'4–12 semaines' },
+        { title:'Optimisation', desc:'Réglage continu des performances, activation des fonctionnalités et intégration BI pour maximiser le ROI plateforme.', dur:'En continu' },
+      ],
+    },
+    work: {
+      eyebrow:'Études de cas', h:'Travaux', em:'sélectionnés.',
+      link:'Voir toutes les études de cas →',
+      cases: [
+        { tag:'Déploiement mondial', title:'Déploiement entreprise sur 180 sites', meta:['Groupe Mode','12 pays','6 mois'] },
+        { tag:'Omnicanal', title:'Transformation omnicanal EMEA', meta:['Luxe','2,4M+ transactions','Zone EMEA'] },
+      ],
+      featTag:'Confidentiel · Plateforme Entreprise',
+      featTitle:'Infrastructure retail déployée à l\'échelle mondiale',
+      featLocs:'Sites actifs', featTx:'Transactions', featUp:'SLA Disponibilité',
+      featCta:'Voir l\'étude de cas →',
+    },
+    testi: {
+      tag:'Paroles Clients',
+      quote:'Nous avions besoin d\'un système pouvant évoluer de 12 boutiques pilotes à plus de 400 sites sans compromettre la performance. Le Command Center de SELEKT nous offre une visibilité temps réel sur chaque point de contact. C\'est la clarté opérationnelle qui nous manquait.',
+      name:'Daniel Dove', role:'Directeur des Revenus',
+      statN:'400+', statL:'Sites déployés',
+    },
+    faq: {
+      eyebrow:'Questions', h:'Tout ce que', em:'vous devez savoir.',
+      p:'Vous avez d\'autres questions ? Notre équipe est disponible pour discuter de vos besoins entreprise lors d\'un briefing privé.',
+      link:'Demander un briefing →',
+      items: [
+        { q:'Exigez-vous un NDA avant l\'engagement ?', a:'Oui. Toutes les conversations de découverte, appels de démonstration et documents sont couverts par un NDA mutuel. Nous traitons votre contexte comme confidentiel par défaut.' },
+        { q:'Quels sont vos standards de sécurité et de conformité ?', a:'Notre plateforme est certifiée SOC 2 Type II. Toutes les données sont chiffrées au repos et en transit. Nous respectons le RGPD, PCI-DSS et les exigences régionales de résidence des données.' },
+        { q:'Comment se déroulent généralement les déploiements ?', a:'Nous commençons par un pilote sur 1–3 sites, affinons la configuration, puis exécutons un déploiement progressif par région. Chaque vague est supportée par des ingénieurs SELEKT sur site.' },
+        { q:'Quels sont les délais typiques des projets ?', a:'Un déploiement entreprise typique dure 8–16 semaines de la signature à la mise en production du premier site. Les déploiements multi-régions sont terminés en 6–12 mois.' },
+      ],
+    },
+    cta: { h:'Prêt à faire évoluer', span:'votre retail', em:'opérations.', btn:'Demander un Briefing →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nPlateforme Retail Entreprise.',
+      products: { label:'Produits', links:['POS Companion →','Suite Clienteling →','OMS & Fulfillment →'] },
+      company:  { label:'Entreprise', links:['Accueil →','Méthode →','Études de cas →','Support →'] },
+      legal:    { label:'Légal', links:['Politique de confidentialité →','Conditions d\'utilisation →','Politique cookies →'] },
+    },
+  },
+  IT: {
+    nav: { home:'Home', products:'Prodotti', method:'Metodo', cases:'Case Study', cta:'Richiedi un Briefing' },
+    hero: {
+      l1:'Costruito per', l2:'il retail enterprise.', l3:'Progettato per scalare.',
+      cta:'→ Richiedi un Briefing', link:'I Nostri Prodotti',
+      frame:'Soluzioni enterprise per le operazioni retail più ambiziose al mondo.',
+      since:'Piattaforma Enterprise', sinceYear:'/DAL 2018', trust:'Scelto da 180+ sedi',
+    },
+    ticker: ['Riservato ad Impatto','Backbone SELEKT','SLA 99,97% Uptime','Livello Enterprise','Deploy Globali','180+ Sedi'],
+    stats: { items: ['Sedi retail deployate','Paesi in operazione commerciale','SLA uptime piattaforma'] },
+    built: {
+      eyebrow:'Piattaforma Core', h:'Costruito per', em:'il retail moderno.',
+      p:'Dai flagship store ai pop-up, la nostra piattaforma si adatta alle tue operazioni senza compromessi.',
+      sLocs:'Sedi deployate', sCtry:'Paesi attivi', sUp:'SLA uptime piattaforma',
+      feats: [
+        { name:'Architettura offline-first', desc:'Continua a vendere anche senza connessione. Nessun compromesso sull\'integrità dei dati in ogni sede.', tags:['POS Sempre attivo','Sync senza conflitti'] },
+        { name:'Sync in tempo reale tra negozi', desc:'I dati si aggiornano ogni 30 secondi. Ogni sede, ogni transazione — sempre aggiornata.', tags:['Aggiornamento 30s','Multi-sede'] },
+        { name:'Qualsiasi dispositivo, ovunque', desc:'Deployabile su iOS e Android. Il tuo team opera ovunque il business lo richieda.', tags:['iOS & Android','Zero formazione'] },
+      ],
+    },
+    products: {
+      eyebrow:'La Nostra Suite', h:'Prodotti', link:'Vedi tutti →', discover:'Scopri →',
+      items: [
+        { cat:'Clienteling', name:'Clienteling Suite', desc:'Un profilo cliente unificato e workflow di vendita personalizzati per i team retail. Ogni cliente, ogni interazione — a portata di mano.' },
+        { cat:'Punto Vendita', name:'POS Companion', desc:'Un livello premium sul tuo POS esistente. Flussi più veloci, UX pulita, servizio migliore. Progettato per il retail esigente.' },
+        { cat:'Fulfillment', name:'OMS & Fulfillment', desc:'Orchestra ordini cross-canale per routing in store e resi omnicanale. Visibilità completa sull\'intera rete.' },
+      ],
+    },
+    marquee: [
+      { num:'180+', lbl:'Sedi deployate' },{ num:'12M+', lbl:'Transazioni elaborate' },
+      { num:'12', lbl:'Paesi serviti' },{ num:'99,97%', lbl:'Uptime piattaforma' },{ num:'24/7', lbl:'Supporto enterprise' },
+    ],
+    method: {
+      tag:'Il Nostro Approccio', h:'Il ', span:'Metodo SELEKT', step:'Fase',
+      steps: [
+        { title:'Scoperta', desc:'Analisi approfondita dell\'infrastruttura, workflow e struttura del team per mappare le operazioni retail.', dur:'1 settimana' },
+        { title:'Architettura', desc:'Design dell\'architettura tecnica, pianificazione del rollout a fasi e benchmarking su tutta la rete.', dur:'1–4 settimane' },
+        { title:'Deployment', desc:'Rollout progressivo con monitoraggio live, ingegneri dedicati on-site e transizioni senza interruzioni.', dur:'4–12 settimane' },
+        { title:'Ottimizzazione', desc:'Tuning continuo delle prestazioni, attivazione funzionalità e integrazione BI per massimizzare il ROI.', dur:'Continuo' },
+      ],
+    },
+    work: {
+      eyebrow:'Case Study', h:'Lavori', em:'selezionati.',
+      link:'Vedi tutti i case study →',
+      cases: [
+        { tag:'Deploy Globale', title:'Deploy Enterprise su 180 sedi', meta:['Gruppo Moda','12 Paesi','6 Mesi'] },
+        { tag:'Omnicanale', title:'Trasformazione Omnicanale EMEA', meta:['Luxury Goods','2,4M+ Transazioni','Area EMEA'] },
+      ],
+      featTag:'Riservato · Piattaforma Enterprise',
+      featTitle:'Infrastruttura retail deployata su scala globale',
+      featLocs:'Sedi attive', featTx:'Transazioni', featUp:'SLA Uptime',
+      featCta:'Vedi il case study →',
+    },
+    testi: {
+      tag:'Voci dei Clienti',
+      quote:'Avevamo bisogno di un sistema in grado di scalare da 12 negozi pilota a oltre 400 sedi senza compromettere le prestazioni. Il Command Center di SELEKT ci offre visibilità in tempo reale su ogni punto di contatto. È la chiarezza operativa che ci mancava.',
+      name:'Daniel Dove', role:'Chief Revenue Officer',
+      statN:'400+', statL:'Sedi deployate',
+    },
+    faq: {
+      eyebrow:'Domande', h:'Tutto ciò che', em:'devi sapere.',
+      p:'Hai altre domande? Il nostro team è disponibile per discutere i tuoi requisiti enterprise in un briefing privato.',
+      link:'Richiedi un briefing →',
+      items: [
+        { q:'Richiedete un NDA prima dell\'incarico?', a:'Sì. Tutte le conversazioni di scoperta, demo e documenti sono coperti da NDA reciproco. Trattiamo il tuo contesto come riservato per impostazione predefinita.' },
+        { q:'Quali sono i vostri standard di sicurezza e conformità?', a:'La nostra piattaforma è certificata SOC 2 Type II. Tutti i dati sono crittografati a riposo e in transito. Rispettiamo GDPR, PCI-DSS e i requisiti regionali di residenza dei dati.' },
+        { q:'Come funzionano tipicamente i rollout?', a:'Iniziamo con un pilota in 1–3 sedi, affiniamo la configurazione, poi eseguiamo un rollout progressivo per regione. Ogni fase è supportata da ingegneri SELEKT on-site.' },
+        { q:'Quali sono i tempi tipici dei progetti?', a:'Un deploy enterprise tipico dura 8–16 settimane dalla firma al go-live del primo negozio. I rollout multi-regione si completano in 6–12 mesi.' },
+      ],
+    },
+    cta: { h:'Pronto a scalare', span:'il tuo retail', em:'operazioni.', btn:'Richiedi un Briefing →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nPiattaforma Retail Enterprise.',
+      products: { label:'Prodotti', links:['POS Companion →','Clienteling Suite →','OMS & Fulfillment →'] },
+      company:  { label:'Azienda', links:['Home →','Metodo →','Case Study →','Supporto →'] },
+      legal:    { label:'Legale', links:['Privacy Policy →','Termini di Servizio →','Cookie Policy →'] },
+    },
+  },
+  '中文': {
+    nav: { home:'首页', products:'产品', method:'方法论', cases:'案例研究', cta:'预约简报' },
+    hero: {
+      l1:'专为', l2:'企业零售打造。', l3:'工程级性能与规模。',
+      cta:'→ 预约简报', link:'我们的产品',
+      frame:'为全球最具雄心的零售运营打造的企业级解决方案。',
+      since:'企业平台', sinceYear:'/自2018年', trust:'180+门店信赖之选',
+    },
+    ticker: ['严格保密','SELEKT核心架构','99.97%运行时间SLA','企业级标准','全球部署','180+门店'],
+    stats: { items: ['已部署零售门店','商业运营国家数量','平台运行时间SLA'] },
+    built: {
+      eyebrow:'核心平台', h:'专为', em:'现代零售打造。',
+      p:'从旗舰店到快闪店，我们的平台无妥协地适配您的运营需求。',
+      sLocs:'已部署门店', sCtry:'活跃国家', sUp:'平台运行时间SLA',
+      feats: [
+        { name:'离线优先架构', desc:'断网时继续销售，每个门店的数据完整性零妥协。', tags:['全天候POS','无冲突同步'] },
+        { name:'跨门店实时同步', desc:'门店数据每30秒刷新一次，每个门店、每笔交易——始终最新。', tags:['30秒刷新','多门店'] },
+        { name:'任意设备，随时随地', desc:'可部署于iOS和Android，您的团队可在业务需要的任何地方运营。', tags:['iOS & Android','零培训'] },
+      ],
+    },
+    products: {
+      eyebrow:'我们的套件', h:'产品', link:'查看全部 →', discover:'了解更多 →',
+      items: [
+        { cat:'客户管理', name:'客户关系套件', desc:'为零售团队提供统一的客户档案和个性化销售工作流。每位客户、每次互动——尽在掌握。' },
+        { cat:'销售终端', name:'POS伴侣', desc:'在您现有POS之上的高级层。更快的流程、简洁的用户体验、更好的服务。专为高要求的零售现场设计。' },
+        { cat:'履约管理', name:'订单与履约系统', desc:'协调跨渠道订单，支持门店路由和全渠道退换货。对整个网络实现完整可见性。' },
+      ],
+    },
+    marquee: [
+      { num:'180+', lbl:'已部署门店' },{ num:'1200万+', lbl:'已处理交易' },
+      { num:'12', lbl:'服务国家' },{ num:'99.97%', lbl:'平台运行时间' },{ num:'24/7', lbl:'企业支持' },
+    ],
+    method: {
+      tag:'我们的方法', h:'SELEKT ', span:'方法论', step:'阶段',
+      steps: [
+        { title:'探索发现', desc:'深入了解您现有的基础设施、工作流程和团队结构，全面规划零售运营范围。', dur:'1周' },
+        { title:'架构设计', desc:'技术架构设计、分阶段推出规划以及覆盖整个零售网络的性能基准测试。', dur:'1–4周' },
+        { title:'部署实施', desc:'分阶段跨门店推出，配备实时监控、专属驻场工程师以及零停机时间的门店过渡。', dur:'4–12周' },
+        { title:'持续优化', desc:'持续性能调优、功能激活和商业智能集成，最大化平台投资回报率。', dur:'持续进行' },
+      ],
+    },
+    work: {
+      eyebrow:'案例研究', h:'精选', em:'案例。',
+      link:'查看所有案例研究 →',
+      cases: [
+        { tag:'全球部署', title:'180门店企业级部署', meta:['时尚集团','12个国家','6个月'] },
+        { tag:'全渠道', title:'EMEA全渠道转型', meta:['奢侈品','240万+交易','EMEA全区'] },
+      ],
+      featTag:'保密 · 企业平台',
+      featTitle:'在全球范围内部署的零售基础设施',
+      featLocs:'上线门店', featTx:'交易量', featUp:'运行时间SLA',
+      featCta:'查看案例研究 →',
+    },
+    testi: {
+      tag:'客户心声',
+      quote:'我们需要一个能从12家试点门店扩展到400多个门店而不影响性能的系统。SELEKT的指挥中心让我们实时了解每个触点的状况。这正是我们一直以来所缺少的运营清晰度。',
+      name:'Daniel Dove', role:'首席营收官',
+      statN:'400+', statL:'已部署门店',
+    },
+    faq: {
+      eyebrow:'常见问题', h:'您需要了解的', em:'一切。',
+      p:'还有更多问题？我们的团队可在私人简报中讨论您的具体企业需求。',
+      link:'预约简报 →',
+      items: [
+        { q:'合作前是否需要签署保密协议？', a:'是的。所有探索性对话、演示通话和文件均受双方保密协议保护。我们默认将您的信息视为机密。' },
+        { q:'您们的安全和合规标准是什么？', a:'我们的平台已通过SOC 2 Type II认证。所有数据在静态和传输过程中均经过加密。我们符合GDPR、PCI-DSS及区域数据驻留要求。' },
+        { q:'项目推出通常如何进行？', a:'我们从1–3个门店开始试点，优化配置后再按区域或概念分阶段推出。每个阶段均有SELEKT驻场工程师提供支持。' },
+        { q:'项目的典型时间表是什么？', a:'典型企业部署从签约到第一家门店上线需要8–16周。多区域推出通常在6–12个月内完成。' },
+      ],
+    },
+    cta: { h:'准备好扩展', span:'您的零售', em:'运营了吗。', btn:'预约简报 →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT。\n企业零售平台。',
+      products: { label:'产品', links:['POS伴侣 →','客户关系套件 →','订单与履约系统 →'] },
+      company:  { label:'公司', links:['首页 →','方法论 →','案例研究 →','支持 →'] },
+      legal:    { label:'法律', links:['隐私政策 →','服务条款 →','Cookie政策 →'] },
+    },
+  },
+};
+
+const LangCtx = createContext({ lang: 'EN', setLang: () => {} });
+function useT() {
+  const { lang } = useContext(LangCtx);
+  return T[lang] || T.EN;
+}
+
+/* ────────────────────────────────────────────────
+   CURSOR
+──────────────────────────────────────────────── */
+function Cursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const mouse = useRef({ x: -200, y: -200 });
+  const lag = useRef({ x: -200, y: -200 });
+  const [hov, setHov] = useState(false);
+
+  useEffect(() => {
+    const onMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('mousemove', onMove);
+
+    const addHov = () => {
+      document.querySelectorAll('a,button,[data-hover]').forEach(el => {
+        el.addEventListener('mouseenter', () => setHov(true));
+        el.addEventListener('mouseleave', () => setHov(false));
+      });
+    };
+    addHov();
+    setTimeout(addHov, 1500);
+
+    let raf;
+    const loop = () => {
+      lag.current.x += (mouse.current.x - lag.current.x) * 0.09;
+      lag.current.y += (mouse.current.y - lag.current.y) * 0.09;
+      if (dotRef.current) dotRef.current.style.transform = `translate(${mouse.current.x - 4}px,${mouse.current.y - 4}px)`;
+      if (ringRef.current) ringRef.current.style.transform = `translate(${lag.current.x - 20}px,${lag.current.y - 20}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
+  }, []);
+
+  return (
+    <>
+      <div ref={dotRef} className={`cur-dot ${hov ? 'big' : ''}`} />
+      <div ref={ringRef} className={`cur-ring ${hov ? 'big' : ''}`} />
+    </>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   BLUR TEXT (per character stagger)
+──────────────────────────────────────────────── */
+function BlurText({ children, active, delay = 0, stagger = 40, className = '' }) {
+  const chars = String(children).split('');
+  return (
+    <span className={className} aria-label={children}>
+      {chars.map((ch, i) => (
+        <span
+          key={i}
+          className={`bt-char ${active ? 'in' : ''}`}
+          style={{ transitionDelay: `${delay + i * stagger}ms` }}
+        >
+          {ch === ' ' ? '\u00A0' : ch}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   AURORA BACKGROUND
+──────────────────────────────────────────────── */
+function Aurora() {
+  return (
+    <div className="aurora" aria-hidden="true">
+      <div className="abl a1" /><div className="abl a2" />
+      <div className="abl a3" /><div className="abl a4" />
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   MAGNETIC BUTTON
+──────────────────────────────────────────────── */
+function Mag({ children, className = '', href, onClick }) {
+  const ref = useRef(null);
+  const onMove = (e) => {
+    const r = ref.current.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    ref.current.style.transform = `translate(${x * .22}px,${y * .22}px)`;
+    ref.current.style.transition = 'transform .15s ease';
+  };
+  const onLeave = () => {
+    ref.current.style.transform = 'translate(0,0)';
+    ref.current.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+  };
+  const props = { ref, className, onMouseMove: onMove, onMouseLeave: onLeave };
+  if (href) return <a href={href} {...props}>{children}</a>;
+  return <button onClick={onClick} {...props}>{children}</button>;
+}
+
+/* ────────────────────────────────────────────────
+   TILT CARD
+──────────────────────────────────────────────── */
+function Tilt({ children, className = '' }) {
+  const ref = useRef(null);
+  const onMove = (e) => {
+    const r = ref.current.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    ref.current.style.transform = `perspective(900px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateZ(10px)`;
+    ref.current.style.transition = 'transform .06s linear';
+  };
+  const onLeave = () => {
+    ref.current.style.transform = 'perspective(900px) rotateY(0) rotateX(0) translateZ(0)';
+    ref.current.style.transition = 'transform .7s cubic-bezier(.34,1.56,.64,1)';
+  };
+  return (
+    <div ref={ref} className={className} onMouseMove={onMove} onMouseLeave={onLeave}>
+      {children}
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   COUNT DISPLAY
+──────────────────────────────────────────────── */
+function Count({ end, suffix = '', prefix = '', dur }) {
+  const [ref, inView] = useInView();
+  const v = useCountUp(end, dur || 2400, inView);
+  return <span ref={ref}>{prefix}{v.toLocaleString()}{suffix}</span>;
+}
+
+/* ────────────────────────────────────────────────
+   LANG SELECTOR
+──────────────────────────────────────────────── */
+const LANGS = [
+  { code: 'EN', label: 'English',  native: 'English' },
+  { code: 'FR', label: 'Français', native: 'Français' },
+  { code: 'IT', label: 'Italiano', native: 'Italiano' },
+  { code: '中文', label: 'Mandarin', native: '中文' },
+];
+
+function LangSelector() {
+  const { lang, setLang } = useContext(LangCtx);
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  return (
+    <div ref={ref} className={`lang-sel ${open ? 'open' : ''}`}>
+      <button className="lang-btn" onClick={() => setOpen(o => !o)}>
+        {lang}
+        <span className="lang-chevron">▾</span>
+      </button>
+      <div className="lang-drop">
+        {LANGS.map(({ code, native }) => (
+          <div
+            key={code}
+            className={`lang-opt ${lang === code ? 'active' : ''}`}
+            onClick={() => { setLang(code); setOpen(false); }}
+          >
+            <span>{code}</span>
+            <span className="lang-opt-native">{native}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   NAV
+──────────────────────────────────────────────── */
+function Nav() {
+  const t = useT();
+  const [sc, setSc] = useState(false);
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    const h = () => setSc(window.scrollY > 30);
+    window.addEventListener('scroll', h);
+    const tick = () => {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2,'0');
+      const mm = String(now.getMinutes()).padStart(2,'0');
+      setTime(`${hh}:${mm}`);
+    };
+    tick();
+    const id = setInterval(tick, 10000);
+    return () => { window.removeEventListener('scroll', h); clearInterval(id); };
+  }, []);
+  return (
+    <nav className={`nav ${sc ? 'scrolled' : ''}`}>
+      <div className="nav-meta">
+        <img src="logo noir.png" alt="SELEKT" style={{ height:38, width:'auto', display:'block', opacity:.85, marginRight:20 }} />
+        <span>{time}</span>
+        <span className="nav-meta-sep">|</span>
+        <span>PARIS, FR</span>
+      </div>
+      <ul className="nav-links">
+        <li><a href="selekt-v2.html">{t.nav.home}</a></li>
+        <li><a href="selekt-products.html">{t.nav.products}</a></li>
+        <li><a href="selekt-method.html">{t.nav.method}</a></li>
+        <li><a href="selekt-cases.html">{t.nav.cases}</a></li>
+      </ul>
+      <div className="nav-right">
+        <LangSelector />
+        <Mag href="#contact" className="btn btn-dark">{t.nav.cta}</Mag>
+      </div>
+    </nav>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   HERO
+──────────────────────────────────────────────── */
+function Hero() {
+  const t = useT();
+  const h = t.hero;
+  const [on, setOn] = useState(false);
+  useEffect(() => { const timer = setTimeout(() => setOn(true), 80); return () => clearTimeout(timer); }, []);
+
+  return (
+    <section className="hero">
+      <div className="hero-glow"><div className="hg1"/><div className="hg2"/><div className="hg3"/></div>
+      <div className="hero-noise" />
+
+      {/* ── Centered body ── */}
+      <div className="hero-body">
+
+        {/* Eyebrow pill */}
+        <div className={`hero-pill ${on ? 'in' : ''}`} style={{ transitionDelay: '0ms' }}>
+          <div className="hero-pill-dot" />
+          <span className="hero-pill-txt">{h.since} · {h.sinceYear.replace('/','')} </span>
+        </div>
+
+        {/* Headline */}
+        <h1 className="hero-hl">
+          <span className="hero-hl-sans">
+            <span className={`hero-hl-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '160ms' }}>{h.l1}</span>
+          </span>
+          <span className="hero-hl-sans">
+            <span className={`hero-hl-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '290ms' }}>{h.l2}</span>
+          </span>
+          <span className="hero-hl-serif">
+            <span className={`hero-hl-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '420ms' }}>{h.l3}</span>
+          </span>
+        </h1>
+
+        {/* Sub */}
+        <p className={`hero-sub ${on ? 'in' : ''}`} style={{ transitionDelay: '540ms' }}>
+          {h.frame}
+        </p>
+
+        {/* CTAs */}
+        <div className={`hero-ctarow ${on ? 'in' : ''}`} style={{ transitionDelay: '660ms' }}>
+          <Mag href="#contact" className="btn-cream">{h.cta}</Mag>
+          <Mag href="#products" className="btn-ghost-cream">{h.link}</Mag>
+        </div>
+
+      </div>
+
+      {/* ── Video/demo frame ── */}
+      <div className={`hframe-wrap ${on ? 'in' : ''}`}>
+        <div className="hframe">
+          <div className="hfaurora">
+            <div className="hfa1"/><div className="hfa2"/><div className="hfa3"/>
+          </div>
+          <div className="noise" style={{ opacity:.04 }} />
+
+          {/* Top-right: product codes */}
+          <div className="hf-topright">
+            {['POS','CLS','OMS','CMD'].map((c,i,a) => (
+              <span key={c}>
+                <span className="hf-code">{c}</span>
+                {i < a.length-1 && <span className="hf-sep">/</span>}
+              </span>
+            ))}
+          </div>
+
+          {/* Center: play button */}
+          <div className="hf-play-wrap">
+            <div className="hf-play">
+              <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="currentColor"/></svg>
+            </div>
+          </div>
+
+          {/* Bottom overlay */}
+          <div className="hf-bottom">
+            <div>
+              <p className="hf-bl-text">{h.frame}</p>
+              <div className="hf-since">⊕ &nbsp;{h.since} <em>&nbsp;{h.sinceYear}</em></div>
+            </div>
+            <div className="hf-br">
+              <div className="hf-avs">
+                <div className="hf-av hf-av1"/><div className="hf-av hf-av2"/><div className="hf-av hf-av3"/>
+              </div>
+              <div>
+                <div className="hf-stars">★★★★★</div>
+                <div className="hf-trust-lbl">{h.trust}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   TICKER
+──────────────────────────────────────────────── */
+function Ticker() {
+  const t = useT();
+  const all = [...t.ticker, ...t.ticker];
+  return (
+    <div className="ticker">
+      <div className="ticker-track">
+        {all.map((item, i) => (
+          <span key={i} className="tick-item">
+            <span className="tick-gem">◆</span>{item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+/* ────────────────────────────────────────────────
+   STATS BAR
+──────────────────────────────────────────────── */
+function StatsBar() {
+  const t = useT();
+  const [ref, inView] = useInView();
+  const defs = [
+    { end: 180, suf: '+', d: 0 },
+    { end: 12, suf: '', d: 120 },
+    { fixed: '99.97%', d: 240 },
+  ];
+  return (
+    <div className="sbar" ref={ref}>
+      <div className="container">
+        <div className="sgrid">
+          {defs.map(({ end, suf, fixed, d }, i) => (
+            <div key={i} className={`sitem fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${d}ms` }}>
+              <div className="snum">
+                {fixed ? (inView ? fixed : '–') : <Count end={end} suffix={suf} />}
+              </div>
+              <div className="slbl">{t.stats.items[i]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   BUILT FOR
+──────────────────────────────────────────────── */
+function Built() {
+  const t = useT();
+  const b = t.built;
+  const [ref, inView] = useInView();
+  const icos = ['◈','↻','◻'];
+  const nums = ['01','02','03'];
+  return (
+    <section className="blt" ref={ref}>
+      <div className="container">
+        <div className="blt-layout">
+          <div className={`fi ${inView ? 'in' : ''}`}>
+            <div className="blt-eyebrow">{b.eyebrow}</div>
+            <h2 className="blt-intro-h">{b.h}<em>{b.em}</em></h2>
+            <p className="blt-intro-p">{b.p}</p>
+            <div className="blt-stats">
+              <div className="blt-stat">
+                <div className="blt-stat-n"><Count end={180} suffix="+" /></div>
+                <div className="blt-stat-l">{b.sLocs}</div>
+              </div>
+              <div className="blt-stat">
+                <div className="blt-stat-n">12</div>
+                <div className="blt-stat-l">{b.sCtry}</div>
+              </div>
+              <div className="blt-stat wide">
+                <div className="blt-stat-n">99.97%</div>
+                <div className="blt-stat-l">{b.sUp}</div>
+              </div>
+            </div>
+          </div>
+          <div className="blt-feats">
+            {b.feats.map(({ name, desc, tags }, i) => (
+              <div key={i} className={`blt-feat fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${150 + i * 100}ms` }}>
+                <div className="blt-feat-n">{nums[i]}</div>
+                <div>
+                  <div className="blt-feat-top">
+                    <div className="blt-feat-ico">{icos[i]}</div>
+                    <div className="blt-feat-name">{name}</div>
+                  </div>
+                  <div className="blt-feat-desc">{desc}</div>
+                  <div className="blt-feat-tags">
+                    {tags.map(tag => <span key={tag} className="blt-tag">{tag}</span>)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   PRODUCTS
+──────────────────────────────────────────────── */
+function Products() {
+  const t = useT();
+  const p = t.products;
+  const [ref, inView] = useInView();
+  const [active, setActive] = useState(0);
+  const imgs = [
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=80',
+  ];
+  const nums = ['01','02','03'];
+  return (
+    <section className="prod-sec" id="products">
+      <div className="container">
+        <div className={`prod-head fi ${inView ? 'in' : ''}`} ref={ref}>
+          <div>
+            <div className="stag"><span className="label">{p.eyebrow}</span></div>
+            <h2>{p.h}</h2>
+          </div>
+          <a href="#" className="ghost">{p.link}</a>
+        </div>
+        <div className={`pcards fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '150ms' }}>
+          {p.items.map(({ cat, name, desc }, i) => (
+            <div
+              key={i}
+              className={`pcrd ${active === i ? 'on' : ''}`}
+              onMouseEnter={() => setActive(i)}
+            >
+              <div className="pcrd-img"><img src={imgs[i]} alt={name} /></div>
+              <div className="pcrd-glow" />
+              <div className="pcrd-grid" />
+              <div className="pcrd-nbg">{nums[i]}</div>
+              <div className="pcrd-deco">
+                <div className="pcrd-dot g" />
+                <div className="pcrd-dot d" />
+                <div className="pcrd-dot d" />
+              </div>
+              <div className="pcrd-vtag">{name}</div>
+              <div className="pcrd-body">
+                <div className="pcrd-cat">{cat}</div>
+                <div className="pcrd-name">{name}</div>
+                <div className="pcrd-desc">{desc}</div>
+                <div className="pcrd-cta">{p.discover}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   MARQUEE NUMBERS (replaces BigStats + Gallery)
+──────────────────────────────────────────────── */
+function BigStats() {
+  const t = useT();
+  const all = [...t.marquee, ...t.marquee];
+  return (
+    <div className="mq-nums">
+      <div className="mq-track">
+        {all.map((item, i) => (
+          <div key={i} className="mq-item">
+            <span className="mq-num">{item.num}</span>
+            <span className="mq-dot" />
+            <span className="mq-lbl">{item.lbl}</span>
+            <span className="mq-dot" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   METHOD — Scroll Stack (direct DOM, 60fps)
+──────────────────────────────────────────────── */
+function Method() {
+  const containerRef = useRef(null);
+  const cardRefs = useRef([]);
+  const dotRefs = useRef([]);
+  const N = 4;
+
+  const { method: m } = useT();
+  const steps = m.steps.map((s, i) => ({ ...s, n: String(i + 1).padStart(2, '0') }));
+
+  useEffect(() => {
+    const tgt = { v: 0 };
+    const cur = { v: 0 };
+
+    const onScroll = () => {
+      if (!containerRef.current) return;
+      const top = containerRef.current.getBoundingClientRect().top;
+      tgt.v = Math.min(N - 1, Math.max(0, -top / window.innerHeight));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    let raf;
+    const tick = () => {
+      cur.v += (tgt.v - cur.v) * 0.11;
+
+      const p = cur.v;
+      const activeIdx = Math.round(p);
+
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const offset = i - p;           // <0 buried, ~0 active, >0 future
+        const d = Math.max(0, -offset); // burial depth (0 when active/future)
+        const f = Math.max(0, offset);  // future distance (0 when active/buried)
+
+        const dC = Math.min(d, 3);
+        const fC = Math.min(f, 1);
+
+        // Buried: shrink and rise into the stack
+        // Future: wait below then slide up
+        const ty   = offset < 0 ? -dC * 28       : fC * 100;
+        const sc   = offset < 0 ? 1 - dC * 0.05  : 1 - fC * 0.02;
+        const op   = offset < 0 ? Math.max(0, 1 - dC * 0.55) : Math.max(0, 1 - fC * 2);
+
+        el.style.transform = `translateY(${ty}px) scale(${sc})`;
+        el.style.opacity    = op;
+        // zIndex: later cards sit on top of earlier ones naturally
+        el.style.zIndex     = (i + 1) * 10;
+      });
+
+      dotRefs.current.forEach((dot, i) => {
+        if (dot) dot.className = `ss-dot${i <= activeIdx ? ' on' : ''}`;
+      });
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} id="method" className="ss-outer" style={{ height: `${(N + 1) * 100}vh` }}>
+      <div className="ss-sticky">
+
+        <div className="ss-hd">
+          <div className="ss-hd-tag">{m.tag}</div>
+          <h2>{m.h}<span>{m.span}</span></h2>
+        </div>
+
+        <div className="ss-stack">
+          {steps.map(({ n, title, desc, dur }, i) => (
+            <div
+              key={i}
+              ref={el => { cardRefs.current[i] = el; }}
+              className="ss-card"
+              style={{
+                opacity: i === 0 ? 1 : 0,
+                transform: i === 0 ? 'translateY(0) scale(1)' : 'translateY(100px) scale(0.98)',
+                zIndex: (i + 1) * 10,
+              }}
+            >
+              <div className="ss-nbg">{n}</div>
+
+              <div className="ss-top">
+                <div className="ss-step-lbl">{m.step} {n}</div>
+                <div className="ss-top-right">
+                  <div className="ss-dur-pill">{dur}</div>
+                  <div className="ss-counter">{i + 1} / {N}</div>
+                </div>
+              </div>
+
+              <div>
+                <div className="ss-title">{title}</div>
+                <div className="ss-desc">{desc}</div>
+              </div>
+
+              <div className="ss-bot">
+                <div className="ss-bar">
+                  <div className="ss-fill" style={{ width: `${((i + 1) / N) * 100}%` }} />
+                </div>
+                <div className="ss-pct">{Math.round((i + 1) / N * 100)}%</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="ss-dots">
+          {steps.map((_, i) => (
+            <div key={i} ref={el => { dotRefs.current[i] = el; }} className="ss-dot" />
+          ))}
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   WORK
+──────────────────────────────────────────────── */
+function Work() {
+  const t = useT();
+  const w = t.work;
+  const [ref, inView] = useInView();
+  const imgs = [
+    'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=400&q=80',
+    'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80',
+  ];
+  const nums = ['01','02'];
+  return (
+    <section className="work-sec" id="work">
+      <div className="container">
+        <div className={`work-head fi ${inView ? 'in' : ''}`} ref={ref}>
+          <div>
+            <div className="stag"><span className="label">{w.eyebrow}</span></div>
+            <h2 className="work-h">{w.h}<em>{w.em}</em></h2>
+          </div>
+          <a href="#" className="ghost" style={{ alignSelf: 'flex-end' }}>{w.link}</a>
+        </div>
+        <div className="work-rows">
+          {w.cases.map(({ tag, title, meta }, i) => (
+            <div key={i} className={`work-row fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${150 + i * 100}ms` }}>
+              <div className="work-rn">{nums[i]}</div>
+              <div>
+                <div className="work-rtag">{tag}</div>
+                <div className="work-rtitle">{title}</div>
+                <div className="work-rmeta">
+                  {meta.map(m => <span key={m}>{m}</span>)}
+                </div>
+              </div>
+              <div className="work-rimg"><img src={imgs[i]} alt={title} /></div>
+            </div>
+          ))}
+        </div>
+        <div className={`work-feat fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '350ms' }} data-hover>
+          <div className="work-feat-img">
+            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1400&q=80" alt="Enterprise Retail" />
+          </div>
+          <div className="work-feat-ov" />
+          <div className="work-feat-body">
+            <div className="work-feat-top">
+              <div className="work-feat-tag">{w.featTag}</div>
+              <div className="work-feat-title">{w.featTitle}</div>
+            </div>
+            <div className="work-feat-bot">
+              <div className="work-feat-stats">
+                <div>
+                  <div className="work-feat-sn"><Count end={180} suffix="+" /></div>
+                  <div className="work-feat-sl">{w.featLocs}</div>
+                </div>
+                <div>
+                  <div className="work-feat-sn">12M+</div>
+                  <div className="work-feat-sl">{w.featTx}</div>
+                </div>
+                <div>
+                  <div className="work-feat-sn">99.97%</div>
+                  <div className="work-feat-sl">{w.featUp}</div>
+                </div>
+              </div>
+              <div className="work-feat-cta">{w.featCta}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   TESTIMONIAL
+──────────────────────────────────────────────── */
+function Testimonial() {
+  const t = useT();
+  const ti = t.testi;
+  const [ref, inView] = useInView();
+  return (
+    <section className="testi-sec">
+      <div className="container">
+        <div className={`testi-inner fi ${inView ? 'in' : ''}`} ref={ref}>
+          <div className="testi-tag"><span className="label">{ti.tag}</span></div>
+          <blockquote className="ttext">{ti.quote}</blockquote>
+          <div className="tauth">
+            <div className="tauth-av" />
+            <div>
+              <div className="tauth-name">{ti.name}</div>
+              <div className="tauth-role">{ti.role}</div>
+            </div>
+            <div className="tauth-divider" />
+            <div>
+              <div className="tauth-stat-n">{ti.statN}</div>
+              <div className="tauth-stat-l">{ti.statL}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   FAQ
+──────────────────────────────────────────────── */
+function FAQ() {
+  const t = useT();
+  const f = t.faq;
+  const [open, setOpen] = useState(0);
+  const [ref, inView] = useInView();
+  return (
+    <section className="faq-sec">
+      <div className="container">
+        <div className="faq-layout" ref={ref}>
+          <div className={`fi ${inView ? 'in' : ''}`}>
+            <div className="faq-eyebrow">{f.eyebrow}</div>
+            <h2 className="faq-lh">{f.h}<em>{f.em}</em></h2>
+            <p className="faq-lp">{f.p}</p>
+            <a href="#contact" className="faq-llink">{f.link}</a>
+          </div>
+          <ul className={`faq-list fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '150ms' }}>
+            {f.items.map(({ q, a }, i) => (
+              <li key={i} className={`faq-item ${open === i ? 'open' : ''}`}>
+                <div className="faq-bar" />
+                <button className="faq-btn" onClick={() => setOpen(open === i ? -1 : i)}>
+                  <span className="faq-n">0{i + 1}</span>
+                  <span className="faq-qt">{q}</span>
+                  <span className="faq-ico">+</span>
+                </button>
+                <div className="faq-body">
+                  <div className="faq-ans">{a}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   CTA
+──────────────────────────────────────────────── */
+function CTA() {
+  const t = useT();
+  const c = t.cta;
+  const [ref, inView] = useInView();
+  return (
+    <section className="cta-sec" id="contact">
+      <div className="noise" />
+      <div className="container cta-inner" ref={ref}>
+        <div className={`cta-layout fi ${inView ? 'in' : ''}`}>
+          <h2 className="cta-h">
+            {c.h}<br />{c.span}
+            <em>{c.em}</em>
+          </h2>
+          <div>
+            <Mag href={`mailto:${c.email}`} className="cta-btn-p">{c.btn}</Mag>
+            <p className="cta-email">{c.email}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   FOOTER
+──────────────────────────────────────────────── */
+const PAGE_HREFS = {
+  'Home →':'selekt-v2.html','Accueil →':'selekt-v2.html','首页 →':'selekt-v2.html',
+  'Method →':'selekt-method.html','Méthode →':'selekt-method.html','Metodo →':'selekt-method.html','方法论 →':'selekt-method.html',
+  'Products':'selekt-products.html','Produits':'selekt-products.html','Prodotti':'selekt-products.html','产品':'selekt-products.html',
+};
+function Footer() {
+  const t = useT();
+  const f = t.footer;
+  const cols = [f.products, f.company, f.legal];
+  return (
+    <footer>
+      <div className="container">
+        <div className="fbar">
+          <div className="fbar-col">
+            <span className="fbar-copy">{f.copy.split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}</span>
+          </div>
+          {cols.map(col => (
+            <div key={col.label} className="fbar-col">
+              <div className="fbar-label">{col.label}</div>
+              <div className="fbar-links">
+                {col.links.map(l => <a key={l} href={PAGE_HREFS[l] || '#'}>{l}</a>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="fwordmark">
+        <img src="logo noir.png" alt="SELEKT" />
+      </div>
+    </footer>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   APP
+──────────────────────────────────────────────── */
+function App() {
+  const [lang, setLang] = useState('EN');
+  return (
+    <LangCtx.Provider value={{ lang, setLang }}>
+      <Cursor />
+      <Nav />
+      <Hero />
+      <Ticker />
+      <StatsBar />
+      <Built />
+      <Products />
+      <Method />
+      <Work />
+      <Testimonial />
+      <FAQ />
+      <CTA />
+      <Footer />
+    </LangCtx.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

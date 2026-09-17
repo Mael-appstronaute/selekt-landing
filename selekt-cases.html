@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SELEKT — Case Studies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#FAFAF8;--bg2:#F3EDE3;--bg3:#EDE3D6;
+      --gold:#C4A35A;--gold-l:#E5CFA0;--gold-p:#F5EDD8;
+      --text:#0F0E0D;--t2:#5A5048;--t3:#9B9088;
+      --bdr:#DDD0C0;--bdrl:#EDE4D7;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',-apple-system,sans-serif;
+      --mw:1240px;
+    }
+    html{font-size:16px;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden}
+    a,button{cursor:none}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:var(--mw);margin:0 auto;padding:0 48px}
+
+    /* ── CURSOR ── */
+    .cur-dot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;top:0;left:0;mix-blend-mode:multiply;transition:width .18s,height .18s}
+    .cur-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(196,163,90,.45);border-radius:50%;pointer-events:none;z-index:9998;top:-20px;left:-20px;transition:width .22s,height .22s,border-color .22s}
+    .cur-dot.big{width:14px;height:14px}
+    .cur-ring.big{width:60px;height:60px;border-color:var(--gold)}
+
+    /* ── FADE ── */
+    .fi{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi.in{opacity:1;transform:none}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    .nav.scrolled{background:rgba(250,250,248,.94);backdrop-filter:blur(18px);border-bottom-color:var(--bdrl)}
+    .nav-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t3);letter-spacing:.05em;min-width:180px}
+    .nav-meta-sep{opacity:.4}
+    .nav-links{display:flex;gap:40px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-right{min-width:180px;display:flex;align-items:center;gap:24px;justify-content:flex-end}
+    .btn-dark{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--text);color:var(--bg);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s}
+    .btn-dark:hover{background:var(--gold);color:var(--text)}
+    .lang-sel{position:relative}
+    .lang-btn{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:none;border:none;padding:4px 0;cursor:none;transition:color .2s}
+    .lang-btn:hover{color:var(--text)}
+    .lang-chevron{font-size:8px;opacity:.5;transition:transform .25s}
+    .lang-sel.open .lang-chevron{transform:rotate(180deg)}
+    .lang-drop{position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);border:1px solid var(--bdrl);min-width:140px;box-shadow:0 8px 32px rgba(15,14,13,.1);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s,transform .22s cubic-bezier(.16,1,.3,1)}
+    .lang-sel.open .lang-drop{opacity:1;transform:translateY(0);pointer-events:all}
+    .lang-opt{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--t2);cursor:none;transition:background .18s,color .18s;gap:12px}
+    .lang-opt:hover{background:var(--bg2);color:var(--text)}
+    .lang-opt.active{color:var(--gold)}
+    .lang-opt-native{font-size:10px;color:var(--t3);letter-spacing:.02em}
+    .lang-opt.active .lang-opt-native{color:rgba(196,163,90,.6)}
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero{padding-top:72px;background:var(--bg);overflow:hidden}
+    .hero-wrap{padding:52px 0 0}
+    .hero-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(80px,10vw,180px);align-items:flex-end;margin-bottom:52px}
+    .hero-brand{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .hero-brand.in{opacity:1;transform:none}
+    .hero-img-card{width:clamp(200px,22vw,340px);height:clamp(300px,36vw,480px);border-radius:20px;overflow:hidden;position:relative}
+    .hero-img-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+    .hero-img-card:hover img{transform:scale(1.04)}
+    .hero-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,rgba(13,12,11,.08) 55%,transparent 100%)}
+    .hero-img-pill{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:7px;background:rgba(250,250,248,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);padding:6px 14px;border-radius:40px}
+    .hero-img-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    .hero-img-pill-text{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.75)}
+    .hero-img-bot{position:absolute;bottom:24px;left:24px;right:24px}
+    .hero-img-stat-n{font-size:clamp(36px,4vw,52px);font-weight:800;font-family:var(--sans);color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+    .hero-img-stat-l{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.4)}
+    .hero-h1{font-size:clamp(28px,3.2vw,46px);font-weight:700;line-height:1.12;margin-bottom:28px;font-family:var(--sans);letter-spacing:-.02em;color:var(--text)}
+    .hero-h1 .accent{color:var(--gold)}
+    .hero-h1 .line{display:block;overflow:hidden}
+    .hero-h1 .line-inner{display:block;transform:translateY(110%);opacity:0;transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .15s}
+    .hero-h1 .line-inner.in{transform:translateY(0);opacity:1}
+    .hero-desc{font-size:14px;line-height:1.8;color:var(--t2);margin-bottom:32px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s;max-width:400px}
+    .hero-desc.in{opacity:1;transform:none}
+    .hero-actions{display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s}
+    .hero-actions.in{opacity:1;transform:none}
+    .ghost{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);display:inline-flex;align-items:center;gap:6px;position:relative;transition:color .3s}
+    .ghost::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s}
+    .ghost:hover{color:var(--gold)}
+    .ghost:hover::after{width:100%}
+
+    /* ── NDA BANNER ── */
+    .nda-bar{background:var(--bg2);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+    .nda-inner{display:flex;align-items:center;gap:12px;padding:14px 0;font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--t3)}
+    .nda-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+    /* ══════════════════════════════════════
+       CASES
+    ══════════════════════════════════════ */
+    .cases-sec{background:var(--bg)}
+    .cases-hdr{display:flex;justify-content:space-between;align-items:flex-end;padding:clamp(52px,6vw,80px) 0 clamp(40px,5vw,60px);border-bottom:1px solid var(--bdr)}
+    .cases-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+    .cases-eyebrow-line{width:24px;height:1px;background:var(--gold)}
+    .cases-eyebrow-text{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+    .cases-h{font-size:clamp(32px,4vw,56px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.02em;line-height:1.1}
+    .cases-count{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);padding-bottom:8px}
+
+    /* Grid */
+    .cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bdrl)}
+    .case-card{background:var(--bg);padding:clamp(32px,3.5vw,52px) clamp(32px,3.5vw,52px);position:relative;overflow:hidden;transition:background .35s}
+    .case-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .45s cubic-bezier(.16,1,.3,1);border-radius:0 2px 2px 0}
+    .case-card:hover::before{transform:scaleY(1)}
+    .case-card:hover{background:#FAF7F3}
+
+    /* Card top */
+    .case-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+    .case-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .case-cat{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text)}
+    .case-meta-sep{width:1px;height:10px;background:var(--bdrl);flex-shrink:0}
+    .case-region{font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)}
+    .case-arrow{font-size:14px;color:var(--gold);opacity:0;transform:translate(-4px,4px);transition:opacity .3s,transform .3s;flex-shrink:0;margin-top:1px}
+    .case-card:hover .case-arrow{opacity:1;transform:none}
+
+    /* Divider */
+    .case-divider{width:100%;height:1px;background:var(--bdrl);margin:0 0 24px}
+
+    /* Labels */
+    .case-section-label{font-size:8px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+
+    /* Constraint tags */
+    .case-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+    .case-tag{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:var(--bg2);border:1px solid var(--bdrl);padding:3px 10px;border-radius:40px}
+
+    /* Metrics */
+    .case-metrics{display:flex;gap:clamp(20px,3vw,44px);margin-bottom:24px}
+    .case-metric-n{font-size:clamp(18px,2vw,28px);font-weight:800;letter-spacing:-.02em;color:var(--text);line-height:1;margin-bottom:4px}
+    .case-metric-l{font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);line-height:1.5;max-width:80px}
+
+    /* Description */
+    .case-desc{font-size:13px;color:var(--t2);line-height:1.8;margin-bottom:20px}
+
+    /* Timeline */
+    .case-tl{display:flex;align-items:center;gap:10px;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+    .case-tl::before{content:'';width:18px;height:1px;background:var(--gold-l);display:block;flex-shrink:0}
+
+    /* ══════════════════════════════════════
+       STATS — dark
+    ══════════════════════════════════════ */
+    .stats-sec{background:#0F0E0D;padding:clamp(80px,9vw,120px) 0;position:relative;overflow:hidden}
+    .stats-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .stats-inner{position:relative;z-index:1}
+    .stats-top{margin-bottom:clamp(52px,6vw,80px)}
+    .stats-eyebrow{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(196,163,90,.6);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .stats-eyebrow::before{content:'';width:20px;height:1px;background:rgba(196,163,90,.4);display:block}
+    .stats-h{font-size:clamp(36px,4.5vw,62px);font-family:var(--serif);font-style:italic;font-weight:300;color:#fff;line-height:1.05;letter-spacing:-.02em}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07)}
+    .stat-card{background:#0F0E0D;padding:44px 36px;transition:background .3s}
+    .stat-card:hover{background:#161310}
+    .stat-n{font-size:clamp(38px,5vw,68px);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:14px;font-family:var(--sans)}
+    .stat-l{font-size:11px;color:rgba(255,255,255,.32);letter-spacing:.06em;line-height:1.6;max-width:160px}
+
+    /* ══════════════════════════════════════
+       CTA
+    ══════════════════════════════════════ */
+    .cta-sec{background:var(--bg2);padding:clamp(100px,10vw,140px) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .cta-inner{position:relative;z-index:1}
+    .cta-h{font-size:clamp(44px,6vw,84px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);line-height:1.05;letter-spacing:-.02em;margin-bottom:24px}
+    .cta-sub{font-size:14px;color:var(--t2);line-height:1.8;max-width:420px;margin:0 auto 44px}
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer{background:#0C0B09;overflow:hidden}
+    .fbar{display:grid;grid-template-columns:1fr auto auto auto auto;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,72px) 0 clamp(40px,5vw,60px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .fbar-col{display:flex;flex-direction:column}
+    .fbar-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:14px}
+    .fbar-links{display:flex;flex-direction:column;gap:7px}
+    .fbar-links a{font-size:12px;color:rgba(255,255,255,.32);transition:color .2s}
+    .fbar-links a:hover{color:var(--gold)}
+    .fbar-copy{font-size:12px;color:rgba(255,255,255,.22);line-height:1.8}
+    .fwordmark{padding:clamp(32px,4vw,52px) 0 0}
+    .fwordmark img{width:clamp(400px,68vw,980px);height:auto;display:block;opacity:.22;filter:brightness(0) invert(1)}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, createContext, useContext } = React;
+
+function useInView(opts = {}) {
+  const ref = useRef(null);
+  const [v, setV] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setV(true); io.unobserve(e.target); }
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px', ...opts });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return [ref, v];
+}
+
+/* ── CURSOR ── */
+function Cursor() {
+  const dot = useRef(), ring = useRef();
+  const m = useRef({ x: -200, y: -200 }), l = useRef({ x: -200, y: -200 });
+  const [h, setH] = useState(false);
+  useEffect(() => {
+    const mv = (e) => { m.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('mousemove', mv);
+    const bind = () => document.querySelectorAll('a,button,[data-hov]').forEach(el => {
+      el.addEventListener('mouseenter', () => setH(true));
+      el.addEventListener('mouseleave', () => setH(false));
+    });
+    bind(); setTimeout(bind, 1200);
+    let raf;
+    const loop = () => {
+      l.current.x += (m.current.x - l.current.x) * .09;
+      l.current.y += (m.current.y - l.current.y) * .09;
+      if (dot.current)  dot.current.style.transform  = `translate(${m.current.x - 4}px,${m.current.y - 4}px)`;
+      if (ring.current) ring.current.style.transform = `translate(${l.current.x - 20}px,${l.current.y - 20}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { window.removeEventListener('mousemove', mv); cancelAnimationFrame(raf); };
+  }, []);
+  return (<><div ref={dot} className={`cur-dot ${h ? 'big' : ''}`} /><div ref={ring} className={`cur-ring ${h ? 'big' : ''}`} /></>);
+}
+
+/* ── MAG ── */
+function Mag({ children, className = '', href }) {
+  const r = useRef();
+  const mv = (e) => { const b = r.current.getBoundingClientRect(); r.current.style.cssText += `transform:translate(${(e.clientX - b.left - b.width / 2) * .22}px,${(e.clientY - b.top - b.height / 2) * .22}px);transition:transform .15s ease`; };
+  const ml = () => { r.current.style.cssText += 'transform:translate(0,0);transition:transform .5s cubic-bezier(.34,1.56,.64,1)'; };
+  if (href) return <a ref={r} href={href} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</a>;
+  return <button ref={r} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</button>;
+}
+
+/* ── TRANSLATIONS ── */
+const TP = {
+  EN: {
+    nav: { home: 'Home', products: 'Products', method: 'Method', cases: 'Case Studies', cta: 'Request a Briefing' },
+    hero: {
+      pill: 'Confidential Work', stat: '18', statL: 'Countries served',
+      l1: 'Selected', l2: 'work.', l3: 'Confidential', l4: 'deployments.',
+      desc: 'Confidential deployments for leading retail brands. All client names withheld under NDA. Results verified by third-party audit.',
+      nda: 'References available under NDA',
+      cta: '→ Request a Briefing', link: 'View method',
+    },
+    cases: {
+      eyebrow: 'Client Work', h: 'Selected deployments.', count: '06 cases',
+      constraintsLabel: 'Constraints', resultsLabel: 'Key Results', timelineLabel: 'Timeline',
+      items: [
+        {
+          cat: 'Luxury Fashion', region: 'EMEA + APAC',
+          constraints: ['Multi-Country', 'Legacy POS', 'Offline-First', 'Multi-Currency'],
+          metrics: [{ n: '43%', l: 'faster checkout' }, { n: '0', l: 'downtime incidents' }, { n: '12', l: 'countries' }],
+          desc: 'Deployed across 12 countries in 8 weeks. Zero service interruptions during peak holiday season.',
+          tl: '8 weeks',
+        },
+        {
+          cat: 'Premium Apparel', region: 'North America',
+          constraints: ['RFID', 'Returns Heavy', 'Multi-Channel', 'Omnichannel'],
+          metrics: [{ n: '91%', l: 'inventory accuracy' }, { n: '4 wks', l: 'deployment time' }, { n: '2.4×', l: 'fulfillment speed' }],
+          desc: 'Full BOPIS + ship-from-store capability with real-time visibility across all channels.',
+          tl: '4 weeks',
+        },
+        {
+          cat: 'Electronics Retail', region: 'Global',
+          constraints: ['High SKU Count', 'Multi-Channel', 'Real-Time Reporting', 'Complex Ops'],
+          metrics: [{ n: 'Live', l: 'ops visibility' }, { n: '12', l: 'pilot locations' }, { n: '850+', l: 'stores deployed' }],
+          desc: 'Executive dashboard with unified KPIs across all channels and locations. Live monitoring for 850+ locations.',
+          tl: '6 weeks',
+        },
+        {
+          cat: 'Specialty Retail', region: 'North America',
+          constraints: ['Complex Transactions', 'Legacy System', 'Staff Training', 'Peak Season'],
+          metrics: [{ n: '67%', l: 'fewer errors' }, { n: '3×', l: 'faster training' }, { n: '240', l: 'locations' }],
+          desc: 'Reduced transaction errors and accelerated staff onboarding across 240 specialty stores.',
+          tl: '10 weeks',
+        },
+        {
+          cat: 'Jewelry', region: 'North America + Europe',
+          constraints: ['High-Value Items', 'RFID', 'Audit Compliance', 'Multi-Location'],
+          metrics: [{ n: '98.5%', l: 'inventory accuracy' }, { n: '85%', l: 'reduction in discrepancies' }, { n: 'Live', l: 'audit trails' }],
+          desc: 'RFID-enabled inventory management with complete audit trails for high-value jewelry across 85 locations.',
+          tl: '12 weeks',
+        },
+        {
+          cat: 'Luxury Beauty', region: 'APAC',
+          constraints: ['Personalization', 'Multi-Language', 'Offline Capability', 'Integration'],
+          metrics: [{ n: '156%', l: 'repeat purchases' }, { n: '2.3×', l: 'higher basket value' }, { n: '95%', l: 'associate adoption' }],
+          desc: 'Personalized client experiences driving significant increases in loyalty and basket size across APAC markets.',
+          tl: '7 weeks',
+        },
+      ],
+    },
+    stats: {
+      eyebrow: 'Platform Scale', h: 'Trusted at enterprise scale.',
+      items: [
+        { n: '2,400+', l: 'Total locations deployed' },
+        { n: '12M+', l: 'Transactions per month' },
+        { n: '18', l: 'Countries served' },
+        { n: '850+', l: 'Store associates trained' },
+      ],
+    },
+    cta: { h: 'Ready to deploy.', sub: 'Schedule a confidential briefing with our enterprise retail team.', btn: 'Request a Briefing' },
+    footer: {
+      copy: '© 2026 SELEKT.\nEnterprise Retail Platform.',
+      cols: [
+        { label: 'Products',  links: ['Clienteling Suite', 'POS Companion', 'OMS & Fulfillment', 'Inventory Accuracy', 'Ops Command Center'] },
+        { label: 'Company',   links: ['Home', 'Method', 'Case Studies', 'Careers', 'Contact'] },
+        { label: 'Resources', links: ['Documentation', 'API Reference', 'Security', 'Support'] },
+        { label: 'Legal',     links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
+      ],
+    },
+  },
+  FR: {
+    nav: { home: 'Accueil', products: 'Produits', method: 'Méthode', cases: 'Études de cas', cta: 'Demander un Briefing' },
+    hero: {
+      pill: 'Travail Confidentiel', stat: '18', statL: 'Pays couverts',
+      l1: 'Travaux', l2: 'sélectionnés.', l3: 'Déploiements', l4: 'confidentiels.',
+      desc: 'Déploiements confidentiels pour les grandes marques retail. Noms des clients retenus sous NDA. Résultats vérifiés par audit tiers.',
+      nda: 'Références disponibles sous NDA',
+      cta: '→ Demander un Briefing', link: 'Voir la méthode',
+    },
+    cases: {
+      eyebrow: 'Travaux Clients', h: 'Déploiements sélectionnés.', count: '06 cas',
+      constraintsLabel: 'Contraintes', resultsLabel: 'Résultats clés', timelineLabel: 'Délai',
+      items: [
+        {
+          cat: 'Mode de Luxe', region: 'EMEA + APAC',
+          constraints: ['Multi-Pays', 'POS Hérité', 'Offline-First', 'Multi-Devises'],
+          metrics: [{ n: '43%', l: 'checkout plus rapide' }, { n: '0', l: 'interruptions' }, { n: '12', l: 'pays' }],
+          desc: 'Déployé dans 12 pays en 8 semaines. Zéro interruption de service pendant le pic des fêtes.',
+          tl: '8 semaines',
+        },
+        {
+          cat: 'Mode Premium', region: 'Amérique du Nord',
+          constraints: ['RFID', 'Retours Intensifs', 'Multi-Canal', 'Omnicanal'],
+          metrics: [{ n: '91%', l: 'précision inventaire' }, { n: '4 sem.', l: 'délai déploiement' }, { n: '2.4×', l: 'vitesse fulfillment' }],
+          desc: 'Capacité BOPIS complète + expédition en magasin avec visibilité temps réel sur tous les canaux.',
+          tl: '4 semaines',
+        },
+        {
+          cat: 'Retail Électronique', region: 'Global',
+          constraints: ['Nombreuses Références', 'Multi-Canal', 'Reporting Temps Réel', 'Ops Complexes'],
+          metrics: [{ n: 'Live', l: 'visibilité ops' }, { n: '12', l: 'sites pilotes' }, { n: '850+', l: 'magasins déployés' }],
+          desc: 'Dashboard exécutif avec KPIs unifiés sur tous les canaux. Monitoring live pour 850+ sites.',
+          tl: '6 semaines',
+        },
+        {
+          cat: 'Retail Spécialisé', region: 'Amérique du Nord',
+          constraints: ['Transactions Complexes', 'Système Hérité', 'Formation Personnel', 'Pic Saisonnier'],
+          metrics: [{ n: '67%', l: 'moins d\'erreurs' }, { n: '3×', l: 'formation accélérée' }, { n: '240', l: 'sites' }],
+          desc: 'Réduction des erreurs de transaction et accélération de l\'intégration du personnel dans 240 magasins.',
+          tl: '10 semaines',
+        },
+        {
+          cat: 'Bijouterie', region: 'Amérique du Nord + Europe',
+          constraints: ['Articles Haute Valeur', 'RFID', 'Conformité Audit', 'Multi-Sites'],
+          metrics: [{ n: '98.5%', l: 'précision inventaire' }, { n: '85%', l: 'réduction écarts' }, { n: 'Live', l: 'pistes d\'audit' }],
+          desc: 'Gestion d\'inventaire RFID avec pistes d\'audit complètes pour la joaillerie haute valeur sur 85 sites.',
+          tl: '12 semaines',
+        },
+        {
+          cat: 'Beauté de Luxe', region: 'APAC',
+          constraints: ['Personnalisation', 'Multi-Langue', 'Mode Hors-ligne', 'Intégration'],
+          metrics: [{ n: '156%', l: 'achats répétés' }, { n: '2.3×', l: 'panier moyen' }, { n: '95%', l: 'adoption équipes' }],
+          desc: 'Expériences clients personnalisées générant des augmentations significatives de fidélité sur les marchés APAC.',
+          tl: '7 semaines',
+        },
+      ],
+    },
+    stats: {
+      eyebrow: 'Échelle Plateforme', h: 'Approuvé à l\'échelle entreprise.',
+      items: [
+        { n: '2 400+', l: 'Sites retail déployés' },
+        { n: '12M+', l: 'Transactions par mois' },
+        { n: '18', l: 'Pays couverts' },
+        { n: '850+', l: 'Associés formés' },
+      ],
+    },
+    cta: { h: 'Prêt à déployer.', sub: 'Planifiez un briefing confidentiel avec notre équipe retail entreprise.', btn: 'Demander un Briefing' },
+    footer: {
+      copy: '© 2026 SELEKT.\nPlateforme Retail Entreprise.',
+      cols: [
+        { label: 'Produits',   links: ['Suite Clienteling', 'POS Companion', 'OMS & Fulfillment', 'Précision Inventaire', 'Ops Command Center'] },
+        { label: 'Entreprise', links: ['Accueil', 'Méthode', 'Études de cas', 'Carrières', 'Contact'] },
+        { label: 'Ressources', links: ['Documentation', 'Référence API', 'Sécurité', 'Support'] },
+        { label: 'Légal',      links: ['Politique de confidentialité', 'Conditions d\'utilisation', 'Politique cookies'] },
+      ],
+    },
+  },
+  IT: {
+    nav: { home: 'Home', products: 'Prodotti', method: 'Metodo', cases: 'Case Study', cta: 'Richiedi un Briefing' },
+    hero: {
+      pill: 'Lavoro Riservato', stat: '18', statL: 'Paesi serviti',
+      l1: 'Lavori', l2: 'selezionati.', l3: 'Deployment', l4: 'riservati.',
+      desc: 'Deployment riservati per i principali brand retail. Nomi dei clienti trattenuti sotto NDA. Risultati verificati da audit terzi.',
+      nda: 'Riferimenti disponibili sotto NDA',
+      cta: '→ Richiedi un Briefing', link: 'Vedi il metodo',
+    },
+    cases: {
+      eyebrow: 'Lavori Clienti', h: 'Deployment selezionati.', count: '06 casi',
+      constraintsLabel: 'Vincoli', resultsLabel: 'Risultati Chiave', timelineLabel: 'Tempistica',
+      items: [
+        {
+          cat: 'Moda di Lusso', region: 'EMEA + APAC',
+          constraints: ['Multi-Paese', 'POS Legacy', 'Offline-First', 'Multi-Valuta'],
+          metrics: [{ n: '43%', l: 'checkout più rapido' }, { n: '0', l: 'interruzioni' }, { n: '12', l: 'paesi' }],
+          desc: 'Deployato in 12 paesi in 8 settimane. Zero interruzioni durante il picco delle festività.',
+          tl: '8 settimane',
+        },
+        {
+          cat: 'Abbigliamento Premium', region: 'Nord America',
+          constraints: ['RFID', 'Resi Intensi', 'Multi-Canale', 'Omnicanale'],
+          metrics: [{ n: '91%', l: 'accuratezza inventario' }, { n: '4 sett.', l: 'tempo deployment' }, { n: '2.4×', l: 'velocità fulfillment' }],
+          desc: 'Capacità BOPIS + spedizione da negozio con visibilità in tempo reale su tutti i canali.',
+          tl: '4 settimane',
+        },
+        {
+          cat: 'Retail Elettronico', region: 'Globale',
+          constraints: ['Alto Numero SKU', 'Multi-Canale', 'Reporting Real-Time', 'Ops Complesse'],
+          metrics: [{ n: 'Live', l: 'visibilità ops' }, { n: '12', l: 'location pilota' }, { n: '850+', l: 'negozi deployati' }],
+          desc: 'Dashboard esecutivo con KPI unificati su tutti i canali. Monitoraggio live per 850+ location.',
+          tl: '6 settimane',
+        },
+        {
+          cat: 'Retail Specializzato', region: 'Nord America',
+          constraints: ['Transazioni Complesse', 'Sistema Legacy', 'Formazione Staff', 'Picco Stagionale'],
+          metrics: [{ n: '67%', l: 'meno errori' }, { n: '3×', l: 'formazione più rapida' }, { n: '240', l: 'location' }],
+          desc: 'Errori di transazione ridotti e onboarding del personale accelerato in 240 negozi specializzati.',
+          tl: '10 settimane',
+        },
+        {
+          cat: 'Gioielleria', region: 'Nord America + Europa',
+          constraints: ['Articoli Alto Valore', 'RFID', 'Conformità Audit', 'Multi-Location'],
+          metrics: [{ n: '98.5%', l: 'accuratezza inventario' }, { n: '85%', l: 'riduzione discrepanze' }, { n: 'Live', l: 'audit trail' }],
+          desc: 'Gestione inventario RFID con audit trail completi per gioielleria di alto valore in 85 location.',
+          tl: '12 settimane',
+        },
+        {
+          cat: 'Bellezza di Lusso', region: 'APAC',
+          constraints: ['Personalizzazione', 'Multi-Lingua', 'Modalità Offline', 'Integrazione'],
+          metrics: [{ n: '156%', l: 'acquisti ripetuti' }, { n: '2.3×', l: 'valore carrello' }, { n: '95%', l: 'adozione team' }],
+          desc: 'Esperienze cliente personalizzate che generano aumenti significativi di fidelizzazione nei mercati APAC.',
+          tl: '7 settimane',
+        },
+      ],
+    },
+    stats: {
+      eyebrow: 'Scala Piattaforma', h: 'Affidabile su scala enterprise.',
+      items: [
+        { n: '2.400+', l: 'Location retail deployate' },
+        { n: '12M+', l: 'Transazioni al mese' },
+        { n: '18', l: 'Paesi serviti' },
+        { n: '850+', l: 'Addetti formati' },
+      ],
+    },
+    cta: { h: 'Pronti al deploy.', sub: 'Pianifica un briefing riservato con il nostro team retail enterprise.', btn: 'Richiedi un Briefing' },
+    footer: {
+      copy: '© 2026 SELEKT.\nPiattaforma Retail Enterprise.',
+      cols: [
+        { label: 'Prodotti', links: ['Clienteling Suite', 'POS Companion', 'OMS & Fulfillment', 'Accuratezza Magazzino', 'Ops Command Center'] },
+        { label: 'Azienda',  links: ['Home', 'Metodo', 'Case Study', 'Carriere', 'Contatti'] },
+        { label: 'Risorse',  links: ['Documentazione', 'Riferimento API', 'Sicurezza', 'Supporto'] },
+        { label: 'Legale',   links: ['Privacy Policy', 'Termini di Servizio', 'Cookie Policy'] },
+      ],
+    },
+  },
+  '中文': {
+    nav: { home: '首页', products: '产品', method: '方法论', cases: '案例研究', cta: '预约简报' },
+    hero: {
+      pill: '保密案例', stat: '18', statL: '服务国家',
+      l1: '精选', l2: '案例。', l3: '保密', l4: '部署。',
+      desc: '为领先零售品牌提供的保密部署。所有客户名称均在NDA协议下保密。结果经第三方审计验证。',
+      nda: 'NDA协议下的参考案例可提供',
+      cta: '→ 预约简报', link: '查看方法论',
+    },
+    cases: {
+      eyebrow: '客户案例', h: '精选部署案例。', count: '06个案例',
+      constraintsLabel: '约束条件', resultsLabel: '关键结果', timelineLabel: '时间线',
+      items: [
+        {
+          cat: '奢侈时尚', region: 'EMEA + APAC',
+          constraints: ['多国家', '传统POS', '离线优先', '多货币'],
+          metrics: [{ n: '43%', l: '结账速度提升' }, { n: '0', l: '停机事故' }, { n: '12', l: '国家' }],
+          desc: '8周内在12个国家完成部署。假日旺季期间零服务中断。',
+          tl: '8周',
+        },
+        {
+          cat: '高端服装', region: '北美',
+          constraints: ['RFID', '高退货量', '多渠道', '全渠道'],
+          metrics: [{ n: '91%', l: '库存准确率' }, { n: '4周', l: '部署时间' }, { n: '2.4×', l: '履约速度' }],
+          desc: '全渠道BOPIS及门店发货能力，实现所有渠道的实时可见性。',
+          tl: '4周',
+        },
+        {
+          cat: '电子零售', region: '全球',
+          constraints: ['高SKU数量', '多渠道', '实时报告', '复杂运营'],
+          metrics: [{ n: '实时', l: '运营可见性' }, { n: '12', l: '试点门店' }, { n: '850+', l: '已部署门店' }],
+          desc: '统一KPI的执行仪表板，覆盖所有渠道及门店。850+门店实时监控。',
+          tl: '6周',
+        },
+        {
+          cat: '专业零售', region: '北美',
+          constraints: ['复杂交易', '传统系统', '员工培训', '旺季'],
+          metrics: [{ n: '67%', l: '错误减少' }, { n: '3×', l: '培训加速' }, { n: '240', l: '门店' }],
+          desc: '减少交易错误，加速240家专业门店员工的入职培训。',
+          tl: '10周',
+        },
+        {
+          cat: '珠宝', region: '北美 + 欧洲',
+          constraints: ['高价值商品', 'RFID', '审计合规', '多门店'],
+          metrics: [{ n: '98.5%', l: '库存准确率' }, { n: '85%', l: '差异减少' }, { n: '实时', l: '审计追踪' }],
+          desc: '为85家珠宝门店提供RFID库存管理及完整审计追踪。',
+          tl: '12周',
+        },
+        {
+          cat: '奢华美妆', region: 'APAC',
+          constraints: ['个性化', '多语言', '离线功能', '系统集成'],
+          metrics: [{ n: '156%', l: '复购率提升' }, { n: '2.3×', l: '客单价提升' }, { n: '95%', l: '员工采用率' }],
+          desc: '个性化客户体验显著提升APAC市场忠诚度和客单价。',
+          tl: '7周',
+        },
+      ],
+    },
+    stats: {
+      eyebrow: '平台规模', h: '企业级规模信赖之选。',
+      items: [
+        { n: '2,400+', l: '已部署零售门店' },
+        { n: '12M+', l: '每月交易量' },
+        { n: '18', l: '服务国家' },
+        { n: '850+', l: '受训店员' },
+      ],
+    },
+    cta: { h: '准备部署。', sub: '与我们的企业零售团队安排保密简报。', btn: '预约简报' },
+    footer: {
+      copy: '© 2026 SELEKT。\n企业零售平台。',
+      cols: [
+        { label: '产品', links: ['客户关系套件', 'POS伴侣', '订单与履约系统', '库存准确性', '运营指挥中心'] },
+        { label: '公司', links: ['首页', '方法论', '案例研究', '招聘', '联系我们'] },
+        { label: '资源', links: ['文档', 'API参考', '安全', '支持'] },
+        { label: '法律', links: ['隐私政策', '服务条款', 'Cookie政策'] },
+      ],
+    },
+  },
+};
+
+const LangCtx = createContext({ lang: 'EN', setLang: () => {} });
+function useT() {
+  const { lang } = useContext(LangCtx);
+  return TP[lang] || TP.EN;
+}
+
+const LANGS = [
+  { code: 'EN', native: 'English' },
+  { code: 'FR', native: 'Français' },
+  { code: 'IT', native: 'Italiano' },
+  { code: '中文', native: '中文' },
+];
+
+function LangSelector() {
+  const { lang, setLang } = useContext(LangCtx);
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const h = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
+  }, []);
+  return (
+    <div ref={ref} className={`lang-sel ${open ? 'open' : ''}`}>
+      <button className="lang-btn" onClick={() => setOpen(o => !o)}>
+        {lang}<span className="lang-chevron">▾</span>
+      </button>
+      <div className="lang-drop">
+        {LANGS.map(({ code, native }) => (
+          <div key={code} className={`lang-opt ${lang === code ? 'active' : ''}`} onClick={() => { setLang(code); setOpen(false); }}>
+            <span>{code}</span>
+            <span className="lang-opt-native">{native}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   NAV
+──────────────────────────────────────────────── */
+function Nav() {
+  const t = useT();
+  const [sc, setSc] = useState(false);
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    window.addEventListener('scroll', () => setSc(window.scrollY > 30));
+    const tick = () => { const n = new Date(); setTime(`${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`); };
+    tick(); const id = setInterval(tick, 10000); return () => clearInterval(id);
+  }, []);
+  return (
+    <nav className={`nav ${sc ? 'scrolled' : ''}`}>
+      <div className="nav-meta">
+        <span>{time}</span><span className="nav-meta-sep">|</span><span>PARIS, FR</span>
+      </div>
+      <ul className="nav-links">
+        <li><a href="selekt-v2.html">{t.nav.home}</a></li>
+        <li><a href="selekt-products.html">{t.nav.products}</a></li>
+        <li><a href="selekt-method.html">{t.nav.method}</a></li>
+        <li><a href="#" className="active">{t.nav.cases}</a></li>
+      </ul>
+      <div className="nav-right">
+        <LangSelector />
+        <Mag href="selekt-v2.html#contact" className="btn-dark">{t.nav.cta}</Mag>
+      </div>
+    </nav>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   HERO
+──────────────────────────────────────────────── */
+function Hero() {
+  const t = useT();
+  const h = t.hero;
+  const [on, setOn] = useState(false);
+  useEffect(() => { const timer = setTimeout(() => setOn(true), 100); return () => clearTimeout(timer); }, []);
+  return (
+    <section className="hero">
+      <div className="container" style={{ paddingBottom: 0 }}>
+        <div className="hero-wrap" style={{ paddingBottom: 0 }}>
+          <div className="hero-top">
+            <div className={`hero-brand ${on ? 'in' : ''}`}>
+              <div className="hero-img-card">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=700&q=80" alt="Case Studies" />
+                <div className="hero-img-ov" />
+                <div className="hero-img-pill">
+                  <span className="hero-img-pill-dot" />
+                  <span className="hero-img-pill-text">{h.pill}</span>
+                </div>
+                <div className="hero-img-bot">
+                  <div className="hero-img-stat-n">{h.stat}</div>
+                  <div className="hero-img-stat-l">{h.statL}</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1 className="hero-h1">
+                <span className="line"><span className={`line-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '250ms' }}>{h.l1}</span></span>
+                <span className="line"><span className={`line-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '360ms' }}>{h.l2}</span></span>
+                <span className="line"><span className={`line-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '460ms' }}><span className="accent">{h.l3}</span></span></span>
+                <span className="line"><span className={`line-inner ${on ? 'in' : ''}`} style={{ transitionDelay: '545ms' }}><span className="accent">{h.l4}</span></span></span>
+              </h1>
+              <p className={`hero-desc ${on ? 'in' : ''}`} style={{ transitionDelay: '560ms' }}>{h.desc}</p>
+              <div className={`hero-actions ${on ? 'in' : ''}`} style={{ transitionDelay: '640ms' }}>
+                <Mag href="selekt-v2.html#contact" className="btn-dark">{h.cta}</Mag>
+                <a href="selekt-method.html" className="ghost" style={{ fontSize: 12, letterSpacing: '.08em' }}>{h.link}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── NDA BANNER ── */
+function NdaBanner() {
+  const t = useT();
+  return (
+    <div className="nda-bar">
+      <div className="container">
+        <div className="nda-inner">
+          <span className="nda-dot" />
+          {t.hero.nda}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   CASE CARD
+──────────────────────────────────────────────── */
+function CaseCard({ item, delay }) {
+  const [ref, inView] = useInView();
+  const t = useT();
+  const c = t.cases;
+  return (
+    <div ref={ref} className={`case-card fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${delay}ms` }} data-hov>
+      <div className="case-top">
+        <div className="case-meta">
+          <span className="case-cat">{item.cat}</span>
+          <span className="case-meta-sep" />
+          <span className="case-region">{item.region}</span>
+        </div>
+        <span className="case-arrow">↗</span>
+      </div>
+      <div className="case-divider" />
+      <div className="case-section-label">{c.constraintsLabel}</div>
+      <div className="case-tags">
+        {item.constraints.map(tag => <span key={tag} className="case-tag">{tag}</span>)}
+      </div>
+      <div className="case-section-label">{c.resultsLabel}</div>
+      <div className="case-metrics">
+        {item.metrics.map((m, i) => (
+          <div key={i}>
+            <div className="case-metric-n">{m.n}</div>
+            <div className="case-metric-l">{m.l}</div>
+          </div>
+        ))}
+      </div>
+      <p className="case-desc">{item.desc}</p>
+      <div className="case-tl">{c.timelineLabel}: {item.tl}</div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   CASES SECTION
+──────────────────────────────────────────────── */
+function Cases() {
+  const t = useT();
+  const c = t.cases;
+  const [ref, inView] = useInView();
+  return (
+    <section className="cases-sec" id="cases">
+      <div className="container">
+        <div ref={ref} className={`cases-hdr fi ${inView ? 'in' : ''}`}>
+          <div>
+            <div className="cases-eyebrow">
+              <span className="cases-eyebrow-line" />
+              <span className="cases-eyebrow-text">{c.eyebrow}</span>
+            </div>
+            <h2 className="cases-h">{c.h}</h2>
+          </div>
+          <span className="cases-count">{c.count}</span>
+        </div>
+      </div>
+      <div className="container" style={{ paddingTop: 0 }}>
+        <div className="cases-grid">
+          {c.items.map((item, i) => (
+            <CaseCard key={i} item={item} delay={i % 2 === 0 ? 0 : 120} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   STATS
+──────────────────────────────────────────────── */
+function StatCard({ item, delay }) {
+  const [ref, inView] = useInView();
+  return (
+    <div ref={ref} className={`stat-card fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${delay}ms` }}>
+      <div className="stat-n">{item.n}</div>
+      <div className="stat-l">{item.l}</div>
+    </div>
+  );
+}
+
+function Stats() {
+  const t = useT();
+  const s = t.stats;
+  const [ref, inView] = useInView();
+  return (
+    <section className="stats-sec">
+      <div className="stats-noise" />
+      <div className="container stats-inner">
+        <div ref={ref} className={`stats-top fi ${inView ? 'in' : ''}`}>
+          <div className="stats-eyebrow">{s.eyebrow}</div>
+          <h2 className="stats-h">{s.h}</h2>
+        </div>
+        <div className="stats-grid">
+          {s.items.map((item, i) => (
+            <StatCard key={i} item={item} delay={i * 80} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   CTA
+──────────────────────────────────────────────── */
+function CtaSec() {
+  const t = useT();
+  const c = t.cta;
+  const [ref, inView] = useInView();
+  return (
+    <section className="cta-sec" id="contact">
+      <div className="cta-noise" />
+      <div className="container cta-inner">
+        <div ref={ref} className={`fi ${inView ? 'in' : ''}`}>
+          <h2 className="cta-h">{c.h}</h2>
+          <p className="cta-sub">{c.sub}</p>
+          <Mag href="selekt-v2.html#contact" className="btn-dark">{c.btn}</Mag>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   FOOTER
+──────────────────────────────────────────────── */
+const PAGE_HREFS = {
+  'Home': 'selekt-v2.html', 'Accueil': 'selekt-v2.html', '首页': 'selekt-v2.html',
+  'Method': 'selekt-method.html', 'Méthode': 'selekt-method.html', 'Metodo': 'selekt-method.html', '方法论': 'selekt-method.html',
+  'Products': 'selekt-products.html', 'Produits': 'selekt-products.html', 'Prodotti': 'selekt-products.html', '产品': 'selekt-products.html',
+  'Case Studies': '#', 'Études de cas': '#', 'Case Study': '#', '案例研究': '#',
+};
+
+function Footer() {
+  const t = useT();
+  const f = t.footer;
+  return (
+    <footer>
+      <div className="container">
+        <div className="fbar">
+          <div className="fbar-col">
+            <span className="fbar-copy">
+              {f.copy.split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}
+            </span>
+          </div>
+          {f.cols.map(({ label, links }) => (
+            <div key={label} className="fbar-col">
+              <div className="fbar-label">{label}</div>
+              <div className="fbar-links">
+                {links.map(l => <a key={l} href={PAGE_HREFS[l] || '#'}>{l}</a>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="container fwordmark">
+        <img src="logo noir.png" alt="SELEKT" />
+      </div>
+    </footer>
+  );
+}
+
+/* ────────────────────────────────────────────────
+   APP
+──────────────────────────────────────────────── */
+function App() {
+  const [lang, setLang] = useState('EN');
+  return (
+    <LangCtx.Provider value={{ lang, setLang }}>
+      <Cursor />
+      <Nav />
+      <Hero />
+      <NdaBanner />
+      <Cases />
+      <Stats />
+      <CtaSec />
+      <Footer />
+    </LangCtx.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

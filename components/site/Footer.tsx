@@ -73,9 +73,6 @@ export function Footer({ locale }: { locale: Locale }) {
             © {new Date().getFullYear()} {nav.legalNote}
           </p>
           <div className="flex items-center gap-6">
-            <p className="kicker text-[0.6rem] text-sand-muted">
-              {locale === "fr" ? "Sobre. Chaud. Précis." : "Quiet. Warm. Precise."}
-            </p>
             {/* Retour en haut — médaillon */}
             <a
               href="#"

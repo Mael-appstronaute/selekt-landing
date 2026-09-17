@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SELEKT — Method</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#FAFAF8;--bg2:#F3EDE3;--bg3:#EDE3D6;
+      --gold:#C4A35A;--gold-l:#E5CFA0;--gold-p:#F5EDD8;
+      --text:#0F0E0D;--t2:#5A5048;--t3:#9B9088;
+      --bdr:#DDD0C0;--bdrl:#EDE4D7;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',-apple-system,sans-serif;
+      --mw:1240px;
+    }
+    html{font-size:16px;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden}
+    a,button{cursor:none}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:var(--mw);margin:0 auto;padding:0 48px}
+
+    /* ── CURSOR ── */
+    .cur-dot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;top:0;left:0;mix-blend-mode:multiply;transition:width .18s,height .18s}
+    .cur-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(196,163,90,.45);border-radius:50%;pointer-events:none;z-index:9998;top:-20px;left:-20px;transition:width .22s,height .22s,border-color .22s}
+    .cur-dot.big{width:14px;height:14px}
+    .cur-ring.big{width:60px;height:60px;border-color:var(--gold)}
+
+    /* ── FADE ── */
+    .fi{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi.in{opacity:1;transform:none}
+    .fi-l{opacity:0;transform:translateX(-20px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi-l.in{opacity:1;transform:none}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    .nav.scrolled{background:rgba(250,250,248,.94);backdrop-filter:blur(18px);border-bottom-color:var(--bdrl)}
+    .nav-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t3);letter-spacing:.05em;min-width:180px}
+    .nav-meta-sep{opacity:.4}
+    .nav-links{display:flex;gap:40px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-right{min-width:180px;display:flex;align-items:center;gap:24px;justify-content:flex-end}
+    .btn-dark{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--text);color:var(--bg);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s}
+    .btn-dark:hover{background:var(--gold);color:var(--text)}
+    .lang-sel{position:relative}
+    .lang-btn{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:none;border:none;padding:4px 0;cursor:none;transition:color .2s}
+    .lang-btn:hover{color:var(--text)}
+    .lang-chevron{font-size:8px;opacity:.5;transition:transform .25s}
+    .lang-sel.open .lang-chevron{transform:rotate(180deg)}
+    .lang-drop{position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);border:1px solid var(--bdrl);min-width:140px;box-shadow:0 8px 32px rgba(15,14,13,.1);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s,transform .22s cubic-bezier(.16,1,.3,1)}
+    .lang-sel.open .lang-drop{opacity:1;transform:translateY(0);pointer-events:all}
+    .lang-opt{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--t2);cursor:none;transition:background .18s,color .18s;gap:12px}
+    .lang-opt:hover{background:var(--bg2);color:var(--text)}
+    .lang-opt.active{color:var(--gold)}
+    .lang-opt-native{font-size:10px;color:var(--t3);letter-spacing:.02em}
+    .lang-opt.active .lang-opt-native{color:rgba(196,163,90,.6)}
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero{padding-top:72px;background:var(--bg);overflow:hidden}
+    .hero-wrap{padding:52px 0 0}
+    .hero-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(80px,10vw,180px);align-items:flex-end;margin-bottom:52px}
+    .hero-brand{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .hero-brand.in{opacity:1;transform:none}
+    .hero-img-card{width:clamp(200px,22vw,340px);height:clamp(300px,36vw,480px);border-radius:20px;overflow:hidden;position:relative}
+    .hero-img-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+    .hero-img-card:hover img{transform:scale(1.04)}
+    .hero-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,rgba(13,12,11,.08) 55%,transparent 100%)}
+    .hero-img-pill{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:7px;background:rgba(250,250,248,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);padding:6px 14px;border-radius:40px}
+    .hero-img-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    .hero-img-pill-text{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.75)}
+    .hero-img-bot{position:absolute;bottom:24px;left:24px;right:24px}
+    .hero-img-stat-n{font-size:clamp(36px,4vw,52px);font-weight:800;font-family:var(--sans);color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+    .hero-img-stat-l{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.4)}
+    .hero-h1{font-size:clamp(28px,3.2vw,46px);font-weight:700;line-height:1.12;margin-bottom:28px;font-family:var(--sans);letter-spacing:-.02em;color:var(--text)}
+    .hero-h1 .accent{color:var(--gold)}
+    .hero-h1 .line{display:block;overflow:hidden}
+    .hero-h1 .line-inner{display:block;transform:translateY(110%);opacity:0;transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .15s}
+    .hero-h1 .line-inner.in{transform:translateY(0);opacity:1}
+    .hero-desc{font-size:14px;line-height:1.8;color:var(--t2);margin-bottom:32px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s;max-width:400px}
+    .hero-desc.in{opacity:1;transform:none}
+    .hero-actions{display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s}
+    .hero-actions.in{opacity:1;transform:none}
+    .hero-frame-wrap{opacity:0;transform:translateY(28px);transition:opacity 1s .35s ease,transform 1s .35s cubic-bezier(.16,1,.3,1);width:100%}
+    .hero-frame-wrap.in{opacity:1;transform:none}
+    .hframe{width:100%;aspect-ratio:21/9;background:#0D0C0B;border-radius:20px 20px 0 0;position:relative;overflow:hidden}
+    .hfaurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .hfa1{position:absolute;width:75%;height:250%;top:-80%;left:-15%;background:radial-gradient(ellipse,rgba(196,163,90,.28) 0%,transparent 55%);border-radius:50%;filter:blur(64px);animation:af1 18s ease-in-out infinite}
+    .hfa2{position:absolute;width:65%;height:200%;top:-40%;right:-10%;background:radial-gradient(ellipse,rgba(220,140,80,.18) 0%,transparent 55%);border-radius:50%;filter:blur(80px);animation:af2 22s ease-in-out 2s infinite}
+    .hfa3{position:absolute;width:55%;height:160%;bottom:-50%;left:28%;background:radial-gradient(ellipse,rgba(140,100,50,.14) 0%,transparent 55%);border-radius:50%;filter:blur(72px);animation:af1 15s ease-in-out 1s infinite}
+    .hframe-noise{position:absolute;inset:-200%;pointer-events:none;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .hf-topright{position:absolute;top:24px;right:28px;z-index:10;display:flex;align-items:center}
+    .hf-code{font-size:11px;font-weight:500;letter-spacing:.08em;color:rgba(244,237,227,.38)}
+    .hf-sep{color:rgba(244,237,227,.18);margin:0 10px;font-size:11px}
+    .hf-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;padding:32px 36px;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,transparent 100%)}
+    .hf-bl-text{font-size:13px;color:rgba(244,237,227,.55);line-height:1.65;max-width:320px;margin-bottom:12px}
+    .hf-since{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,237,227,.3)}
+    .hf-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:2px}
+    .hf-trust-lbl{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,237,227,.35)}
+    @keyframes af1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.06)}66%{transform:translate(-30px,30px) scale(.96)}}
+    @keyframes af2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,50px) scale(1.1)}}
+
+    /* ══════════════════════════════════════
+       PHASES
+    ══════════════════════════════════════ */
+    .phases-sec{background:var(--bg)}
+    .phases-header{display:grid;grid-template-columns:1fr 1fr;gap:clamp(60px,8vw,120px);align-items:end;padding:clamp(60px,7vw,96px) 0 clamp(52px,6vw,80px);border-bottom:1px solid var(--bdr)}
+    .phases-h{font-size:clamp(30px,3.6vw,52px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.02em;line-height:1.1}
+    .phases-sub{font-size:14px;color:var(--t2);line-height:1.8;max-width:380px;align-self:flex-end}
+
+    /* Phase row */
+    .phase-row{display:grid;grid-template-columns:100px 1fr 280px;gap:40px;align-items:start;padding:52px 0 52px 0;border-bottom:1px solid var(--bdrl);position:relative;overflow:hidden}
+    .phase-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.16,1,.3,1);border-radius:2px}
+    .phase-row.in::before{transform:scaleY(1);transition-delay:.2s}
+    .phase-n{font-size:clamp(36px,4vw,52px);font-family:var(--serif);font-weight:400;color:var(--bdrl);line-height:1;transition:color .6s ease;padding-top:4px}
+    .phase-row.in .phase-n{color:var(--gold-l)}
+    .phase-mid{}
+    .phase-name{font-size:clamp(24px,2.8vw,40px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.01em;line-height:1.1;margin-bottom:12px}
+    .phase-badge{display:inline-flex;align-items:center;gap:7px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);background:var(--bg2);border:1px solid var(--bdrl);padding:5px 14px;border-radius:40px;margin-bottom:20px}
+    .phase-badge-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    .phase-desc{font-size:14px;color:var(--t2);line-height:1.8;max-width:420px}
+    .phase-deliv{}
+    .phase-deliv-label{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--bdrl)}
+    .phase-deliv-list{display:flex;flex-direction:column;gap:9px}
+    .phase-deliv-item{font-size:12px;color:var(--t2);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+    .phase-deliv-item::before{content:'→';color:var(--gold);font-size:10px;flex-shrink:0;margin-top:1px}
+
+    /* ══════════════════════════════════════
+       PRINCIPLES
+    ══════════════════════════════════════ */
+    .princ-sec{background:var(--bg2);padding:clamp(80px,9vw,128px) 0}
+    .princ-top{margin-bottom:clamp(52px,6vw,80px)}
+    .princ-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+    .princ-eyebrow-line{width:24px;height:1px;background:var(--gold)}
+    .princ-eyebrow-text{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+    .princ-h{font-size:clamp(32px,4vw,56px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.02em;line-height:1.1;margin-bottom:16px}
+    .princ-sub{font-size:14px;color:var(--t2);line-height:1.8;max-width:400px}
+    .princ-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--bdr);border-left:1px solid var(--bdr)}
+    .princ-card{padding:44px 40px;border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);transition:background .3s}
+    .princ-card:hover{background:rgba(196,163,90,.04)}
+    .princ-card-title{font-size:clamp(22px,2.4vw,32px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.01em;margin-bottom:14px;line-height:1.15}
+    .princ-card-desc{font-size:13px;color:var(--t2);line-height:1.8}
+
+    /* ══════════════════════════════════════
+       QUALITY & SUPPORT — dark
+    ══════════════════════════════════════ */
+    .qual-sec{background:#0F0E0D;padding:clamp(80px,9vw,120px) 0;position:relative;overflow:hidden}
+    .qual-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .qual-inner{position:relative;z-index:1}
+    .qual-top{margin-bottom:clamp(52px,6vw,72px)}
+    .qual-eyebrow{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(196,163,90,.6);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .qual-eyebrow::before{content:'';width:20px;height:1px;background:rgba(196,163,90,.4);display:block}
+    .qual-h{font-size:clamp(36px,4.5vw,62px);font-family:var(--serif);font-style:italic;font-weight:300;color:#fff;line-height:1.05;letter-spacing:-.02em}
+    .qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07)}
+    .qual-card{background:#0F0E0D;padding:44px 36px;transition:background .3s}
+    .qual-card:hover{background:#161310}
+    .qual-card-title{font-size:clamp(15px,1.4vw,18px);font-family:var(--serif);font-style:italic;font-weight:300;color:rgba(244,237,227,.85);line-height:1.25;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .qual-card-desc{font-size:13px;color:rgba(255,255,255,.32);line-height:1.8;transition:color .3s}
+    .qual-card:hover .qual-card-desc{color:rgba(255,255,255,.48)}
+
+    /* ══════════════════════════════════════
+       CTA
+    ══════════════════════════════════════ */
+    .cta-sec{background:var(--bg2);padding:clamp(100px,10vw,140px) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .cta-inner{position:relative;z-index:1}
+    .cta-h{font-size:clamp(44px,6vw,84px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);line-height:1.05;letter-spacing:-.02em;margin-bottom:24px}
+    .cta-sub{font-size:14px;color:var(--t2);line-height:1.8;max-width:420px;margin:0 auto 44px}
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer{background:#0C0B09;overflow:hidden}
+    .fbar{display:grid;grid-template-columns:1fr auto auto auto auto;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,72px) 0 clamp(40px,5vw,60px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .fbar-col{display:flex;flex-direction:column}
+    .fbar-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:14px}
+    .fbar-links{display:flex;flex-direction:column;gap:7px}
+    .fbar-links a{font-size:12px;color:rgba(255,255,255,.32);transition:color .2s}
+    .fbar-links a:hover{color:var(--gold)}
+    .fbar-copy{font-size:12px;color:rgba(255,255,255,.22);line-height:1.8}
+    .fwordmark{padding:clamp(32px,4vw,52px) 0 0}
+    .fwordmark img{width:clamp(400px,68vw,980px);height:auto;display:block;opacity:.22;filter:brightness(0) invert(1)}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, createContext, useContext } = React;
+
+function useInView(opts = {}) {
+  const ref = useRef(null);
+  const [v, setV] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setV(true); io.unobserve(e.target); }
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px', ...opts });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return [ref, v];
+}
+
+/* ── CURSOR ── */
+function Cursor() {
+  const dot = useRef(), ring = useRef();
+  const m = useRef({ x: -200, y: -200 }), l = useRef({ x: -200, y: -200 });
+  const [h, setH] = useState(false);
+  useEffect(() => {
+    const mv = (e) => { m.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('mousemove', mv);
+    const bind = () => document.querySelectorAll('a,button,[data-hov]').forEach(el => {
+      el.addEventListener('mouseenter', () => setH(true));
+      el.addEventListener('mouseleave', () => setH(false));
+    });
+    bind(); setTimeout(bind, 1200);
+    let raf;
+    const loop = () => {
+      l.current.x += (m.current.x - l.current.x) * .09;
+      l.current.y += (m.current.y - l.current.y) * .09;
+      if (dot.current)  dot.current.style.transform  = `translate(${m.current.x - 4}px,${m.current.y - 4}px)`;
+      if (ring.current) ring.current.style.transform = `translate(${l.current.x - 20}px,${l.current.y - 20}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { window.removeEventListener('mousemove', mv); cancelAnimationFrame(raf); };
+  }, []);
+  return (<><div ref={dot} className={`cur-dot ${h ? 'big' : ''}`} /><div ref={ring} className={`cur-ring ${h ? 'big' : ''}`} /></>);
+}
+
+/* ── MAG ── */
+function Mag({ children, className = '', href }) {
+  const r = useRef();
+  const mv = (e) => { const b = r.current.getBoundingClientRect(); r.current.style.cssText += `transform:translate(${(e.clientX - b.left - b.width / 2) * .22}px,${(e.clientY - b.top - b.height / 2) * .22}px);transition:transform .15s ease`; };
+  const ml = () => { r.current.style.cssText += 'transform:translate(0,0);transition:transform .5s cubic-bezier(.34,1.56,.64,1)'; };
+  if (href) return <a ref={r} href={href} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</a>;
+  return <button ref={r} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</button>;
+}
+
+/* ── TRANSLATIONS ── */
+const TP = {
+  EN: {
+    nav: { home: 'Home', products: 'Products', method: 'Method', cases: 'Case Studies', cta: 'Request a Briefing' },
+    hero: {
+      pill: 'Proven Framework', stat: '04', statL: 'Phases',
+      l1: 'A proven', l2: 'framework.', l3: 'Assess. Design.', l4: 'Deploy. Optimize.',
+      desc: 'A disciplined approach to enterprise retail technology. Every deployment follows the same proven process — assessed, designed, deployed, and optimized.',
+      cta: '→ Start with an Assessment', link: 'Explore the framework',
+      frTag: 'Since 2019', frText: '180+ enterprise deployments across retail locations worldwide. Zero service interruptions.',
+    },
+    phases: {
+      label: 'Four-phase framework',
+      sub: 'A systematic approach refined across hundreds of enterprise deployments.',
+      items: [
+        {
+          n: '01', name: 'Discovery & Assessment', time: '2–3 weeks',
+          desc: 'Deep technical assessment of your current infrastructure, pain points, and requirements. We audit existing systems, interview stakeholders, and document constraints.',
+          deliverables: ['Technical audit report', 'Stakeholder interviews', 'Requirements documentation', 'Risk assessment'],
+        },
+        {
+          n: '02', name: 'Architecture & Design', time: '3–4 weeks',
+          desc: 'Custom architecture designed for your specific needs. We design integration points, data flows, and deployment strategy with complete documentation.',
+          deliverables: ['System architecture', 'Integration blueprint', 'Data flow diagrams', 'Security framework'],
+        },
+        {
+          n: '03', name: 'Phased Deployment', time: '8–12 weeks',
+          desc: 'Careful rollout starting with pilot locations. We deploy incrementally, validate at each stage, and ensure zero disruption to operations.',
+          deliverables: ['Pilot deployment', 'Training materials', 'Monitoring dashboard', 'Rollout schedule'],
+        },
+        {
+          n: '04', name: 'Optimization & Scale', time: 'Ongoing',
+          desc: 'Continuous monitoring, performance tuning, and feature enhancement. We measure KPIs, optimize parameters, and enhance capabilities based on usage data.',
+          deliverables: ['Performance reports', 'Usage analytics', 'Enhancement roadmap', '24/7 support'],
+        },
+      ],
+    },
+    princ: {
+      eyebrow: 'Our standards',
+      h: 'Core principles.',
+      sub: 'Non-negotiable standards that guide every decision and deployment.',
+      items: [
+        { title: 'Facts first', desc: 'Every decision backed by data. No assumptions, no guesswork. We measure, validate, and optimize based on real-world performance.' },
+        { title: 'Zero disruption', desc: 'Deployments happen without service interruptions. We schedule carefully, deploy incrementally, and always have rollback plans ready.' },
+        { title: 'Built to last', desc: 'Systems engineered for 5+ year lifecycles. We use proven technologies, document everything, and design for maintainability.' },
+        { title: 'Integration-native', desc: 'Designed to work with existing infrastructure. We build bridges, not silos. Your data stays in your systems.' },
+      ],
+    },
+    qual: {
+      eyebrow: 'Quality & Support',
+      h: 'Enterprise-grade support\nfor every deployment.',
+      items: [
+        { title: 'Monitoring, QA, & Robustness Discipline', desc: 'Continuous monitoring, comprehensive testing protocols, and structured release management ensure system stability and performance at all times.' },
+        { title: 'SLA & Support Packages Available', desc: 'Tailored service-level agreements and support options designed to meet your operational requirements and risk tolerance.' },
+        { title: 'References Available Under NDA', desc: 'Connect with existing clients in similar retail segments to discuss real-world implementation experiences and outcomes.' },
+      ],
+    },
+    cta: {
+      h: 'Start with a\ntechnical assessment.',
+      sub: "We'll audit your current infrastructure and provide a detailed roadmap — no commitment required.",
+      btn: 'Request Assessment →',
+    },
+    footer: {
+      copy: '© 2026 SELEKT.\nEnterprise Retail Platform.',
+      cols: [
+        { label: 'Products',  links: ['Clienteling Suite', 'POS Companion', 'OMS & Fulfillment', 'Inventory Accuracy', 'Ops Command Center'] },
+        { label: 'Company',   links: ['Home', 'Method', 'Case Studies', 'Careers', 'Contact'] },
+        { label: 'Resources', links: ['Documentation', 'API Reference', 'Security', 'Support'] },
+        { label: 'Legal',     links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
+      ],
+    },
+  },
+  FR: {
+    nav: { home: 'Accueil', products: 'Produits', method: 'Méthode', cases: 'Études de cas', cta: 'Demander un Briefing' },
+    hero: {
+      pill: 'Cadre éprouvé', stat: '04', statL: 'Phases',
+      l1: 'Une approche', l2: 'éprouvée.', l3: 'Évaluer. Concevoir.', l4: 'Déployer. Optimiser.',
+      desc: 'Une méthode disciplinée pour la technologie retail entreprise. Chaque déploiement suit le même cadre éprouvé.',
+      cta: '→ Démarrer une Évaluation', link: 'Explorer le cadre',
+      frTag: 'Depuis 2019', frText: '180+ déploiements entreprise dans le monde. Zéro interruption de service.',
+    },
+    phases: {
+      label: 'Framework en quatre phases',
+      sub: 'Une approche systématique affinée au fil de centaines de déploiements entreprise.',
+      items: [
+        {
+          n: '01', name: 'Découverte & Évaluation', time: '2–3 semaines',
+          desc: 'Évaluation technique approfondie de votre infrastructure existante, des points de friction et des besoins. Nous auditons les systèmes, interviewons les parties prenantes et documentons les contraintes.',
+          deliverables: ['Rapport d\'audit technique', 'Entretiens parties prenantes', 'Documentation des besoins', 'Analyse des risques'],
+        },
+        {
+          n: '02', name: 'Architecture & Design', time: '3–4 semaines',
+          desc: 'Architecture sur mesure conçue selon vos besoins spécifiques. Nous définissons les points d\'intégration, les flux de données et la stratégie de déploiement avec une documentation complète.',
+          deliverables: ['Architecture système', 'Plan d\'intégration', 'Schémas de flux de données', 'Cadre de sécurité'],
+        },
+        {
+          n: '03', name: 'Déploiement Progressif', time: '8–12 semaines',
+          desc: 'Déploiement soigné à partir de sites pilotes. Nous procédons par étapes, validons à chaque phase et garantissons zéro interruption des opérations.',
+          deliverables: ['Déploiement pilote', 'Supports de formation', 'Tableau de bord de suivi', 'Plan de déploiement'],
+        },
+        {
+          n: '04', name: 'Optimisation & Montée en charge', time: 'Continu',
+          desc: 'Monitoring continu, optimisation des performances et amélioration des fonctionnalités. Nous mesurons les KPIs, optimisons les paramètres et améliorons les capacités selon les données d\'usage.',
+          deliverables: ['Rapports de performance', 'Analyses d\'usage', 'Feuille de route', 'Support 24/7'],
+        },
+      ],
+    },
+    princ: {
+      eyebrow: 'Nos standards',
+      h: 'Principes fondamentaux.',
+      sub: 'Des standards non négociables qui guident chaque décision et chaque déploiement.',
+      items: [
+        { title: 'Les faits d\'abord', desc: 'Chaque décision est étayée par des données. Pas d\'hypothèses, pas d\'approximations. Nous mesurons, validons et optimisons sur la base de performances réelles.' },
+        { title: 'Zéro disruption', desc: 'Les déploiements se font sans interruption de service. Nous planifions avec soin, déployons progressivement et maintenons toujours des plans de retour arrière.' },
+        { title: 'Conçu pour durer', desc: 'Systèmes conçus pour des cycles de vie de 5 ans et plus. Nous utilisons des technologies éprouvées, documentons tout et concevons pour la maintenabilité.' },
+        { title: 'Natif intégration', desc: 'Conçu pour fonctionner avec l\'infrastructure existante. Nous créons des ponts, pas des silos. Vos données restent dans vos systèmes.' },
+      ],
+    },
+    qual: {
+      eyebrow: 'Qualité & Support',
+      h: 'Un support de niveau\nentreprise à chaque déploiement.',
+      items: [
+        { title: 'Monitoring, QA & Robustesse', desc: 'Monitoring continu, protocoles de tests complets et gestion structurée des releases garantissent la stabilité et les performances du système en permanence.' },
+        { title: 'SLA & Packages de Support', desc: 'Accords de niveau de service sur mesure et options de support conçus pour répondre à vos exigences opérationnelles et à votre tolérance au risque.' },
+        { title: 'Références Disponibles sous NDA', desc: 'Échangez avec des clients existants dans des segments retail similaires pour discuter d\'expériences de mise en œuvre réelles et de leurs résultats.' },
+      ],
+    },
+    cta: {
+      h: 'Commencez par\nune évaluation technique.',
+      sub: 'Nous auditons votre infrastructure actuelle et vous fournissons une feuille de route détaillée — sans engagement.',
+      btn: 'Demander une Évaluation →',
+    },
+    footer: {
+      copy: '© 2026 SELEKT.\nPlateforme Retail Entreprise.',
+      cols: [
+        { label: 'Produits',   links: ['Suite Clienteling', 'POS Companion', 'OMS & Fulfillment', 'Précision Inventaire', 'Ops Command Center'] },
+        { label: 'Entreprise', links: ['Accueil', 'Méthode', 'Études de cas', 'Carrières', 'Contact'] },
+        { label: 'Ressources', links: ['Documentation', 'Référence API', 'Sécurité', 'Support'] },
+        { label: 'Légal',      links: ['Politique de confidentialité', 'Conditions d\'utilisation', 'Politique cookies'] },
+      ],
+    },
+  },
+  IT: {
+    nav: { home: 'Home', products: 'Prodotti', method: 'Metodo', cases: 'Case Study', cta: 'Richiedi un Briefing' },
+    hero: {
+      pill: 'Framework Collaudato', stat: '04', statL: 'Fasi',
+      l1: 'Un approccio', l2: 'collaudato.', l3: 'Valuta. Progetta.', l4: 'Deploy. Ottimizza.',
+      desc: 'Un approccio disciplinato alla tecnologia retail enterprise. Ogni deployment segue lo stesso processo collaudato.',
+      cta: '→ Inizia con una Valutazione', link: 'Esplora il framework',
+      frTag: 'Dal 2019', frText: '180+ deployment enterprise nel mondo. Zero interruzioni di servizio.',
+    },
+    phases: {
+      label: 'Framework in quattro fasi',
+      sub: 'Un approccio sistematico affinato nel corso di centinaia di deployment enterprise.',
+      items: [
+        {
+          n: '01', name: 'Discovery & Assessment', time: '2–3 settimane',
+          desc: 'Valutazione tecnica approfondita della tua infrastruttura attuale, punti critici e requisiti. Facciamo audit dei sistemi esistenti, intervistiamo gli stakeholder e documentiamo i vincoli.',
+          deliverables: ['Report di audit tecnico', 'Interviste stakeholder', 'Documentazione requisiti', 'Analisi dei rischi'],
+        },
+        {
+          n: '02', name: 'Architettura & Design', time: '3–4 settimane',
+          desc: 'Architettura personalizzata progettata per le tue esigenze specifiche. Definiamo i punti di integrazione, i flussi di dati e la strategia di deployment con documentazione completa.',
+          deliverables: ['Architettura di sistema', 'Blueprint di integrazione', 'Diagrammi flusso dati', 'Framework di sicurezza'],
+        },
+        {
+          n: '03', name: 'Deployment Progressivo', time: '8–12 settimane',
+          desc: 'Rollout attento a partire dai siti pilota. Distribuiamo in modo incrementale, validiamo ad ogni fase e garantiamo zero interruzioni alle operazioni.',
+          deliverables: ['Deployment pilota', 'Materiali di formazione', 'Dashboard di monitoraggio', 'Piano di rollout'],
+        },
+        {
+          n: '04', name: 'Ottimizzazione & Scala', time: 'Continuativo',
+          desc: 'Monitoraggio continuo, tuning delle performance e miglioramento delle funzionalità. Misuriamo i KPI, ottimizziamo i parametri e miglioriamo le capacità in base ai dati di utilizzo.',
+          deliverables: ['Report di performance', 'Analisi utilizzo', 'Enhancement roadmap', 'Supporto 24/7'],
+        },
+      ],
+    },
+    princ: {
+      eyebrow: 'I nostri standard',
+      h: 'Principi fondamentali.',
+      sub: 'Standard non negoziabili che guidano ogni decisione e ogni deployment.',
+      items: [
+        { title: 'Prima i fatti', desc: 'Ogni decisione supportata da dati. Nessuna ipotesi, nessuna supposizione. Misuriamo, validiamo e ottimizziamo in base alle performance reali.' },
+        { title: 'Zero disruption', desc: 'I deployment avvengono senza interruzioni del servizio. Pianifichiamo con cura, distribuiamo in modo incrementale e abbiamo sempre piani di rollback pronti.' },
+        { title: 'Costruito per durare', desc: 'Sistemi progettati per cicli di vita di 5+ anni. Usiamo tecnologie collaudate, documentiamo tutto e progettiamo per la manutenibilità.' },
+        { title: 'Integration-native', desc: 'Progettato per funzionare con l\'infrastruttura esistente. Costruiamo ponti, non silos. I tuoi dati rimangono nei tuoi sistemi.' },
+      ],
+    },
+    qual: {
+      eyebrow: 'Qualità & Supporto',
+      h: 'Supporto enterprise\nper ogni deployment.',
+      items: [
+        { title: 'Monitoring, QA & Disciplina di Robustezza', desc: 'Monitoraggio continuo, protocolli di test completi e gestione strutturata dei rilasci garantiscono stabilità e performance del sistema in ogni momento.' },
+        { title: 'SLA & Pacchetti di Supporto', desc: 'Accordi di livello di servizio personalizzati e opzioni di supporto progettati per soddisfare i tuoi requisiti operativi e la tolleranza al rischio.' },
+        { title: 'Referenze Disponibili sotto NDA', desc: 'Connettiti con clienti esistenti in segmenti retail simili per discutere esperienze di implementazione reali e risultati ottenuti.' },
+      ],
+    },
+    cta: {
+      h: 'Inizia con una\nvalutazione tecnica.',
+      sub: 'Faremo un audit della tua infrastruttura attuale e forniremo una roadmap dettagliata — senza impegno.',
+      btn: 'Richiedi una Valutazione →',
+    },
+    footer: {
+      copy: '© 2026 SELEKT.\nPiattaforma Retail Enterprise.',
+      cols: [
+        { label: 'Prodotti',  links: ['Clienteling Suite', 'POS Companion', 'OMS & Fulfillment', 'Accuratezza Magazzino', 'Ops Command Center'] },
+        { label: 'Azienda',   links: ['Home', 'Metodo', 'Case Study', 'Carriere', 'Contatti'] },
+        { label: 'Risorse',   links: ['Documentazione', 'Riferimento API', 'Sicurezza', 'Supporto'] },
+        { label: 'Legale',    links: ['Privacy Policy', 'Termini di Servizio', 'Cookie Policy'] },
+      ],
+    },
+  },
+  '中文': {
+    nav: { home: '首页', products: '产品', method: '方法论', cases: '案例研究', cta: '预约简报' },
+    hero: {
+      pill: '成熟框架', stat: '04', statL: '阶段',
+      l1: '经过验证的', l2: '方法论。', l3: '评估。设计。', l4: '部署。优化。',
+      desc: '企业零售技术的专业化方法。每次部署都遵循相同的成熟流程——评估、设计、部署、优化。',
+      cta: '→ 开始评估', link: '探索框架',
+      frTag: '自2019年', frText: '全球180+企业部署。零服务中断。',
+    },
+    phases: {
+      label: '四阶段框架',
+      sub: '经过数百次企业部署验证的系统化方法。',
+      items: [
+        {
+          n: '01', name: '探索与评估', time: '2–3周',
+          desc: '对您当前基础设施、痛点和需求进行深度技术评估。我们审计现有系统，访谈利益相关方，并记录各项约束条件。',
+          deliverables: ['技术审计报告', '利益相关方访谈', '需求文档', '风险评估'],
+        },
+        {
+          n: '02', name: '架构与设计', time: '3–4周',
+          desc: '针对您的特定需求设计定制架构。我们设计集成点、数据流和部署策略，并提供完整文档。',
+          deliverables: ['系统架构', '集成蓝图', '数据流图', '安全框架'],
+        },
+        {
+          n: '03', name: '分阶段部署', time: '8–12周',
+          desc: '从试点位置开始的谨慎部署。我们逐步部署，在每个阶段进行验证，确保业务运营零中断。',
+          deliverables: ['试点部署', '培训材料', '监控仪表板', '部署计划'],
+        },
+        {
+          n: '04', name: '优化与扩展', time: '持续进行',
+          desc: '持续监控、性能调优和功能增强。我们衡量KPI，优化参数，并根据使用数据增强功能。',
+          deliverables: ['性能报告', '使用分析', '优化路线图', '24/7支持'],
+        },
+      ],
+    },
+    princ: {
+      eyebrow: '我们的标准',
+      h: '核心原则。',
+      sub: '指导每一项决策和每一次部署的不可妥协标准。',
+      items: [
+        { title: '数据优先', desc: '每一个决策都有数据支撑。没有假设，没有猜测。我们基于真实世界的表现进行衡量、验证和优化。' },
+        { title: '零中断', desc: '部署过程中不发生服务中断。我们谨慎安排，逐步部署，并始终准备好回滚方案。' },
+        { title: '经久耐用', desc: '系统为5年以上的生命周期而设计。我们使用经过验证的技术，记录一切，并为可维护性而设计。' },
+        { title: '原生集成', desc: '专为与现有基础设施协同工作而设计。我们构建桥梁，而非孤岛。您的数据保留在您的系统中。' },
+      ],
+    },
+    qual: {
+      eyebrow: '质量与支持',
+      h: '每次部署的\n企业级支持。',
+      items: [
+        { title: '监控、QA与健壮性规范', desc: '持续监控、全面的测试协议和结构化发布管理确保系统在任何时候都保持稳定和高性能。' },
+        { title: 'SLA及支持套餐', desc: '量身定制的服务级别协议和支持选项，旨在满足您的运营要求和风险承受能力。' },
+        { title: 'NDA保密参考案例', desc: '与类似零售细分领域的现有客户交流，讨论真实的实施经验和成果。' },
+      ],
+    },
+    cta: {
+      h: '从技术评估\n开始。',
+      sub: '我们将审计您的现有基础设施，并提供详细的路线图——无需任何承诺。',
+      btn: '申请评估 →',
+    },
+    footer: {
+      copy: '© 2026 SELEKT。\n企业零售平台。',
+      cols: [
+        { label: '产品',   links: ['客户关系套件', 'POS伴侣', '订单与履约系统', '库存准确性', '运营指挥中心'] },
+        { label: '公司',   links: ['首页', '方法论', '案例研究', '招聘', '联系我们'] },
+        { label: '资源',   links: ['文档', 'API参考', '安全', '支持'] },
+        { label: '法律',   links: ['隐私政策', '服务条款', 'Cookie政策'] },
+      ],
+    },
+  },
+};
+
+const LangCtx = createContext({ lang: 'EN', setLang: () => {} });
+function useT() {
+  const { lang } = useContext(LangCtx);
+  return TP[lang] || TP.EN;
+}
+
+const LANGS = [
+  { code: 'EN', native: 'English' },
+  { code: 'FR', native: 'Français' },
+  { code: 'IT', native: 'Italiano' },
+  { code: '中文', native: '中文' },
+];
+
+function LangSelector() {
+  const { lang, setLang } = useContext(LangCtx);
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const h = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
+  }, []);
+  return (
+    <div ref={ref} className={`lang-sel ${open ? 'open' : ''}`}>
+      <button className="lang-btn" onClick={() => setOpen(o => !o)}>
+        {lang}<span className="lang-chevron">▾</span>
+      </button>
+      <div className="lang-drop">
+        {LANGS.map(({ code, native }) => (
+          <div key={code} className={`lang-opt ${lang === code ? 'active' : ''}`}
+            onClick={() => { setLang(code); setOpen(false); }}>
+            <span>{code}</span>
+            <span className="lang-opt-native">{native}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── NAV ── */
+function Nav() {
+  const t = useT();
+  const [sc, setSc] = useState(false);
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    window.addEventListener('scroll', () => setSc(window.scrollY > 30));
+    const tick = () => { const n = new Date(); setTime(`${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`); };
+    tick(); const id = setInterval(tick, 10000); return () => clearInterval(id);
+  }, []);
+  return (
+    <nav className={`nav ${sc ? 'scrolled' : ''}`}>
+      <div className="nav-meta">
+        <span>{time}</span><span className="nav-meta-sep">|</span><span>PARIS, FR</span>
+      </div>
+      <ul className="nav-links">
+        <li><a href="selekt-v2.html">{t.nav.home}</a></li>
+        <li><a href="selekt-products.html">{t.nav.products}</a></li>
+        <li><a href="#" className="active">{t.nav.method}</a></li>
+        <li><a href="selekt-cases.html">{t.nav.cases}</a></li>
+      </ul>
+      <div className="nav-right">
+        <LangSelector />
+        <Mag href="selekt-v2.html#contact" className="btn-dark">{t.nav.cta}</Mag>
+      </div>
+    </nav>
+  );
+}
+
+/* ── HERO ── */
+function Hero() {
+  const t = useT();
+  const h = t.hero;
+  const [on, setOn] = useState(false);
+  useEffect(() => { const timer = setTimeout(() => setOn(true), 100); return () => clearTimeout(timer); }, []);
+  return (
+    <section className="hero">
+      <div className="container" style={{ paddingBottom: 0 }}>
+        <div className="hero-wrap" style={{ paddingBottom: 0 }}>
+          <div className="hero-top">
+            <div className={`hero-brand ${on ? 'in' : ''}`}>
+              <div className="hero-img-card">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=80" alt="Method" />
+                <div className="hero-img-ov" />
+                <div className="hero-img-pill">
+                  <span className="hero-img-pill-dot" />
+                  <span className="hero-img-pill-text">{h.pill}</span>
+                </div>
+                <div className="hero-img-bot">
+                  <div className="hero-img-stat-n">{h.stat}</div>
+                  <div className="hero-img-stat-l">{h.statL}</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1 className="hero-h1">
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'250ms'}}>{h.l1}</span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'360ms'}}>{h.l2}</span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'460ms'}}><span className="accent">{h.l3}</span></span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'545ms'}}><span className="accent">{h.l4}</span></span></span>
+              </h1>
+              <p className={`hero-desc ${on?'in':''}`} style={{transitionDelay:'560ms'}}>{h.desc}</p>
+              <div className={`hero-actions ${on?'in':''}`} style={{transitionDelay:'640ms'}}>
+                <Mag href="selekt-v2.html#contact" className="btn-dark">{h.cta}</Mag>
+                <a href="#phases" className="ghost" style={{fontSize:12,letterSpacing:'.08em'}}>{h.link}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── PHASE ROW ── */
+function PhaseRow({ n, name, time, desc, deliverables, delay }) {
+  const [ref, inView] = useInView();
+  return (
+    <div ref={ref} className={`phase-row fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${delay}ms` }}>
+      <div className="phase-n">{n}</div>
+      <div className="phase-mid">
+        <div className="phase-name">{name}</div>
+        <div className="phase-badge">
+          <span className="phase-badge-dot" />
+          {time}
+        </div>
+        <p className="phase-desc">{desc}</p>
+      </div>
+      <div className="phase-deliv">
+        <div className="phase-deliv-label">Key Deliverables</div>
+        <div className="phase-deliv-list">
+          {deliverables.map(d => (
+            <div key={d} className="phase-deliv-item">{d}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── PHASES SECTION ── */
+function Phases() {
+  const t = useT();
+  const p = t.phases;
+  const [ref, inView] = useInView();
+  return (
+    <section className="phases-sec" id="phases">
+      <div className="container">
+        <div ref={ref} className="phases-header">
+          <h2 className={`phases-h fi ${inView ? 'in' : ''}`}>{p.label}</h2>
+          <p className={`phases-sub fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '120ms' }}>{p.sub}</p>
+        </div>
+        {p.items.map((item, i) => (
+          <PhaseRow key={i} {...item} delay={i * 80} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── PRINCIPLES ── */
+function Principles() {
+  const t = useT();
+  const pr = t.princ;
+  const [ref, inView] = useInView();
+  return (
+    <section className="princ-sec">
+      <div className="container">
+        <div ref={ref} className="princ-top">
+          <div className={`princ-eyebrow fi ${inView ? 'in' : ''}`}>
+            <span className="princ-eyebrow-line" />
+            <span className="princ-eyebrow-text">{pr.eyebrow}</span>
+          </div>
+          <h2 className={`princ-h fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '80ms' }}>{pr.h}</h2>
+          <p className={`princ-sub fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '160ms' }}>{pr.sub}</p>
+        </div>
+        <div className="princ-grid">
+          {pr.items.map((item, i) => {
+            const [cardRef, cardInView] = useInView();
+            return (
+              <div key={i} ref={cardRef} className={`princ-card fi ${cardInView ? 'in' : ''}`}
+                style={{ transitionDelay: `${(i % 2) * 100}ms` }} data-hov>
+                <div className="princ-card-title">{item.title}</div>
+                <p className="princ-card-desc">{item.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── QUALITY & SUPPORT ── */
+function Quality() {
+  const t = useT();
+  const q = t.qual;
+  const [ref, inView] = useInView();
+  return (
+    <section className="qual-sec">
+      <div className="qual-noise" />
+      <div className="container qual-inner">
+        <div ref={ref} className="qual-top">
+          <div className={`qual-eyebrow fi ${inView ? 'in' : ''}`}>{q.eyebrow}</div>
+          <h2 className={`qual-h fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '80ms' }}>
+            {q.h.split('\n').map((line, i) => <span key={i} style={{ display: 'block' }}>{line}</span>)}
+          </h2>
+        </div>
+        <div className={`qual-grid fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '200ms' }}>
+          {q.items.map((item, i) => (
+            <div key={i} className="qual-card" data-hov>
+              <div className="qual-card-title">{item.title}</div>
+              <p className="qual-card-desc">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── CTA ── */
+function CTA() {
+  const t = useT();
+  const c = t.cta;
+  const [ref, inView] = useInView();
+  return (
+    <section className="cta-sec">
+      <div className="cta-noise" />
+      <div className="cta-inner container" ref={ref}>
+        <h2 className={`cta-h fi ${inView ? 'in' : ''}`}>
+          {c.h.split('\n').map((line, i) => <span key={i} style={{ display: 'block' }}>{line}</span>)}
+        </h2>
+        <p className={`cta-sub fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '100ms' }}>{c.sub}</p>
+        <div className={`fi ${inView ? 'in' : ''}`} style={{ transitionDelay: '200ms' }}>
+          <Mag href="selekt-v2.html#contact" className="btn-dark">{c.btn}</Mag>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── FOOTER ── */
+const PAGE_HREFS = {
+  'Home':'selekt-v2.html','Accueil':'selekt-v2.html','首页':'selekt-v2.html',
+  'Method':'selekt-method.html','Méthode':'selekt-method.html','Metodo':'selekt-method.html','方法论':'selekt-method.html',
+  'Products':'selekt-products.html','Produits':'selekt-products.html','Prodotti':'selekt-products.html','产品':'selekt-products.html',
+  'Case Studies':'selekt-cases.html','Études de cas':'selekt-cases.html','Case Study':'selekt-cases.html','案例研究':'selekt-cases.html',
+};
+function Footer() {
+  const t = useT();
+  const f = t.footer;
+  return (
+    <footer>
+      <div className="container">
+        <div className="fbar">
+          <div className="fbar-col">
+            <span className="fbar-copy">
+              {f.copy.split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}
+            </span>
+          </div>
+          {f.cols.map(({ label, links }) => (
+            <div key={label} className="fbar-col">
+              <div className="fbar-label">{label}</div>
+              <div className="fbar-links">
+                {links.map(l => <a key={l} href={PAGE_HREFS[l] || '#'}>{l}</a>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="container fwordmark">
+        <img src="logo noir.png" alt="SELEKT" />
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const [lang, setLang] = useState('EN');
+  return (
+    <LangCtx.Provider value={{ lang, setLang }}>
+      <Cursor />
+      <Nav />
+      <Hero />
+      <Phases />
+      <Principles />
+      <Quality />
+      <CTA />
+      <Footer />
+    </LangCtx.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

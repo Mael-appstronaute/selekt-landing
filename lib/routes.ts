@@ -14,6 +14,7 @@ export const PAGES = {
   aiCopilot: { fr: "/ia-copilote", en: "/en/ai-copilot" },
   security: { fr: "/securite", en: "/en/security" },
   whySelekt: { fr: "/pourquoi-selekt", en: "/en/why-selekt" },
+  partners: { fr: "/partenaires", en: "/en/partners" },
   demo: { fr: "/demo", en: "/en/demo" },
   legal: { fr: "/mentions-legales", en: "/en/legal" },
   privacy: { fr: "/confidentialite", en: "/en/privacy" },

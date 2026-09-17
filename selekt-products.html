@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SELEKT — Products</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#FAFAF8;--bg2:#F3EDE3;--bg3:#EDE3D6;
+      --gold:#C4A35A;--gold-l:#E5CFA0;--gold-p:#F5EDD8;
+      --text:#0F0E0D;--t2:#5A5048;--t3:#9B9088;
+      --bdr:#DDD0C0;--bdrl:#EDE4D7;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',-apple-system,sans-serif;
+      --mw:1240px;
+    }
+    html{font-size:16px;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden}
+    a,button{cursor:none}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:var(--mw);margin:0 auto;padding:0 48px}
+
+    /* ── CURSOR ── */
+    .cur-dot{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;top:0;left:0;mix-blend-mode:multiply;transition:width .18s,height .18s}
+    .cur-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(196,163,90,.45);border-radius:50%;pointer-events:none;z-index:9998;top:-20px;left:-20px;transition:width .22s,height .22s,border-color .22s}
+    .cur-dot.big{width:14px;height:14px}
+    .cur-ring.big{width:60px;height:60px;border-color:var(--gold)}
+
+    /* ── FADE ── */
+    .fi{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.16,1,.3,1)}
+    .fi.in{opacity:1;transform:none}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    .nav.scrolled{background:rgba(250,250,248,.94);backdrop-filter:blur(18px);border-bottom-color:var(--bdrl)}
+    .nav-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t3);letter-spacing:.05em;min-width:180px}
+    .nav-meta-sep{opacity:.4}
+    .nav-links{display:flex;gap:40px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);position:relative;transition:color .2s}
+    .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-right{min-width:180px;display:flex;align-items:center;gap:24px;justify-content:flex-end}
+    .btn-dark{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--text);color:var(--bg);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s}
+    .btn-dark:hover{background:var(--gold);color:var(--text)}
+    /* ── LANG SELECTOR ── */
+    .lang-sel{position:relative}
+    .lang-btn{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);background:none;border:none;padding:4px 0;cursor:none;transition:color .2s}
+    .lang-btn:hover{color:var(--text)}
+    .lang-chevron{font-size:8px;opacity:.5;transition:transform .25s}
+    .lang-sel.open .lang-chevron{transform:rotate(180deg)}
+    .lang-drop{position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);border:1px solid var(--bdrl);min-width:140px;box-shadow:0 8px 32px rgba(15,14,13,.1);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s,transform .22s cubic-bezier(.16,1,.3,1)}
+    .lang-sel.open .lang-drop{opacity:1;transform:translateY(0);pointer-events:all}
+    .lang-opt{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--t2);cursor:none;transition:background .18s,color .18s;gap:12px}
+    .lang-opt:hover{background:var(--bg2);color:var(--text)}
+    .lang-opt.active{color:var(--gold)}
+    .lang-opt-native{font-size:10px;color:var(--t3);letter-spacing:.02em}
+    .lang-opt.active .lang-opt-native{color:rgba(196,163,90,.6)}
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .hero{padding-top:72px;background:var(--bg);overflow:hidden}
+    .hero-wrap{padding:52px 0 0}
+    .hero-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(80px,10vw,180px);align-items:flex-end;margin-bottom:52px}
+    /* Left — image card */
+    .hero-brand{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .hero-brand.in{opacity:1;transform:none}
+    .hero-img-card{width:clamp(200px,22vw,340px);height:clamp(300px,36vw,480px);border-radius:20px;overflow:hidden;position:relative}
+    .hero-img-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+    .hero-img-card:hover img{transform:scale(1.04)}
+    .hero-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,rgba(13,12,11,.08) 55%,transparent 100%)}
+    /* Top pill */
+    .hero-img-pill{position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:7px;background:rgba(250,250,248,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);padding:6px 14px;border-radius:40px}
+    .hero-img-pill-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    .hero-img-pill-text{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.75)}
+    /* Bottom stat */
+    .hero-img-bot{position:absolute;bottom:24px;left:24px;right:24px}
+    .hero-img-stat-n{font-size:clamp(36px,4vw,52px);font-weight:800;font-family:var(--sans);color:#fff;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+    .hero-img-stat-l{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.4)}
+    /* Right headline */
+    .hero-h1{font-size:clamp(28px,3.2vw,46px);font-weight:700;line-height:1.12;margin-bottom:28px;font-family:var(--sans);letter-spacing:-.02em;color:var(--text)}
+    .hero-h1 .accent{color:var(--gold)}
+    .hero-h1 .line{display:block;overflow:hidden}
+    .hero-h1 .line-inner{display:block;transform:translateY(110%);opacity:0;transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .15s}
+    .hero-h1 .line-inner.in{transform:translateY(0);opacity:1}
+    .hero-desc{font-size:14px;line-height:1.8;color:var(--t2);margin-bottom:32px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s;max-width:400px}
+    .hero-desc.in{opacity:1;transform:none}
+    .hero-actions{display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s}
+    .hero-actions.in{opacity:1;transform:none}
+    .ghost{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);display:inline-flex;align-items:center;gap:6px;position:relative;transition:color .3s}
+    .ghost::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s}
+    .ghost:hover{color:var(--gold)}
+    .ghost:hover::after{width:100%}
+    /* Bottom dark frame */
+    .hero-frame-wrap{opacity:0;transform:translateY(28px);transition:opacity 1s .35s ease,transform 1s .35s cubic-bezier(.16,1,.3,1);width:100%}
+    .hero-frame-wrap.in{opacity:1;transform:none}
+    .hframe{width:100%;aspect-ratio:21/9;background:#0D0C0B;border-radius:20px 20px 0 0;position:relative;overflow:hidden}
+    .hfaurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .hfa1{position:absolute;width:75%;height:250%;top:-80%;left:-15%;background:radial-gradient(ellipse,rgba(196,163,90,.28) 0%,transparent 55%);border-radius:50%;filter:blur(64px);animation:af1 18s ease-in-out infinite}
+    .hfa2{position:absolute;width:65%;height:200%;top:-40%;right:-10%;background:radial-gradient(ellipse,rgba(220,140,80,.18) 0%,transparent 55%);border-radius:50%;filter:blur(80px);animation:af2 22s ease-in-out 2s infinite}
+    .hfa3{position:absolute;width:55%;height:160%;bottom:-50%;left:28%;background:radial-gradient(ellipse,rgba(140,100,50,.14) 0%,transparent 55%);border-radius:50%;filter:blur(72px);animation:af1 15s ease-in-out 1s infinite}
+    .hframe-noise{position:absolute;inset:-200%;pointer-events:none;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .hf-topright{position:absolute;top:24px;right:28px;z-index:10;display:flex;align-items:center}
+    .hf-code{font-size:11px;font-weight:500;letter-spacing:.08em;color:rgba(244,237,227,.38)}
+    .hf-sep{color:rgba(244,237,227,.18);margin:0 10px;font-size:11px}
+    .hf-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;padding:32px 36px;background:linear-gradient(to top,rgba(13,12,11,.72) 0%,transparent 100%)}
+    .hf-bl-text{font-size:13px;color:rgba(244,237,227,.55);line-height:1.65;max-width:320px;margin-bottom:12px}
+    .hf-since{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,237,227,.3)}
+    .hf-since em{font-style:normal;color:rgba(196,163,90,.6)}
+    .hf-br{display:flex;align-items:center;gap:14px}
+    .hf-avs{display:flex;align-items:center}
+    .hf-av{width:34px;height:34px;border-radius:50%;border:2px solid rgba(13,12,11,.8);margin-left:-10px;flex-shrink:0}
+    .hf-av:first-child{margin-left:0}
+    .hf-av1{background:linear-gradient(135deg,#C4A35A,#A8835A)}
+    .hf-av2{background:linear-gradient(135deg,#A8835A,#8A6E50)}
+    .hf-av3{background:linear-gradient(135deg,#8A6E50,#6E5A40)}
+    .hf-stars{color:var(--gold);font-size:12px;letter-spacing:3px;margin-bottom:2px}
+    .hf-trust-lbl{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,237,227,.35)}
+
+    /* ══════════════════════════════════════
+       ACCORDION PRODUCTS
+    ══════════════════════════════════════ */
+    .acc-sec{background:var(--bg);border-top:1px solid var(--bdr)}
+    .acc-header{display:flex;justify-content:space-between;align-items:center;padding:52px 0 36px}
+    .acc-h{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--t3)}
+    .acc-count{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+
+    /* Row */
+    .prow{border-bottom:1px solid var(--bdrl);position:relative;overflow:hidden}
+    .prow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .45s cubic-bezier(.16,1,.3,1);transform-origin:top;border-radius:2px}
+    .prow.open::before,.prow:hover::before{transform:scaleY(1)}
+
+    /* Row top — always visible */
+    .prow-top{display:grid;grid-template-columns:88px 1fr auto;gap:24px;align-items:center;padding:36px 0 36px 16px;cursor:none;transition:padding-left .35s cubic-bezier(.16,1,.3,1)}
+    .prow.open .prow-top,.prow:hover .prow-top{padding-left:24px}
+    .prow-n{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--bdr);transition:color .35s;font-family:var(--sans)}
+    .prow.open .prow-n{color:var(--gold)}
+    .prow-title-wrap{}
+    .prow-name{font-size:clamp(28px,3.2vw,48px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);letter-spacing:-.01em;line-height:1.1;transition:color .3s}
+    .prow-best{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--t3);margin-top:4px;transition:color .3s}
+    .prow.open .prow-best,.prow:hover .prow-best{color:var(--gold)}
+    .prow-ico{width:38px;height:38px;border:1px solid var(--bdrl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--t3);transition:all .35s cubic-bezier(.16,1,.3,1);flex-shrink:0}
+    .prow.open .prow-ico{background:var(--gold);border-color:var(--gold);color:#fff;transform:rotate(45deg)}
+    .prow:not(.open):hover .prow-ico{border-color:var(--gold);color:var(--gold)}
+
+    /* Row body — revealed */
+    .prow-body{display:grid;grid-template-columns:88px 1fr;gap:24px;overflow:hidden;max-height:0;transition:max-height .55s cubic-bezier(.16,1,.3,1),opacity .4s .06s,padding .4s}
+    .prow.open .prow-body{max-height:200px;padding-bottom:36px;padding-left:16px}
+    .prow-body-spacer{}
+    .prow-body-content{display:flex;flex-direction:column;gap:20px}
+    .prow-desc{font-size:14px;color:var(--t2);line-height:1.8;max-width:600px}
+    .prow-tags{display:flex;gap:8px;flex-wrap:wrap}
+    .prow-tag{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);background:var(--gold-p);border:1px solid var(--gold-l);padding:4px 12px;border-radius:40px}
+
+    /* ══════════════════════════════════════
+       EXTENSIONS — dark
+    ══════════════════════════════════════ */
+    .ext-sec{background:#0F0E0D;padding:120px 0;position:relative;overflow:hidden}
+    .ext-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .ext-inner{position:relative;z-index:1}
+    .ext-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(60px,8vw,120px);align-items:end;margin-bottom:80px}
+    .ext-eyebrow{font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:rgba(196,163,90,.6);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .ext-eyebrow::before{content:'';width:20px;height:1px;background:rgba(196,163,90,.4);display:block}
+    .ext-h{font-size:clamp(44px,5.5vw,72px);font-family:var(--serif);font-style:italic;font-weight:300;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:0}
+    .ext-r{display:flex;flex-direction:column;justify-content:flex-end;gap:28px}
+    .ext-desc{font-size:14px;color:rgba(255,255,255,.35);line-height:1.8;max-width:380px}
+    .ext-cta{display:inline-flex;align-items:center;gap:12px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,227,.6);border:1px solid rgba(255,255,255,.12);padding:16px 28px;transition:all .3s;align-self:flex-start}
+    .ext-cta:hover{border-color:var(--gold);color:var(--gold);background:rgba(196,163,90,.06)}
+    /* Category grid */
+    .ext-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07)}
+    .ext-card{background:#0F0E0D;padding:36px 32px;transition:background .3s}
+    .ext-card:hover{background:#161310}
+    .ext-card-label{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(196,163,90,.5);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .ext-card-items{display:flex;flex-direction:column;gap:10px}
+    .ext-card-item{font-size:12px;color:rgba(255,255,255,.3);display:flex;align-items:flex-start;gap:10px;line-height:1.5;transition:color .3s}
+    .ext-card:hover .ext-card-item{color:rgba(255,255,255,.5)}
+    .ext-card-item::before{content:'→';color:rgba(196,163,90,.3);font-size:10px;flex-shrink:0;margin-top:1px;transition:color .3s}
+    .ext-card:hover .ext-card-item::before{color:rgba(196,163,90,.6)}
+
+    /* ══════════════════════════════════════
+       CTA
+    ══════════════════════════════════════ */
+    .cta-sec{background:var(--bg2);padding:clamp(100px,10vw,140px) 0;text-align:center;position:relative;overflow:hidden}
+    .cta-noise{position:absolute;inset:-200%;pointer-events:none;z-index:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    .cta-inner{position:relative;z-index:1}
+    .cta-h{font-size:clamp(52px,7vw,96px);font-family:var(--serif);font-style:italic;font-weight:300;color:var(--text);line-height:1;letter-spacing:-.02em;margin-bottom:28px}
+    .cta-sub{font-size:14px;color:var(--t2);line-height:1.8;max-width:420px;margin:0 auto 44px}
+    .cta-email{display:block;font-size:12px;color:var(--t3);margin-top:14px;letter-spacing:.02em}
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer{background:#0C0B09;overflow:hidden}
+    .fbar{display:grid;grid-template-columns:1fr auto auto auto auto;gap:clamp(32px,5vw,64px);padding:clamp(48px,6vw,72px) 0 clamp(40px,5vw,60px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .fbar-col{display:flex;flex-direction:column}
+    .fbar-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:14px}
+    .fbar-links{display:flex;flex-direction:column;gap:7px}
+    .fbar-links a{font-size:12px;color:rgba(255,255,255,.32);transition:color .2s}
+    .fbar-links a:hover{color:var(--gold)}
+    .fbar-copy{font-size:12px;color:rgba(255,255,255,.22);line-height:1.8}
+    .fwordmark{padding:clamp(32px,4vw,52px) 0 0}
+    .fwordmark img{width:clamp(400px,68vw,980px);height:auto;display:block;opacity:.22;filter:brightness(0) invert(1)}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, createContext, useContext } = React;
+
+function useInView(opts = {}) {
+  const ref = useRef(null);
+  const [v, setV] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); io.unobserve(e.target); } }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px', ...opts });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return [ref, v];
+}
+
+/* ── CURSOR ── */
+function Cursor() {
+  const dot = useRef(), ring = useRef();
+  const m = useRef({ x: -200, y: -200 }), l = useRef({ x: -200, y: -200 });
+  const [h, setH] = useState(false);
+  useEffect(() => {
+    const mv = (e) => { m.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('mousemove', mv);
+    const bind = () => document.querySelectorAll('a,button,[data-hov]').forEach(el => {
+      el.addEventListener('mouseenter', () => setH(true));
+      el.addEventListener('mouseleave', () => setH(false));
+    });
+    bind(); setTimeout(bind, 1200);
+    let raf;
+    const loop = () => {
+      l.current.x += (m.current.x - l.current.x) * .09;
+      l.current.y += (m.current.y - l.current.y) * .09;
+      if (dot.current)  dot.current.style.transform  = `translate(${m.current.x-4}px,${m.current.y-4}px)`;
+      if (ring.current) ring.current.style.transform = `translate(${l.current.x-20}px,${l.current.y-20}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { window.removeEventListener('mousemove', mv); cancelAnimationFrame(raf); };
+  }, []);
+  return (<><div ref={dot} className={`cur-dot ${h?'big':''}`}/><div ref={ring} className={`cur-ring ${h?'big':''}`}/></>);
+}
+
+/* ── MAG ── */
+function Mag({ children, className='', href }) {
+  const r = useRef();
+  const mv = (e) => { const b = r.current.getBoundingClientRect(); r.current.style.cssText += `transform:translate(${(e.clientX-b.left-b.width/2)*.22}px,${(e.clientY-b.top-b.height/2)*.22}px);transition:transform .15s ease`; };
+  const ml = () => { r.current.style.cssText += 'transform:translate(0,0);transition:transform .5s cubic-bezier(.34,1.56,.64,1)'; };
+  if (href) return <a ref={r} href={href} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</a>;
+  return <button ref={r} className={className} onMouseMove={mv} onMouseLeave={ml}>{children}</button>;
+}
+
+/* ── TRANSLATIONS ── */
+const TP = {
+  EN: {
+    nav: { home:'Home', products:'Products', method:'Method', cases:'Case Studies', cta:'Request a Briefing' },
+    hero: {
+      pill:'Enterprise Platform', stat:'180+', statL:'Locations deployed worldwide',
+      l1:'Enterprise modules', l2:'built for retail.', l3:'Deploy individually', l4:'or as one platform.',
+      desc:'Each product integrates with your existing infrastructure. Five modules, one unified platform for enterprise retail at scale.',
+      cta:'→ Request a Briefing', link:'Explore modules',
+    },
+    modules: [
+      { name:'Clienteling Suite',    best:'Best for luxury & specialty retail',  desc:'A unified client profile and assisted selling workflows for store teams. Capture preferences, track purchase history, and enable personalized service at every touchpoint.', tags:['Offline-Ready','Multi-Site'] },
+      { name:'POS Companion',        best:'Best for complex transactions',        desc:'A premium layer around your existing POS: faster flows, fewer errors, better service. Reduce training time and improve transaction accuracy across every location.',          tags:['Multi-Device','Real-Time Sync'] },
+      { name:'OMS & Fulfillment',    best:'Best for omnichannel operations',      desc:'Click&Collect, ship-from-store, routing, and omnichannel returns. Complete visibility and control across all fulfillment channels.',                                         tags:['Auto-Routing','Returns Mgmt'] },
+      { name:'Inventory Accuracy',   best:'Best for high-value inventory',        desc:'Reconciliation, audit trails, RFID-ready workflows, anomaly detection. Maintain real-time inventory accuracy across all locations.',                                            tags:['RFID-Ready','Real-Time Audit'] },
+      { name:'Ops Command Center',   best:'Best for multi-site oversight',        desc:'KPIs, adoption monitoring, alerts, and executive reporting. Unified visibility into operations across all channels and regions.',                                               tags:['Real-Time','Executive-Ready'] },
+    ],
+    acc: { h:'Core modules', count:'05 products' },
+    ext: {
+      eyebrow:'Custom', h:'Extensions & Integrations.',
+      desc:'Beyond our five core modules, we deliver custom solutions: integrations, workflows, hardware deployments and multi-country rollouts.',
+      cta:'Discuss requirements +',
+      cats: [
+        { label:'Integrations',          items:['POS systems','WMS solutions','ERP platforms','CDP & CRM'] },
+        { label:'Workflows',             items:['Custom business logic','Automated routines','Approval processes','Role-based access'] },
+        { label:'Hardware / RFID',       items:['RFID readers','Handheld scanners','Mobile devices','IoT sensors'] },
+        { label:'Multi-Country Rollout', items:['Localization','Currency handling','Regional compliance','Tax configuration'] },
+      ],
+    },
+    cta: { h:'Ready to deploy?', sub:'Share your technical requirements and we\'ll prepare a custom architecture proposal.', btn:'Request a Private Briefing →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nEnterprise Retail Platform.',
+      cols: [
+        { label:'Products',   links:['Clienteling Suite','POS Companion','OMS & Fulfillment','Inventory Accuracy','Ops Command Center'] },
+        { label:'Company',    links:['Home','Method','Case Studies','Careers','Contact'] },
+        { label:'Resources',  links:['Documentation','API Reference','Security','Support'] },
+        { label:'Legal',      links:['Privacy Policy','Terms of Service','Cookie Policy'] },
+      ],
+    },
+  },
+  FR: {
+    nav: { home:'Accueil', products:'Produits', method:'Méthode', cases:'Études de cas', cta:'Demander un Briefing' },
+    hero: {
+      pill:'Plateforme Entreprise', stat:'180+', statL:'Sites déployés dans le monde',
+      l1:'Modules entreprise', l2:'pour le retail.', l3:'Déployez individuellement', l4:'ou en plateforme unifiée.',
+      desc:'Chaque produit s\'intègre à votre infrastructure existante. Cinq modules, une plateforme unifiée pour le retail entreprise à grande échelle.',
+      cta:'→ Demander un Briefing', link:'Explorer les modules',
+    },
+    modules: [
+      { name:'Suite Clienteling',    best:'Pour le luxe & le retail spécialisé',  desc:'Un profil client unifié et des workflows de vente assistée pour les équipes en boutique. Capturez les préférences, suivez l\'historique d\'achat et offrez un service personnalisé à chaque point de contact.', tags:['Mode hors-ligne','Multi-site'] },
+      { name:'POS Companion',        best:'Pour les transactions complexes',       desc:'Une couche premium autour de votre POS existant : flux plus rapides, moins d\'erreurs, meilleur service. Réduisez le temps de formation et améliorez la précision des transactions.', tags:['Multi-appareil','Sync temps réel'] },
+      { name:'OMS & Fulfillment',    best:'Pour les opérations omnicanal',         desc:'Click&Collect, expédition depuis le magasin, routage et retours omnicanal. Visibilité et contrôle complets sur tous les canaux de fulfillment.', tags:['Routage auto','Gestion retours'] },
+      { name:'Précision Inventaire', best:'Pour les stocks haute valeur',          desc:'Réconciliation, pistes d\'audit, workflows RFID, détection d\'anomalies. Maintenez la précision de votre inventaire en temps réel sur tous les sites.', tags:['RFID','Audit temps réel'] },
+      { name:'Ops Command Center',   best:'Pour la supervision multi-sites',       desc:'KPIs, suivi d\'adoption, alertes et rapports exécutifs. Visibilité unifiée sur les opérations de tous vos canaux et régions.', tags:['Temps réel','Executive'] },
+    ],
+    acc: { h:'Modules principaux', count:'05 produits' },
+    ext: {
+      eyebrow:'Sur mesure', h:'Extensions & Intégrations.',
+      desc:'Au-delà de nos cinq modules principaux, nous livrons des solutions sur mesure : intégrations, workflows, déploiements matériels et déploiements multi-pays.',
+      cta:'Discuter des besoins +',
+      cats: [
+        { label:'Intégrations',          items:['Systèmes POS','Solutions WMS','Plateformes ERP','CDP & CRM'] },
+        { label:'Workflows',             items:['Logique métier personnalisée','Routines automatisées','Processus d\'approbation','Accès par rôle'] },
+        { label:'Matériel / RFID',       items:['Lecteurs RFID','Scanners portables','Appareils mobiles','Capteurs IoT'] },
+        { label:'Déploiement multi-pays',items:['Localisation','Gestion des devises','Conformité régionale','Configuration fiscale'] },
+      ],
+    },
+    cta: { h:'Prêt à déployer ?', sub:'Partagez vos besoins techniques et nous préparerons une proposition d\'architecture sur mesure.', btn:'Demander un Briefing Privé →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nPlateforme Retail Entreprise.',
+      cols: [
+        { label:'Produits',   links:['Suite Clienteling','POS Companion','OMS & Fulfillment','Précision Inventaire','Ops Command Center'] },
+        { label:'Entreprise', links:['Accueil','Méthode','Études de cas','Carrières','Contact'] },
+        { label:'Ressources', links:['Documentation','Référence API','Sécurité','Support'] },
+        { label:'Légal',      links:['Politique de confidentialité','Conditions d\'utilisation','Politique cookies'] },
+      ],
+    },
+  },
+  IT: {
+    nav: { home:'Home', products:'Prodotti', method:'Metodo', cases:'Case Study', cta:'Richiedi un Briefing' },
+    hero: {
+      pill:'Piattaforma Enterprise', stat:'180+', statL:'Sedi deployate nel mondo',
+      l1:'Moduli enterprise', l2:'per il retail.', l3:'Deploy individuale', l4:'o come piattaforma unica.',
+      desc:'Ogni prodotto si integra con la tua infrastruttura esistente. Cinque moduli, una piattaforma unificata per il retail enterprise su larga scala.',
+      cta:'→ Richiedi un Briefing', link:'Esplora i moduli',
+    },
+    modules: [
+      { name:'Clienteling Suite',    best:'Per il lusso & retail specializzato',  desc:'Un profilo cliente unificato e workflow di vendita assistita per i team in negozio. Cattura preferenze, traccia la cronologia degli acquisti e abilita servizio personalizzato.', tags:['Offline-Ready','Multi-Sede'] },
+      { name:'POS Companion',        best:'Per le transazioni complesse',          desc:'Un livello premium intorno al tuo POS esistente: flussi più veloci, meno errori, servizio migliore. Riduci i tempi di formazione e migliora la precisione delle transazioni.', tags:['Multi-Dispositivo','Sync Real-Time'] },
+      { name:'OMS & Fulfillment',    best:'Per le operazioni omnicanale',          desc:'Click&Collect, spedizione dal negozio, routing e resi omnicanale. Visibilità e controllo completi su tutti i canali di fulfillment.', tags:['Auto-Routing','Gestione Resi'] },
+      { name:'Accuratezza Magazzino',best:'Per inventari ad alto valore',          desc:'Riconciliazione, audit trail, workflow RFID, rilevamento anomalie. Mantieni la precisione dell\'inventario in tempo reale su tutte le sedi.', tags:['RFID-Ready','Audit Real-Time'] },
+      { name:'Ops Command Center',   best:'Per la supervisione multi-sede',        desc:'KPI, monitoraggio adozione, alert e reportistica esecutiva. Visibilità unificata sulle operazioni di tutti i canali e regioni.', tags:['Real-Time','Executive-Ready'] },
+    ],
+    acc: { h:'Moduli principali', count:'05 prodotti' },
+    ext: {
+      eyebrow:'Personalizzato', h:'Estensioni & Integrazioni.',
+      desc:'Oltre ai nostri cinque moduli principali, forniamo soluzioni custom: integrazioni, workflow, deployment hardware e rollout multi-paese.',
+      cta:'Discuti i requisiti +',
+      cats: [
+        { label:'Integrazioni',          items:['Sistemi POS','Soluzioni WMS','Piattaforme ERP','CDP & CRM'] },
+        { label:'Workflow',              items:['Logica business custom','Routine automatizzate','Processi di approvazione','Accesso per ruolo'] },
+        { label:'Hardware / RFID',       items:['Lettori RFID','Scanner portatili','Dispositivi mobili','Sensori IoT'] },
+        { label:'Rollout Multi-Paese',   items:['Localizzazione','Gestione valute','Conformità regionale','Configurazione fiscale'] },
+      ],
+    },
+    cta: { h:'Pronto al deploy?', sub:'Condividi i tuoi requisiti tecnici e prepareremo una proposta di architettura personalizzata.', btn:'Richiedi un Briefing Privato →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT.\nPiattaforma Retail Enterprise.',
+      cols: [
+        { label:'Prodotti',   links:['Clienteling Suite','POS Companion','OMS & Fulfillment','Accuratezza Magazzino','Ops Command Center'] },
+        { label:'Azienda',    links:['Home','Metodo','Case Study','Carriere','Contatti'] },
+        { label:'Risorse',    links:['Documentazione','Riferimento API','Sicurezza','Supporto'] },
+        { label:'Legale',     links:['Privacy Policy','Termini di Servizio','Cookie Policy'] },
+      ],
+    },
+  },
+  '中文': {
+    nav: { home:'首页', products:'产品', method:'方法论', cases:'案例研究', cta:'预约简报' },
+    hero: {
+      pill:'企业平台', stat:'180+', statL:'全球已部署门店',
+      l1:'企业级模块', l2:'专为零售打造。', l3:'单独部署', l4:'或作为一体化平台。',
+      desc:'每个产品都与您现有的基础设施无缝集成。五个模块，一个统一的企业零售平台，支持大规模运营。',
+      cta:'→ 预约简报', link:'探索模块',
+    },
+    modules: [
+      { name:'客户关系套件',  best:'适合奢侈品及专业零售',    desc:'为门店团队提供统一的客户档案和辅助销售工作流。捕捉偏好、追踪购买历史，在每个触点实现个性化服务。', tags:['离线可用','多门店'] },
+      { name:'POS伴侣',       best:'适合复杂交易',             desc:'在您现有POS基础上的高级层：更快的流程、更少的错误、更好的服务。缩短培训时间，提高每个门店的交易准确性。', tags:['多设备','实时同步'] },
+      { name:'订单与履约系统',best:'适合全渠道运营',           desc:'Click&Collect、从店发货、路由及全渠道退换货。对所有履约渠道实现完整的可见性和控制。', tags:['自动路由','退货管理'] },
+      { name:'库存准确性',    best:'适合高价值库存',           desc:'对账、审计追踪、RFID就绪工作流、异常检测。在所有门店保持实时库存准确性。', tags:['RFID就绪','实时审计'] },
+      { name:'运营指挥中心',  best:'适合多门店监督',           desc:'KPI、采用率监控、告警和高管报告。跨所有渠道和地区的统一运营可见性。', tags:['实时','高管级别'] },
+    ],
+    acc: { h:'核心模块', count:'05 个产品' },
+    ext: {
+      eyebrow:'定制化', h:'扩展与集成。',
+      desc:'除了我们的五个核心模块外，我们还提供定制解决方案：集成、工作流、硬件部署和多国推广。',
+      cta:'讨论需求 +',
+      cats: [
+        { label:'集成',          items:['POS系统','WMS解决方案','ERP平台','CDP & CRM'] },
+        { label:'工作流',        items:['自定义业务逻辑','自动化例程','审批流程','基于角色的访问'] },
+        { label:'硬件 / RFID',   items:['RFID读取器','手持扫描仪','移动设备','IoT传感器'] },
+        { label:'多国推广',      items:['本地化','货币处理','区域合规','税务配置'] },
+      ],
+    },
+    cta: { h:'准备好部署了吗？', sub:'分享您的技术需求，我们将为您准备定制架构方案。', btn:'预约私人简报 →', email:'hello@selekt-retail.com' },
+    footer: {
+      copy:'© 2026 SELEKT。\n企业零售平台。',
+      cols: [
+        { label:'产品',   links:['客户关系套件','POS伴侣','订单与履约系统','库存准确性','运营指挥中心'] },
+        { label:'公司',   links:['首页','方法论','案例研究','招聘','联系我们'] },
+        { label:'资源',   links:['文档','API参考','安全','支持'] },
+        { label:'法律',   links:['隐私政策','服务条款','Cookie政策'] },
+      ],
+    },
+  },
+};
+
+const LangCtx = createContext({ lang: 'EN', setLang: () => {} });
+function useT() {
+  const { lang } = useContext(LangCtx);
+  return TP[lang] || TP.EN;
+}
+
+/* ── LANG SELECTOR ── */
+const LANGS = [
+  { code: 'EN', native: 'English' },
+  { code: 'FR', native: 'Français' },
+  { code: 'IT', native: 'Italiano' },
+  { code: '中文', native: '中文' },
+];
+
+function LangSelector() {
+  const { lang, setLang } = useContext(LangCtx);
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const h = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
+  }, []);
+  return (
+    <div ref={ref} className={`lang-sel ${open ? 'open' : ''}`}>
+      <button className="lang-btn" onClick={() => setOpen(o => !o)}>
+        {lang}<span className="lang-chevron">▾</span>
+      </button>
+      <div className="lang-drop">
+        {LANGS.map(({ code, native }) => (
+          <div key={code} className={`lang-opt ${lang === code ? 'active' : ''}`} onClick={() => { setLang(code); setOpen(false); }}>
+            <span>{code}</span>
+            <span className="lang-opt-native">{native}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── NAV ── */
+function Nav() {
+  const t = useT();
+  const [sc, setSc] = useState(false);
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    window.addEventListener('scroll', () => setSc(window.scrollY > 30));
+    const tick = () => { const n = new Date(); setTime(`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`); };
+    tick(); const id = setInterval(tick, 10000); return () => clearInterval(id);
+  }, []);
+  return (
+    <nav className={`nav ${sc ? 'scrolled' : ''}`}>
+      <div className="nav-meta">
+        <span>{time}</span><span className="nav-meta-sep">|</span><span>PARIS, FR</span>
+      </div>
+      <ul className="nav-links">
+        <li><a href="selekt-v2.html">{t.nav.home}</a></li>
+        <li><a href="selekt-products.html" className="active">{t.nav.products}</a></li>
+        <li><a href="selekt-method.html">{t.nav.method}</a></li>
+        <li><a href="selekt-cases.html">{t.nav.cases}</a></li>
+      </ul>
+      <div className="nav-right">
+        <LangSelector />
+        <Mag href="selekt-v2.html#contact" className="btn-dark">{t.nav.cta}</Mag>
+      </div>
+    </nav>
+  );
+}
+
+/* ── HERO ── */
+function Hero() {
+  const t = useT();
+  const h = t.hero;
+  const [on, setOn] = useState(false);
+  useEffect(() => { const timer = setTimeout(() => setOn(true), 100); return () => clearTimeout(timer); }, []);
+
+  return (
+    <section className="hero">
+      <div className="container" style={{ paddingBottom: 0 }}>
+        <div className="hero-wrap" style={{ paddingBottom: 0 }}>
+          <div className="hero-top">
+            <div className={`hero-brand ${on ? 'in' : ''}`}>
+              <div className="hero-img-card">
+                <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=700&q=80" alt="Retail" />
+                <div className="hero-img-ov" />
+                <div className="hero-img-pill">
+                  <span className="hero-img-pill-dot" />
+                  <span className="hero-img-pill-text">{h.pill}</span>
+                </div>
+                <div className="hero-img-bot">
+                  <div className="hero-img-stat-n">{h.stat}</div>
+                  <div className="hero-img-stat-l">{h.statL}</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1 className="hero-h1">
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'250ms'}}>{h.l1}</span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'360ms'}}>{h.l2}</span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'460ms'}}><span className="accent">{h.l3}</span></span></span>
+                <span className="line"><span className={`line-inner ${on?'in':''}`} style={{transitionDelay:'545ms'}}><span className="accent">{h.l4}</span></span></span>
+              </h1>
+              <p className={`hero-desc ${on?'in':''}`} style={{transitionDelay:'560ms'}}>{h.desc}</p>
+              <div className={`hero-actions ${on?'in':''}`} style={{transitionDelay:'640ms'}}>
+                <Mag href="selekt-v2.html#contact" className="btn-dark">{h.cta}</Mag>
+                <a href="#modules" className="ghost" style={{fontSize:12,letterSpacing:'.08em'}}>{h.link}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── ACCORDION PRODUCTS ── */
+function AccordionRow({ n, name, best, desc, tags, open, onToggle, delay }) {
+  const [ref, inView] = useInView();
+  return (
+    <div ref={ref} className={`prow ${open ? 'open' : ''} fi ${inView ? 'in' : ''}`} style={{ transitionDelay: `${delay}ms` }} onClick={onToggle} data-hov>
+      <div className="prow-top">
+        <span className="prow-n">{n}</span>
+        <div className="prow-title-wrap">
+          <div className="prow-name">{name}</div>
+          <div className="prow-best">{best}</div>
+        </div>
+        <div className="prow-ico">+</div>
+      </div>
+      <div className="prow-body">
+        <div className="prow-body-spacer" />
+        <div className="prow-body-content">
+          <p className="prow-desc">{desc}</p>
+          <div className="prow-tags">
+            {tags.map(tag => <span key={tag} className="prow-tag">{tag}</span>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Accordion() {
+  const t = useT();
+  const [open, setOpen] = useState(null);
+  const toggle = (i) => setOpen(open === i ? null : i);
+  const nums = ['01','02','03','04','05'];
+  return (
+    <section className="acc-sec" id="modules">
+      <div className="container">
+        <div className="acc-header">
+          <span className="acc-h">{t.acc.h}</span>
+          <span className="acc-count">{t.acc.count}</span>
+        </div>
+        {t.modules.map((m, i) => (
+          <AccordionRow key={i} n={nums[i]} {...m} open={open === i} onToggle={() => toggle(i)} delay={i * 60} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── EXTENSIONS ── */
+function Extensions() {
+  const t = useT();
+  const e = t.ext;
+  const [ref, inView] = useInView();
+  return (
+    <section className="ext-sec" ref={ref}>
+      <div className="ext-noise" />
+      <div className="container ext-inner">
+        <div className="ext-top">
+          <div className={`fi ${inView ? 'in' : ''}`}>
+            <div className="ext-eyebrow">{e.eyebrow}</div>
+            <h2 className="ext-h">{e.h}</h2>
+          </div>
+          <div className={`ext-r fi ${inView ? 'in' : ''}`} style={{ transitionDelay:'120ms' }}>
+            <p className="ext-desc">{e.desc}</p>
+            <Mag href="selekt-v2.html#contact" className="ext-cta">{e.cta}</Mag>
+          </div>
+        </div>
+        <div className={`ext-grid fi ${inView ? 'in' : ''}`} style={{ transitionDelay:'220ms' }}>
+          {e.cats.map(({ label, items }) => (
+            <div key={label} className="ext-card" data-hov>
+              <div className="ext-card-label">{label}</div>
+              <div className="ext-card-items">
+                {items.map(it => <div key={it} className="ext-card-item">{it}</div>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── CTA ── */
+function CTA() {
+  const t = useT();
+  const c = t.cta;
+  const [ref, inView] = useInView();
+  return (
+    <section className="cta-sec">
+      <div className="cta-noise" />
+      <div className="cta-inner container" ref={ref}>
+        <h2 className={`cta-h fi ${inView ? 'in' : ''}`}>{c.h}</h2>
+        <p className={`cta-sub fi ${inView ? 'in' : ''}`} style={{ transitionDelay:'100ms' }}>{c.sub}</p>
+        <div className={`fi ${inView ? 'in' : ''}`} style={{ transitionDelay:'200ms' }}>
+          <Mag href="selekt-v2.html#contact" className="btn-dark" style={{ fontSize:12 }}>{c.btn}</Mag>
+          <a href={`mailto:${c.email}`} className="cta-email">{c.email}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── FOOTER ── */
+const PAGE_HREFS = {
+  'Home':'selekt-v2.html','Accueil':'selekt-v2.html','首页':'selekt-v2.html',
+  'Method':'selekt-method.html','Méthode':'selekt-method.html','Metodo':'selekt-method.html','方法论':'selekt-method.html',
+  'Products':'selekt-products.html','Produits':'selekt-products.html','Prodotti':'selekt-products.html','产品':'selekt-products.html',
+  'Case Studies':'selekt-cases.html','Études de cas':'selekt-cases.html','Case Study':'selekt-cases.html','案例研究':'selekt-cases.html',
+};
+function Footer() {
+  const t = useT();
+  const f = t.footer;
+  return (
+    <footer>
+      <div className="container">
+        <div className="fbar">
+          <div className="fbar-col">
+            <span className="fbar-copy">{f.copy.split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}</span>
+          </div>
+          {f.cols.map(({ label, links }) => (
+            <div key={label} className="fbar-col">
+              <div className="fbar-label">{label}</div>
+              <div className="fbar-links">
+                {links.map(l => <a key={l} href={PAGE_HREFS[l] || '#'}>{l}</a>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="container fwordmark">
+        <img src="logo noir.png" alt="SELEKT" />
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const [lang, setLang] = useState('EN');
+  return (
+    <LangCtx.Provider value={{ lang, setLang }}>
+      <Cursor />
+      <Nav />
+      <Hero />
+      <Accordion />
+      <Extensions />
+      <CTA />
+      <Footer />
+    </LangCtx.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
