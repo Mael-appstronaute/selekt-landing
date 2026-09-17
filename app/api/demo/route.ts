@@ -1,16 +1,28 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 /**
- * Réception des demandes de démo.
- * - Honeypot : le champ `website` rempli => on répond ok sans rien faire.
- * - Rate limit naïf par IP (en mémoire — suffisant pour un site vitrine).
- * - Transfert vers DEMO_WEBHOOK_URL si définie (CRM, webhook interne…),
- *   sinon vers FormSubmit → contact@selekt-retail.com. L'adresse ne
- *   transite que côté serveur, jamais exposée au navigateur.
+ * Réception des demandes de démo (formulaire /demo et pages SEO).
+ * L'e-mail de notification part aussi du NAVIGATEUR vers FormSubmit (voir
+ * DemoForm — les appels serveur vers FormSubmit sont bloqués par
+ * Cloudflare) ; cette route reçoit une copie de chaque demande et :
+ *   B. l'écrit dans Airtable (base SELEKT, table « Demandes de démo »),
+ *      pour que rien ne se perde et que le commerce ait une file suivable ;
+ *   A. envoie un mail SMTP direct à contact@selekt-retail.com si les
+ *      variables SMTP_* sont posées (aucun tiers, aucun blocage possible).
+ * Garde-fous de la passation du 16/09 : après validation, un échec de
+ * transmission ne renvoie JAMAIS d'erreur au visiteur — on logge (pm2)
+ * et on répond ok. Les jetons ne transitent que côté serveur.
+ *
+ * Env attendues sur le serveur (.env.production) :
+ *   AIRTABLE_TOKEN_SITE   jeton en écriture sur la base SELEKT (repli :
+ *                         AIRTABLE_TOKEN_LANDING, déjà prévue côté pilote)
+ *   AIRTABLE_DEMO_TABLE   id ou nom de la table (défaut « Demandes de démo »)
+ *   SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS   boîte Titan (option A)
  */
 
-const DEFAULT_ENDPOINT = "https://formsubmit.co/ajax/contact@selekt-retail.com";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://selekt-retail.com";
+const AIRTABLE_BASE = "appy7D9hAfuL3quzi";
+const MAIL_TO = "contact@selekt-retail.com";
 
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
@@ -37,6 +49,70 @@ type DemoPayload = {
   website?: string;
   locale?: string;
 };
+
+async function writeToAirtable(data: DemoPayload, role: string) {
+  const token = process.env.AIRTABLE_TOKEN_SITE ?? process.env.AIRTABLE_TOKEN_LANDING;
+  if (!token) {
+    console.error("[demo] AIRTABLE_TOKEN_SITE absente : demande non écrite dans Airtable");
+    return;
+  }
+  const table = encodeURIComponent(process.env.AIRTABLE_DEMO_TABLE ?? "Demandes de démo");
+  const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${table}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      records: [
+        {
+          fields: {
+            Nom: data.name,
+            "Société": data.company,
+            Email: data.email,
+            Fonction: role,
+            "Nb boutiques": data.network,
+            Message: data.message ?? "",
+            Consentement: true,
+            "Reçue le": new Date().toISOString(),
+            Source: "site — /demo",
+            Langue: data.locale ?? "fr",
+          },
+        },
+      ],
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`airtable ${res.status} — ${(await res.text()).slice(0, 300)}`);
+  }
+}
+
+async function sendMail(data: DemoPayload, role: string) {
+  const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return;
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: Number(process.env.SMTP_PORT ?? 465),
+    secure: Number(process.env.SMTP_PORT ?? 465) === 465,
+    auth: { user: SMTP_USER, pass: SMTP_PASS },
+  });
+  await transporter.sendMail({
+    from: `"Site Selekt" <${SMTP_USER}>`,
+    to: MAIL_TO,
+    replyTo: data.email,
+    subject: `Demande de démo — ${data.company}`,
+    text: [
+      `Nom : ${data.name}`,
+      `Société : ${data.company}`,
+      `Email : ${data.email}`,
+      `Fonction : ${role}`,
+      `Nb boutiques : ${data.network}`,
+      `Langue : ${data.locale ?? "fr"}`,
+      "",
+      data.message?.trim() ? `Message :\n${data.message.trim()}` : "(pas de message)",
+    ].join("\n"),
+  });
+}
 
 export async function POST(request: Request) {
   let data: DemoPayload;
@@ -77,43 +153,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
 
-  const endpoint = process.env.DEMO_WEBHOOK_URL ?? DEFAULT_ENDPOINT;
+  // « Autre » : la précision saisie accompagne la fonction
+  const role = data.roleOther?.trim() ? `${data.role} — ${data.roleOther.trim()}` : data.role!;
 
-  try {
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        // FormSubmit refuse les requêtes sans origine identifiable
-        Origin: SITE_URL,
-        Referer: `${SITE_URL}/`,
-      },
-      body: JSON.stringify({
-        // Directives FormSubmit (ignorées par un webhook classique)
-        _subject: "Nouvelle demande de démo — site Selekt",
-        _template: "table",
-        _cc: "appstronaute@gmail.com",
-        name: data.name,
-        company: data.company,
-        email: data.email,
-        // « Autre » : la précision saisie accompagne la fonction
-        role: data.roleOther?.trim() ? `${data.role} — ${data.roleOther.trim()}` : data.role,
-        network: data.network,
-        message: data.message ?? "",
-        locale: data.locale ?? "fr",
-        source: "selekt-site",
-      }),
-    });
-    if (!res.ok) throw new Error(`webhook ${res.status}`);
-    // FormSubmit répond 200 même en échec — vérifier le corps.
-    const result = (await res.json().catch(() => null)) as { success?: string; message?: string } | null;
-    if (result && String(result.success) === "false") {
-      throw new Error(result.message ?? "formsubmit: success=false");
-    }
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("[demo] transmission échouée :", error);
-    return NextResponse.json({ ok: false }, { status: 502 });
+  // B (Airtable) puis A (SMTP) : chaque canal échoue sans bloquer l'autre,
+  // et aucun échec ne remonte au visiteur — le mail FormSubmit du navigateur
+  // reste la troisième ceinture.
+  const [airtable, mail] = await Promise.allSettled([
+    writeToAirtable(data, role),
+    sendMail(data, role),
+  ]);
+  if (airtable.status === "rejected") {
+    console.error("[demo] écriture Airtable échouée :", airtable.reason);
   }
+  if (mail.status === "rejected") {
+    console.error("[demo] envoi SMTP échoué :", mail.reason);
+  }
+  return NextResponse.json({ ok: true });
 }

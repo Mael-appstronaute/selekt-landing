@@ -51,8 +51,10 @@ export function CountUp({
   }, [inView, value, duration, decimals, intl, reduced]);
 
   return (
+    // Contenu initial = la valeur finale : le HTML servi annonce le vrai
+    // chiffre (robots, IA, no-JS) ; l'animation repart de 0 côté client.
     <span ref={ref} className={className}>
-      {(0).toLocaleString(intl, {
+      {value.toLocaleString(intl, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       })}

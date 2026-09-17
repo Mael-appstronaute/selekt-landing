@@ -157,6 +157,7 @@ export const SHOPIFY_POS: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce qu'on nous demande *sur Shopify*.",
         rows: [
@@ -302,6 +303,7 @@ export const SHOPIFY_POS: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "What we are asked *about Shopify*.",
         rows: [

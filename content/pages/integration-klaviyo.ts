@@ -158,6 +158,7 @@ export const KLAVIYO: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce qu'on nous demande *sur Klaviyo*.",
         rows: [
@@ -303,6 +304,7 @@ export const KLAVIYO: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "What we are asked *about Klaviyo*.",
         rows: [

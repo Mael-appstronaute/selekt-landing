@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { PHOTOS, type PhotoKey } from "@/lib/photos";
 import { pagePath, type Locale, type PageKey } from "@/lib/routes";
-import { JsonLd, organizationJsonLd, softwareJsonLd } from "@/lib/seo";
+import { JsonLd, faqJsonLd, organizationJsonLd, softwareJsonLd } from "@/lib/seo";
 import { GoldLine } from "../fx/GoldLine";
 import { Reveal } from "../fx/Reveal";
 import { RippleChip } from "../fx/RippleChip";
@@ -36,6 +36,8 @@ export type FeatureSection =
       lede?: string;
       /** timeline : déroulé vertical à jalons (inspiration 21st.dev « timelines ») */
       variant?: "timeline";
+      /** section questions/réponses : balisée FAQPage en JSON-LD */
+      faq?: boolean;
       rows: { title: string; body: string; key?: PageKey }[];
     }
   | {
@@ -252,10 +254,13 @@ export function FeaturePage({
   content: FeaturePageContent;
 }) {
   const c = content;
+  // Une seule FAQPage par page : toutes les rangées des sections marquées faq.
+  const faqRows = c.sections.flatMap((s) => (s.type === "rows" && s.faq ? s.rows : []));
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={softwareJsonLd(locale)} />
+      {faqRows.length > 0 && <JsonLd data={faqJsonLd(faqRows)} />}
 
       <div className="mx-auto flex max-w-[1272px] flex-col gap-5 px-4 pb-6 pt-[92px] md:gap-6 md:px-8 md:pb-8">
         <PageHero

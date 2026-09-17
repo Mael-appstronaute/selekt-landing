@@ -268,6 +268,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce que nous demandent *les bijoutiers*.",
         rows: [
@@ -584,6 +585,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "What jewelers *ask us*.",
         rows: [

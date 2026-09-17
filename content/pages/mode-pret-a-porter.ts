@@ -277,6 +277,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce que nous demandent *les réseaux de mode*.",
         rows: [
@@ -388,6 +389,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "What fashion networks *ask us*.",
         rows: [

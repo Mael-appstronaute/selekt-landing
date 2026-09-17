@@ -44,6 +44,14 @@ export function DemoForm({ locale, copy }: { locale: Locale; copy: DemoContent["
     }
 
     setStatus("sending");
+
+    // Copie serveur → Airtable + mail SMTP : best-effort, jamais bloquant.
+    void fetch("/api/demo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data, locale }),
+    }).catch(() => {});
+
     try {
       // Envoi direct navigateur → FormSubmit : les appels serveur (VPS comme
       // Vercel) sont bloqués par le Cloudflare de FormSubmit, seul le

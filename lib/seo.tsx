@@ -62,6 +62,19 @@ export function softwareJsonLd(locale: Locale) {
   };
 }
 
+/** FAQPage : construit depuis les rangées d'une section questions/réponses. */
+export function faqJsonLd(rows: { title: string; body: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: rows.map((row) => ({
+      "@type": "Question",
+      name: row.title,
+      acceptedAnswer: { "@type": "Answer", text: row.body },
+    })),
+  };
+}
+
 export function JsonLd({ data }: { data: object }) {
   return (
     <script

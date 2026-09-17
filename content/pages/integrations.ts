@@ -108,6 +108,7 @@ export const INTEGRATIONS: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce qu'on nous demande *avant de commencer*.",
         rows: [
@@ -212,6 +213,7 @@ export const INTEGRATIONS: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "What we are asked *before starting*.",
         rows: [

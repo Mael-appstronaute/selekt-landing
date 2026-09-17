@@ -288,6 +288,7 @@ export const REFERENTIEL_CLIENT_UNIQUE: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Questions fréquentes",
         title: "Ce qu'on nous demande *le plus souvent*.",
         rows: [
@@ -561,6 +562,7 @@ export const REFERENTIEL_CLIENT_UNIQUE: Record<Locale, FeaturePageContent> = {
       {
         type: "rows",
         tone: "cream",
+        faq: true,
         kicker: "Frequently asked",
         title: "Frequently asked *questions*.",
         rows: [
