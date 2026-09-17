@@ -45,4 +45,13 @@ export const CONNECTOR_ICONS: ConnectorIcon[] = [
   { name: "WooCommerce", label: "WooCommerce", src: "/icons/woocommerce.png" },
   { name: "Bijou3 (Odeis)", label: "Bijou3", src: "/icons/odeis.png" },
   { name: "Splio", label: "Splio", src: "/icons/splio.png", wide: true },
+  // Ajout 17/09 : outils détectés chez les marques prospectées (validé Antoine).
+  { name: "Klaviyo", label: "Klaviyo", src: "/icons/klaviyo.png" },
+  { name: "Adobe Commerce (Magento)", label: "Magento", src: "/icons/magento.svg" },
+  { name: "Lightspeed", label: "Lightspeed", src: "/icons/lightspeed.png" },
+  { name: "Skeepers", label: "Skeepers", src: "/icons/skeepers.png" },
+  { name: "Trustpilot", label: "Trustpilot", src: "/icons/trustpilot.svg" },
+  { name: "Twilio Segment", label: "Twilio Segment", src: "/icons/segment.png" },
+  { name: "Yotpo", label: "Yotpo", src: "/icons/yotpo.png" },
+  { name: "Antavo", label: "Antavo", src: "/icons/antavo.png" },
 ];

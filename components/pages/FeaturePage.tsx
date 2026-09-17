@@ -36,7 +36,7 @@ export type FeatureSection =
       lede?: string;
       /** timeline : déroulé vertical à jalons (inspiration 21st.dev « timelines ») */
       variant?: "timeline";
-      rows: { title: string; body: string }[];
+      rows: { title: string; body: string; key?: PageKey }[];
     }
   | {
       type: "cards";
@@ -108,7 +108,8 @@ export type FeatureSection =
       kicker: string;
       title: string;
       lede?: string;
-      items: { title: string; body: string }[];
+      /** key : le titre devient un lien vers la page dédiée */
+      items: { title: string; body: string; key?: PageKey }[];
     };
 
 export type FeaturePageContent = {
@@ -342,7 +343,7 @@ export function FeaturePage({
                             {String(i + 1).padStart(2, "0")}
                           </p>
                           <h3 className="mt-2.5 font-serif text-[1.25rem] leading-snug text-ink">
-                            {row.title}
+                            <TitleLink title={row.title} pageKey={row.key} locale={locale} />
                           </h3>
                           <p className="mt-2.5 text-[0.92rem] leading-relaxed muted">{row.body}</p>
                         </div>
@@ -717,7 +718,7 @@ export function FeaturePage({
                             {String(i + 1).padStart(2, "0")}
                           </span>
                           <h3 className="font-serif text-[1.4rem] leading-tight text-ink md:text-[1.6rem]">
-                            {item.title}
+                            <TitleLink title={item.title} pageKey={item.key} locale={locale} />
                           </h3>
                           <p className="max-w-[52ch] text-[0.94rem] leading-relaxed muted">
                             {item.body}
@@ -734,5 +735,19 @@ export function FeaturePage({
         <DemoCta locale={locale} />
       </div>
     </>
+  );
+}
+
+/** Titre de ligne : texte simple, ou lien vers la page dédiée quand la ligne porte une clé. */
+function TitleLink({ title, pageKey, locale }: { title: string; pageKey?: PageKey; locale: Locale }) {
+  if (!pageKey) return <>{title}</>;
+  return (
+    <Link
+      href={pagePath(pageKey, locale) as ComponentProps<typeof Link>["href"]}
+      className="group inline-flex items-baseline gap-2 text-ink no-underline decoration-brass/50 underline-offset-4 hover:underline"
+    >
+      {title}
+      <Arrow className="shrink-0 text-[0.8em] text-brass transition-transform duration-300 ease-(--ease-lux) group-hover:translate-x-1" />
+    </Link>
   );
 }

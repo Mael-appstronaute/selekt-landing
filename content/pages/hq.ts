@@ -49,6 +49,7 @@ export const HQ: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Base clients unifiée",
+            key: "customerRecord",
             body: "Une fiche par client, sans doublon, pour tout le réseau. Les rapprochements se font automatiquement.",
           },
           {
@@ -142,6 +143,7 @@ export const HQ: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Unified client base",
+            key: "customerRecord",
             body: "One profile per client, no duplicates, across the network. Matching happens automatically.",
           },
           {

@@ -14,7 +14,8 @@ import { Wordmark } from "./Wordmark";
 import { Arrow } from "../ui/Button";
 
 const EASE_LUX = [0.22, 1, 0.36, 1] as const;
-type MenuId = "platform" | "capabilities";
+type MenuId = "platform" | "capabilities" | "solutions";
+const MENU_IDS: MenuId[] = ["platform", "capabilities", "solutions"];
 
 export function Header({ locale }: { locale: Locale }) {
   const nav = NAV[locale];
@@ -32,6 +33,7 @@ export function Header({ locale }: { locale: Locale }) {
   const triggerRefs = useRef<Record<MenuId, HTMLButtonElement | null>>({
     platform: null,
     capabilities: null,
+    solutions: null,
   });
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -105,6 +107,20 @@ export function Header({ locale }: { locale: Locale }) {
   const otherLocale: Locale = locale === "fr" ? "en" : "fr";
   const otherPath = pagePath(currentKey, otherLocale);
 
+  const menuLabels: Record<MenuId, string> = {
+    platform: nav.platformLabel,
+    capabilities: nav.capabilitiesLabel,
+    solutions: nav.solutionsLabel,
+  };
+  /* Lien d'ensemble du filet de pied, propre à chaque panneau */
+  const whyEntry = nav.directLinks.find((e) => e.key === "whySelekt") ?? nav.directLinks[0];
+  const stripEntry: NavEntry =
+    open === "platform"
+      ? nav.platformColumns[1].entries[0]
+      : open === "solutions"
+        ? nav.directLinks[0]
+        : whyEntry;
+
   const demoHref = pagePath("demo", locale);
   const homeHref = pagePath("home", locale);
 
@@ -127,7 +143,7 @@ export function Header({ locale }: { locale: Locale }) {
 
         {/* ——— Navigation desktop ——— */}
         <nav aria-label={nav.menuLabel} className="hidden items-center gap-1 lg:flex">
-          {(["platform", "capabilities"] as MenuId[]).map((id) => (
+          {MENU_IDS.map((id) => (
             <div
               key={id}
               onMouseEnter={() => scheduleOpen(id)}
@@ -140,11 +156,11 @@ export function Header({ locale }: { locale: Locale }) {
                 aria-expanded={open === id}
                 aria-haspopup="true"
                 onClick={() => setOpen(open === id ? null : id)}
-                className={`flex cursor-pointer items-center gap-2 px-4 py-2 text-[0.92rem] transition-colors duration-150 ease-(--ease-lux) ${
+                className={`flex cursor-pointer items-center gap-2 whitespace-nowrap px-3 py-2 text-[0.92rem] xl:px-4 transition-colors duration-150 ease-(--ease-lux) ${
                   open === id ? "text-ink" : "text-ink/65 hover:text-ink"
                 }`}
               >
-                {id === "platform" ? nav.platformLabel : nav.capabilitiesLabel}
+                {menuLabels[id]}
                 <svg
                   aria-hidden
                   viewBox="0 0 10 6"
@@ -160,18 +176,22 @@ export function Header({ locale }: { locale: Locale }) {
               </button>
             </div>
           ))}
-          {nav.directLinks.map((entry) => (
+          {nav.directLinks.map((entry, i) => (
             <Link
               key={entry.key}
               href={navHref(entry, locale) as "/"}
-              className="px-4 py-2 text-[0.92rem] text-ink/65 no-underline transition-colors duration-150 ease-(--ease-lux) hover:text-ink"
+              /* Au-delà du premier, les liens directs n'apparaissent qu'à partir de xl :
+                 entre 1024 et 1280 px la barre déborde. Ils restent au pied de page et au menu mobile. */
+              className={`whitespace-nowrap px-3 py-2 text-[0.92rem] text-ink/65 no-underline transition-colors duration-150 ease-(--ease-lux) hover:text-ink xl:px-4 ${
+                i > 0 ? "hidden xl:block" : ""
+              }`}
             >
               {entry.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 lg:flex">
+        <div className="hidden shrink-0 items-center gap-5 lg:flex">
           <a
             href={otherPath}
             className="kicker text-ink/45 no-underline transition-colors duration-150 ease-(--ease-lux) hover:text-ink"
@@ -183,7 +203,7 @@ export function Header({ locale }: { locale: Locale }) {
           </a>
           <Link
             href={demoHref as "/"}
-            className="inline-flex h-10 items-center rounded-full bg-ink px-5 text-[0.88rem] font-medium text-cream-2 no-underline transition-[background-color,transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-0.5 hover:bg-void hover:shadow-[0_12px_24px_-10px_rgba(16,15,13,0.45)] active:translate-y-0 active:scale-[0.98] active:duration-100"
+            className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-ink px-5 text-[0.88rem] font-medium text-cream-2 no-underline transition-[background-color,transform,box-shadow] duration-300 ease-(--ease-lux) hover:-translate-y-0.5 hover:bg-void hover:shadow-[0_12px_24px_-10px_rgba(16,15,13,0.45)] active:translate-y-0 active:scale-[0.98] active:duration-100"
           >
             {nav.demoCta}
           </Link>
@@ -258,12 +278,37 @@ export function Header({ locale }: { locale: Locale }) {
                       </span>
                     </Link>
                   </div>
+                ) : open === "solutions" ? (
+                  <div className="grid lg:grid-cols-[2fr_1fr]">
+                    <div className="p-5 md:p-6">
+                      <p className="kicker px-2 pb-4 pt-1 text-sand-muted">
+                        {nav.solutionsColumns[0].heading}
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {nav.solutionsColumns[0].entries.map((entry) => (
+                          <PhotoMenuCard key={entry.key} entry={entry} locale={locale} />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="border-l border-ink/10 p-5 md:p-6">
+                      <p className="kicker px-2 pb-3 pt-1 text-sand-muted">
+                        {nav.solutionsColumns[1].heading}
+                      </p>
+                      <ul>
+                        {nav.solutionsColumns[1].entries.map((entry) => (
+                          <li key={entry.key}>
+                            <TextMenuLink entry={entry} locale={locale} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 ) : (
                   <div className="p-5 md:p-6">
                     <p className="kicker px-2 pb-4 pt-1 text-sand-muted">
                       {nav.capabilitiesColumns[0].heading}
                     </p>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-3 gap-2">
                       {nav.capabilitiesColumns[0].entries.map((entry) => (
                         <PhotoMenuCard key={entry.key} entry={entry} locale={locale} />
                       ))}
@@ -273,21 +318,8 @@ export function Header({ locale }: { locale: Locale }) {
 
                 {/* Filet de pied — lien d'ensemble + langues */}
                 <div className="flex items-center justify-between border-t border-ink/10 px-7 py-3.5">
-                  <Link
-                    href={
-                      navHref(
-                        open === "platform"
-                          ? nav.platformColumns[1].entries[0]
-                          : nav.directLinks[0],
-                        locale,
-                      ) as "/"
-                    }
-                    className="link-quiet text-brass"
-                  >
-                    {open === "platform"
-                      ? nav.platformColumns[1].entries[0].label
-                      : nav.directLinks[0].label}{" "}
-                    <Arrow />
+                  <Link href={navHref(stripEntry, locale) as "/"} className="link-quiet text-brass">
+                    {stripEntry.label} <Arrow />
                   </Link>
                   <p className="kicker text-[0.6rem] text-sand-muted">
                     Français · English · Español · 中文
@@ -320,6 +352,7 @@ export function Header({ locale }: { locale: Locale }) {
                 columns={nav.capabilitiesColumns}
                 locale={locale}
               />
+              <MobileGroup heading={nav.solutionsLabel} columns={nav.solutionsColumns} locale={locale} />
               <ul className="mt-2 border-t border-ink/10 pt-6">
                 {nav.directLinks.map((entry) => (
                   <li key={entry.key}>
@@ -380,6 +413,24 @@ function PhotoMenuCard({ entry, locale }: { entry: NavEntry; locale: Locale }) {
         <span className="mt-1 block px-1 pb-1 text-[0.82rem] leading-snug muted">
           {entry.desc}
         </span>
+      )}
+    </Link>
+  );
+}
+
+/** Lien texte du méga-menu — pour les entrées sans vignette (intégrations). */
+function TextMenuLink({ entry, locale }: { entry: NavEntry; locale: Locale }) {
+  return (
+    <Link
+      href={navHref(entry, locale) as "/"}
+      className="group block rounded-xl px-2.5 py-2 no-underline transition-colors duration-150 ease-(--ease-lux) hover:bg-cream-2"
+    >
+      <span className="flex items-center gap-2 font-serif text-[1.05rem] leading-snug text-ink">
+        {entry.label}
+        <Arrow className="shrink-0 text-brass opacity-0 transition-opacity duration-300 ease-(--ease-lux) group-hover:opacity-100" />
+      </span>
+      {entry.desc && (
+        <span className="mt-0.5 block text-[0.8rem] leading-snug muted">{entry.desc}</span>
       )}
     </Link>
   );

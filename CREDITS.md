@@ -116,3 +116,10 @@ asset, aucune image ni icône provenant de leur site, aucune formulation
 reprise. Vocabulaire d'animation inspiré de reactbits.dev / 21st.dev, réécrit
 maison (React/Tailwind/motion), recoloré aux tokens Selekt, easing unique
 cubic-bezier(0.22, 1, 0.36, 1), `prefers-reduced-motion` respecté.
+
+Ajout 17/09/2026 (grille « Connecteurs », outils détectés chez les marques prospectées) :
+- Simple Icons (CC0), recolorées couleur de marque — Magento `#EE672F`, Trustpilot `#00B67A`
+- Favicons officiels 128×128 (Google s2) — Klaviyo (klaviyo.com), Lightspeed (lightspeedhq.com),
+  Skeepers (skeepers.io), Yotpo (yotpo.com), Twilio Segment (segment.com, qui sert l'icône Twilio :
+  d'où le nom « Twilio Segment »)
+- Antavo — favicon officiel 128×128 (Google s2, antavo.com)

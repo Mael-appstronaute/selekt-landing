@@ -49,6 +49,45 @@ export const PHOTOS = {
   facade: unsplash("photo-1781707628090-dd18cfbfda72", 1600),
   /** Gravure ciselée d'une montre de poche — Sécurité */
   gravure: unsplash("photo-1772354318482-9caa5a429320", 1600),
+
+  /* --- Ajout 16/09 : 18 photographies, une par page (registre boutique, atelier, matiere, geste). --- */
+  /* Les commentaires ci-dessous decrivent CE QUE MONTRE l image : ils sont la source des textes alt. */
+  /** Interieur de boutique boisee, presentoirs eclaires — © Christian Wiediger */
+  salonBoise: unsplash("photo-1526745925052-dd824d27b9ab", 1600),
+  /** Boutique sombre, portants et silhouette de cliente — © Antonio Sokic */
+  boutiqueSombre: unsplash("photo-1580418835996-7783da1c3c6c", 1600),
+  /** Mains sertissant une bague a l etabli — © Tahlia Doyle */
+  sertissage: unsplash("photo-1623365545467-d0f2c7ecd677", 1600),
+  /** Mains d un joaillier tenant une pince de precision — © Tahlia Doyle */
+  etabliJoaillier: unsplash("photo-1628058494685-6c2f796ac24a", 1600),
+  /** Outils d horloger ranges sur un plateau de bois — © Ryan Ashby */
+  outilsHorlogerie: unsplash("photo-1786501135828-6927a8612593", 1600),
+  /** Horloger a la loupe reparant un mouvement — © Vanishing Point Images */
+  horloger: unsplash("photo-1788125856699-aee0e94d9150", 1600),
+  /** Calibre de montre maintenu dans un etau, fond sombre — © Vanishing Point Images */
+  calibre: unsplash("photo-1788125856730-2dc2c904e9bf", 1600),
+  /** Interieur de boutique de mode, portants suspendus — © Clark Street Mercantile */
+  boutiqueMode: unsplash("photo-1441984904996-e0b6ba687e04", 1600),
+  /** Portant de vetements aux tons neutres — © Alyssa Strohmann */
+  portantsNeutres: unsplash("photo-1558769132-cb1aea458c5e", 1600),
+  /** Mur de vetements et miroir dans une boutique claire — © Max Harlynking */
+  murVetements: unsplash("photo-1665815844395-06f64f44b5e3", 1600),
+  /** Costumes presentes sur mannequins — © Alexander Naglestad */
+  costumes: unsplash("photo-1580657018950-c7f7d6a6d990", 1600),
+  /** Vitrine de colliers eclairee de nuit — © Xiangkun ZHU */
+  vitrineColliers: unsplash("photo-1689560025810-4599bc195814", 1600),
+  /** Comptoir de bijouterie, bagues sur presentoirs — © Brooks Leibee */
+  comptoirBijoux: unsplash("photo-1580582202907-d01fd0bd4c87", 1600),
+  /** Etabli de maroquinerie, pieces de cuir et outils — © Alexander Kirov */
+  etabliMaroquinerie: unsplash("photo-1644258676710-ffb99d7d7a1b", 1600),
+  /** Grain d un cuir brun, gros plan — © Igor Karimov */
+  grainCuir: unsplash("photo-1778883004916-817113e192f4", 1600),
+  /** Rue commercante europeenne etroite, facades anciennes — © T */
+  rueCommercante: unsplash("photo-1762275194973-1e56414c8e5e", 1600),
+  /** Carnet ouvert sur un bois sombre, pages vierges — © Markus Spiske */
+  carnetOuvert: unsplash("photo-1576611209860-e3ad12547e8d", 1600),
+  /** Carnet a spirale et stylo dans un rai de lumiere — © Kelly Sikkema */
+  carnetStylo: unsplash("photo-1623697899813-60dc464abeef", 1600),
 } as const;
 
 export type PhotoKey = keyof typeof PHOTOS;

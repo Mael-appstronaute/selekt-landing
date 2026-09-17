@@ -13,6 +13,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const columns = [
     { heading: nav.footerHeadings.platform, entries: platformEntries },
     { heading: nav.footerHeadings.capabilities, entries: capabilityEntries },
+    { heading: nav.footerHeadings.solutions, entries: nav.footerSolutions },
     { heading: nav.footerHeadings.company, entries: nav.footerCompany },
   ];
 
@@ -39,7 +40,7 @@ export function Footer({ locale }: { locale: Locale }) {
           </div>
 
           {/* ——— Colonnes de navigation ——— */}
-          <div className="grid gap-10 sm:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-2 xl:grid-cols-4">
             {columns.map((col) => (
               <nav key={col.heading} aria-label={col.heading}>
                 <p className="kicker flex items-center gap-3 text-sand-muted">

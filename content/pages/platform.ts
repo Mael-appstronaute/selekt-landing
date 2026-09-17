@@ -74,6 +74,7 @@ export const PLATFORM: Record<Locale, FeaturePageContent> = {
         items: [
           {
             title: "Référentiel client unique",
+            key: "customerRecord",
             body: "Une seule fiche par client, pour tout le réseau. Historique, préférences, échanges : tout au même endroit.",
           },
           {
@@ -196,6 +197,7 @@ export const PLATFORM: Record<Locale, FeaturePageContent> = {
         items: [
           {
             title: "Unified client base",
+            key: "customerRecord",
             body: "One profile per client, for the whole network. History, preferences, conversations: everything in one place.",
           },
           {

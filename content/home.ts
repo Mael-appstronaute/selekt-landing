@@ -241,7 +241,7 @@ export const HOME: Record<Locale, HomeContent> = {
       tiers: [
         { name: "Boutique", range: "1 à 3 boutiques", price: "90 €", setup: "Setup dès 5 000 €" },
         { name: "Entreprise", range: "4 à 12 boutiques", price: "200 €", setup: "Setup dès 10 000 €" },
-        { name: "Elite", range: "13 boutiques et plus", price: "200 €", setup: "Setup dès 15 000 €" },
+        { name: "Elite", range: "13 boutiques et plus", price: "160 €", setup: "Setup dès 15 000 €" },
       ],
       corner: {
         name: "Grand magasin",
@@ -432,7 +432,7 @@ export const HOME: Record<Locale, HomeContent> = {
       tiers: [
         { name: "Boutique", range: "1 to 3 boutiques", price: "€90", setup: "Setup from €5,000" },
         { name: "Enterprise", range: "4 to 12 boutiques", price: "€200", setup: "Setup from €10,000" },
-        { name: "Elite", range: "13 boutiques and more", price: "€200", setup: "Setup from €15,000" },
+        { name: "Elite", range: "13 boutiques and more", price: "€160", setup: "Setup from €15,000" },
       ],
       corner: {
         name: "Department store",
