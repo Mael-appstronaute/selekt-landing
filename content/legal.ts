@@ -7,11 +7,6 @@ export type LegalContent = {
   sections: { title: string; paragraphs: string[] }[];
 };
 
-/*
- * PLACEHOLDER — les mentions marquées « À COMPLÉTER » doivent être
- * renseignées avant mise en ligne (SIREN, adresse, hébergeur, contact).
- */
-
 export const LEGAL: Record<Locale, LegalContent> = {
   fr: {
     meta: {
@@ -24,17 +19,17 @@ export const LEGAL: Record<Locale, LegalContent> = {
       {
         title: "Éditeur du site",
         paragraphs: [
-          "Le site selekt-retail.com est édité par Appstronaute SAS, dont Selekt Retail OS est une marque.",
-          "Siège social, numéro d'immatriculation et coordonnées : À COMPLÉTER avant mise en ligne.",
+          "Le site selekt-retail.com est édité par SELEKT SAS.",
+          "Siège social : 34 boulevard des Italiens, 75009 Paris, France.",
         ],
       },
       {
-        title: "Directeur de la publication",
-        paragraphs: ["À COMPLÉTER avant mise en ligne."],
+        title: "Directrice de la publication",
+        paragraphs: ["Madame Meiling Fournier."],
       },
       {
         title: "Hébergement",
-        paragraphs: ["Nom et coordonnées de l'hébergeur : À COMPLÉTER avant mise en ligne."],
+        paragraphs: ["Le site est hébergé par Hostinger."],
       },
       {
         title: "Propriété intellectuelle",
@@ -44,7 +39,7 @@ export const LEGAL: Record<Locale, LegalContent> = {
       },
       {
         title: "Contact",
-        paragraphs: ["Adresse de contact : À COMPLÉTER avant mise en ligne."],
+        paragraphs: ["Adresse de contact : contact@selekt-retail.com."],
       },
     ],
   },
@@ -59,17 +54,17 @@ export const LEGAL: Record<Locale, LegalContent> = {
       {
         title: "Site publisher",
         paragraphs: [
-          "The site selekt-retail.com is published by Appstronaute SAS, of which Selekt Retail OS is a brand.",
-          "Registered office, registration number and contact details: TO BE COMPLETED before going live.",
+          "The site selekt-retail.com is published by SELEKT SAS.",
+          "Registered office: 34 boulevard des Italiens, 75009 Paris, France.",
         ],
       },
       {
         title: "Publication director",
-        paragraphs: ["TO BE COMPLETED before going live."],
+        paragraphs: ["Mrs. Meiling Fournier."],
       },
       {
         title: "Hosting",
-        paragraphs: ["Host name and contact details: TO BE COMPLETED before going live."],
+        paragraphs: ["The site is hosted by Hostinger."],
       },
       {
         title: "Intellectual property",
@@ -79,7 +74,7 @@ export const LEGAL: Record<Locale, LegalContent> = {
       },
       {
         title: "Contact",
-        paragraphs: ["Contact address: TO BE COMPLETED before going live."],
+        paragraphs: ["Contact address: contact@selekt-retail.com."],
       },
     ],
   },
@@ -118,7 +113,7 @@ export const PRIVACY: Record<Locale, LegalContent> = {
       {
         title: "Vos droits",
         paragraphs: [
-          "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour l'exercer, écrivez-nous : adresse À COMPLÉTER avant mise en ligne.",
+          "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour l'exercer, écrivez-nous : contact@selekt-retail.com.",
           "Vous pouvez également adresser une réclamation à la CNIL (cnil.fr).",
         ],
       },
@@ -156,7 +151,7 @@ export const PRIVACY: Record<Locale, LegalContent> = {
       {
         title: "Your rights",
         paragraphs: [
-          "In accordance with the GDPR, you have the right to access, rectify, erase, restrict and object to the processing of your data. To exercise these rights, write to us: address TO BE COMPLETED before going live.",
+          "In accordance with the GDPR, you have the right to access, rectify, erase, restrict and object to the processing of your data. To exercise these rights, write to us: contact@selekt-retail.com.",
           "You may also lodge a complaint with your supervisory authority.",
         ],
       },
