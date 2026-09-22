@@ -13,7 +13,7 @@ import { NextResponse } from "next/server";
  * Le token ne transite que côté serveur, jamais exposé au navigateur.
  */
 
-const AIRTABLE_ENDPOINT = "https://api.airtable.com/v0/appy7D9hAfuL3quzi/tblgJqG8RPr9VSR0o";
+const AIRTABLE_ENDPOINT = "https://api.airtable.com/v0/appy7D9hAfuL3quzi/tbld9pFFAh8tu60mU";
 
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
