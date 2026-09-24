@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Selekt — Module Confiance &amp; conformité — mode d'emploi</title>
+<style>
+  :root { --ink:#2A2216; --gold:#C9A96A; --brass:#8C7648; --line:rgba(42,34,22,.16); --cream:#FAF7F0; }
+  body { font-family: Arial, 'Helvetica Neue', sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.6; margin: 0; }
+  h1, h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+  .cover { padding: 22mm 0 8mm; border-bottom: 2px solid var(--ink); margin-bottom: 7mm; }
+  .kicker { font-size: 8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); margin: 0 0 5mm; }
+  h1 { font-size: 23pt; margin: 0 0 2mm; line-height: 1.15; }
+  .sub { font-style: italic; color: rgba(42,34,22,.72); margin: 0; }
+  h2 { font-size: 14.5pt; margin: 8mm 0 2.5mm; padding-top: 3.5mm; border-top: 1px solid var(--line); break-after: avoid; }
+  p, li { margin: 0 0 2.2mm; }
+  ol, ul { padding-left: 5.5mm; }
+  code { font-family: Consolas, monospace; font-size: 9pt; background: var(--cream); border: 1px solid var(--line); padding: 0 1.2mm; border-radius: 2px; }
+  .box { border: 1px solid var(--gold); background: #FDFBF6; padding: 3.5mm 4.5mm; margin: 3mm 0; }
+  .box p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9.5pt; }
+  th, td { border: 1px solid var(--line); padding: 1.8mm 3mm; text-align: left; vertical-align: top; }
+  th { background: var(--cream); }
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <p class="kicker">Selekt Retail OS · documentation interne</p>
+    <h1>Module Confiance &amp; conformité<br>Mode d'emploi</h1>
+    <p class="sub">Version 1.0 · 24 septembre 2026 · selekt-retail.com</p>
+  </div>
+
+  <h2>À quoi ça sert</h2>
+  <p>Remplacer l'envoi en pièce jointe du <strong>Questionnaire de sécurité</strong> (17 sections) et de la
+  <strong>Fiche de description du traitement RGPD</strong> (11 sections) par des liens personnalisés,
+  avec une trace de ce qui a été envoyé, à qui et quand.</p>
+
+  <h2>Les trois adresses</h2>
+  <table>
+    <tr><th>Adresse</th><th>Rôle</th></tr>
+    <tr><td><code>selekt-retail.com/confiance</code></td><td>Page publique, la seule indexée par Google. Présentation courte (OVHcloud France, chiffrement, RGPD, DPA) et formulaire « Demander notre dossier de conformité ». Les demandes arrivent dans l'onglet Demandes du back-office et par mail à contact@selekt-retail.com.</td></tr>
+    <tr><td><code>/confiance/securite</code><br><code>/confiance/rgpd</code></td><td>Pages privées. Sans lien personnalisé valide, elles affichent une erreur 404 (comportement voulu : rien ne doit fuiter). Jamais indexées.</td></tr>
+    <tr><td><code>/confiance-admin</code></td><td>Le back-office, protégé par mot de passe.</td></tr>
+  </table>
+
+  <h2>Générer un lien pour un client (onglet « Nouveau lien »)</h2>
+  <ol>
+    <li>Choisir le <strong>document</strong> et un <strong>profil</strong> (DPO, Sécurité / RSSI, Achats, Complet) : le profil pré-coche les sections pertinentes. Ajustez ensuite les cases librement.</li>
+    <li>Renseigner le <strong>destinataire</strong> (nom, société, e-mail) et, si besoin, la date et le numéro de version affichés sur le document.</li>
+    <li><strong>Surcharges</strong> : pour remplacer la réponse d'une section pour CE client uniquement (sans toucher au contenu de référence), déplier « Surcharges ponctuelles » et saisir le texte de remplacement.</li>
+    <li>Cocher « <strong>Usage unique</strong> » si le lien doit mourir après validation. Sinon, il expire de lui-même au bout de 30 jours.</li>
+    <li>Cliquer « Générer le lien ».</li>
+  </ol>
+  <div class="box">
+    <p><strong>Important :</strong> copiez le lien affiché immédiatement, il ne sera plus jamais montré
+    (seule son empreinte est conservée en base, par sécurité). Envoyez-le au client par e-mail.</p>
+  </div>
+
+  <h2>Ce que voit le client</h2>
+  <p>Les réponses de référence, <strong>pré-remplies</strong> : il ne saisit rien dans le corps du document.
+  Il complète ses coordonnées, des commentaires facultatifs par section et des questions libres
+  (sauvegarde automatique : il peut fermer la page et revenir), puis valide. À la validation :
+  un PDF est généré dans la charte Selekt (pied de page : version, date, identifiant unique)
+  et envoyé à son adresse ainsi qu'à contact@selekt-retail.com.</p>
+
+  <h2>Éditer les contenus (onglet « Documents »)</h2>
+  <ul>
+    <li>Cliquer une section dans la liste de gauche pour éditer son titre et son contenu
+    (HTML : paragraphes, listes, tableaux). Le bouton <strong>Aperçu</strong> montre le rendu final.</li>
+    <li>« Enregistrer la section » modifie la <strong>version courante</strong>. Avant une refonte importante,
+    cliquer « <strong>Publier une nouvelle version</strong> » (v1.1, v1.2… avec auteur) : l'état précédent est
+    archivé, et les liens déjà envoyés continuent d'afficher la version qui leur a servi de base.</li>
+    <li>La section « MODE D'EMPLOI » du questionnaire est marquée <strong>INTERNE</strong> : elle n'est jamais
+    proposée ni envoyée aux clients.</li>
+  </ul>
+
+  <h2>Journal (onglet « Journal »)</h2>
+  <p>Chaque lien généré y figure avec : identifiant, document, version, profil, sections incluses,
+  destinataire, date de création, date de première ouverture, date de validation, adresses IP et
+  <strong>empreinte SHA-256 du PDF</strong> (preuve d'intégrité : deux envois différents ont toujours deux
+  empreintes différentes). Boutons : <strong>export CSV</strong> (ouvre dans Excel) et <strong>Télécharger</strong> pour
+  récupérer n'importe quel PDF archivé.</p>
+
+  <h2>Questions fréquentes</h2>
+  <table>
+    <tr><th>Question</th><th>Réponse</th></tr>
+    <tr><td>Le client dit que son lien ne marche plus</td><td>Il a expiré (30 jours) ou était à usage unique et a été validé. Générez-en un nouveau : c'est l'affaire d'une minute, et chaque lien laisse sa propre trace au journal.</td></tr>
+    <tr><td>« /confiance/securite affiche une 404 »</td><td>Normal sans lien personnalisé : la page n'expose jamais rien sans jeton valide.</td></tr>
+    <tr><td>Modifier une réponse pour un seul client</td><td>Ne modifiez PAS la section dans Documents (cela changerait la référence pour tout le monde) : utilisez la surcharge au moment de générer le lien.</td></tr>
+    <tr><td>Le mail n'est pas parti</td><td>Le PDF est toujours archivé et retéléchargeable depuis le Journal, même si l'envoi échoue. Vérifier la configuration SMTP du serveur (variables SMTP_*).</td></tr>
+  </table>
+
+  <h2>Technique (pour la maintenance)</h2>
+  <ul>
+    <li>Données : <code>data/confiance/</code> sur le VPS (store JSON + PDF), chiffrées AES-256-GCM avec
+    <code>CONFIANCE_KEY</code>. Répertoire hors git et hors archive de déploiement : il survit aux mises en
+    production. <strong>À inclure dans les sauvegardes du serveur.</strong></li>
+    <li>Premier démarrage : documents chargés en v1.0 depuis <code>data/confiance-seed/documents.json</code>
+    (généré des fichiers Word par <code>scripts/build-confiance-seed.mjs</code>).</li>
+    <li>PDF : Chrome headless local (puppeteer). E-mails : SMTP direct via les variables
+    <code>SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS</code>. Aucun service tiers hors UE, aucun traceur.</li>
+    <li>Variables serveur (<code>.env.production</code>) : <code>CONFIANCE_KEY</code>, <code>CONFIANCE_ADMIN_PASSWORD</code>, <code>SMTP_*</code>.</li>
+    <li>Audit accessibilité (WCAG 2.1 AA) : <code>node scripts/a11y-confiance.mjs</code> avec le site sur :3010.</li>
+  </ul>
+</body>
+</html>
