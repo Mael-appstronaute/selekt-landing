@@ -340,11 +340,21 @@ export function HomePage({ locale }: { locale: Locale }) {
                   >
                     <p className="kicker text-gold">{tier.name}</p>
                     <p className="muted-dark mt-2 text-[0.88rem]">{tier.range}</p>
-                    <p className="mt-8 font-serif text-[3.1rem] leading-none text-cream-2">
+                    {tier.prefix ? (
+                      <p className="kicker mt-8 text-[0.56rem] text-sand-muted">{tier.prefix}</p>
+                    ) : null}
+                    <p
+                      className={`${tier.prefix ? "mt-2" : "mt-8"} font-serif leading-none text-cream-2 ${
+                        tier.onRequest ? "flex min-h-[3.1rem] items-center text-[1.9rem] italic" : "text-[3.1rem]"
+                      }`}
+                    >
                       {tier.price}
                     </p>
-                    <p className="kicker mt-2.5 text-[0.56rem] text-sand-muted">{c.pricing.unit}</p>
-                    <p className="muted-dark mt-8 w-full border-t border-sand/14 pt-5 text-[0.85rem]">
+                    {tier.onRequest ? null : (
+                      <p className="kicker mt-2.5 text-[0.56rem] text-sand-muted">{c.pricing.unit}</p>
+                    )}
+                    <div className="mt-8 flex-1" aria-hidden />
+                    <p className="muted-dark w-full border-t border-sand/14 pt-5 text-[0.85rem]">
                       {tier.setup}
                     </p>
                   </div>

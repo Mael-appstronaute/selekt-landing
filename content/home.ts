@@ -64,7 +64,15 @@ export type HomeContent = {
     kicker: string;
     title: string;
     unit: string;
-    tiers: { name: string; range: string; price: string; setup: string }[];
+    /** prefix : mention « à partir de » au-dessus du prix ; onRequest : prix textuel sans unité */
+    tiers: {
+      name: string;
+      range: string;
+      price: string;
+      prefix?: string;
+      onRequest?: boolean;
+      setup: string;
+    }[];
     /** rangée Grand magasin, affichée en une ligne sous les cartes */
     corner: { name: string; range: string; price: string };
     chips: string[];
@@ -239,14 +247,32 @@ export const HOME: Record<Locale, HomeContent> = {
       title: "Une facturation à la *boutique*. Utilisateurs illimités.",
       unit: "/ boutique / mois",
       tiers: [
-        { name: "Boutique", range: "1 à 3 boutiques", price: "90 €", setup: "Setup dès 5 000 €" },
-        { name: "Entreprise", range: "4 à 12 boutiques", price: "200 €", setup: "Setup dès 10 000 €" },
-        { name: "Elite", range: "13 boutiques et plus", price: "160 €", setup: "Setup dès 15 000 €" },
+        {
+          name: "Boutique",
+          range: "1 à 3 boutiques",
+          prefix: "à partir de",
+          price: "400 €",
+          setup: "Setup dès 5 000 €",
+        },
+        {
+          name: "Entreprise",
+          range: "4 à 12 boutiques",
+          prefix: "à partir de",
+          price: "300 €",
+          setup: "Setup dès 10 000 €",
+        },
+        {
+          name: "Elite",
+          range: "13 boutiques et plus",
+          price: "Sur demande",
+          onRequest: true,
+          setup: "Setup dès 15 000 €",
+        },
       ],
       corner: {
         name: "Grand magasin",
         range: "corners, par utilisateur actif",
-        price: "de 20 € à 12 €",
+        price: "sur demande",
       },
       chips: ["Sans engagement · tarif plein", "12 mois · − 10 %", "36 mois · − 20 %, prix bloqué"],
       micro: "Montants hors taxes · Grille non contractuelle",
@@ -430,14 +456,32 @@ export const HOME: Record<Locale, HomeContent> = {
       title: "Billed per *boutique*. Unlimited users.",
       unit: "/ boutique / month",
       tiers: [
-        { name: "Boutique", range: "1 to 3 boutiques", price: "€90", setup: "Setup from €5,000" },
-        { name: "Enterprise", range: "4 to 12 boutiques", price: "€200", setup: "Setup from €10,000" },
-        { name: "Elite", range: "13 boutiques and more", price: "€160", setup: "Setup from €15,000" },
+        {
+          name: "Boutique",
+          range: "1 to 3 boutiques",
+          prefix: "from",
+          price: "€400",
+          setup: "Setup from €5,000",
+        },
+        {
+          name: "Enterprise",
+          range: "4 to 12 boutiques",
+          prefix: "from",
+          price: "€300",
+          setup: "Setup from €10,000",
+        },
+        {
+          name: "Elite",
+          range: "13 boutiques and more",
+          price: "On request",
+          onRequest: true,
+          setup: "Setup from €15,000",
+        },
       ],
       corner: {
         name: "Department store",
         range: "corners, per active user",
-        price: "€20 to €12",
+        price: "on request",
       },
       chips: ["No commitment · full price", "12 months · − 10%", "36 months · − 20%, price locked"],
       micro: "Amounts excl. VAT · Non-contractual grid",
