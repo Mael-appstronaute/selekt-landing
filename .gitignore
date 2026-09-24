@@ -51,3 +51,4 @@ screenshots-site/
 # Module Confiance : donnees runtime (store chiffre + PDF archives)
 /data/confiance/
 /scripts/out-*.html
+/selekt-deploy.tar.gz
