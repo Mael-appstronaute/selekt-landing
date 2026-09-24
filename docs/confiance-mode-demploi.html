@@ -30,6 +30,21 @@
     <p class="sub">Version 1.0 · 24 septembre 2026 · selekt-retail.com</p>
   </div>
 
+  <h2>Les accès</h2>
+  <table>
+    <tr><th style="width:38%">Quoi</th><th>Où</th></tr>
+    <tr><td>Page publique</td><td><code>https://selekt-retail.com/confiance</code></td></tr>
+    <tr><td>Back-office</td><td><code>https://selekt-retail.com/confiance-admin</code></td></tr>
+    <tr><td>Mot de passe admin</td><td><code>maisonorluxecreme-501</code></td></tr>
+    <tr><td>Lien de test — Questionnaire de sécurité<br>(valable jusqu'au 24 octobre 2026)</td><td style="word-break:break-all"><code>https://selekt-retail.com/confiance/securite?t=ModMot3B0dUUoleFEQnOPnF6yPJ0BJlu</code></td></tr>
+    <tr><td>Lien de test — Fiche RGPD<br>(valable jusqu'au 24 octobre 2026)</td><td style="word-break:break-all"><code>https://selekt-retail.com/confiance/rgpd?t=h8HIQd5vf2edrksJeVR6-utgJLk1MGTl</code></td></tr>
+  </table>
+  <div class="box">
+    <p><strong>Ce document contient le mot de passe du back-office :</strong> à ne diffuser qu'aux
+    personnes de l'équipe qui génèrent des liens. Pour le changer : modifier
+    <code>CONFIANCE_ADMIN_PASSWORD</code> dans <code>.env.production</code> sur le serveur, puis <code>pm2 restart selekt</code>.</p>
+  </div>
+
   <h2>À quoi ça sert</h2>
   <p>Remplacer l'envoi en pièce jointe du <strong>Questionnaire de sécurité</strong> (17 sections) et de la
   <strong>Fiche de description du traitement RGPD</strong> (11 sections) par des liens personnalisés,
