@@ -367,3 +367,63 @@ body {
     display: none;
   }
 }
+
+/* ————— Module Confiance & conformité ————— */
+
+/* Contenu de référence des sections (HTML issu des documents Word) */
+.confiance-prose {
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+.confiance-prose h3 {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  margin: 1.4rem 0 0.4rem;
+}
+.confiance-prose p {
+  margin: 0 0 0.7rem;
+}
+.confiance-prose ul {
+  margin: 0 0 0.7rem;
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+.confiance-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0 1rem;
+  font-size: 0.88rem;
+}
+.confiance-prose th,
+.confiance-prose td {
+  border: 1px solid var(--line-light);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.confiance-prose th {
+  background: var(--card);
+}
+.confiance-prose em {
+  color: var(--ink-soft);
+}
+
+/* Impression : document seul, sans chrome du site ni champs de saisie */
+@media print {
+  header:not(.print-keep),
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .confiance-prose table,
+  .confiance-prose tr {
+    break-inside: avoid;
+  }
+  section {
+    break-inside: avoid-page;
+  }
+}

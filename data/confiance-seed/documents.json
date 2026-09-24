@@ -1,0 +1,306 @@
+{
+  "documents": {
+    "securite": {
+      "title": "Questionnaire de sécurité",
+      "subtitle": "Réponses de référence de Selekt Retail OS",
+      "sections": [
+        {
+          "num": 0,
+          "title": "MODE D'EMPLOI (page à retirer avant envoi au client)",
+          "html": "<p>Ce document rassemble les réponses types de Selekt aux questionnaires de sécurité adressés par les directions achats, sécurité et DPO de ses clients. Il sert de source unique : les réponses sont recopiées dans le formulaire du client, quel qu'en soit le format.</p><p><strong>Trois règles d'usage.</strong></p><p><strong>1. Ne jamais répondre au-delà de ce qui est vrai.</strong> Une réponse inexacte à un questionnaire de sécurité est un engagement contractuel : elle est le plus souvent annexée au contrat, et elle fonde un manquement en cas d'incident. Lorsque la réponse est « non » ou « en cours », il vaut mieux l'écrire et indiquer l'échéance.</p><p><strong>2. Les certifications d'OVHcloud ne sont pas celles de Selekt.</strong> OVHcloud détient les certifications ISO/IEC 27001 et 27701, la certification HDS et, pour certaines offres, la qualification SecNumCloud. Ces certifications couvrent le périmètre d'OVHcloud, c'est-à-dire l'infrastructure : sécurité physique des centres de données, redondance électrique et réseau, protection anti-DDoS, isolation des infrastructures. Elles ne couvrent ni le code de Selekt, ni sa gestion des accès, ni ses processus internes. Sur une offre d'infrastructure, la sécurité est partagée : l'hébergeur sécurise ce qu'il maîtrise, l'éditeur sécurise le reste. Écrire « Selekt est certifiée ISO 27001 » parce que son hébergeur l'est serait une déclaration fausse, et le DPO d'une maison de luxe le verra immédiatement. La formulation exacte figure en section 2.</p><p><strong>3. Les passages surlignés sont à vérifier auprès de l'équipe technique avant le premier envoi.</strong> Une fois vérifiés et corrigés, retirez le surlignage : ce document devient la version de référence.</p><p>Réponses à jour au date · Version 1.0 · Responsable du document : nom</p>",
+          "internal": true
+        },
+        {
+          "num": 1,
+          "title": "IDENTITÉ ET GOUVERNANCE",
+          "html": "<h2>1.1. Identité de la société</h2><table><thead><tr><th><p><strong>Élément</strong></p></th><th><p><strong>Réponse</strong></p></th></tr></thead><tbody><tr><td><p>Dénomination sociale</p></td><td><p>Dénomination forme juridique</p></td></tr><tr><td><p>Immatriculation</p></td><td><p>RCS de ville · SIREN numéro · TVA numéro</p></td></tr><tr><td><p>Siège social</p></td><td><p>adresse</p></td></tr><tr><td><p>Activité</p></td><td><p>Édition et exploitation de la plateforme SaaS de clienteling Selekt Retail OS</p></td></tr><tr><td><p>Effectif</p></td><td><p>nombre personnes</p></td></tr><tr><td><p>Année de création</p></td><td><p>année</p></td></tr><tr><td><p>Appartenance à un groupe</p></td><td><p>Société indépendante / Société du groupe [à préciser]</p></td></tr></tbody></table><h2>1.2. Qui est responsable de la sécurité de l'information chez Selekt ?</h2><p>Un référent sécurité est désigné : nom, fonction, adresse électronique. Il pilote les mesures de sécurité, les revues d'accès et le traitement des incidents, et il est le point de contact des clients sur ces sujets.</p><h2>1.3. Existe-t-il une politique de sécurité formalisée ?</h2><p>Oui. Une politique de sécurité de l'information interne, revue annuellement, couvre la gestion des accès, le chiffrement, la journalisation, les sauvegardes, le développement sécurisé, la gestion des incidents et la sélection des sous-traitants. / En cours de formalisation, échéance [date]. Les mesures décrites dans le présent document sont d'ores et déjà appliquées.</p><h2>1.4. Un délégué à la protection des données est-il désigné ?</h2><p>La désignation d'un DPO n'est pas obligatoire au regard de l'article 37 du RGPD compte tenu de l'activité et de la taille de Selekt. Un référent « protection des données » est désigné : [nom, adresse électronique]. / Oui : [nom, coordonnées, date de désignation auprès de la CNIL].</p><h2>1.5. Selekt est-elle assurée ?</h2><p>Selekt est titulaire d'une assurance responsabilité civile professionnelle auprès de assureur, et d'une garantie cyber. L'attestation est communiquée sur demande.</p>",
+          "internal": false
+        },
+        {
+          "num": 2,
+          "title": "CONFORMITÉ ET CERTIFICATIONS",
+          "html": "<h2>2.1. Selekt est-elle certifiée ISO 27001 ou équivalent ?</h2><p>Selekt n'est pas, à ce jour, certifiée ISO/IEC 27001 en son nom propre. Une démarche de certification est engagée, avec une échéance visée en [date]. / Une démarche de certification sera engagée en fonction des exigences de nos clients.</p><p>L'infrastructure sur laquelle la plateforme est exploitée est opérée par OVHcloud, dont les certifications ISO/IEC 27001 et ISO/IEC 27701 couvrent les services d'infrastructure utilisés. Ces certifications portent sur le périmètre d'OVHcloud : sécurité physique des centres de données, redondance, isolation des infrastructures et systèmes d'information support. Elles ne couvrent pas la couche applicative exploitée par Selekt, dont les mesures sont décrites dans les sections suivantes.</p><p><em>Une attestation de conformité OVHcloud peut être jointe à la réponse ; elle ne doit jamais être présentée comme un certificat de Selekt.</em></p><h2>2.2. Quel est le partage des responsabilités entre Selekt et son hébergeur ?</h2><p>OVHcloud assure la sécurité physique, la disponibilité de l'infrastructure, la redondance électrique et réseau et la protection contre les attaques volumétriques. Selekt assure la sécurité de l'application, la configuration des systèmes, la gestion des comptes et des droits, le chiffrement applicatif, les sauvegardes logiques, la journalisation, la supervision et la gestion des vulnérabilités du code.</p><h2>2.3. Des audits ou tests d'intrusion sont-ils réalisés ?</h2><p>Un test d'intrusion est réalisé par un prestataire externe [périodicité, dernier test réalisé le …]. Une synthèse est communiquée aux clients sous accord de confidentialité. / Aucun test d'intrusion externe n'a été réalisé à ce jour ; le premier est programmé pour [date]. Les clients peuvent faire réaliser leur propre audit dans les conditions de l'article 9-4 des CGV et de l'Annexe 2.</p><h2>2.4. Selekt est-elle concernée par la directive NIS 2 ?</h2><p>À vérifier : l'éligibilité dépend de la taille de l'entité et du secteur. Une petite entité éditrice de logiciel n'entre en principe pas dans le champ, sauf qualification particulière.</p>",
+          "internal": false
+        },
+        {
+          "num": 3,
+          "title": "HÉBERGEMENT ET LOCALISATION DES DONNÉES",
+          "html": "<h2>3.1. Où les données sont-elles hébergées ?</h2><p>Les données sont hébergées par OVHcloud, société française, dans des centres de données situés en France (région / ville) et, le cas échéant, dans l'Union européenne. Aucune donnée client n'est stockée hors de l'Espace économique européen.</p><h2>3.2. Les données sont-elles soumises à une législation extraterritoriale ?</h2><p>L'hébergeur est une société de droit français, sans société mère soumise au CLOUD Act américain. Les autres sous-traitants figurent à l'Annexe 3 des CGV ; leur situation au regard des législations extraterritoriales est précisée au cas par cas, notamment pour le fournisseur des modèles d'intelligence artificielle.</p><h2>3.3. L'environnement est-il mutualisé ou dédié ?</h2><p>L'infrastructure est mutualisée entre les clients de Selekt, avec un cloisonnement logique strict décrit en section 4. Un environnement dédié peut être proposé sur devis. / À préciser selon l'architecture retenue.</p><h2>3.4. Des accès distants depuis l'extérieur de l'EEE existent-ils ?</h2><p>Non : l'ensemble du personnel de Selekt et de ses sous-traitants techniques accède aux environnements depuis l'Union européenne. / À vérifier si un prestataire ou un collaborateur accède aux systèmes depuis un pays tiers : un tel accès constitue un transfert au sens du RGPD et doit être encadré.</p>",
+          "internal": false
+        },
+        {
+          "num": 4,
+          "title": "ARCHITECTURE ET CLOISONNEMENT",
+          "html": "<h2>4.1. Comment les données des différents clients sont-elles séparées ?</h2><p>Chaque client dispose d'un espace logiquement cloisonné. Les requêtes applicatives portent systématiquement l'identifiant du client, et aucune requête ne peut retourner des données appartenant à un autre client. Préciser le mécanisme : base de données distincte par client, ou schéma distinct, ou cloisonnement par identifiant de tenant avec contrôle en base.</p><h2>4.2. Un groupe exploitant plusieurs marques peut-il les cloisonner entre elles ?</h2><p>Oui. Au sein d'un même client, les données, les paramétrages et les modèles de messages sont cloisonnés par marque. Les droits d'accès sont définis au niveau de la marque, du point de vente et du champ de données.</p><h2>4.3. Les environnements de test contiennent-ils des données réelles ?</h2><p>Non. Les environnements de développement et de test sont distincts de la production et utilisent des données fictives ou anonymisées. Aucune donnée de production n'y est copiée. À confirmer et, le cas échéant, à corriger en priorité : c'est l'un des premiers points vérifiés par les auditeurs.</p>",
+          "internal": false
+        },
+        {
+          "num": 5,
+          "title": "GESTION DES ACCÈS DES UTILISATEURS DU CLIENT",
+          "html": "<h2>5.1. Comment les comptes sont-ils créés et supprimés ?</h2><p>Le client crée, modifie et désactive lui-même les comptes de ses utilisateurs depuis la console de configuration. La désactivation est immédiate et interrompt les sessions en cours.</p><h2>5.2. Quelle est la politique de mots de passe ?</h2><p>Longueur minimale de [12] caractères, contrôle de complexité, blocage après [10] tentatives infructueuses, stockage sous forme de condensats salés (algorithme [bcrypt / argon2]).</p><h2>5.3. L'authentification à deux facteurs et le SSO sont-ils disponibles ?</h2><p>L'authentification à deux facteurs est disponible et peut être rendue obligatoire par le client. Le SSO (SAML 2.0 / OpenID Connect) et le provisionnement SCIM sont [disponibles / prévus pour [date]].</p><h2>5.4. Les droits peuvent-ils être restreints finement ?</h2><p>Oui. Le client définit ses propres rôles et décide, champ par champ, des données visibles par chaque rôle. Un rôle sans droit sur une donnée ne la reçoit jamais, y compris par les exports et les interfaces.</p><h2>5.5. Les sessions expirent-elles ?</h2><p>Les sessions expirent après [durée] d'inactivité. La durée est paramétrable par le client.</p>",
+          "internal": false
+        },
+        {
+          "num": 6,
+          "title": "ACCÈS DU PERSONNEL DE SELEKT AUX DONNÉES CLIENT",
+          "html": "<h2>6.1. Qui peut accéder aux données de production ?</h2><p>L'accès aux environnements de production est limité à nombre personnes, identifiées nominativement, selon le principe du moindre privilège. Il est protégé par une authentification à deux facteurs et par un accès réseau restreint [VPN / liste d'adresses autorisées].</p><h2>6.2. Dans quels cas le personnel de Selekt consulte-t-il des données client ?</h2><p>Uniquement pour le support et la maintenance, à la demande du client ou pour corriger un incident identifié, et dans la stricte mesure nécessaire. Ces accès sont journalisés. Préciser si un mécanisme d'accès temporaire ou d'approbation existe.</p><h2>6.3. Des sous-traitants ont-ils accès aux données ?</h2><p>Oui : [préciser, notamment si Appstronaute SAS assure le développement et le support technique]. Ces intervenants sont soumis aux mêmes obligations contractuelles de confidentialité et de sécurité, et figurent à l'Annexe 3 des CGV. / Non.</p><h2>6.4. Les revues d'accès sont-elles périodiques ?</h2><p>Une revue des comptes et des droits d'accès aux environnements de production est réalisée [semestriellement]. Les accès sont révoqués le jour du départ d'un collaborateur.</p>",
+          "internal": false
+        },
+        {
+          "num": 7,
+          "title": "CHIFFREMENT",
+          "html": "<h2>7.1. Les données sont-elles chiffrées en transit ?</h2><p>Oui. Tous les échanges avec la plateforme et entre ses composants sont chiffrés en TLS 1.2 ou supérieur, avec redirection systématique du trafic en clair.</p><h2>7.2. Les données sont-elles chiffrées au repos ?</h2><p>Oui : chiffrement des volumes de stockage et des sauvegardes ([AES-256]). / À vérifier : le chiffrement au repos n'est pas systématique sur toutes les offres d'infrastructure et doit être activé explicitement.</p><h2>7.3. Comment les secrets sont-ils gérés ?</h2><p>Les clés, jetons et secrets applicatifs sont stockés dans un coffre dédié [solution], hors du code source, et font l'objet d'une rotation [périodicité].</p>",
+          "internal": false
+        },
+        {
+          "num": 8,
+          "title": "JOURNALISATION ET TRAÇABILITÉ",
+          "html": "<h2>8.1. Quelles actions sont journalisées ?</h2><p>Les connexions, les créations et modifications de comptes et de droits, les accès et modifications portant sur les fiches clients, les exports, les envois de messages et les modifications de paramétrage. Le journal indique l'auteur, la date, l'action et la donnée concernée.</p><h2>8.2. Le client a-t-il accès aux journaux ?</h2><p>Oui, depuis l'espace Siège, pour les actions réalisées au sein de son espace.</p><h2>8.3. Quelle est la durée de conservation des journaux ?</h2><p>[12] mois pour les journaux applicatifs, [6] mois pour les journaux techniques. Les journaux ne peuvent être modifiés ni supprimés par les utilisateurs.</p>",
+          "internal": false
+        },
+        {
+          "num": 9,
+          "title": "SAUVEGARDES ET CONTINUITÉ",
+          "html": "<h2>9.1. Quelle est la politique de sauvegarde ?</h2><p>Sauvegardes quotidiennes automatisées, chiffrées, conservées [30] jours, stockées dans un centre de données distinct de celui de production, situé dans l'Union européenne.</p><h2>9.2. Les restaurations sont-elles testées ?</h2><p>Un test de restauration complet est réalisé [semestriellement] et fait l'objet d'un compte rendu. / À mettre en place : une sauvegarde jamais testée n'est pas une sauvegarde, et c'est la leçon retenue de l'incendie du centre de données SBG2 en 2021.</p><h2>9.3. Quels sont les objectifs de reprise ?</h2><p>Perte de données maximale admissible (RPO) : 24 heures. Durée maximale d'interruption admissible (RTO) : 8 heures ouvrées. Ces objectifs sont repris à l'Annexe 1 des CGV.</p><h2>9.4. Quel est le taux de disponibilité ?</h2><p>Selekt s'engage sur un taux de disponibilité mensuel de 99,5 %, assorti de crédits de service, dans les conditions de l'Annexe 1 des CGV. Le taux constaté est communiqué sur demande.</p>",
+          "internal": false
+        },
+        {
+          "num": 10,
+          "title": "DÉVELOPPEMENT ET GESTION DES CHANGEMENTS",
+          "html": "<h2>10.1. Comment les évolutions sont-elles validées ?</h2><p>Chaque modification du code fait l'objet d'une revue par un autre développeur avant intégration, de tests automatisés et d'un déploiement par une chaîne d'intégration continue. Les déploiements sont traçables et réversibles.</p><h2>10.2. Les développeurs sont-ils sensibilisés à la sécurité ?</h2><p>Oui : sensibilisation aux vulnérabilités applicatives courantes (référentiel OWASP) à l'arrivée puis [annuellement].</p><h2>10.3. Les dépendances externes sont-elles surveillées ?</h2><p>Les bibliothèques tierces font l'objet d'une analyse automatisée des vulnérabilités connues à chaque intégration, et les correctifs de sécurité sont appliqués sous [délai].</p>",
+          "internal": false
+        },
+        {
+          "num": 11,
+          "title": "VULNÉRABILITÉS ET SUPERVISION",
+          "html": "<h2>11.1. Comment les vulnérabilités sont-elles traitées ?</h2><p>Les correctifs de sécurité critiques sont appliqués sous [48 heures], les correctifs importants sous [15 jours]. Les systèmes sont maintenus à jour.</p><h2>11.2. La plateforme est-elle supervisée ?</h2><p>Supervision continue de la disponibilité et des performances, avec alertes automatiques et astreinte [à préciser]. L'infrastructure bénéficie de la protection anti-DDoS d'OVHcloud.</p><h2>11.3. Existe-t-il un canal de signalement de vulnérabilité ?</h2><p>Oui : [adresse électronique dédiée]. Tout signalement fait l'objet d'un accusé de réception sous [2] jours ouvrés.</p>",
+          "internal": false
+        },
+        {
+          "num": 12,
+          "title": "INCIDENTS ET VIOLATIONS DE DONNÉES",
+          "html": "<h2>12.1. Existe-t-il une procédure de gestion des incidents ?</h2><p>Oui : qualification, confinement, correction, information du client, analyse des causes et mesures correctives. Les incidents sont consignés dans un registre interne.</p><h2>12.2. Sous quel délai Selekt informe-t-elle le client d'une violation de données ?</h2><p>Dans les meilleurs délais et au plus tard quarante-huit (48) heures après en avoir pris connaissance, conformément à l'Annexe 2 des CGV. La notification comprend les informations prévues à l'article 33, paragraphe 3, du RGPD, complétées au fur et à mesure de l'investigation. La notification à l'autorité de contrôle et aux personnes concernées incombe au client, responsable de traitement ; Selekt lui apporte son concours.</p><h2>12.3. Qui contacter en cas d'incident de sécurité ?</h2><p>adresse électronique dédiée, et le référent sécurité mentionné en section 1.</p>",
+          "internal": false
+        },
+        {
+          "num": 13,
+          "title": "PROTECTION DES DONNÉES PERSONNELLES",
+          "html": "<h2>13.1. Quel est le rôle de chaque partie ?</h2><p>Le client est responsable de traitement ; Selekt est sous-traitant au sens de l'article 28 du RGPD. Un accord de traitement des données figure en Annexe 2 des CGV et est signé avec le contrat.</p><h2>13.2. Selekt tient-elle un registre des traitements ?</h2><p>Oui, conformément à l'article 30, paragraphe 2, du RGPD.</p><h2>13.3. Comment les droits des personnes sont-ils traités ?</h2><p>La plateforme permet au client d'exporter, de rectifier, d'effacer et d'anonymiser les données d'une personne depuis l'application. L'anonymisation préserve les statistiques agrégées. Toute demande reçue directement par Selekt est transmise au client sous cinq (5) jours ouvrés, sans réponse de sa part.</p><h2>13.4. Quelles sont les durées de conservation ?</h2><p>Elles sont définies et paramétrées par le client, responsable de traitement. À la fin du contrat, les données sont exportables pendant trente (30) jours puis supprimées dans un délai de soixante (60) jours, sauvegardes comprises.</p><h2>13.5. Existe-t-il des transferts hors Union européenne ?</h2><p>Non pour l'hébergement et les traitements applicatifs. Le cas du fournisseur des modèles d'intelligence artificielle est précisé en section 14 et à l'Annexe 3 des CGV.</p><h2>13.6. Les sous-traitants ultérieurs sont-ils communiqués ?</h2><p>Oui : ils figurent à l'Annexe 3 des CGV. Tout ajout ou remplacement est notifié au client trente (30) jours à l'avance, avec un droit d'opposition motivé.</p>",
+          "internal": false
+        },
+        {
+          "num": 14,
+          "title": "INTELLIGENCE ARTIFICIELLE",
+          "html": "<h2>14.1. Quels modèles sont utilisés et où sont-ils exécutés ?</h2><p>Fournisseur : [nom]. Région d'exécution : [à préciser]. Si le fournisseur est établi hors de l'Union européenne ou y traite les données, indiquer les garanties : clauses contractuelles types, hébergement européen dédié, ou modèle exécuté sur l'infrastructure OVHcloud.</p><h2>14.2. Les données client servent-elles à entraîner des modèles ?</h2><p>Non. Selekt s'interdit contractuellement d'utiliser les données des clients pour entraîner ou améliorer des modèles d'intelligence artificielle et impose la même interdiction à ses fournisseurs de modèles. Vérifier que le contrat du fournisseur retenu comporte effectivement cet engagement, ainsi qu'une durée de rétention nulle ou limitée des requêtes.</p><h2>14.3. Quelles données sont transmises aux modèles ?</h2><p>Uniquement les données nécessaires à la fonction demandée par l'utilisateur, au moment où il la demande. Aucun envoi massif ni systématique de la base clients n'est réalisé.</p><h2>14.4. L'IA peut-elle envoyer un message sans intervention humaine ?</h2><p>Non. Les fonctionnalités d'IA produisent des brouillons ; l'envoi suppose la validation d'un utilisateur. Le client définit en outre une liste de formulations proscrites, bloquées avant relecture.</p><h2>14.5. Comment Selekt se situe-t-elle au regard du règlement européen sur l'IA ?</h2><p>Les fonctionnalités proposées relèvent de l'assistance à la rédaction et ne constituent pas un système d'IA à haut risque au sens du règlement (UE) 2024/1689. Selekt fournit au client, sur demande, les informations nécessaires au respect de ses propres obligations, notamment de transparence envers les clients finaux. À faire confirmer par le conseil juridique.</p>",
+          "internal": false
+        },
+        {
+          "num": 15,
+          "title": "RESSOURCES HUMAINES ET SOUS-TRAITANTS",
+          "html": "<h2>15.1. Le personnel est-il soumis à une obligation de confidentialité ?</h2><p>Oui, par une clause figurant au contrat de travail ou de prestation, qui survit à la fin de la relation.</p><h2>15.2. Le personnel est-il sensibilisé à la sécurité ?</h2><p>Sensibilisation à l'arrivée puis [annuellement] : hameçonnage, gestion des mots de passe, traitement des données personnelles.</p><h2>15.3. Quelle est la procédure lors d'un départ ?</h2><p>Révocation des accès le jour du départ, restitution du matériel, suppression des accès aux coffres de secrets et aux environnements de production.</p><h2>15.4. Comment les sous-traitants sont-ils sélectionnés et suivis ?</h2><p>Ils sont retenus sur la base de leurs garanties de sécurité et de conformité, liés par un accord de traitement des données, et réexaminés annuellement. La liste figure à l'Annexe 3 des CGV.</p>",
+          "internal": false
+        },
+        {
+          "num": 16,
+          "title": "RÉVERSIBILITÉ ET FIN DE CONTRAT",
+          "html": "<h2>16.1. Le client peut-il récupérer ses données ?</h2><p>Oui, à tout moment, dans un format standard et documenté, au moyen des fonctions d'export de la plateforme, ainsi que pendant trente (30) jours après la fin du contrat, quelle qu'en soit la cause.</p><h2>16.2. Que deviennent les données ensuite ?</h2><p>Elles sont supprimées dans un délai de soixante (60) jours, sauvegardes comprises selon leur cycle normal de rotation. Une attestation de suppression est remise sur demande.</p><h2>16.3. Le code source est-il déposé auprès d'un tiers ?</h2><p>À la demande du client et à ses frais, un dépôt auprès d'un tiers dépositaire tel que l'Agence pour la Protection des Programmes peut être mis en place, dans les conditions de l'article 14-7 des CGV.</p>",
+          "internal": false
+        },
+        {
+          "num": 17,
+          "title": "DOCUMENTS COMMUNICABLES SUR DEMANDE",
+          "html": "<ul><li>Accord de traitement des données (Annexe 2 des CGV) et liste des sous-traitants ultérieurs (Annexe 3).</li><li>Fiche de description du traitement, pré-remplie.</li><li>Attestation d'assurance responsabilité civile professionnelle et cyber.</li><li>Attestations de conformité de l'hébergeur OVHcloud.</li><li>Synthèse du dernier test d'intrusion, sous accord de confidentialité.</li><li>Extrait Kbis et statuts.</li></ul>",
+          "internal": false
+        }
+      ],
+      "profiles": {
+        "complet": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "dpo": [
+          1,
+          2,
+          3,
+          6,
+          8,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "rssi": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          14,
+          15,
+          17
+        ],
+        "achats": [
+          1,
+          2,
+          3,
+          9,
+          12,
+          13,
+          16,
+          17
+        ]
+      }
+    },
+    "rgpd": {
+      "title": "Fiche de description du traitement",
+      "subtitle": "Annexe RGPD article 28 — pré-remplie Selekt",
+      "sections": [
+        {
+          "num": 0,
+          "title": "Objet du document",
+          "html": "<p>La présente fiche décrit le traitement de données à caractère personnel réalisé par Selekt en qualité de sous-traitant, conformément à l'article 28, paragraphe 3, du règlement (UE) 2016/679 (« RGPD »). Elle complète l'Accord de traitement des données figurant à l'Annexe 2 des Conditions Générales de Vente, qui demeure le document contractuel de référence : en cas de divergence, celui-ci prévaut.</p><p>Elle est remise au Client à sa demande, notamment pour alimenter son registre des activités de traitement, et est mise à jour à chaque évolution significative du traitement ou de la liste des sous-traitants ultérieurs.</p><table><thead><tr><th><p><strong>Élément</strong></p></th><th><p><strong>Information</strong></p></th></tr></thead><tbody><tr><td><p>Responsable de traitement</p></td><td><p>Dénomination du Client, forme juridique, siège, immatriculation</p></td></tr><tr><td><p>Sous-traitant</p></td><td><p>Dénomination forme juridique, adresse du siège, RCS de ville SIREN, éditrice de Selekt Retail OS</p></td></tr><tr><td><p>Sous-traitants ultérieurs</p></td><td><p>OVHcloud (hébergement) · fournisseur des modèles d'IA · autres : voir section 8</p></td></tr><tr><td><p>Contrat de référence</p></td><td><p>Bon de commande du date et Conditions Générales de Vente, Annexe 2 (Accord de traitement des données)</p></td></tr><tr><td><p>Version de la fiche</p></td><td><p>1.0 — date</p></td></tr></tbody></table>",
+          "internal": false
+        },
+        {
+          "num": 1,
+          "title": "SERVICES CONCERNÉS",
+          "html": "<p>Selekt met à la disposition du Client une plateforme logicielle de clienteling en mode SaaS, destinée à ses points de vente et à son siège. Les services comprennent l'hébergement des données des clients finaux du Client et de ses collaborateurs, la synchronisation avec les outils du Client (caisse, e-commerce, CRM, messageries), la mise à disposition de fonctionnalités de communication personnalisée, la génération de brouillons de messages et de résumés par des fonctionnalités d'intelligence artificielle soumises à validation humaine, et le calcul d'indicateurs de chiffre d'affaires direct et influencé.</p>",
+          "internal": false
+        },
+        {
+          "num": 2,
+          "title": "NATURE DES OPÉRATIONS DE TRAITEMENT",
+          "html": "<table><thead><tr><th><p><strong>Opération</strong></p></th><th><p><strong>Concernée</strong></p></th><th><p><strong>Précisions</strong></p></th></tr></thead><tbody><tr><td><p>Collecte</p></td><td><p>Oui</p></td><td><p>Saisie par les utilisateurs du Client, formulaires, synchronisation depuis les services tiers du Client</p></td></tr><tr><td><p>Enregistrement</p></td><td><p>Oui</p></td><td><p>Stockage dans la fiche client et les journaux applicatifs</p></td></tr><tr><td><p>Organisation et structuration</p></td><td><p>Oui</p></td><td><p>Rapprochement des doublons, segmentation, calcul d'indicateurs</p></td></tr><tr><td><p>Consultation et utilisation</p></td><td><p>Oui</p></td><td><p>Par les utilisateurs habilités du Client ; par Selekt pour le support, de manière tracée</p></td></tr><tr><td><p>Modification</p></td><td><p>Oui</p></td><td><p>Mise à jour des fiches par les utilisateurs du Client</p></td></tr><tr><td><p>Communication par transmission</p></td><td><p>Oui</p></td><td><p>Envoi de messages aux clients finaux à l'initiative des utilisateurs ; synchronisation vers les services tiers du Client</p></td></tr><tr><td><p>Rapprochement ou interconnexion</p></td><td><p>Oui</p></td><td><p>Rapprochement des données issues des points de vente, du e-commerce et des messageries</p></td></tr><tr><td><p>Limitation</p></td><td><p>Oui</p></td><td><p>Gestion des oppositions et des restrictions paramétrées par le Client</p></td></tr><tr><td><p>Effacement et anonymisation</p></td><td><p>Oui</p></td><td><p>Sur demande du Client ou à l'expiration des durées qu'il a paramétrées</p></td></tr></tbody></table>",
+          "internal": false
+        },
+        {
+          "num": 3,
+          "title": "FINALITÉS DU TRAITEMENT",
+          "html": "<p>Les finalités sont déterminées par le Client, responsable de traitement. Elles sont, au titre des services :</p><ul><li>la gestion de la relation avec ses clients et prospects (clienteling) ;</li><li>la prise et le suivi de rendez-vous en point de vente ;</li><li>la gestion des listes d'envies et des préférences ;</li><li>l'envoi de communications personnalisées sur les canaux choisis par le Client ;</li><li>la mesure du chiffre d'affaires direct et influencé, et le pilotage de l'activité des points de vente ;</li><li>l'administration des comptes utilisateurs et la sécurité de la plateforme.</li></ul><p>Selekt ne poursuit aucune finalité propre sur ces données. Elle n'utilise ni les données du Client, ni les contenus générés, pour entraîner ou améliorer des modèles d'intelligence artificielle.</p>",
+          "internal": false
+        },
+        {
+          "num": 4,
+          "title": "CATÉGORIES DE PERSONNES CONCERNÉES",
+          "html": "<table><thead><tr><th><p><strong>Catégorie</strong></p></th><th><p><strong>Concernée</strong></p></th><th><p><strong>Précisions</strong></p></th></tr></thead><tbody><tr><td><p>Clients et prospects du Responsable de traitement</p></td><td><p>Oui</p></td><td><p>Personnes physiques dont une fiche est créée dans la plateforme</p></td></tr><tr><td><p>Salariés du Responsable de traitement</p></td><td><p>Oui</p></td><td><p>Conseillers de vente, responsables de point de vente, collaborateurs du siège</p></td></tr><tr><td><p>Prestataires du Responsable de traitement</p></td><td><p>Oui / Non</p></td><td><p>Uniquement s'ils disposent d'un compte utilisateur</p></td></tr><tr><td><p>Autres catégories</p></td><td><p>Non</p></td><td><p>—</p></td></tr></tbody></table>",
+          "internal": false
+        },
+        {
+          "num": 5,
+          "title": "CATÉGORIES DE DONNÉES TRAITÉES",
+          "html": "<table><thead><tr><th><p><strong>Catégorie</strong></p></th><th><p><strong>Traitée</strong></p></th><th><p><strong>Détail</strong></p></th></tr></thead><tbody><tr><td><p>Données d'identification</p></td><td><p>Oui</p></td><td><p>Nom, prénom, civilité, coordonnées postales, téléphone, adresse électronique, identifiants de messagerie, langue, pays</p></td></tr><tr><td><p>Vie personnelle</p></td><td><p>Oui</p></td><td><p>Préférences, centres d'intérêt, tailles, événements déclarés par la personne, notes saisies par les conseillers</p></td></tr><tr><td><p>Vie professionnelle</p></td><td><p>Oui</p></td><td><p>Pour les salariés du Client uniquement : point de vente de rattachement, fonction, rôle dans l'application</p></td></tr><tr><td><p>Données économiques et financières</p></td><td><p>Oui</p></td><td><p>Historique d'achats et montants. Aucune donnée bancaire n'est traitée : les paiements ne transitent pas par la plateforme</p></td></tr><tr><td><p>Données de connexion</p></td><td><p>Oui</p></td><td><p>Journaux de connexion et d'action des utilisateurs, horodatage. Préciser si les adresses IP sont conservées, et pour quelle durée</p></td></tr><tr><td><p>Autres données</p></td><td><p>Oui</p></td><td><p>Historique des échanges et messages, rendez-vous, listes d'envies, consentements et oppositions, ventes attribuées</p></td></tr><tr><td><p>Catégories particulières (article 9)</p></td><td><p>Non</p></td><td><p>Leur saisie est contractuellement interdite au Client et à ses utilisateurs (article 6-3 des CGV), y compris dans les champs libres</p></td></tr><tr><td><p>Condamnations et infractions</p></td><td><p>Non</p></td><td><p>—</p></td></tr></tbody></table><p><em>Vigilance : les notes libres saisies en point de vente sont le principal vecteur de données sensibles non prévues (état de santé, convictions). Le rappel de l'interdiction figure dans la documentation destinée aux utilisateurs.</em></p>",
+          "internal": false
+        },
+        {
+          "num": 6,
+          "title": "LOCALISATION DES TRAITEMENTS",
+          "html": "<table><thead><tr><th><p><strong>Élément</strong></p></th><th><p><strong>Localisation</strong></p></th></tr></thead><tbody><tr><td><p>Hébergement des données et sauvegardes</p></td><td><p>France région, chez OVHcloud, société de droit français</p></td></tr><tr><td><p>Exploitation et administration de la plateforme</p></td><td><p>France, par les équipes de Selekt et de [sous-traitant technique]</p></td></tr><tr><td><p>Support aux utilisateurs</p></td><td><p>France à confirmer</p></td></tr><tr><td><p>Fonctionnalités d'intelligence artificielle</p></td><td><p>À préciser : région d'exécution du fournisseur de modèles</p></td></tr></tbody></table>",
+          "internal": false
+        },
+        {
+          "num": 7,
+          "title": "TRANSFERTS HORS DE L'ESPACE ÉCONOMIQUE EUROPÉEN",
+          "html": "<p>Aucun transfert hors de l'Espace économique européen n'est réalisé. / Un transfert est réalisé vers [pays] au titre de [service]. Garanties mises en œuvre : [décision d'adéquation / clauses contractuelles types de la Commission du 4 juin 2021, modules 3 ou 4, complétées de mesures supplémentaires].</p><p><em>Point d'attention : constitue également un transfert tout accès à distance aux données depuis un pays tiers, notamment par une équipe de support, un prestataire technique ou un fournisseur de modèles d'intelligence artificielle. Répondre « aucun transfert » tout en recourant à un service dont les traitements ou les accès d'assistance sont situés hors de l'Union est une inexactitude fréquente, et repérée en audit.</em></p>",
+          "internal": false
+        },
+        {
+          "num": 8,
+          "title": "SOUS-TRAITANTS ULTÉRIEURS",
+          "html": "<table><thead><tr><th><p><strong>Sous-traitant</strong></p></th><th><p><strong>Service confié</strong></p></th><th><p><strong>Localisation des données</strong></p></th><th><p><strong>Garanties</strong></p></th></tr></thead><tbody><tr><td><p>OVHcloud</p></td><td><p>Hébergement de l'infrastructure, du stockage et des sauvegardes</p></td><td><p>France région</p></td><td><p>ISO/IEC 27001 et 27701 sur le périmètre d'infrastructure ; accord de traitement des données</p></td></tr><tr><td><p>Fournisseur des modèles d'IA</p></td><td><p>Génération de brouillons de messages, de résumés et de comptes rendus</p></td><td><p>à préciser</p></td><td><p>Accord de traitement des données ; engagement de non-entraînement ; clauses contractuelles types si transfert</p></td></tr><tr><td><p>Prestataire d'envoi de courriels et notifications</p></td><td><p>Acheminement des messages transactionnels</p></td><td><p>à préciser</p></td><td><p>à préciser</p></td></tr><tr><td><p>Outil de support</p></td><td><p>Gestion des demandes de support</p></td><td><p>à préciser</p></td><td><p>à préciser</p></td></tr><tr><td><p>Outil de supervision</p></td><td><p>Supervision technique et journaux</p></td><td><p>à préciser</p></td><td><p>à préciser</p></td></tr><tr><td><p>Appstronaute SAS, le cas échéant</p></td><td><p>Développement, maintenance et support technique</p></td><td><p>France</p></td><td><p>Accord de traitement des données ; engagement de confidentialité</p></td></tr></tbody></table><p>Les services tiers choisis et contractés par le Client lui-même (logiciel de caisse, CRM, e-commerce, messageries telles que WhatsApp) ne sont pas des sous-traitants ultérieurs de Selekt : le Client en est le donneur d'ordre direct.</p><p>Tout ajout ou remplacement de sous-traitant ultérieur est notifié au Client au moins trente (30) jours à l'avance, avec faculté d'opposition motivée, conformément à l'Annexe 2 des CGV.</p>",
+          "internal": false
+        },
+        {
+          "num": 9,
+          "title": "DURÉE DU TRAITEMENT",
+          "html": "<p>Les données sont traitées pendant toute la durée du contrat conclu avec le Client. À son terme, elles restent exportables pendant trente (30) jours, puis sont supprimées dans un délai de soixante (60) jours, y compris dans les sauvegardes selon leur cycle normal de rotation, sauf obligation légale de conservation. Une attestation de suppression est remise sur demande.</p><p>Les durées de conservation applicables en cours de contrat à chaque catégorie de données sont définies et paramétrées par le Client, responsable de traitement.</p>",
+          "internal": false
+        },
+        {
+          "num": 10,
+          "title": "MESURES DE SÉCURITÉ",
+          "html": "<p>Les mesures techniques et organisationnelles mises en œuvre au titre de l'article 32 du RGPD sont détaillées à l'Annexe 2 des CGV et dans le questionnaire de sécurité de Selekt. Elles comprennent notamment :</p><ul><li>le chiffrement des données en transit (TLS) et au repos ;</li><li>le cloisonnement logique des données entre clients et entre marques d'un même groupe ;</li><li>la gestion des droits d'accès au niveau du champ de données, définie par le Client ;</li><li>l'authentification renforcée des accès d'administration de Selekt et la limitation nominative de ces accès ;</li><li>la journalisation des actions sensibles et des accès aux fiches clients ;</li><li>des sauvegardes chiffrées quotidiennes, conservées trente (30) jours dans un site distinct ;</li><li>une procédure de gestion des incidents et de notification des violations de données sous quarante-huit (48) heures.</li></ul>",
+          "internal": false
+        },
+        {
+          "num": 11,
+          "title": "CONTACT",
+          "html": "<table><thead><tr><th><p><strong>Objet</strong></p></th><th><p><strong>Contact</strong></p></th></tr></thead><tbody><tr><td><p>Protection des données</p></td><td><p>adresse électronique dédiée</p></td></tr><tr><td><p>Sécurité et incidents</p></td><td><p>adresse électronique dédiée</p></td></tr><tr><td><p>Référent protection des données ou DPO</p></td><td><p>nom, fonction, coordonnées</p></td></tr></tbody></table><p>Fait à ville, le date.</p><p>Pour Selekt : nom, fonction, signature</p>",
+          "internal": false
+        }
+      ],
+      "profiles": {
+        "complet": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "dpo": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "rssi": [
+          0,
+          1,
+          2,
+          5,
+          6,
+          7,
+          8,
+          10,
+          11
+        ],
+        "achats": [
+          0,
+          1,
+          3,
+          8,
+          9,
+          11
+        ]
+      }
+    }
+  }
+}

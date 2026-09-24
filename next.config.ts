@@ -14,6 +14,15 @@ const nextConfig: NextConfig = {
         source: "/docs/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
+      // Pages privées et back-office du module Confiance : jamais indexés
+      {
+        source: "/confiance/:path+",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/confiance-admin",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };

@@ -22,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
   }
+  // Page publique Confiance & conformité (FR uniquement ; les pages privées
+  // /confiance/securite et /confiance/rgpd sont noindex et hors sitemap)
+  entries.push({
+    url: `${SITE_URL}/confiance`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  });
   return entries;
 }

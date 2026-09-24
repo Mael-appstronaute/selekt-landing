@@ -47,3 +47,7 @@ LANGAGE_DESIGN.md
 
 selekt-site.tar.gz
 screenshots-site/
+
+# Module Confiance : donnees runtime (store chiffre + PDF archives)
+/data/confiance/
+/scripts/out-*.html
