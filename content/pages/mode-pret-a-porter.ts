@@ -35,7 +35,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
     hero: {
       kicker: "Mode · Prêt-à-porter",
       title: "Elle a essayé trois pièces. *Personne ne sait laquelle elle regrette.*",
-      lede: "En mode, on voit passer beaucoup de monde et on reconnaît peu de clientes. Selekt donne à chaque vendeuse un portefeuille nommé, les informations qui comptent, et les occasions de recontacter au bon moment — puis mesure ce que ce travail rapporte, boutique par boutique.",
+      lede: "En mode, on voit passer beaucoup de monde et on reconnaît peu de clientes. Selekt donne à chaque conseillère de vente un portefeuille nommé, les informations qui comptent, et les occasions de recontacter au bon moment — puis mesure ce que ce travail rapporte, boutique par boutique.",
       demoLabel: "Demander une démo",
       bg: "waves",
       secondary: { label: "Le clienteling, expliqué simplement", key: "clienteling" },
@@ -49,7 +49,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
         items: [
           {
             title: "Le flux contre la mémoire",
-            body: "Une vendeuse voit des dizaines de personnes par jour. Elle retient les visages, rarement les tailles, presque jamais ce qui a été essayé sans être acheté.",
+            body: "Une conseillère de vente voit des dizaines de personnes par jour. Elle retient les visages, rarement les tailles, presque jamais ce qui a été essayé sans être acheté.",
           },
           {
             title: "La cliente fidèle que personne n'a identifiée",
@@ -57,7 +57,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Vingt à trente clientes suivies",
-            body: "C'est ce qu'une vendeuse peut tenir de tête. Le reste de la base n'est jamais recontacté, alors qu'il a déjà acheté au moins une fois.",
+            body: "C'est ce qu'une conseillère de vente peut tenir de tête. Le reste de la base n'est jamais recontacté, alors qu'il a déjà acheté au moins une fois.",
           },
           {
             title: "La base est déjà là",
@@ -104,23 +104,23 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
           { label: "E-commerce, commandes et retours", cells: [true, false] },
           { label: "Programme de fidélité et campagnes", cells: [true, false] },
           { label: "Fiche cliente et historique d'achat", cells: [true, "reprise et enrichie"] },
-          { label: "Portefeuille réparti par vendeuse", cells: [false, true] },
+          { label: "Portefeuille réparti par conseillère de vente", cells: [false, true] },
           { label: "Relances individuelles tracées", cells: [false, true] },
           { label: "Revenus influencés, mesurés par boutique", cells: [false, true] },
         ],
-        note: "Vos outils font tourner la boutique et parlent à la base. Selekt fait parler une vendeuse à une cliente, et prouve ce que ça rapporte.",
+        note: "Vos outils font tourner la boutique et parlent à la base. Selekt fait parler une conseillère de vente à une cliente, et prouve ce que ça rapporte.",
       },
       {
         type: "split",
         photo: "boutiqueMode",
         alt: "Intérieur de boutique de mode, portants suspendus",
         kicker: "Le portefeuille",
-        title: "Répartir les clientes *entre les vendeuses*.",
+        title: "Répartir les clientes *entre les conseillères de vente*.",
         body: "Une base que tout le monde peut consulter et que personne ne suit ne produit rien. Le portefeuille met un nom en face de chaque cliente : quelqu'un dont c'est le travail de la connaître et de la rappeler.",
         points: [
           "La répartition suit vos règles : qui a vendu, qui connaît la cliente, qui a de la disponibilité",
           "Une cliente qui achète dans plusieurs boutiques reste visible par toutes, avec une responsable désignée",
-          "Au départ d'une vendeuse, son portefeuille est réattribué avec tout son historique",
+          "Au départ d'une conseillère de vente, son portefeuille est réattribué avec tout son historique",
           "La directrice de boutique voit qui a été contactée, quand, et qui n'a été rappelée par personne",
         ],
       },
@@ -166,7 +166,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "La retouche prête",
-            body: "Un message dès le retour de l'atelier, signé par la vendeuse qui a pris les mesures. La cliente revient en boutique, et la visite devient une occasion de plus.",
+            body: "Un message dès le retour de l'atelier, signé par la conseillère de vente qui a pris les mesures. La cliente revient en boutique, et la visite devient une occasion de plus.",
           },
           {
             title: "La taille revenue en réassort",
@@ -207,7 +207,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
         points: [
           "Un motif réel : une pièce réservée, une retouche prête, une taille revenue, une collection qui lui correspond",
           "Le canal qu'elle a choisi, à la fréquence que la maison s'est fixée",
-          "Un message signé par sa vendeuse, dans le ton de la maison",
+          "Un message signé par sa conseillère de vente, dans le ton de la maison",
           "Une validation humaine avant tout envoi, même quand le texte a été préparé automatiquement",
         ],
       },
@@ -218,7 +218,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
         steps: [
           {
             title: "Tracer l'action",
-            body: "Message, rendez-vous d'essayage, relance : l'action est datée et rattachée à la vendeuse qui l'a faite.",
+            body: "Message, rendez-vous d'essayage, relance : l'action est datée et rattachée à la conseillère de vente qui l'a faite.",
           },
           {
             title: "Fixer la fenêtre",
@@ -237,11 +237,11 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
       {
         type: "stats",
         kicker: "Ordres de grandeur",
-        title: "Ce que ça pèse, *honnêtement*.",
+        title: "Le retour sur investissement *mesuré*.",
         stats: [
-          { value: 25, suffix: " %", label: "des revenus influencés par le clienteling, constaté chez des retailers équipés (20 à 25 %)" },
-          { value: 3, suffix: " rôles", label: "vendeuse, manager, siège : les mêmes chiffres, à leur niveau" },
-          { value: 2, suffix: " min", label: "le temps réellement disponible entre deux clientes" },
+          { value: 25, suffix: " %", label: "des revenus influencés par le clienteling, constaté chez des retailers équipés (20 à 25 % minimum)" },
+          { value: 3, suffix: " rôles", label: "conseillères de vente, manager, siège : avec des interfaces dédiées" },
+          { value: 5, suffix: " clientes", label: "contactées par jour : une régularité qui va booster les ventes et la satisfaction client" },
         ],
       },
       {
@@ -269,7 +269,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
           {
             kicker: "Messageries",
             title: "Le canal que la cliente utilise vraiment",
-            body: "Les échanges partent du canal choisi par la cliente et restent tracés au nom de la maison et de la vendeuse, avec une validation humaine avant envoi.",
+            body: "Les échanges partent du canal choisi par la cliente et restent tracés au nom de la maison et de la conseillère de vente, avec une validation humaine avant envoi.",
             key: "aiCopilot",
             cta: "Des messages préparés et validés avant envoi",
           },
@@ -284,11 +284,11 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
         rows: [
           {
             title: "En quoi est-ce différent de mon programme de fidélité ?",
-            body: "Un programme de fidélité récompense un volume d'achats, à l'identique pour tout le monde. Le clienteling s'adresse à une cliente à la fois, avec une raison réelle de la contacter : une pièce réservée, une retouche prête, une collection qui arrive dans sa taille. Les deux cohabitent très bien, et le programme gagne à être exploité par la vendeuse.",
+            body: "Un programme de fidélité récompense un volume d'achats, à l'identique pour tout le monde. Le clienteling s'adresse à une cliente à la fois, avec une raison réelle de la contacter : une pièce réservée, une retouche prête, une collection qui arrive dans sa taille. Les deux cohabitent très bien, et le programme gagne à être exploité par la conseillère de vente.",
           },
           {
-            title: "Nos vendeuses voient trop de monde pour se souvenir de chaque cliente.",
-            body: "C'est exactement le point de départ. Sans outil, une vendeuse suit les vingt ou trente clientes dont elle se souvient ; le reste du fichier dort. Selekt lui donne un portefeuille nommé, l'historique d'achat et les quelques informations qui comptent : taille, coupe, préférences, essayages sans achat.",
+            title: "Nos conseillères de vente voient trop de monde pour se souvenir de chaque cliente.",
+            body: "C'est exactement le point de départ. Sans outil, une conseillère de vente suit les vingt ou trente clientes dont elle se souvient ; le reste du fichier dort. Selekt lui donne un portefeuille nommé, l'historique d'achat et les quelques informations qui comptent : taille, coupe, préférences, essayages sans achat.",
           },
           {
             title: "Faut-il remplacer notre caisse ou notre site e-commerce ?",
@@ -296,7 +296,7 @@ export const FASHION: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Et pendant les soldes ou les périodes de promotion encadrées ?",
-            body: "Ce sont les moments où la relation compte le plus, parce que tout le monde communique en même temps. Une vendeuse qui prévient sa cliente qu'une pièce suivie depuis deux mois est disponible dans sa taille ne fait pas une campagne : elle rend un service. Le message reste individuel, daté et tracé.",
+            body: "Ce sont les moments où la relation compte le plus, parce que tout le monde communique en même temps. Une conseillère de vente qui prévient sa cliente qu'une pièce suivie depuis deux mois est disponible dans sa taille ne fait pas une campagne : elle rend un service. Le message reste individuel, daté et tracé.",
           },
           {
             title: "Nos clientes achètent dans plusieurs de nos boutiques. Comment ça se passe ?",

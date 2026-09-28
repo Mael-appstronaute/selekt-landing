@@ -77,7 +77,7 @@ export const CLIENTELING: Record<Locale, FeaturePageContent> = {
         items: [
           {
             title: "La pièce mise de côté",
-            body: "Une cliente hésite sur un bracelet. Il est noté dans sa wishlist. Trois semaines plus tard, la vendeuse la prévient qu'il reste une pièce : la vente se fait sans remise.",
+            body: "Une cliente hésite sur un bracelet. Il est noté dans sa wishlist. Trois semaines plus tard, la conseillère de vente la prévient qu'il reste une pièce : la vente se fait sans remise.",
           },
           {
             title: "Le retour d'un achat marquant",

@@ -23,7 +23,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
     meta: {
       title: "CRM bijouterie et joaillerie",
       description:
-        "Portefeuille par vendeuse, relances au bon moment, SAV suivi, revenus influencés mesurés : le clienteling des bijouteries, au-dessus de votre caisse.",
+        "Portefeuille par conseiller de vente, relances au bon moment, SAV suivi, revenus influencés mesurés : le clienteling des bijouteries, au-dessus de votre caisse.",
     },
     hero: {
       kicker: "Bijouterie · Horlogerie · Joaillerie",
@@ -37,20 +37,20 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
       {
         type: "list",
         kicker: "Le point de départ",
-        title: "La relation client tient dans la *mémoire des vendeuses*.",
+        title: "La relation client tient dans la *mémoire des conseillers de vente*.",
         lede: "Dans la plupart des bijouteries, la connaissance client existe : elle est réelle, précise, parfois remarquable. Mais elle vit dans des têtes et dans des carnets, et elle ne couvre qu'une poignée de clients.",
         items: [
           {
             title: "Le carnet personnel",
-            body: "Chaque vendeuse a le sien : tailles, préférences, dates. Il fonctionne très bien, pour elle, tant qu'elle est là et tant qu'elle s'en souvient.",
+            body: "Chaque conseiller de vente a le sien : tailles, préférences, dates. Il fonctionne très bien, pour lui, tant qu'il est là et tant qu'il s'en souvient.",
           },
           {
-            title: "La vendeuse qui part",
-            body: "Le jour où elle s'en va, la maison perd le lien avec ses meilleurs clients. Ils reviennent, ne sont pas reconnus, et repartent avec le sentiment d'être devenus anonymes.",
+            title: "Le conseiller de vente qui part",
+            body: "Le jour où il s'en va, la maison perd le lien avec ses meilleurs clients. Ils reviennent, ne sont pas reconnus, et repartent avec le sentiment d'être devenus anonymes.",
           },
           {
             title: "Vingt à trente clients suivis",
-            body: "C'est ce qu'une vendeuse peut tenir de mémoire. Au-delà, le reste du fichier dort : il a acheté une fois, personne ne l'a jamais rappelé.",
+            body: "C'est ce qu'un conseiller de vente peut tenir de mémoire. Au-delà, le reste du fichier dort : il a acheté une fois, personne ne l'a jamais rappelé.",
           },
           {
             title: "Le fichier complet",
@@ -79,7 +79,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
           {
             kicker: "Les dates du client",
             title: "Son anniversaire, son dernier achat",
-            body: "La date la plus rentable est souvent celle d'un achat marquant. Un an après, un message signé de la vendeuse qui l'a servi vaut mieux que n'importe quelle campagne.",
+            body: "La date la plus rentable est souvent celle d'un achat marquant. Un an après, un message signé du conseiller de vente qui l'a servi vaut mieux que n'importe quelle campagne.",
           },
         ],
       },
@@ -96,7 +96,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
           { label: "Encaissement et comptabilité", cells: [true, false] },
           { label: "Livre de police et fiscalité HBJO", cells: [true, false] },
           { label: "Fiche client et historique d'achat", cells: [true, "reprise et enrichie"] },
-          { label: "Portefeuille réparti par vendeuse", cells: [false, true] },
+          { label: "Portefeuille réparti par conseiller de vente", cells: [false, true] },
           { label: "Relances tracées et préparées", cells: [false, true] },
           { label: "Revenus influencés, mesurés par boutique", cells: [false, true] },
         ],
@@ -107,12 +107,12 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
         photo: "sertissage",
         alt: "Mains sertissant une bague à l'établi",
         kicker: "Le portefeuille",
-        title: "Répartir les clients *entre les vendeuses*.",
+        title: "Répartir les clients *entre les conseillers de vente*.",
         body: "Un fichier que tout le monde peut voir et que personne ne suit ne produit rien. Le portefeuille donne un nom en face de chaque client : quelqu'un dont c'est le travail de le connaître et de le rappeler.",
         points: [
           "La répartition se pose selon vos règles : qui a vendu, qui connaît, qui est disponible",
-          "Un client servi par plusieurs vendeuses reste visible par toutes, avec un responsable désigné",
-          "Au départ d'une vendeuse, son portefeuille se réattribue avec tout son historique",
+          "Un client servi par plusieurs conseillers de vente reste visible par tous, avec un responsable désigné",
+          "Au départ d'un conseiller de vente, son portefeuille se réattribue avec tout son historique",
           "Le manager voit qui a été contacté, quand, et qui n'a été rappelé par personne",
         ],
       },
@@ -154,7 +154,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
         rows: [
           {
             title: "La réparation prête",
-            body: "Un message dès qu'elle revient de l'atelier, avec le nom de la vendeuse qui l'a prise en charge. Le client revient en boutique, et la visite est une occasion de plus.",
+            body: "Un message dès qu'elle revient de l'atelier, avec le nom du conseiller de vente qui l'a prise en charge. Le client revient en boutique, et la visite est une occasion de plus.",
           },
           {
             title: "La révision à échéance",
@@ -204,7 +204,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
         points: [
           "Un motif réel : une pièce réservée, une révision, une date qui compte pour le client",
           "Le canal qu'il a choisi, et la fréquence que la maison s'est fixée",
-          "Un message signé par sa vendeuse, dans le ton de la maison, jamais une promotion de masse",
+          "Un message signé par son conseiller de vente, dans le ton de la maison, jamais une promotion de masse",
           "Une validation humaine avant tout envoi, y compris quand le texte est préparé automatiquement",
         ],
         reverse: true,
@@ -216,7 +216,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
         steps: [
           {
             title: "Tracer l'action",
-            body: "Message, rendez-vous, relance : l'action est datée et rattachée à la vendeuse qui l'a faite.",
+            body: "Message, rendez-vous, relance : l'action est datée et rattachée au conseiller de vente qui l'a faite.",
           },
           {
             title: "Fixer la fenêtre",
@@ -235,11 +235,11 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
       {
         type: "stats",
         kicker: "Ordres de grandeur",
-        title: "Ce que ça pèse, *honnêtement*.",
+        title: "Le retour sur investissement *mesuré*.",
         stats: [
-          { value: 25, suffix: " %", label: "des revenus influencés par le clienteling, constaté chez des retailers équipés (20 à 25 %)" },
-          { value: 3, suffix: " rôles", label: "vendeuse, manager, siège : les mêmes chiffres, à leur niveau" },
-          { value: 2, suffix: " min", label: "le temps réellement disponible entre deux clients" },
+          { value: 25, suffix: " %", label: "des revenus influencés par le clienteling, constaté chez des retailers équipés (20 à 25 % minimum)" },
+          { value: 3, suffix: " rôles", label: "conseillers de vente, manager, siège : avec des interfaces dédiées" },
+          { value: 5, suffix: " clients", label: "contactés par jour : une régularité qui va booster les ventes et la satisfaction client" },
         ],
       },
       {
@@ -254,11 +254,11 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Le site e-commerce",
-            body: "Une commande passée en ligne rejoint la fiche du client suivi en boutique. La vendeuse cesse de découvrir après coup ce que sa cliente a acheté sur le site.",
+            body: "Une commande passée en ligne rejoint la fiche du client suivi en boutique. Le conseiller de vente cesse de découvrir après coup ce que sa cliente a acheté sur le site.",
           },
           {
             title: "Les messageries",
-            body: "Les échanges partent du canal que le client utilise vraiment, et restent tracés au nom de la maison et de la vendeuse.",
+            body: "Les échanges partent du canal que le client utilise vraiment, et restent tracés au nom de la maison et du conseiller de vente.",
           },
           {
             title: "Ce qui ne bouge pas",
@@ -283,14 +283,14 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Mon fichier client est ancien et incomplet. Est-il utilisable ?",
-            body: "Oui, et c'est le cas le plus courant. On part de ce qui existe : noms, achats, dates. Les fiches se complètent ensuite au fil des ventes, par la vendeuse, en quelques secondes. Un fichier imparfait mais vivant vaut mieux qu'une base parfaite que personne ne met à jour.",
+            body: "Oui, et c'est le cas le plus courant. On part de ce qui existe : noms, achats, dates. Les fiches se complètent ensuite au fil des ventes, par le conseiller de vente, en quelques secondes. Un fichier imparfait mais vivant vaut mieux qu'une base parfaite que personne ne met à jour.",
           },
           {
-            title: "Mes vendeuses n'ont pas de téléphone professionnel.",
-            body: "C'est l'objection la plus fréquente, et elle est légitime. L'application s'utilise depuis un appareil de la boutique, tablette ou mobile, et les échanges y sont tracés au nom de la maison et de la vendeuse. Le paramétrage des canaux se règle à la mise en route, selon l'organisation de votre point de vente.",
+            title: "Mes conseillers de vente n'ont pas de téléphone professionnel.",
+            body: "C'est l'objection la plus fréquente, et elle est légitime. L'application s'utilise depuis un appareil de la boutique, tablette ou mobile, et les échanges y sont tracés au nom de la maison et du conseiller de vente. Le paramétrage des canaux se règle à la mise en route, selon l'organisation de votre point de vente.",
           },
           {
-            title: "Combien de temps une vendeuse doit-elle y consacrer ?",
+            title: "Combien de temps un conseiller de vente doit-il y consacrer ?",
             body: "Quelques minutes par jour. Le matin, la liste des clients à recontacter ; après une vente, deux ou trois informations ajoutées à la fiche. Si l'outil demande plus qu'il ne rend, il n'est pas utilisé : la contrepartie doit être immédiate, retrouver un client ou voir une pièce disponible dans le réseau.",
           },
           {
@@ -299,7 +299,7 @@ export const JEWELRY: Record<Locale, FeaturePageContent> = {
           },
           {
             title: "Est-ce que cela remplace ma carte de fidélité ?",
-            body: "Non. Une carte récompense un volume d'achats ; le clienteling s'adresse à un client à la fois, avec une raison réelle de le contacter : une révision, une pièce réservée, un anniversaire de mariage. Les deux cohabitent. La carte gagne simplement à être exploitée par la vendeuse plutôt que subie.",
+            body: "Non. Une carte récompense un volume d'achats ; le clienteling s'adresse à un client à la fois, avec une raison réelle de le contacter : une révision, une pièce réservée, un anniversaire de mariage. Les deux cohabitent. La carte gagne simplement à être exploitée par le conseiller de vente plutôt que subie.",
           },
         ],
       },

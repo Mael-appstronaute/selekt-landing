@@ -547,7 +547,13 @@ export function FeaturePage({
               );
 
             /* ——— Comparatif — carte claire ——— */
-            case "table":
+            case "table": {
+              // Certains contenus incluent une entrée vide en tête de `columns` pour la
+              // colonne des labels, déjà rendue par le <th> dédié : on la retire pour que
+              // les en-têtes restent alignés sur les cellules.
+              const hasLabelColumn = section.columns[0] === "";
+              const dataColumns = hasLabelColumn ? section.columns.slice(1) : section.columns;
+              const highlight = hasLabelColumn ? section.highlight - 1 : section.highlight;
               return (
                 <Reveal key={si}>
                   <section className="py-12 md:py-16">
@@ -557,17 +563,17 @@ export function FeaturePage({
                         <thead>
                           <tr>
                             <th className="w-[28%]" />
-                            {section.columns.map((col, i) => (
+                            {dataColumns.map((col, i) => (
                               <th
                                 key={col}
                                 scope="col"
                                 className={`border-b border-ink/14 px-5 pb-4 align-bottom ${
-                                  i === section.highlight
+                                  i === highlight
                                     ? "font-serif text-[1.3rem] font-normal"
                                     : "kicker text-sand-muted"
                                 }`}
                               >
-                                {i === section.highlight ? (
+                                {i === highlight ? (
                                   <span>
                                     Sel<em className="italic text-brass">e</em>kt
                                   </span>
@@ -591,13 +597,13 @@ export function FeaturePage({
                                 <td
                                   key={i}
                                   className={`border-b border-ink/10 px-5 py-4 text-[0.9rem] ${
-                                    i === section.highlight ? "bg-void text-on-void" : "muted"
+                                    i === highlight ? "bg-void text-on-void" : "muted"
                                   }`}
                                 >
                                   {typeof cell === "boolean" ? (
                                     <span
                                       className={
-                                        i === section.highlight ? "text-gold" : "text-current"
+                                        i === highlight ? "text-gold" : "text-current"
                                       }
                                     >
                                       <Check on={cell} />
@@ -616,6 +622,7 @@ export function FeaturePage({
                   </section>
                 </Reveal>
               );
+            }
 
             /* ——— Panneau photo pleine largeur (grammaire home) ——— */
             case "photo":
